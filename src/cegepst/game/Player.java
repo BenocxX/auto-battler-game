@@ -5,6 +5,8 @@ import cegepst.engine.CollidableRepository;
 import cegepst.engine.controls.MovementController;
 import cegepst.engine.entities.ControllableEntity;
 
+import java.awt.*;
+
 public class Player extends ControllableEntity {
 
     public Player(MovementController controller) {
@@ -16,7 +18,16 @@ public class Player extends ControllableEntity {
     }
 
     @Override
-    public void draw(Buffer buffer) {
+    public void update() {
+        super.update();
+        moveAccordingToController();
+    }
 
+    @Override
+    public void draw(Buffer buffer) {
+        buffer.drawRectangle(x, y, width, height, new Color(32, 170, 32));
+        if (hasMoved()) {
+            drawHitBox(buffer);
+        }
     }
 }
