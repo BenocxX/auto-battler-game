@@ -2,6 +2,9 @@ package cegepst.game;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.Game;
+import cegepst.engine.GameTime;
+
+import java.awt.*;
 
 public class AutoBattlerGame extends Game {
 
@@ -21,7 +24,8 @@ public class AutoBattlerGame extends Game {
 
     @Override
     public void draw(Buffer buffer) {
-
+        buffer.drawText("FPS: " + GameTime.getCurrentFps(), 10, 20, Color.WHITE);
+        buffer.drawText(GameTime.getElapsedTimeFormattedTime(), 10, 40, Color.WHITE);
     }
 
     @Override
