@@ -1,4 +1,4 @@
-package cegepst;
+package cegepst.game;
 
 public class App {
 
