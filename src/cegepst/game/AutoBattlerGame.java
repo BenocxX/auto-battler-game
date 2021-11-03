@@ -32,6 +32,8 @@ public class AutoBattlerGame extends Game {
         player.update();
         for (BuyStation buyStation : buyStations) {
             buyStation.update();
+            // Refactor: Check comments in ZoneTrigger class
+            buyStation.setSelected(buyStation.checkIfSelected(player));
         }
     }
 
