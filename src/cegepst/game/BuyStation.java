@@ -9,14 +9,14 @@ import java.awt.*;
 
 public class BuyStation extends MovableEntity {
 
-    private ZoneTrigger zoneTrigger;
+    private Trigger trigger;
     private Friend friendForSell;
     private boolean isSelected;
 
     public BuyStation(int x, int y) {
         setDimension(30, 30);
         teleport(x, y);
-        zoneTrigger = new ZoneTrigger(x - 10, y + height + 10, 50, 50);
+        trigger = new Trigger(x - 10, y + height + 10, 50, 50);
         friendForSell = new Friend(x + 10, y + 10);
         CollidableRepository.getInstance().registerEntity(this);
     }
@@ -26,7 +26,7 @@ public class BuyStation extends MovableEntity {
     }
 
     public boolean checkIfSelected(StaticEntity entity) {
-        return zoneTrigger.intersectWith(entity);
+        return trigger.intersectWith(entity);
     }
 
     @Override

@@ -5,14 +5,14 @@ import cegepst.engine.entities.StaticEntity;
 
 import java.awt.*;
 
-public class ZoneTrigger extends StaticEntity {
+public class Trigger extends StaticEntity {
 
     // Make the zone trigger have a Static Entity to activate when colliding
 
     // Make an arrayList of zone triggers in AutoBattlerGame class and
     // loop through them to check if triggered or not
 
-    public ZoneTrigger(int x, int y, int width, int height) {
+    public Trigger(int x, int y, int width, int height) {
         setDimension(width, height);
         teleport(x, y);
     }
