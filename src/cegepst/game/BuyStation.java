@@ -7,22 +7,16 @@ import cegepst.engine.entities.StaticEntity;
 
 import java.awt.*;
 
-public class BuyStation extends MovableEntity {
+public class BuyStation extends MovableEntity implements Triggerable {
 
-    private Trigger trigger;
     private Friend friendForSell;
     private boolean isSelected;
 
     public BuyStation(int x, int y) {
         setDimension(30, 30);
         teleport(x, y);
-        trigger = new Trigger(x - 10, y + height + 10, 50, 50);
         friendForSell = new Friend(x + 10, y + 10);
         CollidableRepository.getInstance().registerEntity(this);
-    }
-
-    public void setActiveIfTriggered(StaticEntity entity) {
-        isSelected = trigger.intersectWith(entity);
     }
 
     @Override
@@ -33,5 +27,15 @@ public class BuyStation extends MovableEntity {
             buffer.drawRectangle(x, y, width, height, new Color(94, 71, 47));
         }
         friendForSell.draw(buffer);
+    }
+
+    @Override
+    public void trigger() {
+        isSelected = true;
+    }
+
+    @Override
+    public void untrigger() {
+        isSelected = false;
     }
 }
