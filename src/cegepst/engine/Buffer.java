@@ -24,4 +24,9 @@ public class Buffer {
         graphics.setPaint(paint);
         graphics.drawString(text, x, y);
     }
+
+    public void drawGameDebugStats() {
+        drawText("FPS: " + GameTime.getCurrentFps(), 10, 20, Color.WHITE);
+        drawText(GameTime.getElapsedTimeFormattedTime(), 10, 40, Color.WHITE);
+    }
 }

@@ -29,7 +29,7 @@ public class AutoBattlerGame extends Game {
         triggers = new HashMap<>();
         for (BuyStation buyStation : buyStations) {
             Trigger trigger = new Trigger();
-            trigger.teleport(buyStation.getX() - 10, buyStation.getY() + 10);
+            trigger.teleport(buyStation.getX() - 10, buyStation.getY() + buyStation.getHeight() + 10);
             trigger.setDimension(50, 50);
             triggers.put(trigger, buyStation);
         }
@@ -37,11 +37,8 @@ public class AutoBattlerGame extends Game {
 
     @Override
     public void update() {
-        if (gamePad.isQuitPressed()) {
-            stop();
-        }
+        quitCheck();
         player.update();
-
         checkTriggers();
     }
 
@@ -50,14 +47,22 @@ public class AutoBattlerGame extends Game {
         for (BuyStation buyStation : buyStations) {
             buyStation.draw(buffer);
         }
+        for (Trigger triggers: triggers.keySet()) {
+            triggers.draw(buffer);
+        }
         player.draw(buffer);
-        buffer.drawText("FPS: " + GameTime.getCurrentFps(), 10, 20, Color.WHITE);
-        buffer.drawText(GameTime.getElapsedTimeFormattedTime(), 10, 40, Color.WHITE);
+        buffer.drawGameDebugStats();
     }
 
     @Override
     public void conclude() {
 
+    }
+
+    private void quitCheck() {
+        if (gamePad.isQuitPressed()) {
+            stop();
+        }
     }
 
     private void checkTriggers() {
