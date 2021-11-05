@@ -4,6 +4,7 @@ import cegepst.engine.Buffer;
 import cegepst.engine.Game;
 import cegepst.engine.entities.StaticEntity;
 import cegepst.game.entities.BuyStation;
+import cegepst.game.entities.EntityRepository;
 import cegepst.game.entities.Player;
 import cegepst.game.entities.Trigger;
 
