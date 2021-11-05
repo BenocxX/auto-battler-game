@@ -42,13 +42,7 @@ public class AutoBattlerGame extends Game {
         }
         player.update();
 
-        for (HashMap.Entry<Trigger, Triggerable> entry : triggers.entrySet()) {
-            if (entry.getKey().isTriggered(player)) {
-                entry.getValue().trigger();
-            } else {
-                entry.getValue().untrigger();
-            }
-        }
+        checkTriggers();
     }
 
     @Override
@@ -64,5 +58,15 @@ public class AutoBattlerGame extends Game {
     @Override
     public void conclude() {
 
+    }
+
+    private void checkTriggers() {
+        for (HashMap.Entry<Trigger, Triggerable> entry : triggers.entrySet()) {
+            if (entry.getKey().isTriggered(player)) {
+                entry.getValue().trigger();
+            } else {
+                entry.getValue().untrigger();
+            }
+        }
     }
 }
