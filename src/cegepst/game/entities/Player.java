@@ -1,9 +1,10 @@
-package cegepst.game;
+package cegepst.game.entities;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.CollidableRepository;
 import cegepst.engine.controls.MovementController;
 import cegepst.engine.entities.ControllableEntity;
+import cegepst.game.EntityRepository;
 
 import java.awt.*;
 

@@ -1,9 +1,10 @@
-package cegepst.game;
+package cegepst.game.entities;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.CollidableRepository;
 import cegepst.engine.entities.MovableEntity;
-import cegepst.engine.entities.StaticEntity;
+import cegepst.game.EntityRepository;
+import cegepst.game.Triggerable;
 
 import java.awt.*;
 
