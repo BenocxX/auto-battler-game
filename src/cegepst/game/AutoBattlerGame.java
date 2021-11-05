@@ -2,9 +2,7 @@ package cegepst.game;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.Game;
-import cegepst.engine.GameTime;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -19,20 +17,8 @@ public class AutoBattlerGame extends Game {
     public void initialize() {
         gamePad = new GamePad();
         player = new Player(gamePad);
-
-        buyStations = new ArrayList<>();
-        buyStations.add(new BuyStation(100, 100));
-        buyStations.add(new BuyStation(200, 100));
-        buyStations.add(new BuyStation(300, 100));
-        buyStations.add(new BuyStation(400, 100));
-
-        triggers = new HashMap<>();
-        for (BuyStation buyStation : buyStations) {
-            Trigger trigger = new Trigger();
-            trigger.teleport(buyStation.getX() - 10, buyStation.getY() + buyStation.getHeight() + 10);
-            trigger.setDimension(50, 50);
-            triggers.put(trigger, buyStation);
-        }
+        initBuyStations();
+        initTriggersHashMap();
     }
 
     @Override
@@ -72,6 +58,24 @@ public class AutoBattlerGame extends Game {
             } else {
                 entry.getValue().untrigger();
             }
+        }
+    }
+
+    private void initBuyStations() {
+        buyStations = new ArrayList<>();
+        buyStations.add(new BuyStation(100, 100));
+        buyStations.add(new BuyStation(200, 100));
+        buyStations.add(new BuyStation(300, 100));
+        buyStations.add(new BuyStation(400, 100));
+    }
+
+    private void initTriggersHashMap() {
+        triggers = new HashMap<>();
+        for (BuyStation buyStation : buyStations) {
+            Trigger trigger = new Trigger();
+            trigger.teleport(buyStation.getX() - 10, buyStation.getY() + buyStation.getHeight() + 10);
+            trigger.setDimension(50, 50);
+            triggers.put(trigger, buyStation);
         }
     }
 }
