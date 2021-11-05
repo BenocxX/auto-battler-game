@@ -7,6 +7,8 @@ import java.awt.*;
 
 public class Trigger extends StaticEntity {
 
+    // Use HashMap<Trigger, Triggerable>()
+
     // Make the zone trigger have a Static Entity to activate when colliding
 
     // Make an arrayList of zone triggers in AutoBattlerGame class and

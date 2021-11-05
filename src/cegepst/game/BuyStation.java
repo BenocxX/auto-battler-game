@@ -21,12 +21,8 @@ public class BuyStation extends MovableEntity {
         CollidableRepository.getInstance().registerEntity(this);
     }
 
-    public void setSelected(boolean isSelected) {
-        this.isSelected = isSelected;
-    }
-
-    public boolean checkIfSelected(StaticEntity entity) {
-        return trigger.intersectWith(entity);
+    public void setActiveIfTriggered(StaticEntity entity) {
+        isSelected = trigger.intersectWith(entity);
     }
 
     @Override
