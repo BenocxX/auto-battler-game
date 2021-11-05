@@ -16,6 +16,7 @@ public class BuyStation extends MovableEntity implements Triggerable {
         setDimension(30, 30);
         teleport(x, y);
         friendForSell = new Friend(x + 10, y + 10);
+        EntityRepository.getInstance().registerEntity(this);
         CollidableRepository.getInstance().registerEntity(this);
     }
 

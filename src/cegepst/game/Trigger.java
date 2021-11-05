@@ -7,6 +7,10 @@ import java.awt.*;
 
 public class Trigger extends StaticEntity {
 
+    public Trigger() {
+        EntityRepository.getInstance().registerEntity(this);
+    }
+
     public boolean isTriggered(StaticEntity entity) {
         return intersectWith(entity);
     }

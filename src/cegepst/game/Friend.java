@@ -16,6 +16,7 @@ public class Friend extends MovableEntity {
         teleport(x, y);
         random = new Random();
         color = new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256));
+        EntityRepository.getInstance().registerEntity(this);
     }
 
     @Override

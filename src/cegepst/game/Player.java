@@ -14,6 +14,7 @@ public class Player extends ControllableEntity {
         setDimension(30, 50);
         teleport(250, 250);
         setSpeed(5);
+        EntityRepository.getInstance().registerEntity(this);
         CollidableRepository.getInstance().registerEntity(this);
     }
 

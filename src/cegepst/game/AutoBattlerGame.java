@@ -2,6 +2,7 @@ package cegepst.game;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.Game;
+import cegepst.engine.entities.StaticEntity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,11 +31,8 @@ public class AutoBattlerGame extends Game {
 
     @Override
     public void draw(Buffer buffer) {
-        for (BuyStation buyStation : buyStations) {
-            buyStation.draw(buffer);
-        }
-        for (Trigger triggers: triggers.keySet()) {
-            triggers.draw(buffer);
+        for (StaticEntity entity : EntityRepository.getInstance()) {
+            entity.draw(buffer);
         }
         player.draw(buffer);
         buffer.drawGameDebugStats();
