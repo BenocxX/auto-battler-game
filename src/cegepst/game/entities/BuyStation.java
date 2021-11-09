@@ -32,6 +32,10 @@ public class BuyStation extends MovableEntity implements Triggerable {
         friendForSell.draw(buffer);
     }
 
+    public boolean isSelected() {
+        return isSelected;
+    }
+
     @Override
     public void trigger() {
         isSelected = true;

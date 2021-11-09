@@ -31,6 +31,11 @@ public class AutoBattlerGame extends Game {
         quitCheck();
         player.update();
         checkTriggers();
+        if (gamePad.isUsePressed()) {
+            for (BuyStation buyStation : buyStations) {
+                // check if buystation is triggered
+            }
+        }
     }
 
     @Override
