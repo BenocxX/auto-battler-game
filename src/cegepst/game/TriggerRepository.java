@@ -49,6 +49,10 @@ public class TriggerRepository {
         hashMap.put(trigger, triggerable);
     }
 
+    public void addEntries(HashMap<Trigger, Triggerable> entries) {
+        hashMap.putAll(entries);
+    }
+
     public void removeEntry(Trigger key) {
         hashMap.remove(key);
     }
