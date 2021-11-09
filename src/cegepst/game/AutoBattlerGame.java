@@ -9,19 +9,19 @@ import cegepst.game.entities.Player;
 import cegepst.game.entities.Trigger;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class AutoBattlerGame extends Game {
 
     private GamePad gamePad;
     private Player player;
     private ArrayList<BuyStation> buyStations;
-    private HashMap<Trigger, Triggerable> triggers;
+    private TriggerRepository triggerRepository;
 
     @Override
     public void initialize() {
         gamePad = new GamePad();
         player = new Player(gamePad);
+        triggerRepository = new TriggerRepository();
         initBuyStations();
         initTriggersHashMap();
     }
@@ -30,10 +30,13 @@ public class AutoBattlerGame extends Game {
     public void update() {
         quitCheck();
         player.update();
-        checkTriggers();
+        triggerRepository.triggerValuesIfCollindingWithEntity(player);
         if (gamePad.isUsePressed()) {
             for (BuyStation buyStation : buyStations) {
-                // check if buystation is triggered
+                if (triggerRepository.isValueTriggeredByEntity(buyStation, player)) {
+                    // Item bought
+                    System.out.println("Bought!");
+                }
             }
         }
     }
@@ -57,16 +60,6 @@ public class AutoBattlerGame extends Game {
         }
     }
 
-    private void checkTriggers() {
-        for (HashMap.Entry<Trigger, Triggerable> entry : triggers.entrySet()) {
-            if (entry.getKey().isTriggered(player)) {
-                entry.getValue().trigger();
-            } else {
-                entry.getValue().untrigger();
-            }
-        }
-    }
-
     private void initBuyStations() {
         buyStations = new ArrayList<>();
         buyStations.add(new BuyStation(100, 100));
@@ -76,12 +69,11 @@ public class AutoBattlerGame extends Game {
     }
 
     private void initTriggersHashMap() {
-        triggers = new HashMap<>();
         for (BuyStation buyStation : buyStations) {
             Trigger trigger = new Trigger();
             trigger.teleport(buyStation.getX() - 10, buyStation.getY() + buyStation.getHeight() + 10);
             trigger.setDimension(50, 50);
-            triggers.put(trigger, buyStation);
+            triggerRepository.addEntry(trigger, buyStation);
         }
     }
 }
