@@ -1,7 +1,6 @@
-package cegepst.game;
+package cegepst.game.triggers;
 
 import cegepst.engine.entities.StaticEntity;
-import cegepst.game.entities.Trigger;
 
 import java.util.ArrayList;
 import java.util.HashMap;

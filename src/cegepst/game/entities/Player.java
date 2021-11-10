@@ -5,8 +5,8 @@ import cegepst.engine.CollidableRepository;
 import cegepst.engine.controls.MovementController;
 import cegepst.engine.entities.ControllableEntity;
 import cegepst.game.GameSettings;
-import cegepst.game.TriggerRepository;
-import cegepst.game.Triggerer;
+import cegepst.game.triggers.TriggerRepository;
+import cegepst.game.triggers.Triggerer;
 
 import java.awt.*;
 
