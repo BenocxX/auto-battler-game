@@ -8,7 +8,7 @@ import java.util.HashMap;
 public abstract class Controller implements KeyListener {
 
     private final HashMap<Integer, Boolean> pressedKeys;
-    private ArrayList<Integer> typedKeys;
+    private final ArrayList<Integer> typedKeys;
 
     public Controller() {
         pressedKeys = new HashMap<>();
