@@ -4,6 +4,7 @@ import cegepst.engine.Buffer;
 import cegepst.engine.CollidableRepository;
 import cegepst.engine.controls.MovementController;
 import cegepst.engine.entities.ControllableEntity;
+import cegepst.game.TriggerRepository;
 
 import java.awt.*;
 
@@ -29,5 +30,9 @@ public class Player extends ControllableEntity {
         if (hasMoved()) {
             drawHitBox(buffer);
         }
+    }
+
+    public void isTriggering(TriggerRepository repository) {
+        repository.triggerValuesIfCollindingWithEntity(this);
     }
 }

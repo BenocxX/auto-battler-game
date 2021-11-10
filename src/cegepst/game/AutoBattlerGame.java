@@ -33,7 +33,7 @@ public class AutoBattlerGame extends Game {
     public void update() {
         quitKeyCheck();
         player.update();
-        triggerRepository.triggerValuesIfCollindingWithEntity(player);
+        player.isTriggering(triggerRepository);
         debugKeyCheck();
         useKeyCheck();
         gamePad.clearTypedKeys();
