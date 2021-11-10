@@ -3,6 +3,7 @@ package cegepst.game;
 import cegepst.engine.entities.StaticEntity;
 import cegepst.game.entities.Trigger;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TriggerRepository {
@@ -43,6 +44,22 @@ public class TriggerRepository {
 
     public Triggerable getTriggerable(Trigger key) {
         return hashMap.get(key);
+    }
+
+    public ArrayList<Trigger> getKeys() {
+        ArrayList<Trigger> keys = new ArrayList<>();
+        for (HashMap.Entry<Trigger, Triggerable> entry : hashMap.entrySet()) {
+            keys.add(entry.getKey());
+        }
+        return keys;
+    }
+
+    public ArrayList<Triggerable> getValues() {
+        ArrayList<Triggerable> values = new ArrayList<>();
+        for (HashMap.Entry<Trigger, Triggerable> entry : hashMap.entrySet()) {
+            values.add(entry.getValue());
+        }
+        return values;
     }
 
     public void addEntry(Trigger trigger, Triggerable triggerable) {

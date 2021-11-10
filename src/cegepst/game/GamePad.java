@@ -9,6 +9,7 @@ public class GamePad extends MovementController {
 
     private int quitKey = KeyEvent.VK_Q;
     private int useKey = KeyEvent.VK_F;
+    private int debugKey = KeyEvent.VK_D;
 
     public GamePad() {
         bindKey(quitKey);
@@ -22,5 +23,11 @@ public class GamePad extends MovementController {
 
     public boolean isUsePressed() {
         return isKeyPressed(useKey);
+    }
+
+    public boolean isDebugTyped() {
+        boolean isPressed = lastTypedKeyIs(debugKey);
+        resetLastTypedKey();
+        return isPressed;
     }
 }

@@ -1,5 +1,7 @@
 package cegepst.engine;
 
+import cegepst.game.GameSettings;
+
 import java.awt.*;
 
 public class Buffer {

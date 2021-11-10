@@ -2,6 +2,7 @@ package cegepst.game.entities;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.CollidableRepository;
+import cegepst.engine.RenderingEngine;
 import cegepst.engine.entities.MovableEntity;
 import cegepst.game.Triggerable;
 
@@ -16,7 +17,6 @@ public class BuyStation extends MovableEntity implements Triggerable {
         setDimension(30, 30);
         teleport(x, y);
         friendForSell = new Friend(x + 10, y + 10);
-        EntityRepository.getInstance().registerEntity(this);
         CollidableRepository.getInstance().registerEntity(this);
     }
 
@@ -25,7 +25,7 @@ public class BuyStation extends MovableEntity implements Triggerable {
         if (isSelected) {
             buffer.drawRectangle(x, y, width, height, new Color(137, 106, 77));
             buffer.drawText("Buy", x + 5, y - 5, new Color(255, 255, 255));
-            buffer.drawText("(Use F to Buy)", 10, 60, new Color(255, 255, 255));
+            buffer.drawText("(Use F to Buy)", RenderingEngine.WIDTH - 90, 40, new Color(255, 255, 255));
         } else {
             buffer.drawRectangle(x, y, width, height, new Color(94, 71, 47));
         }

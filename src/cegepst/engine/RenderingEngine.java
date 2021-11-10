@@ -7,6 +7,9 @@ import java.awt.image.BufferedImage;
 
 public class RenderingEngine {
 
+    public static int WIDTH = 800;
+    public static int HEIGHT = 600;
+
     private static RenderingEngine instance;
     private JFrame frame;
     private JPanel panel;
@@ -53,7 +56,7 @@ public class RenderingEngine {
 
     private void initializeFrame() {
         frame = new JFrame();
-        frame.setSize(800, 600);
+        frame.setSize(WIDTH, HEIGHT);
         frame.setLocationRelativeTo(null); // Center frame on screen
         frame.setResizable(false);
         frame.setTitle("Game");

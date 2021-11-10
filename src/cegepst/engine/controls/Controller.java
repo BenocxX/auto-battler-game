@@ -2,11 +2,13 @@ package cegepst.engine.controls;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class Controller implements KeyListener {
 
     private final HashMap<Integer, Boolean> pressedKeys;
+    private int lastTypedKey;
 
     public Controller() {
         pressedKeys = new HashMap<>();
@@ -34,6 +36,14 @@ public abstract class Controller implements KeyListener {
         return pressedKeys.containsKey(key) && pressedKeys.get(key);
     }
 
+    protected boolean lastTypedKeyIs(int key) {
+        return lastTypedKey == key;
+    }
+
+    protected void resetLastTypedKey() {
+        lastTypedKey = 0;
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -53,5 +63,7 @@ public abstract class Controller implements KeyListener {
         if (pressedKeys.containsKey(keycode)) {
             pressedKeys.put(keycode, false);
         }
+
+        lastTypedKey = e.getKeyCode();
     }
 }

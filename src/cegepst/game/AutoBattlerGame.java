@@ -2,15 +2,19 @@ package cegepst.game;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.Game;
-import cegepst.engine.entities.StaticEntity;
+import cegepst.engine.GameTime;
+import cegepst.engine.RenderingEngine;
 import cegepst.game.entities.BuyStation;
-import cegepst.game.entities.EntityRepository;
 import cegepst.game.entities.Player;
+import cegepst.game.entities.Trigger;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class AutoBattlerGame extends Game {
 
+    private long lastTime;
     private GamePad gamePad;
     private Player player;
     private Initializer initializer;
@@ -32,11 +36,15 @@ public class AutoBattlerGame extends Game {
         quitCheck();
         player.update();
         triggerRepository.triggerValuesIfCollindingWithEntity(player);
+
+        if (gamePad.isDebugTyped()) {
+            GameSettings.DEBUG_MODE = !GameSettings.DEBUG_MODE;
+        }
+
         if (gamePad.isUsePressed()) {
             for (BuyStation buyStation : buyStations) {
                 if (triggerRepository.isValueTriggeredByEntity(buyStation, player)) {
-                    // Item bought
-                    System.out.println("Bought!");
+                    System.out.println("Item bought!");
                 }
             }
         }
@@ -44,10 +52,19 @@ public class AutoBattlerGame extends Game {
 
     @Override
     public void draw(Buffer buffer) {
-        for (StaticEntity entity : EntityRepository.getInstance()) {
-            entity.draw(buffer);
+        for (BuyStation buyStation : buyStations) {
+            buyStation.draw(buffer);
         }
-        buffer.drawGameDebugStats();
+        for (Trigger trigger : triggerRepository.getKeys()) {
+            trigger.draw(buffer);
+        }
+        player.draw(buffer);
+        if (GameSettings.DEBUG_MODE) {
+            buffer.drawGameDebugStats();
+            buffer.drawText("('D' to deactivate debug mode)", RenderingEngine.WIDTH - 191, 20, new Color(255, 255, 255));
+        } else {
+            buffer.drawText("('D' to activate debug mode)", RenderingEngine.WIDTH - 176, 20, new Color(255, 255, 255));
+        }
     }
 
     @Override
