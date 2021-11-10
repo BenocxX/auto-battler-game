@@ -2,14 +2,12 @@ package cegepst.game;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.Game;
-import cegepst.engine.GameTime;
 import cegepst.engine.RenderingEngine;
 import cegepst.game.entities.BuyStation;
 import cegepst.game.entities.Player;
 import cegepst.game.entities.Trigger;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class AutoBattlerGame extends Game {
@@ -33,22 +31,11 @@ public class AutoBattlerGame extends Game {
 
     @Override
     public void update() {
-        quitCheck();
+        quitKeyCheck();
         player.update();
         triggerRepository.triggerValuesIfCollindingWithEntity(player);
-
-        if (gamePad.isDebugTyped()) {
-            GameSettings.DEBUG_MODE = !GameSettings.DEBUG_MODE;
-        }
-
-        if (gamePad.isUseTyped()) {
-            for (BuyStation buyStation : buyStations) {
-                if (triggerRepository.isValueTriggeredByEntity(buyStation, player)) {
-                    System.out.println("Item bought!");
-                }
-            }
-        }
-
+        debugKeyCheck();
+        useKeyCheck();
         gamePad.clearTypedKeys();
     }
 
@@ -74,9 +61,25 @@ public class AutoBattlerGame extends Game {
 
     }
 
-    private void quitCheck() {
+    private void quitKeyCheck() {
         if (gamePad.isQuitPressed()) {
             stop();
+        }
+    }
+
+    private void debugKeyCheck() {
+        if (gamePad.isDebugTyped()) {
+            GameSettings.DEBUG_MODE = !GameSettings.DEBUG_MODE;
+        }
+    }
+
+    private void useKeyCheck() {
+        if (gamePad.isUseTyped()) {
+            for (BuyStation buyStation : buyStations) {
+                if (triggerRepository.isValueTriggeredByEntity(buyStation, player)) {
+                    System.out.println("Item bought!");
+                }
+            }
         }
     }
 }
