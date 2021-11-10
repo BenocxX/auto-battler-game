@@ -76,7 +76,7 @@ public class AutoBattlerGame extends Game {
     private void useKeyCheck() {
         if (gamePad.isUseTyped()) {
             for (BuyStation buyStation : buyStations) {
-                if (triggerRepository.isValueTriggeredByEntity(buyStation, player)) {
+                if (triggerRepository.isValueTriggeredByTriggerer(buyStation, player)) {
                     System.out.println("Item bought!");
                 }
             }

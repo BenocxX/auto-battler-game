@@ -14,18 +14,18 @@ public class TriggerRepository {
         hashMap = new HashMap<>();
     }
 
-    public boolean isValueTriggeredByEntity(Triggerable triggerable, StaticEntity entity) {
+    public boolean isValueTriggeredByTriggerer(Triggerable triggerable, StaticEntity triggerer) {
         for (HashMap.Entry<Trigger, Triggerable> entry : hashMap.entrySet()) {
-            if (entry.getValue().equals(triggerable) && entry.getKey().intersectWith(entity)) {
+            if (entry.getValue().equals(triggerable) && entry.getKey().intersectWith(triggerer)) {
                 return true;
             }
         }
         return false;
     }
 
-    public void triggerValuesIfCollindingWithEntity(StaticEntity entity) {
+    public void triggerTriggerables(StaticEntity triggerer) {
         for (HashMap.Entry<Trigger, Triggerable> entry : hashMap.entrySet()) {
-            if (entry.getKey().isTriggered(entity)) {
+            if (entry.getKey().isTriggered(triggerer)) {
                 entry.getValue().trigger();
             } else {
                 entry.getValue().untrigger();

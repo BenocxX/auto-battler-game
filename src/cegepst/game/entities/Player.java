@@ -34,6 +34,6 @@ public class Player extends ControllableEntity {
     }
 
     public void isTriggering(TriggerRepository repository) {
-        repository.triggerValuesIfCollindingWithEntity(this);
+        repository.triggerTriggerables(this);
     }
 }
