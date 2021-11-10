@@ -12,12 +12,17 @@ public class BuyStation extends MovableEntity implements Triggerable {
 
     private Friend friendForSell;
     private boolean isSelected;
+    private boolean isBought;
 
     public BuyStation(int x, int y) {
         setDimension(30, 30);
         teleport(x, y);
         friendForSell = new Friend(x + 10, y + 10);
         CollidableRepository.getInstance().registerEntity(this);
+    }
+
+    public void buy() {
+        isBought = true;
     }
 
     @Override
@@ -29,11 +34,9 @@ public class BuyStation extends MovableEntity implements Triggerable {
         } else {
             buffer.drawRectangle(x, y, width, height, new Color(94, 71, 47));
         }
-        friendForSell.draw(buffer);
-    }
-
-    public boolean isSelected() {
-        return isSelected;
+        if (!isBought) {
+            friendForSell.draw(buffer);
+        }
     }
 
     @Override

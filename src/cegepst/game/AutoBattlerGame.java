@@ -77,7 +77,7 @@ public class AutoBattlerGame extends Game {
         if (gamePad.isUseTyped()) {
             for (BuyStation buyStation : buyStations) {
                 if (triggerRepository.isValueTriggeredByTriggerer(buyStation, player)) {
-                    System.out.println("Item bought!");
+                    buyStation.buy();
                 }
             }
         }
