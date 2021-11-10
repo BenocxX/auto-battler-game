@@ -6,10 +6,11 @@ import cegepst.engine.controls.MovementController;
 import cegepst.engine.entities.ControllableEntity;
 import cegepst.game.GameSettings;
 import cegepst.game.TriggerRepository;
+import cegepst.game.Triggerer;
 
 import java.awt.*;
 
-public class Player extends ControllableEntity {
+public class Player extends ControllableEntity implements Triggerer {
 
     public Player(MovementController controller) {
         super(controller);
@@ -33,6 +34,7 @@ public class Player extends ControllableEntity {
         }
     }
 
+    @Override
     public void isTriggering(TriggerRepository repository) {
         repository.triggerTriggerables(this);
     }
