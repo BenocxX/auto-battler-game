@@ -4,6 +4,7 @@ import cegepst.engine.Buffer;
 import cegepst.engine.CollidableRepository;
 import cegepst.engine.controls.MovementController;
 import cegepst.engine.entities.ControllableEntity;
+import cegepst.game.GameSettings;
 import cegepst.game.TriggerRepository;
 
 import java.awt.*;
@@ -27,7 +28,7 @@ public class Player extends ControllableEntity {
     @Override
     public void draw(Buffer buffer) {
         buffer.drawRectangle(x, y, width, height, new Color(32, 170, 32));
-        if (hasMoved()) {
+        if (hasMoved() && GameSettings.DEBUG_MODE) {
             drawHitBox(buffer);
         }
     }
