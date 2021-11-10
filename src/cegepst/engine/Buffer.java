@@ -1,7 +1,5 @@
 package cegepst.engine;
 
-import cegepst.game.GameSettings;
-
 import java.awt.*;
 
 public class Buffer {
@@ -23,6 +21,7 @@ public class Buffer {
     }
 
     public void drawText(String text, int x, int y, Paint paint) {
+        graphics.setFont(new Font("Arial", Font.PLAIN, 14));
         graphics.setPaint(paint);
         graphics.drawString(text, x, y);
     }
@@ -30,5 +29,9 @@ public class Buffer {
     public void drawGameDebugStats() {
         drawText("FPS: " + GameTime.getCurrentFps(), 10, 20, Color.WHITE);
         drawText(GameTime.getElapsedTimeFormattedTime(), 10, 40, Color.WHITE);
+    }
+
+    public void setFontSize(int style, int fontSize) {
+        graphics.setFont(new Font("TimesRoman", style, fontSize)); //http://gauss.ececs.uc.edu/Users/Franco/Fonts/Fonts.java.html
     }
 }

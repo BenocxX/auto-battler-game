@@ -50,9 +50,9 @@ public class AutoBattlerGame extends Game {
         player.draw(buffer);
         if (GameSettings.DEBUG_MODE) {
             buffer.drawGameDebugStats();
-            buffer.drawText("('D' to deactivate debug mode)", RenderingEngine.WIDTH - 191, 20, new Color(255, 255, 255));
+            buffer.drawText("('D' to deactivate debug mode)", RenderingEngine.WIDTH - 200, 20, new Color(255, 255, 255));
         } else {
-            buffer.drawText("('D' to activate debug mode)", RenderingEngine.WIDTH - 176, 20, new Color(255, 255, 255));
+            buffer.drawText("('D' to activate debug mode)", RenderingEngine.WIDTH - 184, 20, new Color(255, 255, 255));
         }
     }
 

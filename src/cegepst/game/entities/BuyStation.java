@@ -29,8 +29,10 @@ public class BuyStation extends MovableEntity implements Triggerable {
     public void draw(Buffer buffer) {
         if (isSelected) {
             buffer.drawRectangle(x, y, width, height, new Color(137, 106, 77));
-            buffer.drawText("Buy", x + 5, y - 5, new Color(255, 255, 255));
-            buffer.drawText("(Use F to Buy)", RenderingEngine.WIDTH - 90, 40, new Color(255, 255, 255));
+            if (!isBought) {
+                buffer.drawText("Buy", x + 5, y - 5, new Color(255, 255, 255));
+                buffer.drawText("(Use F to Buy)", RenderingEngine.WIDTH - 97, 40, new Color(255, 255, 255));
+            }
         } else {
             buffer.drawRectangle(x, y, width, height, new Color(94, 71, 47));
         }
