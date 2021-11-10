@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 public class AutoBattlerGame extends Game {
 
-    private long lastTime;
     private GamePad gamePad;
     private Player player;
     private Initializer initializer;
