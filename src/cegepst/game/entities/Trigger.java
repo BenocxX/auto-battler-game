@@ -8,8 +8,8 @@ import java.awt.*;
 
 public class Trigger extends StaticEntity {
 
-    public boolean isTriggered(StaticEntity entity) {
-        return intersectWith(entity);
+    public boolean isTriggered(StaticEntity triggerer) {
+        return intersectWith(triggerer);
     }
 
     @Override
