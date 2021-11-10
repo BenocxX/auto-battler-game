@@ -25,10 +25,6 @@ public abstract class Controller implements KeyListener {
         pressedKeys.put(key, false);
     }
 
-    protected void clearKeys() {
-        pressedKeys.clear();
-    }
-
     protected void removeKey(int key) {
         pressedKeys.remove(key);
     }
@@ -37,10 +33,6 @@ public abstract class Controller implements KeyListener {
         return pressedKeys.containsKey(key) && pressedKeys.get(key);
     }
 
-    /*protected boolean lastTypedKeyIs(int key) {
-        return lastTypedKey == key;
-    }*/
-
     protected boolean isKeyTyped(int key) {
         return typedKeys.contains(key);
     }
@@ -48,10 +40,6 @@ public abstract class Controller implements KeyListener {
     public void clearTypedKeys() {
         typedKeys.clear();
     }
-
-    /*protected void resetLastTypedKey() {
-        lastTypedKey = 0;
-    }*/
 
     @Override
     public void keyTyped(KeyEvent e) {
