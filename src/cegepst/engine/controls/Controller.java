@@ -8,10 +8,11 @@ import java.util.HashMap;
 public abstract class Controller implements KeyListener {
 
     private final HashMap<Integer, Boolean> pressedKeys;
-    private int lastTypedKey;
+    private ArrayList<Integer> typedKeys;
 
     public Controller() {
         pressedKeys = new HashMap<>();
+        typedKeys = new ArrayList<>();
     }
 
     protected void bindKeys(int[] keys) {
@@ -36,13 +37,21 @@ public abstract class Controller implements KeyListener {
         return pressedKeys.containsKey(key) && pressedKeys.get(key);
     }
 
-    protected boolean lastTypedKeyIs(int key) {
+    /*protected boolean lastTypedKeyIs(int key) {
         return lastTypedKey == key;
+    }*/
+
+    protected boolean isKeyTyped(int key) {
+        return typedKeys.contains(key);
     }
 
-    protected void resetLastTypedKey() {
-        lastTypedKey = 0;
+    public void clearTypedKeys() {
+        typedKeys.clear();
     }
+
+    /*protected void resetLastTypedKey() {
+        lastTypedKey = 0;
+    }*/
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -63,7 +72,6 @@ public abstract class Controller implements KeyListener {
         if (pressedKeys.containsKey(keycode)) {
             pressedKeys.put(keycode, false);
         }
-
-        lastTypedKey = e.getKeyCode();
+        typedKeys.add(keycode);
     }
 }

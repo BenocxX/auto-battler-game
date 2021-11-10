@@ -48,6 +48,8 @@ public class AutoBattlerGame extends Game {
                 }
             }
         }
+
+        gamePad.clearTypedKeys();
     }
 
     @Override

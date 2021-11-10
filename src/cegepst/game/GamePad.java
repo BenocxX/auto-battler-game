@@ -26,8 +26,6 @@ public class GamePad extends MovementController {
     }
 
     public boolean isDebugTyped() {
-        boolean isPressed = lastTypedKeyIs(debugKey);
-        resetLastTypedKey();
-        return isPressed;
+        return isKeyTyped(debugKey);
     }
 }
