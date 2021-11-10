@@ -41,7 +41,7 @@ public class AutoBattlerGame extends Game {
             GameSettings.DEBUG_MODE = !GameSettings.DEBUG_MODE;
         }
 
-        if (gamePad.isUsePressed()) {
+        if (gamePad.isUseTyped()) {
             for (BuyStation buyStation : buyStations) {
                 if (triggerRepository.isValueTriggeredByEntity(buyStation, player)) {
                     System.out.println("Item bought!");

@@ -21,8 +21,8 @@ public class GamePad extends MovementController {
         return isKeyPressed(quitKey);
     }
 
-    public boolean isUsePressed() {
-        return isKeyPressed(useKey);
+    public boolean isUseTyped() {
+        return isKeyTyped(useKey);
     }
 
     public boolean isDebugTyped() {
