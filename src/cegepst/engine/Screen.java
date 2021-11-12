@@ -55,6 +55,7 @@ public class Screen {
         } else {
             fullscreen();
         }
+        frame.setLocationRelativeTo(null);
     }
 
     protected void setPanel(JPanel panel) {
