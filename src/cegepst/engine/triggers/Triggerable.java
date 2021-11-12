@@ -1,4 +1,4 @@
-package cegepst.game.triggers;
+package cegepst.engine.triggers;
 
 public interface Triggerable {
 

@@ -4,7 +4,7 @@ import cegepst.engine.Buffer;
 import cegepst.engine.CollidableRepository;
 import cegepst.engine.RenderingEngine;
 import cegepst.engine.entities.MovableEntity;
-import cegepst.game.triggers.Triggerable;
+import cegepst.engine.triggers.Triggerable;
 
 import java.awt.*;
 

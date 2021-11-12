@@ -1,4 +1,4 @@
-package cegepst.game.triggers;
+package cegepst.engine.triggers;
 
 import cegepst.engine.entities.StaticEntity;
 

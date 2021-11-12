@@ -1,8 +1,8 @@
 package cegepst.game;
 
 import cegepst.game.entities.BuyStation;
-import cegepst.game.triggers.Trigger;
-import cegepst.game.triggers.Triggerable;
+import cegepst.engine.triggers.Trigger;
+import cegepst.engine.triggers.Triggerable;
 
 import java.util.ArrayList;
 import java.util.HashMap;

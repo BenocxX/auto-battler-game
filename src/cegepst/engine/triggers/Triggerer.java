@@ -1,4 +1,4 @@
-package cegepst.game.triggers;
+package cegepst.engine.triggers;
 
 // Triggerer is a valid word
 // Source: https://ell.stackexchange.com/questions/274203/is-triggerer-correct-or-is-there-some-other-word-to-identify-the-person-who-t

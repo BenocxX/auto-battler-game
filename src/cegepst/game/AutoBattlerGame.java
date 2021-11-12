@@ -5,8 +5,8 @@ import cegepst.engine.Game;
 import cegepst.engine.RenderingEngine;
 import cegepst.game.entities.BuyStation;
 import cegepst.game.entities.Player;
-import cegepst.game.triggers.Trigger;
-import cegepst.game.triggers.TriggerRepository;
+import cegepst.engine.triggers.Trigger;
+import cegepst.engine.triggers.TriggerRepository;
 
 import java.awt.*;
 import java.util.ArrayList;
