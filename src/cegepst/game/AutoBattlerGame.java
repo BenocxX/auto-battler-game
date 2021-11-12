@@ -41,19 +41,8 @@ public class AutoBattlerGame extends Game {
 
     @Override
     public void draw(Buffer buffer) {
-        for (BuyStation buyStation : buyStations) {
-            buyStation.draw(buffer);
-        }
-        for (Trigger trigger : triggerRepository.getKeys()) {
-            trigger.draw(buffer);
-        }
-        player.draw(buffer);
-        if (GameSettings.DEBUG_MODE) {
-            buffer.drawGameDebugStats();
-            buffer.drawText("('D' to deactivate debug mode)", RenderingEngine.WIDTH - 200, 20, new Color(255, 255, 255));
-        } else {
-            buffer.drawText("('D' to activate debug mode)", RenderingEngine.WIDTH - 184, 20, new Color(255, 255, 255));
-        }
+        logicDraw(buffer);
+        UIDraw(buffer);
     }
 
     @Override
@@ -80,6 +69,25 @@ public class AutoBattlerGame extends Game {
                     buyStation.buy();
                 }
             }
+        }
+    }
+
+    private void logicDraw(Buffer buffer) {
+        for (BuyStation buyStation : buyStations) {
+            buyStation.draw(buffer);
+        }
+        for (Trigger trigger : triggerRepository.getKeys()) {
+            trigger.draw(buffer);
+        }
+        player.draw(buffer);
+    }
+
+    private void UIDraw(Buffer buffer) {
+        if (GameSettings.DEBUG_MODE) {
+            buffer.drawGameDebugStats();
+            buffer.drawText("('D' to deactivate debug mode)", RenderingEngine.WIDTH - 200, 20, new Color(255, 255, 255));
+        } else {
+            buffer.drawText("('D' to activate debug mode)", RenderingEngine.WIDTH - 184, 20, new Color(255, 255, 255));
         }
     }
 }
