@@ -27,9 +27,6 @@ public class AutoBattlerGame extends Game {
         triggerRepository = new TriggerRepository();
         buyStations = initializer.getBuyStations();
         triggerRepository.addEntries(initializer.getTriggersForBuyStations(buyStations));
-
-        RenderingEngine.getInstance().getScreen().hideCursor();
-        RenderingEngine.getInstance().getScreen().fullscreen();
     }
 
     @Override
@@ -37,6 +34,7 @@ public class AutoBattlerGame extends Game {
         quitKeyCheck();
         debugKeyCheck();
         useKeyCheck();
+        screenModeKeyCheck();
         player.update();
         player.isTriggering(triggerRepository);
         gamePad.clearTypedKeys();
@@ -46,6 +44,25 @@ public class AutoBattlerGame extends Game {
     public void draw(Buffer buffer) {
         logicDraw(buffer);
         UIDraw(buffer);
+    }
+
+    private void logicDraw(Buffer buffer) {
+        for (BuyStation buyStation : buyStations) {
+            buyStation.draw(buffer);
+        }
+        for (Trigger trigger : triggerRepository.getKeys()) {
+            trigger.draw(buffer);
+        }
+        player.draw(buffer);
+    }
+
+    private void UIDraw(Buffer buffer) {
+        if (GameSettings.DEBUG_MODE) {
+            buffer.drawGameDebugStats();
+            buffer.drawText("('D' to deactivate debug mode)", RenderingEngine.WIDTH - 200, 20, new Color(255, 255, 255));
+        } else {
+            buffer.drawText("('D' to activate debug mode)", RenderingEngine.WIDTH - 184, 20, new Color(255, 255, 255));
+        }
     }
 
     @Override
@@ -75,22 +92,9 @@ public class AutoBattlerGame extends Game {
         }
     }
 
-    private void logicDraw(Buffer buffer) {
-        for (BuyStation buyStation : buyStations) {
-            buyStation.draw(buffer);
-        }
-        for (Trigger trigger : triggerRepository.getKeys()) {
-            trigger.draw(buffer);
-        }
-        player.draw(buffer);
-    }
-
-    private void UIDraw(Buffer buffer) {
-        if (GameSettings.DEBUG_MODE) {
-            buffer.drawGameDebugStats();
-            buffer.drawText("('D' to deactivate debug mode)", RenderingEngine.WIDTH - 200, 20, new Color(255, 255, 255));
-        } else {
-            buffer.drawText("('D' to activate debug mode)", RenderingEngine.WIDTH - 184, 20, new Color(255, 255, 255));
+    private void screenModeKeyCheck() {
+        if (gamePad.isScreenModeTyped()) {
+            RenderingEngine.getInstance().getScreen().toggleFullscreen();
         }
     }
 }
