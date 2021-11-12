@@ -11,7 +11,7 @@ public class RenderingEngine {
     public static int HEIGHT = 600;
 
     private static RenderingEngine instance;
-    private JFrame frame;
+    private Screen screen;
     private JPanel panel;
     private BufferedImage bufferedImage;
 
@@ -23,7 +23,7 @@ public class RenderingEngine {
     }
 
     public Buffer getRenderingBuffer() {
-        bufferedImage = new BufferedImage(800, 600, BufferedImage.TYPE_INT_RGB);
+        bufferedImage = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = bufferedImage.createGraphics();
         graphics.setRenderingHints(getOptimalRenderingHints());
         return new Buffer(graphics);
@@ -36,13 +36,16 @@ public class RenderingEngine {
         graphics.dispose();
     }
 
+    public Screen getScreen() {
+        return screen;
+    }
+
     public void start() {
-        frame.setVisible(true);
+        screen.start();
     }
 
     public void stop() {
-        frame.setVisible(false);
-        frame.dispose();
+        screen.end();
     }
 
     public void addKeyListener(KeyListener listener) {
@@ -50,19 +53,14 @@ public class RenderingEngine {
     }
 
     private RenderingEngine() {
-        initializeFrame();
+        initializeScreen();
         initializePanel();
     }
 
-    private void initializeFrame() {
-        frame = new JFrame();
-        frame.setSize(WIDTH, HEIGHT);
-        frame.setLocationRelativeTo(null); // Center frame on screen
-        frame.setResizable(false);
-        frame.setTitle("Game");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setState(JFrame.NORMAL);
-        frame.setUndecorated(true);
+    private void initializeScreen() {
+        screen = new Screen();
+        screen.setTitle("New Game");
+        screen.setSize(WIDTH, HEIGHT);
     }
 
     private void initializePanel() {
@@ -70,7 +68,7 @@ public class RenderingEngine {
         panel.setBackground(Color.BLUE);
         panel.setFocusable(true);
         panel.setDoubleBuffered(true);
-        frame.add(panel); // Ajouter le panneau dans le JFrame
+        screen.setPanel(panel);
     }
 
     private RenderingHints getOptimalRenderingHints() {

@@ -27,15 +27,18 @@ public class AutoBattlerGame extends Game {
         triggerRepository = new TriggerRepository();
         buyStations = initializer.getBuyStations();
         triggerRepository.addEntries(initializer.getTriggersForBuyStations(buyStations));
+
+        RenderingEngine.getInstance().getScreen().hideCursor();
+        RenderingEngine.getInstance().getScreen().fullscreen();
     }
 
     @Override
     public void update() {
         quitKeyCheck();
-        player.update();
-        player.isTriggering(triggerRepository);
         debugKeyCheck();
         useKeyCheck();
+        player.update();
+        player.isTriggering(triggerRepository);
         gamePad.clearTypedKeys();
     }
 
