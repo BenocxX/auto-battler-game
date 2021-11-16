@@ -5,11 +5,15 @@ import cegepst.engine.CollidableRepository;
 import cegepst.engine.RenderingEngine;
 import cegepst.engine.entities.MovableEntity;
 import cegepst.engine.triggers.Triggerable;
+import cegepst.game.GameSettings;
+import cegepst.game.Sound;
 
 import java.awt.*;
+import java.util.Random;
 
 public class BuyStation extends MovableEntity implements Triggerable {
 
+    private Sound sound;
     private Friend friendForSell;
     private boolean isSelected;
     private boolean isBought;
@@ -19,10 +23,7 @@ public class BuyStation extends MovableEntity implements Triggerable {
         teleport(x, y);
         friendForSell = new Friend(x + 10, y + 10);
         CollidableRepository.getInstance().registerEntity(this);
-    }
-
-    public void buy() {
-        isBought = true;
+        initializeSound();
     }
 
     @Override
@@ -43,11 +44,32 @@ public class BuyStation extends MovableEntity implements Triggerable {
 
     @Override
     public void trigger() {
-        isSelected = true;
+        isSelected = !isBought;
     }
 
     @Override
     public void untrigger() {
         isSelected = false;
+    }
+
+    public void buy() {
+        if (!isBought) {
+            isBought = true;
+            sound.play(GameSettings.SOUND);
+        }
+    }
+
+    private void initializeSound() {
+        Random random = new Random();
+        int randomSound = random.nextInt(4);
+        if (randomSound == 0) {
+            sound = Sound.BUY_1;
+        } else if (randomSound == 1) {
+            sound = Sound.BUY_2;
+        } else if (randomSound == 2) {
+            sound = Sound.BUY_3;
+        } else {
+            sound = Sound.BUY_4;
+        }
     }
 }

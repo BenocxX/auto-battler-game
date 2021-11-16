@@ -5,7 +5,11 @@ import cegepst.engine.resources.sounds.SoundPlayer;
 public enum Sound {
 
     MUSIC("./musics/map1.wav"),
-    ENEMY_1("./sounds/best1.wav");
+    ENEMY_1("./sounds/best1.wav"),
+    BUY_1("./sounds/buy1.wav"),
+    BUY_2("./sounds/buy2.wav"),
+    BUY_3("./sounds/buy3.wav"),
+    BUY_4("./sounds/buy4.wav");
 
     private final String path;
 
