@@ -4,19 +4,27 @@ import cegepst.engine.Buffer;
 import cegepst.engine.CollidableRepository;
 import cegepst.engine.controls.MovementController;
 import cegepst.engine.entities.ControllableEntity;
+import cegepst.engine.resources.images.Animator;
 import cegepst.game.GameSettings;
 import cegepst.engine.triggers.TriggerRepository;
 import cegepst.engine.triggers.Triggerer;
-
-import java.awt.*;
+import cegepst.game.Sound;
+import cegepst.game.Sprite;
 
 public class Player extends ControllableEntity implements Triggerer {
 
+    private Animator animator;
+
     public Player(MovementController controller) {
         super(controller);
-        setDimension(30, 50);
+        setDimension(32, 32);
         teleport(250, 250);
         setSpeed(5);
+
+        animator = new Animator(
+                Sprite.PLAYER_SPRITE_SHEET.getBufferedImage(), 8);
+        animator.loadAnimations(0, 128, width, height, 3);
+
         CollidableRepository.getInstance().registerEntity(this);
     }
 
@@ -24,11 +32,12 @@ public class Player extends ControllableEntity implements Triggerer {
     public void update() {
         super.update();
         moveAccordingToController();
+        animator.updateAnimationFrame(hasMoved());
     }
 
     @Override
     public void draw(Buffer buffer) {
-        buffer.drawRectangle(x, y, width, height, new Color(32, 170, 32));
+        buffer.drawImage(animator.getImage(getDirection()), x ,y);
         if (hasMoved() && GameSettings.DEBUG_MODE) {
             drawHitBox(buffer);
         }

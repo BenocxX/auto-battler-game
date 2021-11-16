@@ -1,4 +1,5 @@
-package cegepst.engine.sounds;
+package cegepst.engine.resources.sounds;
+
 
 public class SoundPlayer {
 

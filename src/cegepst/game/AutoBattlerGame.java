@@ -29,6 +29,8 @@ public class AutoBattlerGame extends Game {
         triggerRepository.addEntries(initializer.getTriggersForBuyStations(buyStations));
 
         GameSettings.isFullscreenMode = false;
+
+        Sound.MUSIC.playLoop(GameSettings.MUSIC);
     }
 
     @Override

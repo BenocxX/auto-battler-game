@@ -1,6 +1,6 @@
 package cegepst.game;
 
-import cegepst.engine.sounds.SoundPlayer;
+import cegepst.engine.resources.sounds.SoundPlayer;
 
 public enum Sound {
 
@@ -17,7 +17,21 @@ public enum Sound {
         SoundPlayer.play(path);
     }
 
+    // Overload to allow game setting to activate or deactivate sfx
+    public void play(boolean isActive) {
+        if (isActive) {
+            SoundPlayer.play(path);
+        }
+    }
+
     public void playLoop() {
         SoundPlayer.playLoop(path);
+    }
+
+    // Overload to allow game setting to activate or deactivate sfx
+    public void playLoop(boolean isActive) {
+        if (isActive) {
+            SoundPlayer.playLoop(path);
+        }
     }
 }

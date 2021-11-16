@@ -1,4 +1,4 @@
-package cegepst.engine.sounds;
+package cegepst.engine.resources.sounds;
 
 import javax.sound.sampled.*;
 import java.io.IOException;

@@ -31,6 +31,10 @@ public class Buffer {
         drawText(GameTime.getElapsedTimeFormattedTime(), 10, 40, Color.WHITE);
     }
 
+    public void drawImage(Image image, int x, int y) {
+        graphics.drawImage(image, x, y, null);
+    }
+
     public void setFontSize(int style, int fontSize) {
         graphics.setFont(new Font("TimesRoman", style, fontSize)); //http://gauss.ececs.uc.edu/Users/Franco/Fonts/Fonts.java.html
     }
