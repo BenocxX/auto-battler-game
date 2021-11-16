@@ -4,6 +4,7 @@ import cegepst.engine.Buffer;
 import cegepst.engine.CollidableRepository;
 import cegepst.engine.RenderingEngine;
 import cegepst.engine.entities.MovableEntity;
+import cegepst.engine.helpers.RandomHandler;
 import cegepst.engine.triggers.Triggerable;
 import cegepst.game.GameSettings;
 import cegepst.game.Sound;
@@ -60,8 +61,7 @@ public class BuyStation extends MovableEntity implements Triggerable {
     }
 
     private void initializeSound() {
-        Random random = new Random();
-        int randomSound = random.nextInt(4);
+        int randomSound = RandomHandler.getInt(4);
         if (randomSound == 0) {
             sound = Sound.BUY_1;
         } else if (randomSound == 1) {
