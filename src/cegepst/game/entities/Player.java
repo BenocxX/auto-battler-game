@@ -8,7 +8,6 @@ import cegepst.engine.resources.images.Animator;
 import cegepst.game.GameSettings;
 import cegepst.engine.triggers.TriggerRepository;
 import cegepst.engine.triggers.Triggerer;
-import cegepst.game.Sound;
 import cegepst.game.Sprite;
 
 public class Player extends ControllableEntity implements Triggerer {
