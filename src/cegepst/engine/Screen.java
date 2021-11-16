@@ -1,5 +1,7 @@
 package cegepst.engine;
 
+import cegepst.game.GameSettings;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -10,7 +12,7 @@ public class Screen {
     private JFrame frame;
     private DisplayMode fullscreenDisplayMode;
     private DisplayMode windowedDisplayMode;
-    private boolean isFullscreenMode;
+
     private Cursor invisibleCursor;
 
     public Screen() {
@@ -34,7 +36,7 @@ public class Screen {
             }
             device.setDisplayMode(fullscreenDisplayMode);
             frame.setLocationRelativeTo(null);
-            isFullscreenMode = true;
+            GameSettings.isFullscreenMode = true;
         }
     }
 
@@ -45,12 +47,12 @@ public class Screen {
             }
             device.setDisplayMode(windowedDisplayMode);
             frame.setLocationRelativeTo(null);
-            isFullscreenMode = false;
+            GameSettings.isFullscreenMode = false;
         }
     }
 
     public void toggleFullscreen() {
-        if (isFullscreenMode) {
+        if (GameSettings.isFullscreenMode) {
             windowed();
         } else {
             fullscreen();
