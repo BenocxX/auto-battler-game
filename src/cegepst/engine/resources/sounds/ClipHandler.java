@@ -24,6 +24,12 @@ public class ClipHandler {
         clip.start();
     }
 
+    public void stop() {
+        clip.stop();
+        clip.flush();
+        clip.close();
+    }
+
     private AudioInputStream getAudioStream() throws IOException, UnsupportedAudioFileException {
         return AudioSystem.getAudioInputStream(getInputStream());
     }
