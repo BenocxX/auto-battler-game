@@ -88,7 +88,6 @@ public class AutoBattlerGame extends Game {
 
     private void useKeyCheck() {
         if (gamePad.isUseTyped()) {
-            SoundRepository.getInstance().stopSound(1);
             for (BuyStation buyStation : buyStations) {
                 if (triggerRepository.isValueTriggeredByTriggerer(buyStation, player)) {
                     buyStation.buy();
