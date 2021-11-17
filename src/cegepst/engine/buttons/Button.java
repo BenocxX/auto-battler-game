@@ -7,11 +7,11 @@ import java.awt.*;
 
 public class Button extends StaticEntity {
 
-    private String text;
-    private boolean isClicked;
-    private boolean isHovered;
-    private boolean isVisible;
-    private CustomEvent event;
+    protected String text;
+    protected boolean isClicked;
+    protected boolean isHovered;
+    protected boolean isVisible;
+    protected CustomEvent event;
 
     public Button(int x, int y,
                   int width, int height,
@@ -24,13 +24,24 @@ public class Button extends StaticEntity {
         this.isVisible = isVisible;
     }
 
+    public Button(int x, int y,
+                  int style, String text,
+                  boolean isVisible,
+                  CustomEvent event) {
+        teleport(x, y);
+        applyStyle(style);
+        this.text = text;
+        this.event = event;
+        this.isVisible = isVisible;
+    }
+
     @Override
     public void draw(Buffer buffer) {
         if (isVisible) {
             if (isHovered) {
-                buffer.drawRoundRectangle(x, y, width, height, 30, 30, new Color(132, 132, 132, 255));
+                buffer.drawRectangle(x, y, width, height, new Color(132, 132, 132, 255));
             } else {
-                buffer.drawRoundRectangle(x, y, width, height, 30, 30, new Color(108, 108, 108, 255));
+                buffer.drawRectangle(x, y, width, height, new Color(108, 108, 108, 255));
             }
             buffer.drawCenteredText(text, getBounds());
         }
@@ -59,5 +70,34 @@ public class Button extends StaticEntity {
 
     public void checkIfHovered(Point mousePosition) {
         isHovered = getBounds().contains(mousePosition);
+    }
+
+    protected void applyStyle(int style) {
+        switch (style) {
+            case 1 -> {
+                width = 100;
+                height = 25;
+            }
+            case 2 -> {
+                width = 200;
+                height = 50;
+            }
+            case 3 -> {
+                width = 400;
+                height = 100;
+            }
+            case 7 -> {
+                width = 25;
+                height = 100;
+            }
+            case 8 -> {
+                width = 50;
+                height = 200;
+            }
+            case 9 -> {
+                width = 100;
+                height = 400;
+            }
+        }
     }
 }

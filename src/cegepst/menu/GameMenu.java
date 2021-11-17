@@ -2,26 +2,28 @@ package cegepst.menu;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.Game;
+import cegepst.engine.buttons.ButtonStyle;
 import cegepst.engine.buttons.CustomEvent;
 import cegepst.engine.buttons.Button;
+import cegepst.engine.buttons.RoundButton;
 import cegepst.engine.controls.MouseController;
 import cegepst.game.AutoBattlerGame;
 import cegepst.game.GamePad;
 import cegepst.game.GameSettings;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class GameMenu extends Game {
 
     private GamePad gamePad;
     private MouseController mouse;
-    private HashMap<String, Button> buttons;
+    private ArrayList<Button> buttons;
 
     @Override
     public void initialize() {
         gamePad = new GamePad();
         mouse = new MouseController();
-        buttons = new HashMap<>();
+        buttons = new ArrayList<>();
         initializeMenuButtons();
     }
 
@@ -34,8 +36,8 @@ public class GameMenu extends Game {
 
     @Override
     public void draw(Buffer buffer) {
-        for (HashMap.Entry<String, Button> entry : buttons.entrySet()) {
-            entry.getValue().draw(buffer);
+        for (Button button : buttons) {
+            button.draw(buffer);
         }
     }
 
@@ -51,17 +53,16 @@ public class GameMenu extends Game {
     }
 
     private void mouseHoverCheck() {
-        for (HashMap.Entry<String, Button> entry : buttons.entrySet()) {
-            entry.getValue().checkIfHovered(mouse.getMousePosition());
+        for (Button button : buttons) {
+            button.checkIfHovered(mouse.getMousePosition());
         }
     }
 
     private void mouseClickCheck() {
         if (mouse.isClicked()) {
-            for (HashMap.Entry<String, Button> entry : buttons.entrySet()) {
-                if (entry.getValue().isClicked(mouse.getMousePosition()) &&
-                        entry.getValue().isVisible()) {
-                    entry.getValue().event();
+            for (Button button : buttons) {
+                if (button.isVisible() && button.isClicked(mouse.getMousePosition())) {
+                    button.event();
                     break;
                 }
             }
@@ -75,8 +76,9 @@ public class GameMenu extends Game {
          *  de redéfinir la fonction de l'interface afin d'avoir des
          *  actions différentes pour chaque boutons.
          */
-        buttons.put("PlayButton", new Button(
-                100, 100, 200, 50, "Play", true,
+        buttons.add(new RoundButton(
+                100, 100, ButtonStyle.MEDIUM_HORIZONTAL_ROUND,
+                "Play", true,
                 new CustomEvent() {
                     @Override
                     public void activate() {
@@ -85,8 +87,9 @@ public class GameMenu extends Game {
                     }
                 }));
 
-        buttons.put("OptionsButton", new Button(
-                100, 160, 200, 50, "Options", true,
+        buttons.add(new RoundButton(
+                100, 160, ButtonStyle.MEDIUM_HORIZONTAL_ROUND,
+                "Options", true,
                 new CustomEvent() {
                     @Override
                     public void activate() {
@@ -94,8 +97,9 @@ public class GameMenu extends Game {
                     }
                 }));
 
-        buttons.put("QuitButton", new Button(
-                100, 220, 200, 50, "Quit", true,
+        buttons.add(new RoundButton(
+                100, 220, ButtonStyle.MEDIUM_HORIZONTAL_ROUND,
+                "Quit", true,
                 new CustomEvent() {
                     @Override
                     public void activate() {
@@ -103,38 +107,42 @@ public class GameMenu extends Game {
                     }
                 }));
 
-        buttons.put("SoundButton", new Button(
-                100, 100, 200, 50, "Sound " + (GameSettings.SOUND ? "On" : "Off"), false,
+        buttons.add(new RoundButton(
+                100, 100, ButtonStyle.MEDIUM_HORIZONTAL_ROUND,
+                "Sound " + (GameSettings.SOUND ? "On" : "Off"), false,
                 new CustomEvent() {
                     @Override
                     public void activate() {
                         GameSettings.SOUND = !GameSettings.SOUND;
-                        buttons.get("SoundButton").setText("Sound " + (GameSettings.SOUND ? "On" : "Off"));
+                        buttons.get(3).setText("Sound " + (GameSettings.SOUND ? "On" : "Off"));
                     }
                 }));
 
-        buttons.put("MusicButton", new Button(
-                100, 160, 200, 50, "Music " + (GameSettings.MUSIC ? "On" : "Off"), false,
+        buttons.add(new RoundButton(
+                100, 160, ButtonStyle.MEDIUM_HORIZONTAL_ROUND,
+                "Music " + (GameSettings.MUSIC ? "On" : "Off"), false,
                 new CustomEvent() {
                     @Override
                     public void activate() {
                         GameSettings.MUSIC = !GameSettings.MUSIC;
-                        buttons.get("MusicButton").setText("Music " + (GameSettings.MUSIC ? "On" : "Off"));
+                        buttons.get(4).setText("Music " + (GameSettings.MUSIC ? "On" : "Off"));
                     }
                 }));
 
-        buttons.put("DebugButton", new Button(
-                100, 220, 200, 50, "Debug " + (GameSettings.DEBUG_MODE ? "On" : "Off"), false,
+        buttons.add(new RoundButton(
+                100, 220, ButtonStyle.MEDIUM_HORIZONTAL_ROUND,
+                "Debug " + (GameSettings.DEBUG_MODE ? "On" : "Off"), false,
                 new CustomEvent() {
                     @Override
                     public void activate() {
                         GameSettings.DEBUG_MODE = !GameSettings.DEBUG_MODE;
-                        buttons.get("DebugButton").setText("Debug " + (GameSettings.DEBUG_MODE ? "On" : "Off"));
+                        buttons.get(5).setText("Debug " + (GameSettings.DEBUG_MODE ? "On" : "Off"));
                     }
                 }));
 
-        buttons.put("BackButton", new Button(
-                100, 280, 200, 50, "Back", false,
+        buttons.add(new RoundButton(
+                100, 280, ButtonStyle.MEDIUM_HORIZONTAL_ROUND,
+                "Back", false,
                 new CustomEvent() {
                     @Override
                     public void activate() {
@@ -144,8 +152,8 @@ public class GameMenu extends Game {
     }
 
     private void invertButtonsVisibility() {
-        for (HashMap.Entry<String, Button> entry : buttons.entrySet()) {
-            entry.getValue().setVisible(!entry.getValue().isVisible());
+        for (Button button : buttons) {
+            button.setVisible(!button.isVisible());
         }
     }
 }
