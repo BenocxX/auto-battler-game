@@ -21,12 +21,6 @@ public class MouseController extends MouseAdapter {
                 mousePositionRelativeToScreen.y - locationOfJPanelOnScreen.y);
     }
 
-    public Rectangle getMouseRectangle() {
-        Point mousePositionInJPanel = getMousePosition();
-        Rectangle hitbox = new Rectangle(mousePositionInJPanel.x, mousePositionInJPanel.y, 1, 1);
-        return hitbox;
-    }
-
     public boolean isClicked() {
         return isClicked;
     }
@@ -36,7 +30,13 @@ public class MouseController extends MouseAdapter {
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mousePressed(MouseEvent e) {
+        super.mousePressed(e);
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
         isClicked = true;
+        super.mouseReleased(e);
     }
 }

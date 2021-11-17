@@ -12,6 +12,7 @@ import cegepst.game.Sprite;
 
 public class Player extends ControllableEntity implements Triggerer {
 
+    // TODO: Faire un hashMap: HashMap<StaticEntity, Animator>
     private Animator animator;
 
     public Player(MovementController controller) {

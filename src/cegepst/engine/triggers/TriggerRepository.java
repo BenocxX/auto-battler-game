@@ -34,16 +34,6 @@ public class TriggerRepository {
         }
     }
 
-    public void triggerTriggerables(Rectangle hitbox) {
-        for (HashMap.Entry<Trigger, Triggerable> entry : hashMap.entrySet()) {
-            if (entry.getKey().isTriggered(hitbox)) {
-                entry.getValue().trigger();
-            } else {
-                entry.getValue().untrigger();
-            }
-        }
-    }
-
     public Trigger getTrigger(Triggerable value) {
         for (HashMap.Entry<Trigger, Triggerable> entry : hashMap.entrySet()) {
             if (entry.getValue().equals(value)) {
