@@ -68,6 +68,11 @@ public class GameMenu extends Game {
     }
 
     private void initializeMenuButtons() {
+        /* TODO: Demander pour fonctions anonymes avec interface.
+         *  Utilisation car une seule classe de bouton, donc impossible
+         *  de redéfinir la fonction de l'interface afin d'avoir des
+         *  actions différentes pour chaque boutons.
+         */
         buttons.put("PlayButton", new Button(
                 100, 100, 200, 50, "Play", true,
                 new Action() {
