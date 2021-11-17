@@ -1,7 +1,9 @@
 package cegepst.engine.triggers;
 
 import cegepst.engine.entities.StaticEntity;
+import cegepst.menu.Button;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -25,6 +27,16 @@ public class TriggerRepository {
     public void triggerTriggerables(StaticEntity triggerer) {
         for (HashMap.Entry<Trigger, Triggerable> entry : hashMap.entrySet()) {
             if (entry.getKey().isTriggered(triggerer)) {
+                entry.getValue().trigger();
+            } else {
+                entry.getValue().untrigger();
+            }
+        }
+    }
+
+    public void triggerTriggerables(Rectangle hitbox) {
+        for (HashMap.Entry<Trigger, Triggerable> entry : hashMap.entrySet()) {
+            if (entry.getKey().isTriggered(hitbox)) {
                 entry.getValue().trigger();
             } else {
                 entry.getValue().untrigger();

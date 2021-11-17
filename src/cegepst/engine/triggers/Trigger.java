@@ -12,6 +12,10 @@ public class Trigger extends StaticEntity {
         return intersectWith(triggerer);
     }
 
+    public boolean isTriggered(Rectangle triggerer) {
+        return intersectWith(triggerer);
+    }
+
     @Override
     public void draw(Buffer buffer) {
         if (GameSettings.DEBUG_MODE) {
