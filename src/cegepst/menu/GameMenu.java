@@ -2,7 +2,6 @@ package cegepst.menu;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.Game;
-import cegepst.engine.RenderingEngine;
 import cegepst.engine.controls.MouseController;
 import cegepst.game.AutoBattlerGame;
 import cegepst.game.GamePad;
@@ -20,7 +19,7 @@ public class GameMenu extends Game {
         gamePad = new GamePad();
         mouse = new MouseController();
         buttons = new HashMap<>();
-        initializeButtons();
+        initializeMenuButtons();
     }
 
     @Override
@@ -70,7 +69,7 @@ public class GameMenu extends Game {
         }
     }
 
-    private void initializeButtons() {
+    private void initializeMenuButtons() {
         buttons.put("PlayButton", new Button(100, 100, 200, 50, "Play"));
         buttons.put("OptionsButton", new Button(100, 160, 200, 50, "Options"));
         buttons.put("QuitButton", new Button(100, 220, 200, 50, "Quit"));

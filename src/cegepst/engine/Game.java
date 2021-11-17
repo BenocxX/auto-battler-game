@@ -15,14 +15,12 @@ public abstract class Game {
     }
 
     public final void start() {
-        System.out.println("Start Game");
         initialize();
         run();
         conclude();
     }
 
     public final void stop() {
-        System.out.println("Stop Game");
         playing = false;
     }
 
