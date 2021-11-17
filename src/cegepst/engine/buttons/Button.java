@@ -13,6 +13,10 @@ public class Button extends StaticEntity {
     protected boolean isVisible;
     protected CustomEvent event;
 
+    /*
+     * Lots of overloaded constructors because I want to let
+     * the developer customize the button easily.
+     */
     public Button(int x, int y,
                   int width, int height,
                   String text, boolean isVisible,
@@ -32,6 +36,20 @@ public class Button extends StaticEntity {
         applyStyle(style);
         this.text = text;
         this.event = event;
+        this.isVisible = isVisible;
+    }
+
+    public Button(int x, int y, int style, String text, boolean isVisible) {
+        teleport(x, y);
+        applyStyle(style);
+        this.text = text;
+        this.isVisible = isVisible;
+    }
+
+    public Button(int x, int y, String text, boolean isVisible) {
+        teleport(x, y);
+        applyStyle(ButtonStyle.MEDIUM_HORIZONTAL);
+        this.text = text;
         this.isVisible = isVisible;
     }
 
@@ -66,6 +84,10 @@ public class Button extends StaticEntity {
 
     public void event() {
         event.activate();
+    }
+
+    public void setEvent(CustomEvent event) {
+        this.event = event;
     }
 
     public void checkIfHovered(Point mousePosition) {

@@ -9,6 +9,10 @@ public class RoundButton extends Button {
     private int arcWidth;
     private int arcHeight;
 
+    /*
+     * Lots of overloaded constructors because I want to let
+     * the developer customize the button easily.
+     */
     public RoundButton(int x, int y, int width, int height,
                        int arcWidth, int arcHeight, String text,
                        boolean isVisible, CustomEvent event) {
@@ -21,6 +25,16 @@ public class RoundButton extends Button {
                        boolean isVisible, CustomEvent event) {
         super(x, y, style, text, isVisible, event);
         applyStyle(style);
+    }
+
+    public RoundButton(int x, int y, int style, String text, boolean isVisible) {
+        super(x, y, style, text, isVisible);
+        applyStyle(style);
+    }
+
+    public RoundButton(int x, int y, String text, boolean isVisible) {
+        super(x, y, text, isVisible);
+        applyStyle(ButtonStyle.MEDIUM_HORIZONTAL_ROUND);
     }
 
     @Override

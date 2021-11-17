@@ -76,79 +76,76 @@ public class GameMenu extends Game {
          *  de redéfinir la fonction de l'interface afin d'avoir des
          *  actions différentes pour chaque boutons.
          */
-        buttons.add(new RoundButton(
-                100, 100, ButtonStyle.MEDIUM_HORIZONTAL_ROUND,
-                "Play", true,
-                new CustomEvent() {
-                    @Override
-                    public void activate() {
-                        stop();
-                        (new AutoBattlerGame()).start();
-                    }
-                }));
+        Button playButton = new RoundButton(100, 100, "Play", true);
+        playButton.setEvent(new CustomEvent() {
+            @Override
+            public void activate() {
+                stop();
+                (new AutoBattlerGame()).start();
+            }
+        });
 
-        buttons.add(new RoundButton(
-                100, 160, ButtonStyle.MEDIUM_HORIZONTAL_ROUND,
-                "Options", true,
-                new CustomEvent() {
-                    @Override
-                    public void activate() {
-                        invertButtonsVisibility();
-                    }
-                }));
+        Button optionButton = new RoundButton(100, 160, "Option", true);
+        optionButton.setEvent(new CustomEvent() {
+            @Override
+            public void activate() {
+                invertButtonsVisibility();
+            }
+        });
 
-        buttons.add(new RoundButton(
-                100, 220, ButtonStyle.MEDIUM_HORIZONTAL_ROUND,
-                "Quit", true,
-                new CustomEvent() {
-                    @Override
-                    public void activate() {
-                        stop();
-                    }
-                }));
+        Button quitButton = new RoundButton(100, 220, "Quit", true);
+        quitButton.setEvent(new CustomEvent() {
+            @Override
+            public void activate() {
+                stop();
+            }
+        });
 
-        buttons.add(new RoundButton(
-                100, 100, ButtonStyle.MEDIUM_HORIZONTAL_ROUND,
-                "Sound " + (GameSettings.SOUND ? "On" : "Off"), false,
-                new CustomEvent() {
-                    @Override
-                    public void activate() {
-                        GameSettings.SOUND = !GameSettings.SOUND;
-                        buttons.get(3).setText("Sound " + (GameSettings.SOUND ? "On" : "Off"));
-                    }
-                }));
+        Button soundButton = new RoundButton(100, 100,
+                "Sound " + (GameSettings.SOUND ? "On" : "Off"), false);
+        soundButton.setEvent(new CustomEvent() {
+            @Override
+            public void activate() {
+                GameSettings.SOUND = !GameSettings.SOUND;
+                soundButton.setText("Sound " + (GameSettings.SOUND ? "On" : "Off"));
+            }
+        });
 
-        buttons.add(new RoundButton(
-                100, 160, ButtonStyle.MEDIUM_HORIZONTAL_ROUND,
-                "Music " + (GameSettings.MUSIC ? "On" : "Off"), false,
-                new CustomEvent() {
-                    @Override
-                    public void activate() {
-                        GameSettings.MUSIC = !GameSettings.MUSIC;
-                        buttons.get(4).setText("Music " + (GameSettings.MUSIC ? "On" : "Off"));
-                    }
-                }));
+        Button musicButton = new RoundButton(100, 160,
+                "Music " + (GameSettings.MUSIC ? "On" : "Off"), false);
+        musicButton.setEvent(new CustomEvent() {
+            @Override
+            public void activate() {
+                GameSettings.MUSIC = !GameSettings.MUSIC;
+                musicButton.setText("Music " + (GameSettings.MUSIC ? "On" : "Off"));
+            }
+        });
 
-        buttons.add(new RoundButton(
-                100, 220, ButtonStyle.MEDIUM_HORIZONTAL_ROUND,
-                "Debug " + (GameSettings.DEBUG_MODE ? "On" : "Off"), false,
-                new CustomEvent() {
-                    @Override
-                    public void activate() {
-                        GameSettings.DEBUG_MODE = !GameSettings.DEBUG_MODE;
-                        buttons.get(5).setText("Debug " + (GameSettings.DEBUG_MODE ? "On" : "Off"));
-                    }
-                }));
+        Button debugButton = new RoundButton(100, 220,
+                "Debug " + (GameSettings.DEBUG_MODE ? "On" : "Off"), false);
+        debugButton.setEvent(new CustomEvent() {
+            @Override
+            public void activate() {
+                GameSettings.DEBUG_MODE = !GameSettings.DEBUG_MODE;
+                debugButton.setText("Debug " + (GameSettings.DEBUG_MODE ? "On" : "Off"));
+            }
+        });
 
-        buttons.add(new RoundButton(
-                100, 280, ButtonStyle.MEDIUM_HORIZONTAL_ROUND,
-                "Back", false,
-                new CustomEvent() {
-                    @Override
-                    public void activate() {
-                        invertButtonsVisibility();
-                    }
-                }));
+        Button backButton = new RoundButton(100, 280, "Back", false);
+        backButton.setEvent(new CustomEvent() {
+            @Override
+            public void activate() {
+                invertButtonsVisibility();
+            }
+        });
+
+        buttons.add(playButton);
+        buttons.add(optionButton);
+        buttons.add(quitButton);
+        buttons.add(soundButton);
+        buttons.add(musicButton);
+        buttons.add(debugButton);
+        buttons.add(backButton);
     }
 
     private void invertButtonsVisibility() {
