@@ -71,11 +71,6 @@ public class GameMenu extends Game {
     }
 
     private void initializeMenuButtons() {
-        /* TODO: Demander pour fonctions anonymes avec interface.
-         *  Utilisation car une seule classe de bouton, donc impossible
-         *  de redéfinir la fonction de l'interface afin d'avoir des
-         *  actions différentes pour chaque boutons.
-         */
         Button playButton = new RoundButton(100, 100, "Play", true);
         playButton.setEvent(new CustomEvent() {
             @Override
