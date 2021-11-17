@@ -17,6 +17,10 @@ public class Button extends StaticEntity {
         this.text = text;
     }
 
+    public void setText(String text) {
+        this.text = text;
+    }
+
     @Override
     public void draw(Buffer buffer) {
         if (isHovered) {
