@@ -2,7 +2,9 @@ package cegepst.menu;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.Game;
+import cegepst.engine.RenderingEngine;
 import cegepst.engine.controls.MouseController;
+import cegepst.game.AutoBattlerGame;
 import cegepst.game.GamePad;
 
 import java.util.HashMap;
@@ -55,7 +57,8 @@ public class GameMenu extends Game {
     private void mouseClickCheck() {
         if (mouse.isClicked()) {
             if (buttons.get("PlayButton").isClicked(mouse.getMousePosition())) {
-                System.out.println("Play Button Clicked!");
+                stop();
+                //(new AutoBattlerGame()).start();
             }
             if (buttons.get("OptionsButton").isClicked(mouse.getMousePosition())) {
                 System.out.println("Options Button Clicked!");
