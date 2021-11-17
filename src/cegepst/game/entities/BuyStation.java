@@ -10,7 +10,6 @@ import cegepst.game.GameSettings;
 import cegepst.game.Sound;
 
 import java.awt.*;
-import java.util.Random;
 
 public class BuyStation extends MovableEntity implements Triggerable {
 

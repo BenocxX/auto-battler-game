@@ -1,12 +1,12 @@
 package cegepst;
 
 import cegepst.game.AutoBattlerGame;
-import cegepst.menu.Menu;
+import cegepst.menu.GameMenu;
 
 public class App {
 
     public static void main(String[] args) {
-        (new Menu()).start();
-        (new AutoBattlerGame()).start();
+        (new GameMenu()).start();
+        //(new AutoBattlerGame()).start();
     }
 }

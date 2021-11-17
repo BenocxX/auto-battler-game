@@ -4,13 +4,15 @@ import cegepst.engine.Buffer;
 import cegepst.engine.Game;
 import cegepst.game.GamePad;
 
-public class Menu extends Game {
+public class GameMenu extends Game {
 
     private GamePad gamePad;
+    private Button button;
 
     @Override
     public void initialize() {
         gamePad = new GamePad();
+        button = new Button(100, 100, 200, 50, "Quit");
     }
 
     @Override
@@ -20,7 +22,7 @@ public class Menu extends Game {
 
     @Override
     public void draw(Buffer buffer) {
-
+        button.draw(buffer);
     }
 
     @Override
