@@ -58,7 +58,7 @@ public class GameMenu extends Game {
         if (mouse.isClicked()) {
             if (buttons.get("PlayButton").isClicked(mouse.getMousePosition())) {
                 stop();
-                //(new AutoBattlerGame()).start();
+                (new AutoBattlerGame()).start();
             }
             if (buttons.get("OptionsButton").isClicked(mouse.getMousePosition())) {
                 System.out.println("Options Button Clicked!");

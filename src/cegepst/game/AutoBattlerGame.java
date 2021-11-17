@@ -74,7 +74,9 @@ public class AutoBattlerGame extends Game {
 
     private void quitKeyCheck() {
         if (gamePad.isQuitPressed()) {
-            stop();
+            // TODO: Quand je fais "stop();" je reçois un erreur que je ne comprends pas
+            // stop();
+            System.exit(0);
         }
     }
 
