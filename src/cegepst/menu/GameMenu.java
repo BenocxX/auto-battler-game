@@ -2,6 +2,8 @@ package cegepst.menu;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.Game;
+import cegepst.engine.buttons.CustomEvent;
+import cegepst.engine.buttons.Button;
 import cegepst.engine.controls.MouseController;
 import cegepst.game.AutoBattlerGame;
 import cegepst.game.GamePad;
@@ -59,7 +61,7 @@ public class GameMenu extends Game {
             for (HashMap.Entry<String, Button> entry : buttons.entrySet()) {
                 if (entry.getValue().isClicked(mouse.getMousePosition()) &&
                         entry.getValue().isVisible()) {
-                    entry.getValue().action();
+                    entry.getValue().event();
                     break;
                 }
             }
@@ -75,7 +77,7 @@ public class GameMenu extends Game {
          */
         buttons.put("PlayButton", new Button(
                 100, 100, 200, 50, "Play", true,
-                new Action() {
+                new CustomEvent() {
                     @Override
                     public void activate() {
                         stop();
@@ -85,7 +87,7 @@ public class GameMenu extends Game {
 
         buttons.put("OptionsButton", new Button(
                 100, 160, 200, 50, "Options", true,
-                new Action() {
+                new CustomEvent() {
                     @Override
                     public void activate() {
                         invertButtonsVisibility();
@@ -94,7 +96,7 @@ public class GameMenu extends Game {
 
         buttons.put("QuitButton", new Button(
                 100, 220, 200, 50, "Quit", true,
-                new Action() {
+                new CustomEvent() {
                     @Override
                     public void activate() {
                         stop();
@@ -103,7 +105,7 @@ public class GameMenu extends Game {
 
         buttons.put("SoundButton", new Button(
                 100, 100, 200, 50, "Sound " + (GameSettings.SOUND ? "On" : "Off"), false,
-                new Action() {
+                new CustomEvent() {
                     @Override
                     public void activate() {
                         GameSettings.SOUND = !GameSettings.SOUND;
@@ -113,7 +115,7 @@ public class GameMenu extends Game {
 
         buttons.put("MusicButton", new Button(
                 100, 160, 200, 50, "Music " + (GameSettings.MUSIC ? "On" : "Off"), false,
-                new Action() {
+                new CustomEvent() {
                     @Override
                     public void activate() {
                         GameSettings.MUSIC = !GameSettings.MUSIC;
@@ -123,7 +125,7 @@ public class GameMenu extends Game {
 
         buttons.put("DebugButton", new Button(
                 100, 220, 200, 50, "Debug " + (GameSettings.DEBUG_MODE ? "On" : "Off"), false,
-                new Action() {
+                new CustomEvent() {
                     @Override
                     public void activate() {
                         GameSettings.DEBUG_MODE = !GameSettings.DEBUG_MODE;
@@ -133,7 +135,7 @@ public class GameMenu extends Game {
 
         buttons.put("BackButton", new Button(
                 100, 280, 200, 50, "Back", false,
-                new Action() {
+                new CustomEvent() {
                     @Override
                     public void activate() {
                         invertButtonsVisibility();

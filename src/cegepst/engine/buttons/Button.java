@@ -1,4 +1,4 @@
-package cegepst.menu;
+package cegepst.engine.buttons;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.entities.StaticEntity;
@@ -11,13 +11,16 @@ public class Button extends StaticEntity {
     private boolean isClicked;
     private boolean isHovered;
     private boolean isVisible;
-    private Action action;
+    private CustomEvent event;
 
-    public Button(int x, int y, int width, int height, String text, boolean isVisible, Action action) {
+    public Button(int x, int y,
+                  int width, int height,
+                  String text, boolean isVisible,
+                  CustomEvent event) {
         teleport(x, y);
         setDimension(width, height);
         this.text = text;
-        this.action = action;
+        this.event = event;
         this.isVisible = isVisible;
     }
 
@@ -25,9 +28,9 @@ public class Button extends StaticEntity {
     public void draw(Buffer buffer) {
         if (isVisible) {
             if (isHovered) {
-                buffer.drawRectangle(x, y, width, height, new Color(132, 132, 132, 255));
+                buffer.drawRoundRectangle(x, y, width, height, 30, 30, new Color(132, 132, 132, 255));
             } else {
-                buffer.drawRectangle(x, y, width, height, new Color(108, 108, 108, 255));
+                buffer.drawRoundRectangle(x, y, width, height, 30, 30, new Color(108, 108, 108, 255));
             }
             buffer.drawCenteredText(text, getBounds());
         }
@@ -50,8 +53,8 @@ public class Button extends StaticEntity {
         return isVisible;
     }
 
-    public void action() {
-        action.activate();
+    public void event() {
+        event.activate();
     }
 
     public void checkIfHovered(Point mousePosition) {

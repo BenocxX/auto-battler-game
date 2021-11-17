@@ -1,6 +1,7 @@
 package cegepst.engine;
 
 import java.awt.*;
+import java.awt.geom.RoundRectangle2D;
 
 public class Buffer {
 
@@ -15,6 +16,11 @@ public class Buffer {
     public void drawRectangle(int x, int y, int width, int height, Paint paint) {
         graphics.setPaint(paint);
         graphics.fillRect(x, y, width, height);
+    }
+
+    public void drawRoundRectangle(int x, int y, int width, int height, int arcWidth, int arcHeight, Paint paint) {
+        graphics.setPaint(paint);
+        graphics.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
     }
 
     public void drawCircle(int x, int y, int radius, Paint paint) {

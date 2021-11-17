@@ -1,9 +1,7 @@
 package cegepst.engine.triggers;
 
 import cegepst.engine.entities.StaticEntity;
-import cegepst.menu.Button;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
