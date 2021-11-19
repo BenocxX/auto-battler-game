@@ -11,7 +11,7 @@ public class Button extends StaticEntity {
     protected boolean isClicked;
     protected boolean isHovered;
     protected boolean isVisible;
-    protected CustomEvent event;
+    protected CustomEvent customEvent;
 
     /*
      * Lots of overloaded constructors because I want to let
@@ -24,7 +24,7 @@ public class Button extends StaticEntity {
         teleport(x, y);
         setDimension(width, height);
         this.text = text;
-        this.event = event;
+        this.customEvent = event;
         this.isVisible = isVisible;
     }
 
@@ -35,7 +35,7 @@ public class Button extends StaticEntity {
         teleport(x, y);
         applyStyle(style);
         this.text = text;
-        this.event = event;
+        this.customEvent = event;
         this.isVisible = isVisible;
     }
 
@@ -82,12 +82,12 @@ public class Button extends StaticEntity {
         return isVisible;
     }
 
-    public void event() {
-        event.activate();
+    public void customEvent() {
+        customEvent.event();
     }
 
-    public void setEvent(CustomEvent event) {
-        this.event = event;
+    public void setCustomEvent(CustomEvent customEvent) {
+        this.customEvent = customEvent;
     }
 
     public void checkIfHovered(Point mousePosition) {

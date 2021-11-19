@@ -2,7 +2,6 @@ package cegepst.menu;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.Game;
-import cegepst.engine.buttons.ButtonStyle;
 import cegepst.engine.buttons.CustomEvent;
 import cegepst.engine.buttons.Button;
 import cegepst.engine.buttons.RoundButton;
@@ -62,7 +61,7 @@ public class GameMenu extends Game {
         if (mouse.isClicked()) {
             for (Button button : buttons) {
                 if (button.isVisible() && button.isClicked(mouse.getMousePosition())) {
-                    button.event();
+                    button.customEvent();
                     break;
                 }
             }
@@ -72,35 +71,35 @@ public class GameMenu extends Game {
 
     private void initializeMenuButtons() {
         Button playButton = new RoundButton(100, 100, "Play", true);
-        playButton.setEvent(new CustomEvent() {
+        playButton.setCustomEvent(new CustomEvent() {
             @Override
-            public void activate() {
+            public void event() {
                 stop();
                 (new AutoBattlerGame()).start();
             }
         });
 
         Button optionButton = new RoundButton(100, 160, "Option", true);
-        optionButton.setEvent(new CustomEvent() {
+        optionButton.setCustomEvent(new CustomEvent() {
             @Override
-            public void activate() {
+            public void event() {
                 invertButtonsVisibility();
             }
         });
 
         Button quitButton = new RoundButton(100, 220, "Quit", true);
-        quitButton.setEvent(new CustomEvent() {
+        quitButton.setCustomEvent(new CustomEvent() {
             @Override
-            public void activate() {
+            public void event() {
                 stop();
             }
         });
 
         Button soundButton = new RoundButton(100, 100,
                 "Sound " + (GameSettings.SOUND ? "On" : "Off"), false);
-        soundButton.setEvent(new CustomEvent() {
+        soundButton.setCustomEvent(new CustomEvent() {
             @Override
-            public void activate() {
+            public void event() {
                 GameSettings.SOUND = !GameSettings.SOUND;
                 soundButton.setText("Sound " + (GameSettings.SOUND ? "On" : "Off"));
             }
@@ -108,9 +107,9 @@ public class GameMenu extends Game {
 
         Button musicButton = new RoundButton(100, 160,
                 "Music " + (GameSettings.MUSIC ? "On" : "Off"), false);
-        musicButton.setEvent(new CustomEvent() {
+        musicButton.setCustomEvent(new CustomEvent() {
             @Override
-            public void activate() {
+            public void event() {
                 GameSettings.MUSIC = !GameSettings.MUSIC;
                 musicButton.setText("Music " + (GameSettings.MUSIC ? "On" : "Off"));
             }
@@ -118,18 +117,18 @@ public class GameMenu extends Game {
 
         Button debugButton = new RoundButton(100, 220,
                 "Debug " + (GameSettings.DEBUG_MODE ? "On" : "Off"), false);
-        debugButton.setEvent(new CustomEvent() {
+        debugButton.setCustomEvent(new CustomEvent() {
             @Override
-            public void activate() {
+            public void event() {
                 GameSettings.DEBUG_MODE = !GameSettings.DEBUG_MODE;
                 debugButton.setText("Debug " + (GameSettings.DEBUG_MODE ? "On" : "Off"));
             }
         });
 
         Button backButton = new RoundButton(100, 280, "Back", false);
-        backButton.setEvent(new CustomEvent() {
+        backButton.setCustomEvent(new CustomEvent() {
             @Override
-            public void activate() {
+            public void event() {
                 invertButtonsVisibility();
             }
         });
