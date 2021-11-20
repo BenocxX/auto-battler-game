@@ -10,7 +10,7 @@ import cegepst.game.entities.Player;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class GameDisplay {
+public class AutoBattlerGame {
 
     private GamePad gamePad;
     private Player player;
@@ -19,7 +19,7 @@ public class GameDisplay {
     private TriggerRepository triggerRepository;
     private boolean isStayingInGame = true;
 
-    public GameDisplay() {
+    public AutoBattlerGame() {
         gamePad = new GamePad();
         player = new Player(gamePad);
         initializer = new Initializer();

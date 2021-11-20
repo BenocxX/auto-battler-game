@@ -8,7 +8,7 @@ import cegepst.engine.controls.MouseController;
 
 import java.util.ArrayList;
 
-public class MenuDisplay {
+public class AutoBattlerMenu {
 
     private GamePad gamePad;
     private MouseController mouse;
@@ -16,7 +16,7 @@ public class MenuDisplay {
     private boolean isQuitting = false;
     private boolean isStayingInMenu = true;
 
-    public MenuDisplay() {
+    public AutoBattlerMenu() {
         gamePad = new GamePad();
         mouse = new MouseController();
         buttons = new ArrayList<>();
