@@ -31,3 +31,8 @@ Lorsqu'un item est pick up, le joueur fait une animation de célébration.
 onItemPickUp() -> player.celebrate()
 
 Il est impossible de call player.celebrate() dans la classe de l'item lorsqu'il est pick up puisqu'il ne contient pas un référence au player, il faudrait alors passer le player en paramètre et etc... Avec un Event System, la classe Player implements itemEventListener et possède la méthode @override onItemPickUp() dans laquelle il peut effectuer la célébration. La classe Item possède une fonction pickUp() qui va call EventSystem.getInstance().onItemPickUp() qui va ensuite call le "onItemPickUp()" dans le player.
+
+### Sources:
+- [How To Build An Event System in Unity](https://www.youtube.com/watch?v=gx0Lt4tCDE0&t=324s)
+- [GameDev Architecture - Scriptable Object Event System - Unity - Part 1](https://www.youtube.com/watch?v=iXNwWpG7EhM&t=703s)
+- [GameDev Architecture - Scriptable Object Events With Custom Data - Unity - Part 2](https://www.youtube.com/watch?v=P-U7GPXMtLY&t=166s)
