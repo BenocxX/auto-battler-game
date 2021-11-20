@@ -1,53 +1,55 @@
-package cegepst.menu;
+package cegepst.game;
 
 import cegepst.engine.Buffer;
-import cegepst.engine.Game;
 import cegepst.engine.buttons.CustomEvent;
 import cegepst.engine.buttons.Button;
 import cegepst.engine.buttons.RoundButton;
 import cegepst.engine.controls.MouseController;
-import cegepst.game.AutoBattlerGame;
-import cegepst.game.GamePad;
-import cegepst.game.GameSettings;
 
 import java.util.ArrayList;
 
-public class GameMenu extends Game {
+public class MenuDisplay {
 
     private GamePad gamePad;
     private MouseController mouse;
     private ArrayList<Button> buttons;
+    private boolean isQuitting = false;
+    private boolean isStayingInMenu = true;
 
-    @Override
-    public void initialize() {
+    public MenuDisplay() {
         gamePad = new GamePad();
         mouse = new MouseController();
         buttons = new ArrayList<>();
         initializeMenuButtons();
     }
 
-    @Override
-    public void update() {
-        quitCheck();
+    public boolean update() {
+        quitKeyCheck();
         mouseHoverCheck();
         mouseClickCheck();
+        gamePad.clearTypedKeys();
+        return isStayingInMenu;
     }
 
-    @Override
     public void draw(Buffer buffer) {
         for (Button button : buttons) {
             button.draw(buffer);
         }
     }
 
-    @Override
-    public void conclude() {
-
+    public boolean isQuitting() {
+        return isQuitting;
     }
 
-    private void quitCheck() {
-        if (gamePad.isQuitPressed()) {
-            stop();
+    public void resetStateData() {
+        isQuitting = false;
+        isStayingInMenu = true;
+        gamePad.clearTypedKeys();
+    }
+
+    private void quitKeyCheck() {
+        if (gamePad.isQuitTyped()) {
+            isQuitting = true;
         }
     }
 
@@ -74,8 +76,7 @@ public class GameMenu extends Game {
         playButton.setCustomEvent(new CustomEvent() {
             @Override
             public void event() {
-                stop();
-                (new AutoBattlerGame()).start();
+                isStayingInMenu = false;
             }
         });
 
@@ -91,7 +92,7 @@ public class GameMenu extends Game {
         quitButton.setCustomEvent(new CustomEvent() {
             @Override
             public void event() {
-                stop();
+                isQuitting = true;
             }
         });
 

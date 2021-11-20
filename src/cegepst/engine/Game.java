@@ -29,9 +29,11 @@ public abstract class Game {
         GameTime.getInstance();
         while (playing) {
             update();
-            draw(renderingEngine.getRenderingBuffer());
-            renderingEngine.renderBufferOnScreen();
-            GameTime.getInstance().synchronize();
+            if (playing) {
+                draw(renderingEngine.getRenderingBuffer());
+                renderingEngine.renderBufferOnScreen();
+                GameTime.getInstance().synchronize();
+            }
         }
         renderingEngine.stop();
     }

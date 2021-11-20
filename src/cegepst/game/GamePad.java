@@ -13,12 +13,11 @@ public class GamePad extends MovementController {
     private int debugKey = KeyEvent.VK_D;
 
     public GamePad() {
-        bindKey(quitKey);
         RenderingEngine.getInstance().addKeyListener(this);
     }
 
-    public boolean isQuitPressed() {
-        return isKeyPressed(quitKey);
+    public boolean isQuitTyped() {
+        return isKeyTyped(quitKey);
     }
 
     public boolean isUseTyped() {

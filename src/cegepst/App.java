@@ -1,10 +1,10 @@
 package cegepst;
 
-import cegepst.menu.GameMenu;
+import cegepst.game.DisplaySelector;
 
 public class App {
 
     public static void main(String[] args) {
-        (new GameMenu()).start();
+        (new DisplaySelector()).start();
     }
 }

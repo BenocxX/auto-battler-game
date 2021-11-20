@@ -1,26 +1,25 @@
 package cegepst.game;
 
 import cegepst.engine.Buffer;
-import cegepst.engine.Game;
 import cegepst.engine.RenderingEngine;
-import cegepst.game.entities.BuyStation;
-import cegepst.game.entities.Player;
 import cegepst.engine.triggers.Trigger;
 import cegepst.engine.triggers.TriggerRepository;
+import cegepst.game.entities.BuyStation;
+import cegepst.game.entities.Player;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-public class AutoBattlerGame extends Game {
+public class GameDisplay {
 
     private GamePad gamePad;
     private Player player;
     private Initializer initializer;
     private ArrayList<BuyStation> buyStations;
     private TriggerRepository triggerRepository;
+    private boolean isStayingInGame = true;
 
-    @Override
-    public void initialize() {
+    public GameDisplay() {
         gamePad = new GamePad();
         player = new Player(gamePad);
         initializer = new Initializer();
@@ -31,8 +30,7 @@ public class AutoBattlerGame extends Game {
         Sound.MUSIC.playLoop(GameSettings.MUSIC);
     }
 
-    @Override
-    public void update() {
+    public boolean update() {
         quitKeyCheck();
         debugKeyCheck();
         useKeyCheck();
@@ -40,12 +38,17 @@ public class AutoBattlerGame extends Game {
         player.update();
         player.isTriggering(triggerRepository);
         gamePad.clearTypedKeys();
+        return isStayingInGame;
     }
 
-    @Override
     public void draw(Buffer buffer) {
         logicDraw(buffer);
         UIDraw(buffer);
+    }
+
+    public void resetStateData() {
+        isStayingInGame = true;
+        gamePad.clearTypedKeys();
     }
 
     private void logicDraw(Buffer buffer) {
@@ -67,17 +70,8 @@ public class AutoBattlerGame extends Game {
         }
     }
 
-    @Override
-    public void conclude() {
-
-    }
-
     private void quitKeyCheck() {
-        if (gamePad.isQuitPressed()) {
-            // TODO: Quand je fais "stop();" je reçois un erreur que je ne comprends pas
-            // stop();
-            System.exit(0);
-        }
+        isStayingInGame = !gamePad.isQuitTyped();
     }
 
     private void debugKeyCheck() {
