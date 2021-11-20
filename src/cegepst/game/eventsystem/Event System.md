@@ -2,10 +2,10 @@
 Created: 2021-11-20 12:07
 <br>
 
-##### À quoi sert un Event System?
+### À quoi sert un Event System?
 Un Event System sert à créer une multitudes d'évènements et de listeners afin de pouvoir gérer des triggers plus facilement et afin de pouvoir "expand" très simplement. L'Event System va gérer quel listener déclancher selon quel évènement est déclanché.
 
-##### Programme:
+### Programme:
 1. Premièrement, on veut se créer une singleton qui va gérer quel listener déclancher selon l'évènement déclanché. Cette classe se nommera "EventSystem". Dans cette classe, on veut contenir une liste des interfaces "listeners" afin de pouvoir les calls lorsqu'un event leur correspondant est déclenché.
 	
 	Voir: [EventSystem.java sur mon github](https://github.com/BenocxX/auto-battler-game/blob/master/src/cegepst/game/eventsystem/EventSystem.java)
