@@ -3,6 +3,8 @@ package cegepst.game;
 import cegepst.engine.Buffer;
 import cegepst.engine.Game;
 
+import java.awt.*;
+
 public class AutoBattler extends Game {
 
     private AutoBattlerGame autoBattlerGame;
@@ -30,8 +32,10 @@ public class AutoBattler extends Game {
     @Override
     public void draw(Buffer buffer) {
         if (inMenu) {
+            buffer.setFontSize(Font.PLAIN, 20);
             autoBattlerMenu.draw(buffer);
         } else {
+            buffer.setFontSize(Font.PLAIN, 14);
             autoBattlerGame.draw(buffer);
         }
     }
