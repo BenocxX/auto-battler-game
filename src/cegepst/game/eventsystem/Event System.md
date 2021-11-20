@@ -24,3 +24,10 @@ Un Event System sert à créer une multitudes d'évènements et de listeners afi
 4. Pour finir, on veut créer un objet qui va agir lorsqu'un event est appellé. Cette classe va se nommer "Box", elle va extends "StaticEntity" et va implémenter "TriggerAreaListener". Cette classe va donc avoir les 3 méthodes qu'on a créées dans l'interface "TriggerAreaListener" à l'étape #2. Lorsqu'un event associé au listener qu'implémente cette méthode est déclenché, l'EventSystem va appellé ces méthodes là.
 
 	Voir: [Box.java sur mon github](https://github.com/BenocxX/auto-battler-game/blob/master/src/cegepst/game/eventsystem/Box.java)
+
+### Exemples:
+Lorsqu'un item est pick up, le joueur fait une animation de célébration.
+
+onItemPickUp() -> player.celebrate()
+
+Il est impossible de call player.celebrate() dans la classe de l'item lorsqu'il est pick up puisqu'il ne contient pas un référence au player, il faudrait alors passer le player en paramètre et etc... Avec un Event System, la classe Player implements itemEventListener et possède la méthode @override onItemPickUp() dans laquelle il peut effectuer la célébration. La classe Item possède une fonction pickUp() qui va call EventSystem.getInstance().onItemPickUp() qui va ensuite call le "onItemPickUp()" dans le player.
