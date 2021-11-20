@@ -2,6 +2,9 @@
 Created: 2021-11-20 12:07
 <br>
 
+## Important
+S'il vous plait, ne pas copier mon code, plutôt vous en inspirer. Merci :)
+
 ### À quoi sert un Event System?
 Un Event System sert à créer une multitudes d'évènements et de listeners afin de pouvoir gérer des triggers plus facilement et afin de pouvoir "expand" très simplement. L'Event System va gérer quel listener déclancher selon quel évènement est déclanché.
 
