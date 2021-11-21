@@ -66,7 +66,7 @@ public class BuyStation extends MovableEntity implements TriggerAreaListener, Cr
     }
 
     @Override
-    public void onBuy(int creatureId) {
+    public void onCreatureBuy(int creatureId) {
         if (id == creatureId) {
             hasItem = false;
         }

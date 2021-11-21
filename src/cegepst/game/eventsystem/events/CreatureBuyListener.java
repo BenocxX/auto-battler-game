@@ -2,5 +2,5 @@ package cegepst.game.eventsystem.events;
 
 public interface CreatureBuyListener {
 
-    void onBuy(int creatureId);
+    void onCreatureBuy(int creatureId);
 }

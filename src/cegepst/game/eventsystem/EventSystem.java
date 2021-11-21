@@ -94,7 +94,7 @@ public class EventSystem {
 
     public void onCreatureBuy(int creatureId) {
         for (CreatureBuyListener listener : creatureBuyListener) {
-            listener.onBuy(creatureId);
+            listener.onCreatureBuy(creatureId);
         }
     }
 
