@@ -6,34 +6,34 @@ import cegepst.engine.RenderingEngine;
 import cegepst.engine.entities.MovableEntity;
 import cegepst.engine.helpers.RandomHandler;
 import cegepst.game.GameSettings;
-import cegepst.game.Sound;
+import cegepst.game.resources.Sound;
 import cegepst.game.eventsystem.EventSystem;
-import cegepst.game.eventsystem.events.CreatureBuyListener;
+import cegepst.game.eventsystem.events.ItemBuyListener;
 import cegepst.game.eventsystem.events.TriggerAreaListener;
 
 import java.awt.*;
 
-public class BuyStation extends MovableEntity implements TriggerAreaListener, CreatureBuyListener {
+public class BuyStation extends MovableEntity implements TriggerAreaListener, ItemBuyListener {
 
     private static final Color SELECTED_COLOR = new Color(137, 106, 77);
     private static final Color UNSELECTED_COLOR = new Color(94, 71, 47);
 
     private Sound sound;
-    private Creature creature;
+    private Item item;
     private boolean isSelected;
     private boolean hasItem;
     private int id;
 
     public BuyStation(int x, int y, int id) {
         this.id = id;
+        item = new Creature(id, x + 10, y + 10);
+        hasItem = true;
         setDimension(30, 30);
         teleport(x, y);
-        creature = new Creature(id, x + 10, y + 10);
-        hasItem = true;
+        initializeSound();
         CollidableRepository.getInstance().registerEntity(this);
         EventSystem.getInstance().addTriggerAreaListener(this);
-        EventSystem.getInstance().addCreatureBuyListener(this);
-        initializeSound();
+        EventSystem.getInstance().addItemBuyListener(this);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class BuyStation extends MovableEntity implements TriggerAreaListener, Cr
         } else {
             buffer.drawRectangle(x, y, width, height, UNSELECTED_COLOR);
         }
-        creature.draw(buffer);
+        item.draw(buffer);
     }
 
     @Override
@@ -56,7 +56,9 @@ public class BuyStation extends MovableEntity implements TriggerAreaListener, Cr
     }
 
     @Override
-    public void onTrigger(int triggerId) { }
+    public void onTrigger(int triggerId) {
+
+    }
 
     @Override
     public void onTriggerLeave(int triggerId) {
@@ -66,9 +68,10 @@ public class BuyStation extends MovableEntity implements TriggerAreaListener, Cr
     }
 
     @Override
-    public void onCreatureBuy(int creatureId) {
-        if (id == creatureId) {
+    public void onItemBuy(int itemId) {
+        if (id == itemId) {
             hasItem = false;
+            sound.play(GameSettings.SOUND);
         }
     }
 
@@ -80,10 +83,9 @@ public class BuyStation extends MovableEntity implements TriggerAreaListener, Cr
         return isSelected;
     }
 
-    public void buy() {
+    public void buyItem() {
         if (hasItem) {
-            creature.buy();
-            sound.play(GameSettings.SOUND);
+            item.buy();
         }
     }
 

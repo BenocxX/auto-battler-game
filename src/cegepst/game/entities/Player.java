@@ -6,7 +6,7 @@ import cegepst.engine.controls.MovementController;
 import cegepst.engine.entities.ControllableEntity;
 import cegepst.engine.resources.images.Animator;
 import cegepst.game.GameSettings;
-import cegepst.game.Sprite;
+import cegepst.game.resources.Sprite;
 
 public class Player extends ControllableEntity {
 

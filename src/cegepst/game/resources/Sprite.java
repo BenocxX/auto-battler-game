@@ -1,4 +1,4 @@
-package cegepst.game;
+package cegepst.game.resources;
 
 import cegepst.engine.resources.images.ImageLoader;
 

@@ -1,6 +1,6 @@
 package cegepst.game.eventsystem;
 
-import cegepst.game.eventsystem.events.CreatureBuyListener;
+import cegepst.game.eventsystem.events.ItemBuyListener;
 import cegepst.game.eventsystem.events.TriggerAreaListener;
 
 import java.util.ArrayList;
@@ -57,7 +57,7 @@ public class EventSystem {
     private static EventSystem instance;
 
     private ArrayList<TriggerAreaListener> triggerAreaListeners;
-    private ArrayList<CreatureBuyListener> creatureBuyListener;
+    private ArrayList<ItemBuyListener> itemBuyListeners;
 
     public static EventSystem getInstance() {
         if (instance == null) {
@@ -70,8 +70,8 @@ public class EventSystem {
         triggerAreaListeners.add(listener);
     }
 
-    public void addCreatureBuyListener(CreatureBuyListener listener) {
-        creatureBuyListener.add(listener);
+    public void addItemBuyListener(ItemBuyListener listener) {
+        itemBuyListeners.add(listener);
     }
 
     public void onTriggerAreaEnter(int triggerId) {
@@ -92,14 +92,14 @@ public class EventSystem {
         }
     }
 
-    public void onCreatureBuy(int creatureId) {
-        for (CreatureBuyListener listener : creatureBuyListener) {
-            listener.onCreatureBuy(creatureId);
+    public void onItemBuy(int itemId) {
+        for (ItemBuyListener listener : itemBuyListeners) {
+            listener.onItemBuy(itemId);
         }
     }
 
     private EventSystem() {
         triggerAreaListeners = new ArrayList<>();
-        creatureBuyListener = new ArrayList<>();
+        itemBuyListeners = new ArrayList<>();
     }
 }

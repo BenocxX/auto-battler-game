@@ -5,6 +5,7 @@ import cegepst.engine.RenderingEngine;
 import cegepst.game.entities.BuyStation;
 import cegepst.game.entities.Player;
 import cegepst.game.entities.TriggerArea;
+import cegepst.game.resources.Sound;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -88,7 +89,7 @@ public class AutoBattlerGame {
         if (gamePad.isUseTyped()) {
             for (BuyStation buyStation : buyStations) {
                 if (buyStation.isSelected()) {
-                    buyStation.buy();
+                    buyStation.buyItem();
                 }
             }
         }
