@@ -23,4 +23,8 @@ public class Item extends StaticEntity {
         isBought = true;
         EventSystem.getInstance().onItemBuy(id);
     }
+
+    public String name() {
+        return null;
+    }
 }

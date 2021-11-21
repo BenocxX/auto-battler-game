@@ -17,11 +17,8 @@ public class Player extends ControllableEntity {
         setDimension(32, 32);
         teleport(250, 250);
         setSpeed(5);
-
-        animator = new Animator(
-                Sprite.PLAYER_SPRITE_SHEET.getBufferedImage(), 8);
+        animator = new Animator(Sprite.PLAYER_SPRITE_SHEET.getBufferedImage(), 8);
         animator.loadAnimations(0, 128, width, height, 3);
-
         CollidableRepository.getInstance().registerEntity(this);
     }
 
