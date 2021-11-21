@@ -5,7 +5,6 @@ import cegepst.engine.CollidableRepository;
 import cegepst.engine.RenderingEngine;
 import cegepst.engine.entities.MovableEntity;
 import cegepst.engine.helpers.RandomHandler;
-import cegepst.engine.triggers.Triggerable;
 import cegepst.game.GameSettings;
 import cegepst.game.Sound;
 import cegepst.game.eventsystem.EventSystem;
@@ -13,7 +12,7 @@ import cegepst.game.eventsystem.TriggerAreaListener;
 
 import java.awt.*;
 
-public class BuyStation extends MovableEntity implements Triggerable, TriggerAreaListener {
+public class BuyStation extends MovableEntity implements TriggerAreaListener {
 
     private Sound sound;
     private Friend friendForSell;
@@ -92,15 +91,5 @@ public class BuyStation extends MovableEntity implements Triggerable, TriggerAre
         } else {
             sound = Sound.BUY_4;
         }
-    }
-
-    @Override
-    public void trigger() {
-        isSelected = !isBought;
-    }
-
-    @Override
-    public void untrigger() {
-        isSelected = false;
     }
 }

@@ -1,12 +1,9 @@
 package cegepst.game;
 
 import cegepst.game.entities.BuyStation;
-import cegepst.engine.triggers.Trigger;
-import cegepst.engine.triggers.Triggerable;
 import cegepst.game.eventsystem.TriggerArea;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Initializer {
 

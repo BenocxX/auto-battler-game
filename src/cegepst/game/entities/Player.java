@@ -6,11 +6,9 @@ import cegepst.engine.controls.MovementController;
 import cegepst.engine.entities.ControllableEntity;
 import cegepst.engine.resources.images.Animator;
 import cegepst.game.GameSettings;
-import cegepst.engine.triggers.TriggerRepository;
-import cegepst.engine.triggers.Triggerer;
 import cegepst.game.Sprite;
 
-public class Player extends ControllableEntity implements Triggerer {
+public class Player extends ControllableEntity {
 
     // TODO: Faire un hashMap: HashMap<StaticEntity, Animator>
     private Animator animator;
@@ -41,10 +39,5 @@ public class Player extends ControllableEntity implements Triggerer {
         if (hasMoved() && GameSettings.DEBUG_MODE) {
             drawHitBox(buffer);
         }
-    }
-
-    @Override
-    public void isTriggering(TriggerRepository repository) {
-        repository.triggerTriggerables(this);
     }
 }
