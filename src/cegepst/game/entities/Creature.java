@@ -14,7 +14,7 @@ public class Creature extends MovableEntity {
     public Creature(int x, int y) {
         setDimension(10, 10);
         teleport(x, y);
-        color = new Color(RandomHandler.getInt(100, 256), RandomHandler.getInt(100, 256), RandomHandler.getInt(100, 256));
+        color = new Color(RandomHandler.getInt(100, 255), RandomHandler.getInt(100, 255), RandomHandler.getInt(100, 255));
         isBought = false;
     }
 
@@ -27,5 +27,9 @@ public class Creature extends MovableEntity {
 
     public void buy() {
         isBought = true;
+    }
+
+    public boolean isBought() {
+        return isBought;
     }
 }
