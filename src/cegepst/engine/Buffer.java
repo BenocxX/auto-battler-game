@@ -42,6 +42,20 @@ public class Buffer {
         drawText(text, x, y, Color.WHITE);
     }
 
+    public void drawHorizontallyCenteredText(String text, Rectangle rect, int y) {
+        FontMetrics metrics = graphics.getFontMetrics(font);
+        int x = rect.x + (rect.width - metrics.stringWidth(text)) / 2;
+        graphics.setFont(font);
+        drawText(text, x, y, Color.WHITE);
+    }
+
+    public void drawVerticallyCenteredText(String text, Rectangle rect, int x) {
+        FontMetrics metrics = graphics.getFontMetrics(font);
+        int y = rect.y + ((rect.height - metrics.getHeight()) / 2) + metrics.getAscent();
+        graphics.setFont(font);
+        drawText(text, x, y, Color.WHITE);
+    }
+
     public void drawGameDebugStats() {
         drawText("FPS: " + GameTime.getCurrentFps(), 10, 20, Color.WHITE);
         drawText(GameTime.getElapsedTimeFormattedTime(), 10, 40, Color.WHITE);
