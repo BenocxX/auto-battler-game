@@ -34,10 +34,8 @@ public class BuyStation extends MovableEntity implements TriggerAreaListener {
     public void draw(Buffer buffer) {
         if (isSelected) {
             buffer.drawRectangle(x, y, width, height, new Color(137, 106, 77));
-            if (!isBought) {
-                buffer.drawText("Buy", x + 5, y - 5, new Color(255, 255, 255));
-                buffer.drawText("(Use E to Buy)", RenderingEngine.WIDTH - 97, 40, new Color(255, 255, 255));
-            }
+            buffer.drawHorizontallyCenteredText("Buy", getBounds(), y - 5);
+            buffer.drawText("(Use E to Buy)", RenderingEngine.WIDTH - 97, 40, Color.WHITE);
         } else {
             buffer.drawRectangle(x, y, width, height, new Color(94, 71, 47));
         }
@@ -48,14 +46,16 @@ public class BuyStation extends MovableEntity implements TriggerAreaListener {
 
     @Override
     public void onTriggerEnter(int triggerId) {
-        if (id == triggerId) {
-            isSelected = !isBought;
+        if (id == triggerId && !isBought) {
+            isSelected = true;
         }
     }
 
     @Override
     public void onTrigger(int triggerId) {
-
+        if (id == triggerId) {
+            isSelected = !isBought;
+        }
     }
 
     @Override
