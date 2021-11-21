@@ -29,10 +29,7 @@ public class AutoBattlerGame {
     }
 
     public boolean update() {
-        quitKeyCheck();
-        debugKeyCheck();
-        useKeyCheck();
-        screenModeKeyCheck();
+        keysInputCheck();
         player.update();
         for (TriggerArea triggerArea : triggerAreas) {
             triggerArea.triggerCheck(player);
@@ -68,6 +65,13 @@ public class AutoBattlerGame {
         } else {
             buffer.drawText("('D' to activate debug mode)", RenderingEngine.WIDTH - 184, 20, new Color(255, 255, 255));
         }
+    }
+
+    private void keysInputCheck() {
+        quitKeyCheck();
+        debugKeyCheck();
+        useKeyCheck();
+        screenModeKeyCheck();
     }
 
     private void quitKeyCheck() {
