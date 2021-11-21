@@ -19,4 +19,12 @@ public class SpritesheetHandler {
         }
         return frames;
     }
+
+    public static Image getFrame(BufferedImage spriteSheet,
+                                 int initialX,
+                                 int initialY,
+                                 int width,
+                                 int height) {
+        return spriteSheet.getSubimage(initialX, initialY, width, height);
+    }
 }

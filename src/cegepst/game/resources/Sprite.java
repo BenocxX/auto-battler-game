@@ -8,7 +8,8 @@ import java.awt.image.BufferedImage;
 public enum Sprite {
 
     MAP_1("./images/demo.png"),
-    PLAYER_SPRITE_SHEET("./images/player.png");
+    PLAYER_SPRITE_SHEET("./images/player.png"),
+    SHOP_SPRITE_SHEET("./images/shop.png");
 
     private final String path;
     private Image image;

@@ -5,11 +5,13 @@ import cegepst.engine.CollidableRepository;
 import cegepst.engine.RenderingEngine;
 import cegepst.engine.entities.MovableEntity;
 import cegepst.engine.helpers.RandomHandler;
+import cegepst.engine.resources.images.SpritesheetHandler;
 import cegepst.game.GameSettings;
 import cegepst.game.resources.Sound;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.ItemBuyListener;
 import cegepst.game.eventsystem.events.TriggerAreaListener;
+import cegepst.game.resources.Sprite;
 
 import java.awt.*;
 
@@ -19,6 +21,7 @@ public class BuyStation extends MovableEntity implements TriggerAreaListener, It
     private static final Color UNSELECTED_COLOR = new Color(94, 71, 47);
 
     private Sound sound;
+    private Image shopImage;
     private Item item;
     private boolean isSelected;
     private boolean hasItem;
@@ -34,11 +37,13 @@ public class BuyStation extends MovableEntity implements TriggerAreaListener, It
         CollidableRepository.getInstance().registerEntity(this);
         EventSystem.getInstance().addTriggerAreaListener(this);
         EventSystem.getInstance().addItemBuyListener(this);
+
+        shopImage = SpritesheetHandler.getFrame(Sprite.SHOP_SPRITE_SHEET.getBufferedImage(), 448, 416, 32, 32);
     }
 
     @Override
     public void draw(Buffer buffer) {
-        buffer.drawRectangle(x, y, width, height, isSelected ? SELECTED_COLOR : UNSELECTED_COLOR);
+        buffer.drawImage(shopImage, x, y);
         if (isSelected) {
             buffer.drawHorizontallyCenteredText(item.name(), getBounds(), y - 5);
             buffer.drawText("(Use E to Buy)", RenderingEngine.WIDTH - 97, 40, Color.WHITE);
