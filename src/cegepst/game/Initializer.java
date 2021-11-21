@@ -16,17 +16,6 @@ public class Initializer {
         return buyStations;
     }
 
-    /*public HashMap<Trigger, Triggerable> getTriggersForBuyStations(ArrayList<BuyStation> buyStations) {
-        HashMap<Trigger, Triggerable> hashMap = new HashMap<>();
-        for (BuyStation buyStation : buyStations) {
-            Trigger trigger = new Trigger();
-            trigger.teleport(buyStation.getX() - 10, buyStation.getY() + buyStation.getHeight() + 10);
-            trigger.setDimension(50, 50);
-            hashMap.put(trigger, buyStation);
-        }
-        return hashMap;
-    }*/
-
     public ArrayList<TriggerArea> getTriggerAreasForBuyStations(ArrayList<BuyStation> buyStations) {
         ArrayList<TriggerArea> triggerAreas = new ArrayList<>();
         for (BuyStation buyStation : buyStations) {
