@@ -53,8 +53,8 @@ public class BuyStation extends MovableEntity implements TriggerAreaListener {
 
     @Override
     public void onTrigger(int triggerId) {
-        if (id == triggerId) {
-            isSelected = !isBought;
+        if (id == triggerId && isBought) {
+            isSelected = false;
         }
     }
 
