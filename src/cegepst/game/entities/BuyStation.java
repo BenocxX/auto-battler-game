@@ -15,7 +15,7 @@ import java.awt.*;
 public class BuyStation extends MovableEntity implements TriggerAreaListener {
 
     private Sound sound;
-    private Friend friendForSell;
+    private Creature creature;
     private boolean isSelected;
     private boolean isBought;
     private int id;
@@ -25,7 +25,7 @@ public class BuyStation extends MovableEntity implements TriggerAreaListener {
         EventSystem.getInstance().addTriggerAreaListener(this);
         setDimension(30, 30);
         teleport(x, y);
-        friendForSell = new Friend(x + 10, y + 10);
+        creature = new Creature(x + 10, y + 10);
         CollidableRepository.getInstance().registerEntity(this);
         initializeSound();
     }
@@ -40,7 +40,7 @@ public class BuyStation extends MovableEntity implements TriggerAreaListener {
             buffer.drawRectangle(x, y, width, height, new Color(94, 71, 47));
         }
         if (!isBought) {
-            friendForSell.draw(buffer);
+            creature.draw(buffer);
         }
     }
 
@@ -76,6 +76,7 @@ public class BuyStation extends MovableEntity implements TriggerAreaListener {
     public void buy() {
         if (!isBought) {
             isBought = true;
+            creature.buy();
             sound.play(GameSettings.SOUND);
         }
     }
