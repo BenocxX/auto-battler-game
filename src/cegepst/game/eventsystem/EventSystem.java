@@ -1,5 +1,7 @@
 package cegepst.game.eventsystem;
 
+import cegepst.game.eventsystem.events.TriggerAreaListener;
+
 import java.util.ArrayList;
 
 public class EventSystem {

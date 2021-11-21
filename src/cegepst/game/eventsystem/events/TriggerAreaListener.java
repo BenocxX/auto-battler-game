@@ -1,4 +1,4 @@
-package cegepst.game.eventsystem;
+package cegepst.game.eventsystem.events;
 
 public interface TriggerAreaListener {
 

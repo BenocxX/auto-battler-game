@@ -8,7 +8,7 @@ import cegepst.engine.helpers.RandomHandler;
 import cegepst.game.GameSettings;
 import cegepst.game.Sound;
 import cegepst.game.eventsystem.EventSystem;
-import cegepst.game.eventsystem.TriggerAreaListener;
+import cegepst.game.eventsystem.events.TriggerAreaListener;
 
 import java.awt.*;
 
