@@ -1,7 +1,7 @@
 package cegepst.game;
 
 import cegepst.game.entities.BuyStation;
-import cegepst.game.eventsystem.TriggerArea;
+import cegepst.game.entities.TriggerArea;
 
 import java.util.ArrayList;
 

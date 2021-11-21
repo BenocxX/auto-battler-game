@@ -3,15 +3,18 @@ package cegepst.game.entities;
 import cegepst.engine.Buffer;
 import cegepst.engine.entities.MovableEntity;
 import cegepst.engine.helpers.RandomHandler;
+import cegepst.game.eventsystem.EventSystem;
 
 import java.awt.*;
 
 public class Creature extends MovableEntity {
 
     private Color color;
+    private int id;
     private boolean isBought;
 
-    public Creature(int x, int y) {
+    public Creature(int id, int x, int y) {
+        this.id = id;
         setDimension(10, 10);
         teleport(x, y);
         color = new Color(RandomHandler.getInt(100, 255), RandomHandler.getInt(100, 255), RandomHandler.getInt(100, 255));
@@ -27,9 +30,6 @@ public class Creature extends MovableEntity {
 
     public void buy() {
         isBought = true;
-    }
-
-    public boolean isBought() {
-        return isBought;
+        EventSystem.getInstance().onCreatureBuy(id);
     }
 }

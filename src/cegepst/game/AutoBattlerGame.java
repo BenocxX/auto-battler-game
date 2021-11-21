@@ -4,7 +4,7 @@ import cegepst.engine.Buffer;
 import cegepst.engine.RenderingEngine;
 import cegepst.game.entities.BuyStation;
 import cegepst.game.entities.Player;
-import cegepst.game.eventsystem.TriggerArea;
+import cegepst.game.entities.TriggerArea;
 
 import java.awt.*;
 import java.util.ArrayList;
