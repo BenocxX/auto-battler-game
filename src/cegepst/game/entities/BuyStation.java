@@ -8,17 +8,22 @@ import cegepst.engine.helpers.RandomHandler;
 import cegepst.engine.triggers.Triggerable;
 import cegepst.game.GameSettings;
 import cegepst.game.Sound;
+import cegepst.game.eventsystem.EventSystem;
+import cegepst.game.eventsystem.TriggerAreaListener;
 
 import java.awt.*;
 
-public class BuyStation extends MovableEntity implements Triggerable {
+public class BuyStation extends MovableEntity implements Triggerable, TriggerAreaListener {
 
     private Sound sound;
     private Friend friendForSell;
     private boolean isSelected;
     private boolean isBought;
+    private int id;
 
-    public BuyStation(int x, int y) {
+    public BuyStation(int x, int y, int id) {
+        this.id = id;
+        EventSystem.getInstance().addTriggerAreaListener(this);
         setDimension(30, 30);
         teleport(x, y);
         friendForSell = new Friend(x + 10, y + 10);
@@ -43,13 +48,30 @@ public class BuyStation extends MovableEntity implements Triggerable {
     }
 
     @Override
-    public void trigger() {
-        isSelected = !isBought;
+    public void onTriggerEnter(int triggerId) {
+        if (id == triggerId) {
+            isSelected = !isBought;
+        }
     }
 
     @Override
-    public void untrigger() {
-        isSelected = false;
+    public void onTrigger(int triggerId) {
+
+    }
+
+    @Override
+    public void onTriggerLeave(int triggerId) {
+        if (id == triggerId) {
+            isSelected = false;
+        }
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
     }
 
     public void buy() {
@@ -70,5 +92,15 @@ public class BuyStation extends MovableEntity implements Triggerable {
         } else {
             sound = Sound.BUY_4;
         }
+    }
+
+    @Override
+    public void trigger() {
+        isSelected = !isBought;
+    }
+
+    @Override
+    public void untrigger() {
+        isSelected = false;
     }
 }

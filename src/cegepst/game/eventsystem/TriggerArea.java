@@ -11,9 +11,11 @@ public class TriggerArea extends StaticEntity {
     private int id;
     private boolean isTriggered;
 
-    public TriggerArea(int id) {
+    public TriggerArea(int id, int x, int y, int width, int height) {
         this.id = id;
         isTriggered = false;
+        teleport(x, y);
+        setDimension(width, height);
     }
 
     public void triggerCheck(StaticEntity triggerer) {
