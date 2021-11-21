@@ -14,10 +14,12 @@ import java.awt.*;
 
 public class BuyStation extends MovableEntity implements TriggerAreaListener {
 
+    private static final Color SELECTED_COLOR = new Color(137, 106, 77);
+    private static final Color UNSELECTED_COLOR = new Color(94, 71, 47);
+
     private Sound sound;
     private Creature creature;
     private boolean isSelected;
-    private boolean isBought;
     private int id;
 
     public BuyStation(int x, int y, int id) {
@@ -33,30 +35,24 @@ public class BuyStation extends MovableEntity implements TriggerAreaListener {
     @Override
     public void draw(Buffer buffer) {
         if (isSelected) {
-            buffer.drawRectangle(x, y, width, height, new Color(137, 106, 77));
+            buffer.drawRectangle(x, y, width, height, SELECTED_COLOR);
             buffer.drawHorizontallyCenteredText("Buy", getBounds(), y - 5);
             buffer.drawText("(Use E to Buy)", RenderingEngine.WIDTH - 97, 40, Color.WHITE);
         } else {
-            buffer.drawRectangle(x, y, width, height, new Color(94, 71, 47));
+            buffer.drawRectangle(x, y, width, height, UNSELECTED_COLOR);
         }
-        if (!isBought) {
-            creature.draw(buffer);
-        }
+        creature.draw(buffer);
     }
 
     @Override
     public void onTriggerEnter(int triggerId) {
-        if (id == triggerId && !isBought) {
+        if (id == triggerId && !creature.isBought()) {
             isSelected = true;
         }
     }
 
     @Override
-    public void onTrigger(int triggerId) {
-        if (id == triggerId && isBought) {
-            isSelected = false;
-        }
-    }
+    public void onTrigger(int triggerId) { }
 
     @Override
     public void onTriggerLeave(int triggerId) {
@@ -74,23 +70,13 @@ public class BuyStation extends MovableEntity implements TriggerAreaListener {
     }
 
     public void buy() {
-        if (!isBought) {
-            isBought = true;
+        if (!creature.isBought()) {
             creature.buy();
             sound.play(GameSettings.SOUND);
         }
     }
 
     private void initializeSound() {
-        int randomSound = RandomHandler.getInt(4);
-        if (randomSound == 0) {
-            sound = Sound.BUY_1;
-        } else if (randomSound == 1) {
-            sound = Sound.BUY_2;
-        } else if (randomSound == 2) {
-            sound = Sound.BUY_3;
-        } else {
-            sound = Sound.BUY_4;
-        }
+        sound = Sound.values()[RandomHandler.getInt(2, 5)];
     }
 }
