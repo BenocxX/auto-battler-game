@@ -42,7 +42,7 @@ public class Animator {
                 Direction.UP
         };
         for (int i = 0; i < directions.length; i++, y += height) {
-            Image[] images = SpritesheetHandler.getFrames(spriteSheet,
+            Image[] images = SpriteHandler.getFrames(spriteSheet,
                     x, y, width, height, nbImages);
             frames.put(directions[i], images);
         }

@@ -1,7 +1,8 @@
 package cegepst.engine;
 
+import cegepst.engine.resources.images.SpriteHandler;
+
 import java.awt.*;
-import java.awt.geom.RoundRectangle2D;
 
 public class Buffer {
 
@@ -63,6 +64,11 @@ public class Buffer {
 
     public void drawImage(Image image, int x, int y) {
         graphics.drawImage(image, x, y, null);
+    }
+
+    public void drawImage(Image image, int x, int y, int width, int height) {
+        Image resizedImage = SpriteHandler.resizeImage(image, Image.SCALE_DEFAULT, width, height);
+        graphics.drawImage(resizedImage, x, y, null);
     }
 
     public void setFontSize(int style, int fontSize) {

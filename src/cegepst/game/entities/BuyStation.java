@@ -5,7 +5,7 @@ import cegepst.engine.CollidableRepository;
 import cegepst.engine.RenderingEngine;
 import cegepst.engine.entities.MovableEntity;
 import cegepst.engine.helpers.RandomHandler;
-import cegepst.engine.resources.images.SpritesheetHandler;
+import cegepst.engine.resources.images.SpriteHandler;
 import cegepst.game.GameSettings;
 import cegepst.game.resources.Sound;
 import cegepst.game.eventsystem.EventSystem;
@@ -17,11 +17,8 @@ import java.awt.*;
 
 public class BuyStation extends MovableEntity implements TriggerAreaListener, ItemBuyListener {
 
-    private static final Color SELECTED_COLOR = new Color(137, 106, 77);
-    private static final Color UNSELECTED_COLOR = new Color(94, 71, 47);
-
     private Sound sound;
-    private Image shopImage;
+    private Image image;
     private Item item;
     private boolean isSelected;
     private boolean hasItem;
@@ -29,23 +26,23 @@ public class BuyStation extends MovableEntity implements TriggerAreaListener, It
 
     public BuyStation(int x, int y, int id) {
         this.id = id;
-        item = new Creature(id, x + 10, y + 10);
+        item = new Creature(id, x - 6, y - 30);
         hasItem = true;
-        setDimension(30, 30);
+        setDimension(32, 32);
         teleport(x, y);
         initializeSound();
         CollidableRepository.getInstance().registerEntity(this);
         EventSystem.getInstance().addTriggerAreaListener(this);
         EventSystem.getInstance().addItemBuyListener(this);
 
-        shopImage = SpritesheetHandler.getFrame(Sprite.SHOP_SPRITE_SHEET.getBufferedImage(), 448, 416, 32, 32);
+        image = SpriteHandler.getFrame(Sprite.SHOP_SPRITE_SHEET.getBufferedImage(), 448, 416, 32, 32);
     }
 
     @Override
     public void draw(Buffer buffer) {
-        buffer.drawImage(shopImage, x, y);
+        buffer.drawImage(image, x, y);
         if (isSelected) {
-            buffer.drawHorizontallyCenteredText(item.name(), getBounds(), y - 5);
+            buffer.drawHorizontallyCenteredText(item.name(), getBounds(), y - 35);
             buffer.drawText("(Use E to Buy)", RenderingEngine.WIDTH - 97, 40, Color.WHITE);
         }
         item.draw(buffer);

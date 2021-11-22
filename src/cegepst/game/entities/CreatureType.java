@@ -1,28 +1,31 @@
 package cegepst.game.entities;
 
+import cegepst.engine.resources.images.SpriteHandler;
+import cegepst.game.resources.Sprite;
+
 import java.awt.*;
 
 public enum CreatureType {
 
-    ZOMBIE("Zombie", new Color(101, 128, 68)),
-    FISH("Fish", new Color(74, 184, 219)),
-    DOG("Dog", new Color(255, 0, 0)),
-    VAMPIRE("Vampire", new Color(180, 170, 144)),
-    BAT("Bat", new Color(59, 59, 59));
+    ANT("Ant", Sprite.SAP_ANT_SPRITE.getImage()),
+    FISH("Fish", Sprite.SAP_FISH_SPRITE.getImage()),
+    DOG("Dog", Sprite.SAP_DOG_SPRITE.getImage()),
+    DRAGON("Dragon", Sprite.SAP_DRAGON_SPRITE.getImage()),
+    BAT("Bat", Sprite.SAP_BAT_SPRITE.getImage());
 
     private String name;
-    private Color color;
+    private Image sprite;
 
-    CreatureType(String name, Color color) {
+    CreatureType(String name, Image sprite) {
         this.name = name;
-        this.color = color;
+        this.sprite = sprite;
     }
 
     public String getName() {
         return name;
     }
 
-    public Color getColor() {
-        return color;
+    public Image getSprite(int width, int height) {
+        return SpriteHandler.resizeImage(sprite, Image.SCALE_SMOOTH, width, height);
     }
 }
