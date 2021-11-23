@@ -19,6 +19,14 @@ public class MovementController extends Controller {
         bindKeys(keys);
     }
 
+    public boolean isUpTyped() {
+        return isKeyTyped(upKey);
+    }
+
+    public boolean isDownTyped() {
+        return isKeyTyped(downKey);
+    }
+
     public boolean isLeftPressed() {
         return isKeyPressed(leftKey);
     }

@@ -28,6 +28,8 @@ public class AutoBattlerMenu {
 
     public boolean update() {
         quitKeyCheck();
+        upKeyPressed();
+        downKeyPressed();
         mouseHoverCheck();
         mouseClickCheck();
         gamePad.clearTypedKeys();
@@ -63,6 +65,18 @@ public class AutoBattlerMenu {
             } else {
                 isQuitting = true;
             }
+        }
+    }
+
+    private void upKeyPressed() {
+        if (gamePad.isUpTyped()) {
+            System.out.println("Up typed");
+        }
+    }
+
+    private void downKeyPressed() {
+        if (gamePad.isDownTyped()) {
+            System.out.println("Down typed");
         }
     }
 
