@@ -4,10 +4,6 @@ import cegepst.engine.resources.sounds.ClipHandler;
 import cegepst.engine.resources.sounds.SoundPlayer;
 import cegepst.game.GameSettings;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.IOException;
-
 public class MusicHandler {
 
     private ClipHandler musicClip;
@@ -17,13 +13,9 @@ public class MusicHandler {
     }
 
     public void play() {
-        try {
-            setVolumeBasedOnGameSettings(GameSettings.MUSIC);
-            musicClip.start();
-            musicClip.loop();
-        } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
-            e.printStackTrace();
-        }
+        setVolumeBasedOnGameSettings(GameSettings.MUSIC);
+        musicClip.start();
+        musicClip.loop();
     }
 
     public void stop() {

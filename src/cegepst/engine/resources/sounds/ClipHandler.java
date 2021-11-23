@@ -20,7 +20,7 @@ public class ClipHandler {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
-    public void start() throws IOException, LineUnavailableException, UnsupportedAudioFileException {
+    public void start() {
         clip.start();
     }
 
