@@ -1,10 +1,9 @@
 package cegepst.game;
 
 import cegepst.engine.Buffer;
-import cegepst.engine.buttons.CustomEvent;
-import cegepst.engine.buttons.Button;
 import cegepst.engine.buttons.RoundButton;
 import cegepst.engine.controls.MouseController;
+import cegepst.game.entities.ButtonFactory;
 
 import java.util.ArrayList;
 
@@ -12,8 +11,8 @@ public class AutoBattlerMenu {
 
     private GamePad gamePad;
     private MouseController mouse;
-    private ArrayList<Button> mainMenuButtons;
-    private ArrayList<Button> optionMenuButtons;
+    private ArrayList<RoundButton> mainMenuButtons;
+    private ArrayList<RoundButton> optionMenuButtons;
     private boolean inOptionMenu = false;
     private boolean isQuitting = false;
     private boolean isStayingInMenu = true;
@@ -23,7 +22,8 @@ public class AutoBattlerMenu {
         mouse = new MouseController();
         mainMenuButtons = new ArrayList<>();
         optionMenuButtons = new ArrayList<>();
-        initializeMenuButtons();
+        initializeMainMenuButtons();
+        initializeOptionMenuButtons();
     }
 
     public boolean update() {
@@ -36,11 +36,11 @@ public class AutoBattlerMenu {
 
     public void draw(Buffer buffer) {
         if (inOptionMenu) {
-            for (Button button : optionMenuButtons) {
+            for (RoundButton button : optionMenuButtons) {
                 button.draw(buffer);
             }
         } else {
-            for (Button button : mainMenuButtons) {
+            for (RoundButton button : mainMenuButtons) {
                 button.draw(buffer);
             }
         }
@@ -68,11 +68,11 @@ public class AutoBattlerMenu {
 
     private void mouseHoverCheck() {
         if (inOptionMenu) {
-            for (Button button : optionMenuButtons) {
+            for (RoundButton button : optionMenuButtons) {
                 button.checkIfHovered(mouse.getMousePosition());
             }
         } else {
-            for (Button button : mainMenuButtons) {
+            for (RoundButton button : mainMenuButtons) {
                 button.checkIfHovered(mouse.getMousePosition());
             }
         }
@@ -89,8 +89,8 @@ public class AutoBattlerMenu {
         mouse.resetIsClicked();
     }
 
-    private void buttonClickCheck(ArrayList<Button> buttons) {
-        for (Button button : buttons) {
+    private void buttonClickCheck(ArrayList<RoundButton> buttons) {
+        for (RoundButton button : buttons) {
             if (button.isClicked(mouse.getMousePosition())) {
                 button.customEvent();
                 break;
@@ -98,75 +98,28 @@ public class AutoBattlerMenu {
         }
     }
 
-    private void initializeMenuButtons() {
-        Button playButton = new RoundButton(100, 100, "Play", true);
-        playButton.setCustomEvent(new CustomEvent() {
-            @Override
-            public void event() {
-                isStayingInMenu = false;
-            }
-        });
+    public void setIsStayingInMenu(boolean isStayingInMenu) {
+        this.isStayingInMenu = isStayingInMenu;
+    }
 
-        Button optionButton = new RoundButton(100, 160, "Option", true);
-        optionButton.setCustomEvent(new CustomEvent() {
-            @Override
-            public void event() {
-                inOptionMenu = true;
-            }
-        });
+    public void setIsQuitting(boolean isQuitting) {
+        this.isQuitting = isQuitting;
+    }
 
-        Button quitButton = new RoundButton(100, 220, "Quit", true);
-        quitButton.setCustomEvent(new CustomEvent() {
-            @Override
-            public void event() {
-                isQuitting = true;
-            }
-        });
+    public void setInOptionMenu(boolean inOptionMenu) {
+        this.inOptionMenu = inOptionMenu;
+    }
 
-        Button soundButton = new RoundButton(100, 100,
-                "Sound " + (GameSettings.SOUND ? "On" : "Off"), true);
-        soundButton.setCustomEvent(new CustomEvent() {
-            @Override
-            public void event() {
-                GameSettings.SOUND = !GameSettings.SOUND;
-                soundButton.setText("Sound " + (GameSettings.SOUND ? "On" : "Off"));
-            }
-        });
+    private void initializeMainMenuButtons() {
+        mainMenuButtons.add(ButtonFactory.playButton(this));
+        mainMenuButtons.add(ButtonFactory.optionButton(this));
+        mainMenuButtons.add(ButtonFactory.quitButton(this));
+    }
 
-        Button musicButton = new RoundButton(100, 160,
-                "Music " + (GameSettings.MUSIC ? "On" : "Off"), true);
-        musicButton.setCustomEvent(new CustomEvent() {
-            @Override
-            public void event() {
-                GameSettings.MUSIC = !GameSettings.MUSIC;
-                musicButton.setText("Music " + (GameSettings.MUSIC ? "On" : "Off"));
-            }
-        });
-
-        Button debugButton = new RoundButton(100, 220,
-                "Debug " + (GameSettings.DEBUG_MODE ? "On" : "Off"), true);
-        debugButton.setCustomEvent(new CustomEvent() {
-            @Override
-            public void event() {
-                GameSettings.DEBUG_MODE = !GameSettings.DEBUG_MODE;
-                debugButton.setText("Debug " + (GameSettings.DEBUG_MODE ? "On" : "Off"));
-            }
-        });
-
-        Button backButton = new RoundButton(100, 280, "Back", true);
-        backButton.setCustomEvent(new CustomEvent() {
-            @Override
-            public void event() {
-                inOptionMenu = false;
-            }
-        });
-
-        mainMenuButtons.add(playButton);
-        mainMenuButtons.add(optionButton);
-        mainMenuButtons.add(quitButton);
-        optionMenuButtons.add(soundButton);
-        optionMenuButtons.add(musicButton);
-        optionMenuButtons.add(debugButton);
-        optionMenuButtons.add(backButton);
+    private void initializeOptionMenuButtons() {
+        optionMenuButtons.add(ButtonFactory.soundButton());
+        optionMenuButtons.add(ButtonFactory.musicButton());
+        optionMenuButtons.add(ButtonFactory.debugButton());
+        optionMenuButtons.add(ButtonFactory.backButton(this));
     }
 }
