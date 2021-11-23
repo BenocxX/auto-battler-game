@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 public class GamePad extends MovementController {
 
     private int quitKey = KeyEvent.VK_Q;
+    private int escapeKey = KeyEvent.VK_ESCAPE;
     private int useKey = KeyEvent.VK_E;
     private int screenModeKey = KeyEvent.VK_F;
     private int debugKey = KeyEvent.VK_D;
@@ -18,6 +19,10 @@ public class GamePad extends MovementController {
 
     public boolean isQuitTyped() {
         return isKeyTyped(quitKey);
+    }
+
+    public boolean isEscapeTyped() {
+        return isKeyTyped(escapeKey);
     }
 
     public boolean isUseTyped() {

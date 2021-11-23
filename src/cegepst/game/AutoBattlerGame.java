@@ -2,11 +2,9 @@ package cegepst.game;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.RenderingEngine;
-import cegepst.engine.resources.sounds.ClipHandler;
 import cegepst.game.entities.BuyStation;
 import cegepst.game.entities.Player;
 import cegepst.game.entities.TriggerArea;
-import cegepst.game.resources.Sound;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -79,6 +77,9 @@ public class AutoBattlerGame {
 
     private void quitKeyCheck() {
         isStayingInGame = !gamePad.isQuitTyped();
+        if (isStayingInGame) {
+            isStayingInGame = !gamePad.isEscapeTyped();
+        }
     }
 
     private void debugKeyCheck() {
