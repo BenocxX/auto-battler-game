@@ -14,9 +14,9 @@ import java.util.ArrayList;
 
 public class AutoBattlerGame {
 
-    private Image map;
     private GamePad gamePad;
     private Player player;
+    private World world;
     private Initializer initializer;
     private ArrayList<BuyStation> buyStations;
     private ArrayList<TriggerArea> triggerAreas;
@@ -25,11 +25,10 @@ public class AutoBattlerGame {
     public AutoBattlerGame() {
         gamePad = new GamePad();
         player = new Player(gamePad);
+        world = new World();
         initializer = new Initializer();
         buyStations = initializer.getBuyStations();
         triggerAreas = initializer.getTriggerAreasForBuyStations(buyStations);
-        map = SpriteHandler.resizeImage(Sprite.MAP.getImage(),
-                Image.SCALE_SMOOTH, RenderingEngine.WIDTH, RenderingEngine.HEIGHT);
         GameSettings.isFullscreenMode = false;
         Sound.MUSIC.playLoop(GameSettings.MUSIC);
     }
@@ -55,7 +54,7 @@ public class AutoBattlerGame {
     }
 
     private void logicDraw(Buffer buffer) {
-        buffer.drawImage(map, 0, 0);
+        world.draw(buffer);
         for (BuyStation buyStation : buyStations) {
             buyStation.draw(buffer);
         }
