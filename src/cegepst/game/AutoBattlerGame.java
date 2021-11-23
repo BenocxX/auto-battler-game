@@ -2,12 +2,10 @@ package cegepst.game;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.RenderingEngine;
-import cegepst.engine.resources.images.SpriteHandler;
 import cegepst.game.entities.BuyStation;
 import cegepst.game.entities.Player;
 import cegepst.game.entities.TriggerArea;
 import cegepst.game.resources.Sound;
-import cegepst.game.resources.Sprite;
 
 import java.awt.*;
 import java.util.ArrayList;
