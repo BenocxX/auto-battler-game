@@ -12,14 +12,17 @@ public class AutoBattlerMenu {
 
     private GamePad gamePad;
     private MouseController mouse;
-    private ArrayList<Button> buttons;
+    private ArrayList<Button> mainMenuButtons;
+    private ArrayList<Button> optionMenuButtons;
+    private boolean inOptionMenu = false;
     private boolean isQuitting = false;
     private boolean isStayingInMenu = true;
 
     public AutoBattlerMenu() {
         gamePad = new GamePad();
         mouse = new MouseController();
-        buttons = new ArrayList<>();
+        mainMenuButtons = new ArrayList<>();
+        optionMenuButtons = new ArrayList<>();
         initializeMenuButtons();
     }
 
@@ -32,8 +35,14 @@ public class AutoBattlerMenu {
     }
 
     public void draw(Buffer buffer) {
-        for (Button button : buttons) {
-            button.draw(buffer);
+        if (inOptionMenu) {
+            for (Button button : optionMenuButtons) {
+                button.draw(buffer);
+            }
+        } else {
+            for (Button button : mainMenuButtons) {
+                button.draw(buffer);
+            }
         }
     }
 
@@ -48,27 +57,45 @@ public class AutoBattlerMenu {
     }
 
     private void quitKeyCheck() {
-        if (gamePad.isQuitTyped()) {
-            isQuitting = true;
+        if (gamePad.isQuitTyped() || gamePad.isEscapeTyped()) {
+            if (inOptionMenu) {
+                inOptionMenu = false;
+            } else {
+                isQuitting = true;
+            }
         }
     }
 
     private void mouseHoverCheck() {
-        for (Button button : buttons) {
-            button.checkIfHovered(mouse.getMousePosition());
+        if (inOptionMenu) {
+            for (Button button : optionMenuButtons) {
+                button.checkIfHovered(mouse.getMousePosition());
+            }
+        } else {
+            for (Button button : mainMenuButtons) {
+                button.checkIfHovered(mouse.getMousePosition());
+            }
         }
     }
 
     private void mouseClickCheck() {
         if (mouse.isClicked()) {
-            for (Button button : buttons) {
-                if (button.isVisible() && button.isClicked(mouse.getMousePosition())) {
-                    button.customEvent();
-                    break;
-                }
+            if (inOptionMenu) {
+                buttonClickCheck(optionMenuButtons);
+            } else {
+                buttonClickCheck(mainMenuButtons);
             }
         }
         mouse.resetIsClicked();
+    }
+
+    private void buttonClickCheck(ArrayList<Button> buttons) {
+        for (Button button : buttons) {
+            if (button.isClicked(mouse.getMousePosition())) {
+                button.customEvent();
+                break;
+            }
+        }
     }
 
     private void initializeMenuButtons() {
@@ -84,7 +111,7 @@ public class AutoBattlerMenu {
         optionButton.setCustomEvent(new CustomEvent() {
             @Override
             public void event() {
-                invertButtonsVisibility();
+                inOptionMenu = true;
             }
         });
 
@@ -97,7 +124,7 @@ public class AutoBattlerMenu {
         });
 
         Button soundButton = new RoundButton(100, 100,
-                "Sound " + (GameSettings.SOUND ? "On" : "Off"), false);
+                "Sound " + (GameSettings.SOUND ? "On" : "Off"), true);
         soundButton.setCustomEvent(new CustomEvent() {
             @Override
             public void event() {
@@ -107,7 +134,7 @@ public class AutoBattlerMenu {
         });
 
         Button musicButton = new RoundButton(100, 160,
-                "Music " + (GameSettings.MUSIC ? "On" : "Off"), false);
+                "Music " + (GameSettings.MUSIC ? "On" : "Off"), true);
         musicButton.setCustomEvent(new CustomEvent() {
             @Override
             public void event() {
@@ -117,7 +144,7 @@ public class AutoBattlerMenu {
         });
 
         Button debugButton = new RoundButton(100, 220,
-                "Debug " + (GameSettings.DEBUG_MODE ? "On" : "Off"), false);
+                "Debug " + (GameSettings.DEBUG_MODE ? "On" : "Off"), true);
         debugButton.setCustomEvent(new CustomEvent() {
             @Override
             public void event() {
@@ -126,26 +153,20 @@ public class AutoBattlerMenu {
             }
         });
 
-        Button backButton = new RoundButton(100, 280, "Back", false);
+        Button backButton = new RoundButton(100, 280, "Back", true);
         backButton.setCustomEvent(new CustomEvent() {
             @Override
             public void event() {
-                invertButtonsVisibility();
+                inOptionMenu = false;
             }
         });
 
-        buttons.add(playButton);
-        buttons.add(optionButton);
-        buttons.add(quitButton);
-        buttons.add(soundButton);
-        buttons.add(musicButton);
-        buttons.add(debugButton);
-        buttons.add(backButton);
-    }
-
-    private void invertButtonsVisibility() {
-        for (Button button : buttons) {
-            button.setVisible(!button.isVisible());
-        }
+        mainMenuButtons.add(playButton);
+        mainMenuButtons.add(optionButton);
+        mainMenuButtons.add(quitButton);
+        optionMenuButtons.add(soundButton);
+        optionMenuButtons.add(musicButton);
+        optionMenuButtons.add(debugButton);
+        optionMenuButtons.add(backButton);
     }
 }
