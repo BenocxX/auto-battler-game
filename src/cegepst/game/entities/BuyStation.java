@@ -34,7 +34,7 @@ public class BuyStation extends MovableEntity implements TriggerAreaListener, It
 
 
         this.id = id;
-        item = new Creature(id, x + ((width - Creature.WIDTH) / 2), y - (Creature.HEIGHT / 2));
+        item = new CreatureItem(id, x + ((width - CreatureItem.WIDTH) / 2), y - (CreatureItem.HEIGHT / 2));
         hasItem = true;
         image = SpriteHandler.resizeImage(Sprite.SAP_TILE_SPRITE.getImage(), Image.SCALE_SMOOTH, width, height);
     }

@@ -5,7 +5,7 @@ import cegepst.engine.helpers.RandomHandler;
 
 import java.awt.*;
 
-public class Creature extends Item {
+public class CreatureItem extends Item {
 
     public static final int WIDTH = 60;
     public static final int HEIGHT = 60;
@@ -13,7 +13,7 @@ public class Creature extends Item {
     private CreatureType creatureType;
     private Image sprite;
 
-    public Creature(int id, int x, int y) {
+    public CreatureItem(int id, int x, int y) {
         super(id);
         setDimension(WIDTH, HEIGHT);
         teleport(x, y);
