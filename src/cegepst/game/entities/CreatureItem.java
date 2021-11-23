@@ -2,6 +2,7 @@ package cegepst.game.entities;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.helpers.RandomHandler;
+import cegepst.game.CreatureType;
 
 import java.awt.*;
 
