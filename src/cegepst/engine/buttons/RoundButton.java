@@ -14,39 +14,36 @@ public class RoundButton extends Button {
      * the developer customize the button easily.
      */
     public RoundButton(int x, int y, int width, int height,
-                       int arcWidth, int arcHeight, String text,
-                       boolean isVisible, CustomEvent event) {
-        super(x, y, width, height, text, isVisible, event);
+                       int arcWidth, int arcHeight,
+                       String text, CustomEvent event) {
+        super(x, y, width, height, text, event);
         this.arcWidth = arcWidth;
         this.arcHeight = arcHeight;
     }
 
-    public RoundButton(int x, int y, int style, String text,
-                       boolean isVisible, CustomEvent event) {
-        super(x, y, style, text, isVisible, event);
+    public RoundButton(int x, int y, int style, String text, CustomEvent event) {
+        super(x, y, style, text, event);
         applyStyle(style);
     }
 
-    public RoundButton(int x, int y, int style, String text, boolean isVisible) {
-        super(x, y, style, text, isVisible);
+    public RoundButton(int x, int y, int style, String text) {
+        super(x, y, style, text);
         applyStyle(style);
     }
 
-    public RoundButton(int x, int y, String text, boolean isVisible) {
-        super(x, y, text, isVisible);
+    public RoundButton(int x, int y, String text) {
+        super(x, y, text);
         applyStyle(ButtonStyle.MEDIUM_HORIZONTAL_ROUND);
     }
 
     @Override
     public void draw(Buffer buffer) {
-        if (isVisible) {
-            if (isHovered) {
-                buffer.drawRoundRectangle(x, y, width, height, arcWidth, arcHeight, new Color(132, 132, 132, 255));
-            } else {
-                buffer.drawRoundRectangle(x, y, width, height, arcWidth, arcHeight, new Color(108, 108, 108, 255));
-            }
-            buffer.drawCenteredText(text, getBounds());
+        if (isHovered) {
+            buffer.drawRoundRectangle(x, y, width, height, arcWidth, arcHeight, new Color(132, 132, 132, 255));
+        } else {
+            buffer.drawRoundRectangle(x, y, width, height, arcWidth, arcHeight, new Color(108, 108, 108, 255));
         }
+        buffer.drawCenteredText(text, getBounds());
     }
 
     @Override

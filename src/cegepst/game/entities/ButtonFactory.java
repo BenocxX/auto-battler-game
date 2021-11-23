@@ -8,7 +8,7 @@ import cegepst.game.GameSettings;
 public class ButtonFactory {
 
     public static RoundButton playButton(AutoBattlerMenu menu) {
-        RoundButton playButton = new RoundButton(100, 100, "Play", true);
+        RoundButton playButton = new RoundButton(100, 100, "Play");
         playButton.setCustomEvent(new CustomEvent() {
             @Override
             public void event() {
@@ -19,7 +19,7 @@ public class ButtonFactory {
     }
 
     public static RoundButton optionButton(AutoBattlerMenu menu) {
-        RoundButton optionButton = new RoundButton(100, 160, "Option", true);
+        RoundButton optionButton = new RoundButton(100, 160, "Option");
         optionButton.setCustomEvent(new CustomEvent() {
             @Override
             public void event() {
@@ -30,7 +30,7 @@ public class ButtonFactory {
     }
 
     public static RoundButton quitButton(AutoBattlerMenu menu) {
-        RoundButton quitButton = new RoundButton(100, 220, "Quit", true);
+        RoundButton quitButton = new RoundButton(100, 220, "Quit");
         quitButton.setCustomEvent(new CustomEvent() {
             @Override
             public void event() {
@@ -42,7 +42,7 @@ public class ButtonFactory {
 
     public static RoundButton soundButton() {
         RoundButton soundButton = new RoundButton(100, 100,
-                "Sound " + (GameSettings.SOUND ? "On" : "Off"), true);
+                "Sound " + (GameSettings.SOUND ? "On" : "Off"));
         soundButton.setCustomEvent(new CustomEvent() {
             @Override
             public void event() {
@@ -55,7 +55,7 @@ public class ButtonFactory {
 
     public static RoundButton musicButton() {
         RoundButton musicButton = new RoundButton(100, 160,
-                "Music " + (GameSettings.MUSIC ? "On" : "Off"), true);
+                "Music " + (GameSettings.MUSIC ? "On" : "Off"));
         musicButton.setCustomEvent(new CustomEvent() {
             @Override
             public void event() {
@@ -68,7 +68,7 @@ public class ButtonFactory {
 
     public static RoundButton debugButton() {
         RoundButton debugButton = new RoundButton(100, 220,
-                "Debug " + (GameSettings.DEBUG_MODE ? "On" : "Off"), true);
+                "Debug " + (GameSettings.DEBUG_MODE ? "On" : "Off"));
         debugButton.setCustomEvent(new CustomEvent() {
             @Override
             public void event() {
@@ -80,7 +80,7 @@ public class ButtonFactory {
     }
 
     public static RoundButton backButton(AutoBattlerMenu menu) {
-        RoundButton backButton = new RoundButton(100, 280, "Back", true);
+        RoundButton backButton = new RoundButton(100, 280, "Back");
         backButton.setCustomEvent(new CustomEvent() {
             @Override
             public void event() {
