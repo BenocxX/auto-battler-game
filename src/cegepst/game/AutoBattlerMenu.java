@@ -13,6 +13,8 @@ public class AutoBattlerMenu {
     private MouseController mouse;
     private ArrayList<RoundButton> mainMenuButtons;
     private ArrayList<RoundButton> optionMenuButtons;
+    private int selectedOptionMenuButtonIndex;
+    private int selectedMainMenuButtonIndex;
     private boolean inOptionMenu = false;
     private boolean isQuitting = false;
     private boolean isStayingInMenu = true;
@@ -28,8 +30,8 @@ public class AutoBattlerMenu {
 
     public boolean update() {
         quitKeyCheck();
-        upKeyPressed();
-        downKeyPressed();
+        enterKeyCheck();
+        upDownKeyCheck();
         mouseHoverCheck();
         mouseClickCheck();
         gamePad.clearTypedKeys();
@@ -68,26 +70,79 @@ public class AutoBattlerMenu {
         }
     }
 
-    private void upKeyPressed() {
-        if (gamePad.isUpTyped()) {
-            System.out.println("Up typed");
+    // TODO: Faire touche "enter" pour click bouton
+    private void enterKeyCheck() {
+        if (gamePad.isEnterTyped()) {
+            if (inOptionMenu) {
+                optionMenuButtons.get(selectedOptionMenuButtonIndex).customEvent();
+            } else {
+                mainMenuButtons.get(selectedMainMenuButtonIndex).customEvent();
+            }
         }
     }
 
-    private void downKeyPressed() {
-        if (gamePad.isDownTyped()) {
-            System.out.println("Down typed");
+    private void upDownKeyCheck() {
+        if (inOptionMenu) {
+            selectedOptionMenuButtonIndex = upKeyPressed(optionMenuButtons, selectedOptionMenuButtonIndex);
+            selectedOptionMenuButtonIndex = downKeyPressed(optionMenuButtons, selectedOptionMenuButtonIndex);
+        } else {
+            selectedMainMenuButtonIndex = upKeyPressed(mainMenuButtons, selectedMainMenuButtonIndex);
+            selectedMainMenuButtonIndex = downKeyPressed(mainMenuButtons, selectedMainMenuButtonIndex);
         }
+    }
+
+    private int upKeyPressed(ArrayList<RoundButton> buttons, int index) {
+        if (gamePad.isUpTyped()) {
+            index = decrementSelectedButtonIndex(buttons, index);
+            for (RoundButton button : buttons) {
+                button.isSelected(button == buttons.get(index));
+            }
+        }
+        return index;
+    }
+
+    private int downKeyPressed(ArrayList<RoundButton> buttons, int index) {
+        if (gamePad.isDownTyped()) {
+            index = incrementSelectedButtonIndex(buttons, index);
+            for (RoundButton button : buttons) {
+                button.isSelected(button == buttons.get(index));
+            }
+        }
+        return index;
+    }
+
+    private int decrementSelectedButtonIndex(ArrayList<RoundButton> buttons, int index) {
+        if (index > 0) {
+            index--;
+        } else {
+            index = buttons.size() - 1;
+        }
+        return index;
+    }
+
+    private int incrementSelectedButtonIndex(ArrayList<RoundButton> buttons, int index) {
+        if (index < buttons.size() - 1) {
+            index++;
+        } else {
+            index = 0;
+        }
+        return index;
     }
 
     private void mouseHoverCheck() {
         if (inOptionMenu) {
-            for (RoundButton button : optionMenuButtons) {
-                button.checkIfHovered(mouse.getMousePosition());
-            }
+            buttonHoverCheck(optionMenuButtons);
         } else {
-            for (RoundButton button : mainMenuButtons) {
-                button.checkIfHovered(mouse.getMousePosition());
+            buttonHoverCheck(mainMenuButtons);
+        }
+    }
+
+    private void buttonHoverCheck(ArrayList<RoundButton> buttons) {
+        for (RoundButton button : buttons) {
+            button.checkIfHovered(mouse.getMousePosition());
+            if (button.isHovered()) {
+                buttons.get(inOptionMenu ? selectedOptionMenuButtonIndex :
+                        selectedMainMenuButtonIndex).isSelected(false);
             }
         }
     }
@@ -128,6 +183,7 @@ public class AutoBattlerMenu {
         mainMenuButtons.add(ButtonFactory.playButton(this));
         mainMenuButtons.add(ButtonFactory.optionButton(this));
         mainMenuButtons.add(ButtonFactory.quitButton(this));
+        mainMenuButtons.get(0).isSelected(true);
     }
 
     private void initializeOptionMenuButtons() {
@@ -135,5 +191,6 @@ public class AutoBattlerMenu {
         optionMenuButtons.add(ButtonFactory.musicButton());
         optionMenuButtons.add(ButtonFactory.debugButton());
         optionMenuButtons.add(ButtonFactory.backButton(this));
+        optionMenuButtons.get(0).isSelected(true);
     }
 }

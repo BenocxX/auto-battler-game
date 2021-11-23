@@ -7,9 +7,13 @@ import java.awt.*;
 
 public class Button extends StaticEntity {
 
+    protected static final Color SELECTED_COLOR = new Color(132, 132, 132, 255);
+    protected static final Color UNSELECTED_COLOR = new Color(108, 108, 108, 255);
+
     protected String text;
     protected boolean isClicked;
     protected boolean isHovered;
+    protected boolean isSelected;
     protected CustomEvent customEvent;
 
     /*
@@ -44,10 +48,10 @@ public class Button extends StaticEntity {
 
     @Override
     public void draw(Buffer buffer) {
-        if (isHovered) {
-            buffer.drawRectangle(x, y, width, height, new Color(132, 132, 132, 255));
+        if (isHovered || isSelected) {
+            buffer.drawRectangle(x, y, width, height, SELECTED_COLOR);
         } else {
-            buffer.drawRectangle(x, y, width, height, new Color(108, 108, 108, 255));
+            buffer.drawRectangle(x, y, width, height, UNSELECTED_COLOR);
         }
         buffer.drawCenteredText(text, getBounds());
     }
@@ -71,6 +75,17 @@ public class Button extends StaticEntity {
 
     public void checkIfHovered(Point mousePosition) {
         isHovered = getBounds().contains(mousePosition);
+        if (isHovered) {
+            isSelected = false;
+        }
+    }
+
+    public void isSelected(boolean isSelected) {
+        this.isSelected = isSelected;
+    }
+
+    public boolean isHovered() {
+        return isHovered;
     }
 
     protected void applyStyle(int style) {

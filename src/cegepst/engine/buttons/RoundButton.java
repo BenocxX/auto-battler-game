@@ -38,10 +38,10 @@ public class RoundButton extends Button {
 
     @Override
     public void draw(Buffer buffer) {
-        if (isHovered) {
-            buffer.drawRoundRectangle(x, y, width, height, arcWidth, arcHeight, new Color(132, 132, 132, 255));
+        if (isHovered || isSelected) {
+            buffer.drawRoundRectangle(x, y, width, height, arcWidth, arcHeight, SELECTED_COLOR);
         } else {
-            buffer.drawRoundRectangle(x, y, width, height, arcWidth, arcHeight, new Color(108, 108, 108, 255));
+            buffer.drawRoundRectangle(x, y, width, height, arcWidth, arcHeight, UNSELECTED_COLOR);
         }
         buffer.drawCenteredText(text, getBounds());
     }
