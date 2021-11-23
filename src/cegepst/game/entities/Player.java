@@ -15,7 +15,7 @@ public class Player extends ControllableEntity {
     public Player(MovementController controller) {
         super(controller);
         setDimension(32, 32);
-        teleport(250, 250);
+        teleport(100, 400);
         setSpeed(5);
         animator = new Animator(Sprite.PLAYER_SPRITE_SHEET.getBufferedImage(), 8);
         animator.loadAnimations(0, 128, width, height, 3);
