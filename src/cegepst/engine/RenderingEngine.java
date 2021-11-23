@@ -8,8 +8,8 @@ import java.awt.image.BufferedImage;
 
 public class RenderingEngine {
 
-    public static int WIDTH = 800;
-    public static int HEIGHT = 600;
+    public static int WIDTH = 1000;
+    public static int HEIGHT = 625;
 
     private static RenderingEngine instance;
     private Screen screen;
