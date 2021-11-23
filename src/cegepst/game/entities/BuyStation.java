@@ -25,17 +25,18 @@ public class BuyStation extends MovableEntity implements TriggerAreaListener, It
     private int id;
 
     public BuyStation(int x, int y, int id) {
-        this.id = id;
-        item = new Creature(id, x - 6, y - 30);
-        hasItem = true;
-        setDimension(32, 32);
+        setDimension(70, 44);
         teleport(x, y);
         initializeSound();
         CollidableRepository.getInstance().registerEntity(this);
         EventSystem.getInstance().addTriggerAreaListener(this);
         EventSystem.getInstance().addItemBuyListener(this);
 
-        image = SpriteHandler.getFrame(Sprite.SHOP_SPRITE_SHEET.getBufferedImage(), 448, 416, 32, 32);
+
+        this.id = id;
+        item = new Creature(id, x + ((width - Creature.WIDTH) / 2), y - (Creature.HEIGHT / 2));
+        hasItem = true;
+        image = SpriteHandler.resizeImage(Sprite.SAP_TILE_SPRITE.getImage(), Image.SCALE_SMOOTH, width, height);
     }
 
     @Override

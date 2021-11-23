@@ -19,8 +19,8 @@ public class Initializer {
     public ArrayList<TriggerArea> getTriggerAreasForBuyStations(ArrayList<BuyStation> buyStations) {
         ArrayList<TriggerArea> triggerAreas = new ArrayList<>();
         for (BuyStation buyStation : buyStations) {
-            triggerAreas.add(new TriggerArea(buyStation.getId(), buyStation.getX() - 10,
-                    buyStation.getY() + buyStation.getHeight() + 10, 50, 50));
+            triggerAreas.add(new TriggerArea(buyStation.getId(), buyStation.getX(),
+                    buyStation.getY() + buyStation.getHeight() + 10, buyStation.getWidth(), 50));
         }
         return triggerAreas;
     }

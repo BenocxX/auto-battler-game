@@ -2,14 +2,13 @@ package cegepst.game.entities;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.helpers.RandomHandler;
-import cegepst.game.resources.Sprite;
 
 import java.awt.*;
 
 public class Creature extends Item {
 
-    private static final int WIDTH = 44;
-    private static final int HEIGHT = 44;
+    public static final int WIDTH = 60;
+    public static final int HEIGHT = 60;
 
     private CreatureType creatureType;
     private Image sprite;
