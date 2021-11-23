@@ -6,7 +6,7 @@ import cegepst.game.GameSettings;
 
 public class MusicHandler {
 
-    private ClipHandler musicClip;
+    private final ClipHandler musicClip;
 
     public MusicHandler() {
         musicClip = SoundPlayer.getClip(Sound.MUSIC.getPath());
