@@ -17,13 +17,24 @@ public class SoundPlayer {
         }).start();
     }
 
-    public static void playLoop(final String path) {
+    public static ClipHandler playLoop(final String path) {
         try {
             ClipHandler player = new ClipHandler(path);
             player.loop();
             player.start();
+            return player;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    public static ClipHandler getClip(final String path) {
+        try {
+            return new ClipHandler(path);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

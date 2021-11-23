@@ -1,5 +1,6 @@
 package cegepst.game.resources;
 
+import cegepst.engine.resources.sounds.ClipHandler;
 import cegepst.engine.resources.sounds.SoundPlayer;
 
 public enum Sound {
@@ -33,9 +34,15 @@ public enum Sound {
     }
 
     // Overload to allow game setting to activate or deactivate sfx
-    public void playLoop(boolean isActive) {
+    public ClipHandler playLoop(boolean isActive) {
+        ClipHandler clipHandler = null;
         if (isActive) {
-            SoundPlayer.playLoop(path);
+            clipHandler = SoundPlayer.playLoop(path);
         }
+        return clipHandler;
+    }
+
+    public String getPath() {
+        return path;
     }
 }

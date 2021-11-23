@@ -2,6 +2,7 @@ package cegepst.game;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.RenderingEngine;
+import cegepst.engine.resources.sounds.ClipHandler;
 import cegepst.game.entities.BuyStation;
 import cegepst.game.entities.Player;
 import cegepst.game.entities.TriggerArea;
@@ -27,8 +28,6 @@ public class AutoBattlerGame {
         initializer = new Initializer();
         buyStations = initializer.getBuyStations();
         triggerAreas = initializer.getTriggerAreasForBuyStations(buyStations);
-        GameSettings.isFullscreenMode = false;
-        Sound.MUSIC.playLoop(GameSettings.MUSIC);
     }
 
     public boolean update() {
