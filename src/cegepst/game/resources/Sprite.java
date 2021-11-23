@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 
 public enum Sprite {
 
-    MAP_1("./images/demo.png"),
+    MAP("./images/sap/map.png"),
     PLAYER_SPRITE_SHEET("./images/player.png"),
     SAP_TILE_SPRITE("./images/sap/tile.png"),
     SAP_ANT_SPRITE("./images/sap/ant.png"),

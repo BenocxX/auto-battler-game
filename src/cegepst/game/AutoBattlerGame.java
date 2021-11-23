@@ -2,6 +2,7 @@ package cegepst.game;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.RenderingEngine;
+import cegepst.engine.resources.images.SpriteHandler;
 import cegepst.game.entities.BuyStation;
 import cegepst.game.entities.Player;
 import cegepst.game.entities.TriggerArea;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 public class AutoBattlerGame {
 
+    private Image map;
     private GamePad gamePad;
     private Player player;
     private Initializer initializer;
@@ -26,6 +28,8 @@ public class AutoBattlerGame {
         initializer = new Initializer();
         buyStations = initializer.getBuyStations();
         triggerAreas = initializer.getTriggerAreasForBuyStations(buyStations);
+        map = SpriteHandler.resizeImage(Sprite.MAP.getImage(),
+                Image.SCALE_SMOOTH, RenderingEngine.WIDTH, RenderingEngine.HEIGHT);
         GameSettings.isFullscreenMode = false;
         Sound.MUSIC.playLoop(GameSettings.MUSIC);
     }
@@ -51,7 +55,7 @@ public class AutoBattlerGame {
     }
 
     private void logicDraw(Buffer buffer) {
-        buffer.drawImage(Sprite.MAP_1.getImage(), 0, -64);
+        buffer.drawImage(map, 0, 0);
         for (BuyStation buyStation : buyStations) {
             buyStation.draw(buffer);
         }
