@@ -9,10 +9,10 @@ public class Initializer {
 
     public ArrayList<BuyStation> getBuyStations() {
         ArrayList<BuyStation> buyStations = new ArrayList<>();
-        buyStations.add(new BuyStation(100, 100, 1));
-        buyStations.add(new BuyStation(200, 100, 2));
-        buyStations.add(new BuyStation(300, 100, 3));
-        buyStations.add(new BuyStation(400, 100, 4));
+        buyStations.add(new BuyStation(200, 150, 1));
+        buyStations.add(new BuyStation(300, 150, 2));
+        buyStations.add(new BuyStation(400, 150, 3));
+        buyStations.add(new BuyStation(500, 150, 4));
         return buyStations;
     }
 

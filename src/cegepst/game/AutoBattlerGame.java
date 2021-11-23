@@ -6,6 +6,7 @@ import cegepst.game.entities.BuyStation;
 import cegepst.game.entities.Player;
 import cegepst.game.entities.TriggerArea;
 import cegepst.game.resources.Sound;
+import cegepst.game.resources.Sprite;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ public class AutoBattlerGame {
     }
 
     private void logicDraw(Buffer buffer) {
+        buffer.drawImage(Sprite.MAP_1.getImage(), 0, -64);
         for (BuyStation buyStation : buyStations) {
             buyStation.draw(buffer);
         }
