@@ -9,6 +9,9 @@ import java.util.ArrayList;
 
 public class AutoBattlerMenu {
 
+    // TODO: Refactor whole Option Menu in a new class caller AutoBattlerOptionMenu
+    // TODO: Rename class to AutoBattleMainMenu
+
     private GamePad gamePad;
     private MouseController mouse;
     private ArrayList<RoundButton> mainMenuButtons;
