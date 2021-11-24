@@ -2,13 +2,15 @@ package cegepst.game;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.Game;
-import cegepst.engine.resources.sounds.ClipHandler;
 import cegepst.game.resources.MusicHandler;
-import cegepst.game.resources.Sound;
 
 import java.awt.*;
 
 public class AutoBattler extends Game {
+
+    private static final int MAIN_MENU_ID = 0;
+    private static final int OPTION_MENU_ID = 1;
+    private static final int GAME_ID = 2;
 
     private boolean inMenu = true;
     private AutoBattlerGame autoBattlerGame;
