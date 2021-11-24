@@ -8,8 +8,6 @@ import cegepst.game.displays.MainMenuDisplay;
 import cegepst.game.displays.OptionMenuDisplay;
 import cegepst.game.resources.MusicHandler;
 
-import java.awt.*;
-
 public class AutoBattler extends Game {
 
     private MusicHandler musicHandler;
