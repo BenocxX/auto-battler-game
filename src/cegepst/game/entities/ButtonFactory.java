@@ -25,7 +25,6 @@ public class ButtonFactory {
             @Override
             public void event() {
                 menu.goToOptionDisplay();
-                //menu.setInOptionMenu(true);
             }
         });
         return optionButton;
