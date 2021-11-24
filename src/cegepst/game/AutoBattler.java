@@ -8,11 +8,7 @@ import java.awt.*;
 
 public class AutoBattler extends Game {
 
-    private static final int MAIN_MENU_ID = 0;
-    private static final int OPTION_MENU_ID = 1;
-    private static final int GAME_ID = 2;
-
-    private boolean inMenu = true;
+    private int currentId = 0;
     private AutoBattlerGame autoBattlerGame;
     private AutoBattlerMenu autoBattlerMenu;
     private MusicHandler musicHandler;
@@ -29,22 +25,21 @@ public class AutoBattler extends Game {
     @Override
     public void update() {
         musicHandler.setVolumeBasedOnGameSettings(GameSettings.MUSIC);
-        if (inMenu) {
-            inMenu = autoBattlerMenu.update();
-            stopCheck();
-            autoBattlerGame.resetStateData();
-        } else {
-            inMenu = !autoBattlerGame.update();
-            autoBattlerMenu.resetStateData();
+        if (currentId == DisplayIds.MAIN_MENU.getId()) {
+            currentId = autoBattlerMenu.update();
+        } else if (currentId == DisplayIds.GAME.getId()) {
+            currentId = autoBattlerGame.update();
+        } else if (currentId == DisplayIds.QUIT.getId()) {
+            stop();
         }
     }
 
     @Override
     public void draw(Buffer buffer) {
-        if (inMenu) {
+        if (currentId == DisplayIds.MAIN_MENU.getId()) {
             buffer.setFontSize(Font.PLAIN, 20);
             autoBattlerMenu.draw(buffer);
-        } else {
+        } else if (currentId == DisplayIds.GAME.getId()) {
             buffer.setFontSize(Font.PLAIN, 14);
             autoBattlerGame.draw(buffer);
         }
@@ -53,11 +48,5 @@ public class AutoBattler extends Game {
     @Override
     public void conclude() {
         musicHandler.stop();
-    }
-
-    private void stopCheck() {
-        if (autoBattlerMenu.isQuitting()) {
-            stop();
-        }
     }
 }

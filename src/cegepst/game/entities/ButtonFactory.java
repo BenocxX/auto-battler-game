@@ -12,7 +12,7 @@ public class ButtonFactory {
         playButton.setCustomEvent(new CustomEvent() {
             @Override
             public void event() {
-                menu.setIsStayingInMenu(false);
+                menu.playGame();
             }
         });
         return playButton;
@@ -34,7 +34,7 @@ public class ButtonFactory {
         quitButton.setCustomEvent(new CustomEvent() {
             @Override
             public void event() {
-                menu.setIsQuitting(true);
+                menu.quit();
             }
         });
         return quitButton;

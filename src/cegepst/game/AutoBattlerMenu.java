@@ -5,12 +5,10 @@ import cegepst.engine.buttons.RoundButton;
 import cegepst.engine.controls.MouseController;
 import cegepst.game.entities.ButtonFactory;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class AutoBattlerMenu {
-
-    // TODO: Refactor whole Option Menu in a new class caller AutoBattlerOptionMenu
-    // TODO: Rename class to AutoBattleMainMenu
 
     private GamePad gamePad;
     private MouseController mouse;
@@ -19,8 +17,8 @@ public class AutoBattlerMenu {
     private int selectedOptionMenuButtonIndex;
     private int selectedMainMenuButtonIndex;
     private boolean inOptionMenu = false;
-    private boolean isQuitting = false;
-    private boolean isStayingInMenu = true;
+    private boolean alreadyInDisplay = false;
+    private int currentId = DisplayIds.MAIN_MENU.getId();
 
     public AutoBattlerMenu() {
         gamePad = new GamePad();
@@ -31,17 +29,22 @@ public class AutoBattlerMenu {
         initializeOptionMenuButtons();
     }
 
-    public boolean update() {
+    public int update() {
+        if (!alreadyInDisplay) {
+            resetStateData();
+        }
         quitKeyCheck();
         enterKeyCheck();
         upDownKeyCheck();
         mouseHoverCheck();
         mouseClickCheck();
         gamePad.clearTypedKeys();
-        return isStayingInMenu;
+        alreadyInDisplay = (currentId == DisplayIds.MAIN_MENU.getId());
+        return currentId;
     }
 
     public void draw(Buffer buffer) {
+        buffer.setFontSize(Font.PLAIN, 20);
         if (inOptionMenu) {
             for (RoundButton button : optionMenuButtons) {
                 button.draw(buffer);
@@ -53,13 +56,8 @@ public class AutoBattlerMenu {
         }
     }
 
-    public boolean isQuitting() {
-        return isQuitting;
-    }
-
     public void resetStateData() {
-        isQuitting = false;
-        isStayingInMenu = true;
+        currentId = DisplayIds.MAIN_MENU.getId();
         gamePad.clearTypedKeys();
     }
 
@@ -68,12 +66,11 @@ public class AutoBattlerMenu {
             if (inOptionMenu) {
                 inOptionMenu = false;
             } else {
-                isQuitting = true;
+                currentId = DisplayIds.QUIT.getId();
             }
         }
     }
 
-    // TODO: Faire touche "enter" pour click bouton
     private void enterKeyCheck() {
         if (gamePad.isEnterTyped()) {
             if (inOptionMenu) {
@@ -170,12 +167,12 @@ public class AutoBattlerMenu {
         }
     }
 
-    public void setIsStayingInMenu(boolean isStayingInMenu) {
-        this.isStayingInMenu = isStayingInMenu;
+    public void playGame() {
+        currentId = DisplayIds.GAME.getId();
     }
 
-    public void setIsQuitting(boolean isQuitting) {
-        this.isQuitting = isQuitting;
+    public void quit() {
+        currentId = DisplayIds.QUIT.getId();
     }
 
     public void setInOptionMenu(boolean inOptionMenu) {

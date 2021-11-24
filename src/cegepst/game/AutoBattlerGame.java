@@ -17,7 +17,8 @@ public class AutoBattlerGame {
     private Initializer initializer;
     private ArrayList<BuyStation> buyStations;
     private ArrayList<TriggerArea> triggerAreas;
-    private boolean isStayingInGame = true;
+    private boolean alreadyInDisplay = false;
+    private int currentId = DisplayIds.GAME.getId();
 
     public AutoBattlerGame() {
         gamePad = new GamePad();
@@ -28,14 +29,18 @@ public class AutoBattlerGame {
         triggerAreas = initializer.getTriggerAreasForBuyStations(buyStations);
     }
 
-    public boolean update() {
+    public int update() {
+        if (!alreadyInDisplay) {
+            resetStateData();
+        }
         keysInputCheck();
         player.update();
         for (TriggerArea triggerArea : triggerAreas) {
             triggerArea.triggerCheck(player);
         }
         gamePad.clearTypedKeys();
-        return isStayingInGame;
+        alreadyInDisplay = (currentId == DisplayIds.GAME.getId());
+        return currentId;
     }
 
     public void draw(Buffer buffer) {
@@ -44,7 +49,7 @@ public class AutoBattlerGame {
     }
 
     public void resetStateData() {
-        isStayingInGame = true;
+        currentId = DisplayIds.GAME.getId();
         gamePad.clearTypedKeys();
     }
 
@@ -76,9 +81,8 @@ public class AutoBattlerGame {
     }
 
     private void quitKeyCheck() {
-        isStayingInGame = !gamePad.isQuitTyped();
-        if (isStayingInGame) {
-            isStayingInGame = !gamePad.isEscapeTyped();
+        if (gamePad.isQuitTyped() || gamePad.isEscapeTyped()) {
+            currentId = DisplayIds.MAIN_MENU.getId();
         }
     }
 
