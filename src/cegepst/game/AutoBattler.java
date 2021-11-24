@@ -13,11 +13,11 @@ import java.awt.*;
 
 public class AutoBattler extends Game {
 
-    private int currentId = 0;
-    private GameDisplay gameDisplay;
+    private MusicHandler musicHandler;
     private MainMenuDisplay mainMenuDisplay;
     private OptionMenuDisplay optionMenuDisplay;
-    private MusicHandler musicHandler;
+    private GameDisplay gameDisplay;
+    private int currentId = 0;
 
     @Override
     public void initialize() {
@@ -34,10 +34,10 @@ public class AutoBattler extends Game {
         musicHandler.setVolumeBasedOnGameSettings(GameSettings.MUSIC);
         if (currentId == DisplayType.MAIN_MENU.getId()) {
             currentId = mainMenuDisplay.update();
-        } else if (currentId == DisplayType.GAME.getId()) {
-            currentId = gameDisplay.update();
         } else if (currentId == DisplayType.OPTION_MENU.getId()) {
             currentId = optionMenuDisplay.update();
+        } else if (currentId == DisplayType.GAME.getId()) {
+            currentId = gameDisplay.update();
         } else if (currentId == DisplayType.QUIT.getId()) {
             stop();
         }
