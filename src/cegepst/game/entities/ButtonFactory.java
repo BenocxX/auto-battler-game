@@ -4,6 +4,7 @@ import cegepst.engine.buttons.CustomEvent;
 import cegepst.engine.buttons.RoundButton;
 import cegepst.game.displays.MainMenuDisplay;
 import cegepst.game.GameSettings;
+import cegepst.game.displays.OptionMenuDisplay;
 
 public class ButtonFactory {
 
@@ -12,7 +13,7 @@ public class ButtonFactory {
         playButton.setCustomEvent(new CustomEvent() {
             @Override
             public void event() {
-                menu.playGame();
+                menu.goToGameDisplay();
             }
         });
         return playButton;
@@ -23,7 +24,8 @@ public class ButtonFactory {
         optionButton.setCustomEvent(new CustomEvent() {
             @Override
             public void event() {
-                menu.setInOptionMenu(true);
+                menu.goToOptionDisplay();
+                //menu.setInOptionMenu(true);
             }
         });
         return optionButton;
@@ -79,12 +81,12 @@ public class ButtonFactory {
         return debugButton;
     }
 
-    public static RoundButton backButton(MainMenuDisplay menu) {
+    public static RoundButton backButton(OptionMenuDisplay menu) {
         RoundButton backButton = new RoundButton(100, 280, "Back");
         backButton.setCustomEvent(new CustomEvent() {
             @Override
             public void event() {
-                menu.setInOptionMenu(false);
+                menu.goToMainMenuDisplay();
             }
         });
         return backButton;

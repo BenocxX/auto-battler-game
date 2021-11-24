@@ -18,6 +18,7 @@ public class GameDisplay {
     private Initializer initializer;
     private ArrayList<BuyStation> buyStations;
     private ArrayList<TriggerArea> triggerAreas;
+
     private boolean alreadyInDisplay = false;
     private int currentId = DisplayIds.GAME.getId();
 

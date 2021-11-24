@@ -9,7 +9,7 @@ import cegepst.game.entities.ButtonFactory;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class MainMenuDisplay {
+public class OptionMenuDisplay {
 
     private GamePad gamePad;
     private MouseController mouse;
@@ -17,9 +17,9 @@ public class MainMenuDisplay {
     private int selectedButtonIndex;
 
     private boolean alreadyInDisplay = false;
-    private int currentId = DisplayIds.MAIN_MENU.getId();
+    private int currentId = DisplayIds.OPTION_MENU.getId();
 
-    public MainMenuDisplay() {
+    public OptionMenuDisplay() {
         gamePad = new GamePad();
         mouse = new MouseController();
         buttons = new ArrayList<>();
@@ -36,7 +36,7 @@ public class MainMenuDisplay {
         mouseHoverCheck();
         mouseClickCheck();
         gamePad.clearTypedKeys();
-        alreadyInDisplay = (currentId == DisplayIds.MAIN_MENU.getId());
+        alreadyInDisplay = (currentId == DisplayIds.OPTION_MENU.getId());
         return currentId;
     }
 
@@ -47,14 +47,18 @@ public class MainMenuDisplay {
         }
     }
 
-    private void resetStateData() {
+    public void goToMainMenuDisplay() {
         currentId = DisplayIds.MAIN_MENU.getId();
+    }
+
+    private void resetStateData() {
+        currentId = DisplayIds.OPTION_MENU.getId();
         gamePad.clearTypedKeys();
     }
 
     private void quitKeyCheck() {
         if (gamePad.isQuitTyped() || gamePad.isEscapeTyped()) {
-            quit();
+            goToMainMenuDisplay();
         }
     }
 
@@ -104,13 +108,10 @@ public class MainMenuDisplay {
     }
 
     private void mouseHoverCheck() {
-        buttonHoverCheck();
-    }
-
-    private void buttonHoverCheck() {
         for (RoundButton button : buttons) {
             button.checkIfHovered(mouse.getMousePosition());
             if (button.isHovered()) {
+                // TODO: button.isSelected(false);
                 buttons.get(selectedButtonIndex).isSelected(false);
             }
         }
@@ -132,22 +133,11 @@ public class MainMenuDisplay {
         }
     }
 
-    public void goToGameDisplay() {
-        currentId = DisplayIds.GAME.getId();
-    }
-
-    public void goToOptionDisplay() {
-        currentId = DisplayIds.OPTION_MENU.getId();
-    }
-
-    public void quit() {
-        currentId = DisplayIds.QUIT.getId();
-    }
-
     private void initializeButtons() {
-        buttons.add(ButtonFactory.playButton(this));
-        buttons.add(ButtonFactory.optionButton(this));
-        buttons.add(ButtonFactory.quitButton(this));
+        buttons.add(ButtonFactory.soundButton());
+        buttons.add(ButtonFactory.musicButton());
+        buttons.add(ButtonFactory.debugButton());
+        buttons.add(ButtonFactory.backButton(this));
         buttons.get(0).isSelected(true);
     }
 }
