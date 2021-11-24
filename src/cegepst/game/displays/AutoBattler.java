@@ -18,9 +18,9 @@ public class AutoBattler extends Game {
     @Override
     public void initialize() {
         GameSettings.isFullscreenMode = false;
-        gameDisplay = new GameDisplay();
         mainMenuDisplay = new MainMenuDisplay(DisplayType.MAIN_MENU);
         optionMenuDisplay = new OptionMenuDisplay(DisplayType.OPTION_MENU);
+        gameDisplay = new GameDisplay(DisplayType.GAME);
         musicHandler = new MusicHandler();
         musicHandler.play();
     }

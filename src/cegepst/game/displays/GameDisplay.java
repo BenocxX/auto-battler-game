@@ -10,7 +10,7 @@ import cegepst.game.entities.TriggerArea;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class GameDisplay {
+public class GameDisplay extends Display {
 
     private GamePad gamePad;
     private Player player;
@@ -19,11 +19,8 @@ public class GameDisplay {
     private ArrayList<BuyStation> buyStations;
     private ArrayList<TriggerArea> triggerAreas;
 
-    // TODO: duplicate
-    private boolean alreadyInDisplay = false;
-    private int currentId = DisplayType.GAME.getId();
-
-    public GameDisplay() {
+    public GameDisplay(DisplayType displayType) {
+        super(displayType);
         gamePad = new GamePad();
         player = new Player(gamePad);
         world = new World();
@@ -33,10 +30,7 @@ public class GameDisplay {
     }
 
     public int update() {
-        // TODO: duplicate
-        if (!alreadyInDisplay) {
-            resetStateData();
-        }
+        super.resetStateData(gamePad);
 
         keysInputCheck();
         player.update();
@@ -45,8 +39,7 @@ public class GameDisplay {
         }
         gamePad.clearTypedKeys();
 
-        // TODO: duplicate
-        alreadyInDisplay = (currentId == DisplayType.GAME.getId());
+        super.updateAlreadyInDisplay();
 
         return currentId;
     }
@@ -54,12 +47,6 @@ public class GameDisplay {
     public void draw(Buffer buffer) {
         logicDraw(buffer);
         UIDraw(buffer);
-    }
-
-    // TODO: duplicate
-    public void resetStateData() {
-        currentId = DisplayType.GAME.getId();
-        gamePad.clearTypedKeys();
     }
 
     private void logicDraw(Buffer buffer) {
