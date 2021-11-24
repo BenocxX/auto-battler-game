@@ -2,12 +2,12 @@ package cegepst.game.entities;
 
 import cegepst.engine.buttons.CustomEvent;
 import cegepst.engine.buttons.RoundButton;
-import cegepst.game.displays.AutoBattlerMenu;
+import cegepst.game.displays.MainMenuDisplay;
 import cegepst.game.GameSettings;
 
 public class ButtonFactory {
 
-    public static RoundButton playButton(AutoBattlerMenu menu) {
+    public static RoundButton playButton(MainMenuDisplay menu) {
         RoundButton playButton = new RoundButton(100, 100, "Play");
         playButton.setCustomEvent(new CustomEvent() {
             @Override
@@ -18,7 +18,7 @@ public class ButtonFactory {
         return playButton;
     }
 
-    public static RoundButton optionButton(AutoBattlerMenu menu) {
+    public static RoundButton optionButton(MainMenuDisplay menu) {
         RoundButton optionButton = new RoundButton(100, 160, "Option");
         optionButton.setCustomEvent(new CustomEvent() {
             @Override
@@ -29,7 +29,7 @@ public class ButtonFactory {
         return optionButton;
     }
 
-    public static RoundButton quitButton(AutoBattlerMenu menu) {
+    public static RoundButton quitButton(MainMenuDisplay menu) {
         RoundButton quitButton = new RoundButton(100, 220, "Quit");
         quitButton.setCustomEvent(new CustomEvent() {
             @Override
@@ -79,7 +79,7 @@ public class ButtonFactory {
         return debugButton;
     }
 
-    public static RoundButton backButton(AutoBattlerMenu menu) {
+    public static RoundButton backButton(MainMenuDisplay menu) {
         RoundButton backButton = new RoundButton(100, 280, "Back");
         backButton.setCustomEvent(new CustomEvent() {
             @Override

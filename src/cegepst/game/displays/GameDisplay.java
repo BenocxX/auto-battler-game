@@ -10,7 +10,7 @@ import cegepst.game.entities.TriggerArea;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class AutoBattlerGame {
+public class GameDisplay {
 
     private GamePad gamePad;
     private Player player;
@@ -21,7 +21,7 @@ public class AutoBattlerGame {
     private boolean alreadyInDisplay = false;
     private int currentId = DisplayIds.GAME.getId();
 
-    public AutoBattlerGame() {
+    public GameDisplay() {
         gamePad = new GamePad();
         player = new Player(gamePad);
         world = new World();

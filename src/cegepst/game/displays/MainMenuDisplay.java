@@ -9,7 +9,7 @@ import cegepst.game.entities.ButtonFactory;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class AutoBattlerMenu {
+public class MainMenuDisplay {
 
     private GamePad gamePad;
     private MouseController mouse;
@@ -21,7 +21,7 @@ public class AutoBattlerMenu {
     private boolean alreadyInDisplay = false;
     private int currentId = DisplayIds.MAIN_MENU.getId();
 
-    public AutoBattlerMenu() {
+    public MainMenuDisplay() {
         gamePad = new GamePad();
         mouse = new MouseController();
         mainMenuButtons = new ArrayList<>();
