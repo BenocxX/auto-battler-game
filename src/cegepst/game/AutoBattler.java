@@ -2,14 +2,14 @@ package cegepst.game;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.Game;
-import cegepst.game.displays.DisplayType;
-import cegepst.game.displays.GameDisplay;
-import cegepst.game.displays.MainMenuDisplay;
-import cegepst.game.displays.OptionMenuDisplay;
+import cegepst.game.displays.*;
 import cegepst.game.resources.MusicHandler;
+
+import java.util.ArrayList;
 
 public class AutoBattler extends Game {
 
+    private ArrayList<Display> displays;
     private MusicHandler musicHandler;
     private MainMenuDisplay mainMenuDisplay;
     private OptionMenuDisplay optionMenuDisplay;
@@ -22,6 +22,12 @@ public class AutoBattler extends Game {
         mainMenuDisplay = new MainMenuDisplay(DisplayType.MAIN_MENU);
         optionMenuDisplay = new OptionMenuDisplay(DisplayType.OPTION_MENU);
         gameDisplay = new GameDisplay(DisplayType.GAME);
+
+        displays = new ArrayList<>();
+        displays.add(mainMenuDisplay);
+        displays.add(optionMenuDisplay);
+        displays.add(gameDisplay);
+
         currentId = DisplayType.MAIN_MENU.getId();
         musicHandler = new MusicHandler();
         musicHandler.play();
@@ -30,25 +36,23 @@ public class AutoBattler extends Game {
     @Override
     public void update() {
         musicHandler.setVolumeBasedOnGameSettings(GameSettings.MUSIC);
-        if (currentId == mainMenuDisplay.getId()) {
-            currentId = mainMenuDisplay.update();
-        } else if (currentId == optionMenuDisplay.getId()) {
-            currentId = optionMenuDisplay.update();
-        } else if (currentId == gameDisplay.getId()) {
-            currentId = gameDisplay.update();
-        } else {
-            stop();
+        for (Display display : displays) {
+            if (currentId == display.getId()) {
+                currentId = display.update();
+                if (currentId == DisplayType.QUIT.getId()) {
+                    stop();
+                }
+                break;
+            }
         }
     }
 
     @Override
     public void draw(Buffer buffer) {
-        if (currentId == mainMenuDisplay.getId()) {
-            mainMenuDisplay.draw(buffer);
-        } else if (currentId == optionMenuDisplay.getId()) {
-            optionMenuDisplay.draw(buffer);
-        } else if (currentId == gameDisplay.getId()) {
-            gameDisplay.draw(buffer);
+        for (Display display : displays) {
+            if (currentId == display.getId()) {
+                display.draw(buffer);
+            }
         }
     }
 

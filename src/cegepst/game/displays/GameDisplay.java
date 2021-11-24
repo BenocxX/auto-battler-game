@@ -29,6 +29,7 @@ public class GameDisplay extends Display {
         triggerAreas = initializer.getTriggerAreasForBuyStations(buyStations);
     }
 
+    @Override
     public int update() {
         resetStateData(gamePad);
         keysInputCheck();
@@ -41,6 +42,7 @@ public class GameDisplay extends Display {
         return currentId;
     }
 
+    @Override
     public void draw(Buffer buffer) {
         buffer.setFontSize(Font.PLAIN, 14);
         logicDraw(buffer);

@@ -1,5 +1,6 @@
 package cegepst.game.displays;
 
+import cegepst.engine.Buffer;
 import cegepst.game.GamePad;
 
 public abstract class Display {
@@ -13,6 +14,9 @@ public abstract class Display {
         alreadyInDisplay = false;
         currentId = displayType.getId();
     }
+
+    public abstract int update();
+    public abstract void draw(Buffer buffer);
 
     public int getId() {
         return displayType.getId();

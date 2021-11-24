@@ -24,6 +24,7 @@ public class MainMenuDisplay extends Display {
         initializeButtons();
     }
 
+    @Override
     public int update() {
         resetStateData(gamePad);
         quitKeyCheck();
@@ -36,6 +37,7 @@ public class MainMenuDisplay extends Display {
         return currentId;
     }
 
+    @Override
     public void draw(Buffer buffer) {
         buffer.setFontSize(Font.PLAIN, 20);
         for (RoundButton button : buttons) {
