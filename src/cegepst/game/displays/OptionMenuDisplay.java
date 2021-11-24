@@ -46,10 +46,6 @@ public class OptionMenuDisplay extends Display {
         }
     }
 
-    public void goToMainMenuDisplay() {
-        currentId = DisplayType.MAIN_MENU.getId();
-    }
-
     private void quitKeyCheck() {
         if (gamePad.isQuitTyped() || gamePad.isEscapeTyped()) {
             goToMainMenuDisplay();

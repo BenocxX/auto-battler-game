@@ -18,6 +18,22 @@ public abstract class Display {
         return displayType.getId();
     }
 
+    public void goToMainMenuDisplay() {
+        currentId = DisplayType.MAIN_MENU.getId();
+    }
+
+    public void goToOptionDisplay() {
+        currentId = DisplayType.OPTION_MENU.getId();
+    }
+
+    public void goToGameDisplay() {
+        currentId = DisplayType.GAME.getId();
+    }
+
+    public void quit() {
+        currentId = DisplayType.QUIT.getId();
+    }
+
     protected void resetStateData(GamePad gamePad) {
         if (!alreadyInDisplay) {
             currentId = displayType.getId();

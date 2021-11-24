@@ -123,18 +123,6 @@ public class MainMenuDisplay extends Display {
         }
     }
 
-    public void goToGameDisplay() {
-        currentId = DisplayType.GAME.getId();
-    }
-
-    public void goToOptionDisplay() {
-        currentId = DisplayType.OPTION_MENU.getId();
-    }
-
-    public void quit() {
-        currentId = DisplayType.QUIT.getId();
-    }
-
     private void initializeButtons() {
         buttons.add(ButtonFactory.playButton(this));
         buttons.add(ButtonFactory.optionButton(this));

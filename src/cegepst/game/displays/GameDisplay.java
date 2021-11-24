@@ -79,7 +79,7 @@ public class GameDisplay extends Display {
 
     private void quitKeyCheck() {
         if (gamePad.isQuitTyped() || gamePad.isEscapeTyped()) {
-            currentId = DisplayType.MAIN_MENU.getId();
+            goToMainMenuDisplay();
         }
     }
 
