@@ -19,8 +19,9 @@ public class GameDisplay {
     private ArrayList<BuyStation> buyStations;
     private ArrayList<TriggerArea> triggerAreas;
 
+    // TODO: duplicate
     private boolean alreadyInDisplay = false;
-    private int currentId = DisplayIds.GAME.getId();
+    private int currentId = DisplayType.GAME.getId();
 
     public GameDisplay() {
         gamePad = new GamePad();
@@ -32,16 +33,21 @@ public class GameDisplay {
     }
 
     public int update() {
+        // TODO: duplicate
         if (!alreadyInDisplay) {
             resetStateData();
         }
+
         keysInputCheck();
         player.update();
         for (TriggerArea triggerArea : triggerAreas) {
             triggerArea.triggerCheck(player);
         }
         gamePad.clearTypedKeys();
-        alreadyInDisplay = (currentId == DisplayIds.GAME.getId());
+
+        // TODO: duplicate
+        alreadyInDisplay = (currentId == DisplayType.GAME.getId());
+
         return currentId;
     }
 
@@ -50,8 +56,9 @@ public class GameDisplay {
         UIDraw(buffer);
     }
 
+    // TODO: duplicate
     public void resetStateData() {
-        currentId = DisplayIds.GAME.getId();
+        currentId = DisplayType.GAME.getId();
         gamePad.clearTypedKeys();
     }
 
@@ -84,7 +91,7 @@ public class GameDisplay {
 
     private void quitKeyCheck() {
         if (gamePad.isQuitTyped() || gamePad.isEscapeTyped()) {
-            currentId = DisplayIds.MAIN_MENU.getId();
+            currentId = DisplayType.MAIN_MENU.getId();
         }
     }
 

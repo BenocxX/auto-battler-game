@@ -19,7 +19,7 @@ public class AutoBattler extends Game {
     public void initialize() {
         GameSettings.isFullscreenMode = false;
         gameDisplay = new GameDisplay();
-        mainMenuDisplay = new MainMenuDisplay();
+        mainMenuDisplay = new MainMenuDisplay(DisplayType.MAIN_MENU);
         optionMenuDisplay = new OptionMenuDisplay();
         musicHandler = new MusicHandler();
         musicHandler.play();
@@ -28,25 +28,25 @@ public class AutoBattler extends Game {
     @Override
     public void update() {
         musicHandler.setVolumeBasedOnGameSettings(GameSettings.MUSIC);
-        if (currentId == DisplayIds.MAIN_MENU.getId()) {
+        if (currentId == DisplayType.MAIN_MENU.getId()) {
             currentId = mainMenuDisplay.update();
-        } else if (currentId == DisplayIds.GAME.getId()) {
+        } else if (currentId == DisplayType.GAME.getId()) {
             currentId = gameDisplay.update();
-        } else if (currentId == DisplayIds.OPTION_MENU.getId()) {
+        } else if (currentId == DisplayType.OPTION_MENU.getId()) {
             currentId = optionMenuDisplay.update();
-        } else if (currentId == DisplayIds.QUIT.getId()) {
+        } else if (currentId == DisplayType.QUIT.getId()) {
             stop();
         }
     }
 
     @Override
     public void draw(Buffer buffer) {
-        if (currentId == DisplayIds.MAIN_MENU.getId()) {
+        if (currentId == DisplayType.MAIN_MENU.getId()) {
             buffer.setFontSize(Font.PLAIN, 20);
             mainMenuDisplay.draw(buffer);
-        } else if (currentId == DisplayIds.OPTION_MENU.getId()) {
+        } else if (currentId == DisplayType.OPTION_MENU.getId()) {
             optionMenuDisplay.draw(buffer);
-        } else if (currentId == DisplayIds.GAME.getId()) {
+        } else if (currentId == DisplayType.GAME.getId()) {
             buffer.setFontSize(Font.PLAIN, 14);
             gameDisplay.draw(buffer);
         }

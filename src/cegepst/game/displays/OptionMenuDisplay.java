@@ -16,8 +16,9 @@ public class OptionMenuDisplay {
     private ArrayList<RoundButton> buttons;
     private int selectedButtonIndex;
 
+    // TODO: duplicate
     private boolean alreadyInDisplay = false;
-    private int currentId = DisplayIds.OPTION_MENU.getId();
+    private int currentId = DisplayType.OPTION_MENU.getId();
 
     public OptionMenuDisplay() {
         gamePad = new GamePad();
@@ -27,16 +28,21 @@ public class OptionMenuDisplay {
     }
 
     public int update() {
+        // TODO: duplicate
         if (!alreadyInDisplay) {
             resetStateData();
         }
+
         quitKeyCheck();
         enterKeyCheck();
         upDownKeyCheck();
         mouseHoverCheck();
         mouseClickCheck();
         gamePad.clearTypedKeys();
-        alreadyInDisplay = (currentId == DisplayIds.OPTION_MENU.getId());
+
+        // TODO: duplicate
+        alreadyInDisplay = (currentId == DisplayType.OPTION_MENU.getId());
+
         return currentId;
     }
 
@@ -48,11 +54,12 @@ public class OptionMenuDisplay {
     }
 
     public void goToMainMenuDisplay() {
-        currentId = DisplayIds.MAIN_MENU.getId();
+        currentId = DisplayType.MAIN_MENU.getId();
     }
 
+    // TODO: duplicate
     private void resetStateData() {
-        currentId = DisplayIds.OPTION_MENU.getId();
+        currentId = DisplayType.OPTION_MENU.getId();
         gamePad.clearTypedKeys();
     }
 

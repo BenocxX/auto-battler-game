@@ -9,17 +9,15 @@ import cegepst.game.entities.ButtonFactory;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class MainMenuDisplay {
+public class MainMenuDisplay extends Display {
 
     private GamePad gamePad;
     private MouseController mouse;
     private ArrayList<RoundButton> buttons;
     private int selectedButtonIndex;
 
-    private boolean alreadyInDisplay = false;
-    private int currentId = DisplayIds.MAIN_MENU.getId();
-
-    public MainMenuDisplay() {
+    public MainMenuDisplay(DisplayType displayType) {
+        super(displayType);
         gamePad = new GamePad();
         mouse = new MouseController();
         buttons = new ArrayList<>();
@@ -27,16 +25,14 @@ public class MainMenuDisplay {
     }
 
     public int update() {
-        if (!alreadyInDisplay) {
-            resetStateData();
-        }
+        super.resetStateData(gamePad);
         quitKeyCheck();
         enterKeyCheck();
         upDownKeyCheck();
         mouseHoverCheck();
         mouseClickCheck();
         gamePad.clearTypedKeys();
-        alreadyInDisplay = (currentId == DisplayIds.MAIN_MENU.getId());
+        super.updateAlreadyInDisplay();
         return currentId;
     }
 
@@ -45,11 +41,6 @@ public class MainMenuDisplay {
         for (RoundButton button : buttons) {
             button.draw(buffer);
         }
-    }
-
-    private void resetStateData() {
-        currentId = DisplayIds.MAIN_MENU.getId();
-        gamePad.clearTypedKeys();
     }
 
     private void quitKeyCheck() {
@@ -133,15 +124,15 @@ public class MainMenuDisplay {
     }
 
     public void goToGameDisplay() {
-        currentId = DisplayIds.GAME.getId();
+        currentId = DisplayType.GAME.getId();
     }
 
     public void goToOptionDisplay() {
-        currentId = DisplayIds.OPTION_MENU.getId();
+        currentId = DisplayType.OPTION_MENU.getId();
     }
 
     public void quit() {
-        currentId = DisplayIds.QUIT.getId();
+        currentId = DisplayType.QUIT.getId();
     }
 
     private void initializeButtons() {

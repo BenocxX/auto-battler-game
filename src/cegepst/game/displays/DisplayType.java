@@ -1,6 +1,6 @@
 package cegepst.game.displays;
 
-public enum DisplayIds {
+public enum DisplayType {
 
     QUIT(-1),
     MAIN_MENU(0),
@@ -9,7 +9,7 @@ public enum DisplayIds {
 
     private int id;
 
-    DisplayIds(int id) {
+    DisplayType(int id) {
         this.id = id;
     }
 
