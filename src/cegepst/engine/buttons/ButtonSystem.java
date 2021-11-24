@@ -19,8 +19,12 @@ public class ButtonSystem {
     }
 
     public void update() {
-        gamePadCheck();
-        mouseCheck();
+        if (gamePad != null) {
+            gamePadCheck();
+        }
+        if (mouse != null) {
+            mouseCheck();
+        }
     }
 
     public void draw(Buffer buffer) {
