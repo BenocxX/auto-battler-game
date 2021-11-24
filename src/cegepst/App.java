@@ -1,6 +1,6 @@
 package cegepst;
 
-import cegepst.game.displays.AutoBattler;
+import cegepst.game.AutoBattler;
 
 public class App {
 

@@ -1,8 +1,12 @@
-package cegepst.game.displays;
+package cegepst.game;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.Game;
 import cegepst.game.GameSettings;
+import cegepst.game.displays.DisplayType;
+import cegepst.game.displays.GameDisplay;
+import cegepst.game.displays.MainMenuDisplay;
+import cegepst.game.displays.OptionMenuDisplay;
 import cegepst.game.resources.MusicHandler;
 
 import java.awt.*;
