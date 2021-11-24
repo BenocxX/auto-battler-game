@@ -11,23 +11,12 @@ public class AutoBattler extends Game {
 
     private ArrayList<Display> displays;
     private MusicHandler musicHandler;
-    private MainMenuDisplay mainMenuDisplay;
-    private OptionMenuDisplay optionMenuDisplay;
-    private GameDisplay gameDisplay;
     private int currentId;
 
     @Override
     public void initialize() {
         GameSettings.isFullscreenMode = false;
-        mainMenuDisplay = new MainMenuDisplay(DisplayType.MAIN_MENU);
-        optionMenuDisplay = new OptionMenuDisplay(DisplayType.OPTION_MENU);
-        gameDisplay = new GameDisplay(DisplayType.GAME);
-
-        displays = new ArrayList<>();
-        displays.add(mainMenuDisplay);
-        displays.add(optionMenuDisplay);
-        displays.add(gameDisplay);
-
+        initializeDisplays();
         currentId = DisplayType.MAIN_MENU.getId();
         musicHandler = new MusicHandler();
         musicHandler.play();
@@ -59,5 +48,12 @@ public class AutoBattler extends Game {
     @Override
     public void conclude() {
         musicHandler.stop();
+    }
+
+    private void initializeDisplays() {
+        displays = new ArrayList<>();
+        displays.add(new MainMenuDisplay(DisplayType.MAIN_MENU));
+        displays.add(new OptionMenuDisplay(DisplayType.OPTION_MENU));
+        displays.add(new GameDisplay(DisplayType.GAME));
     }
 }
