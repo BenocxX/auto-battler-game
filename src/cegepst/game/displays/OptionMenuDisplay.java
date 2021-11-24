@@ -111,7 +111,6 @@ public class OptionMenuDisplay {
         for (RoundButton button : buttons) {
             button.checkIfHovered(mouse.getMousePosition());
             if (button.isHovered()) {
-                // TODO: button.isSelected(false);
                 buttons.get(selectedButtonIndex).isSelected(false);
             }
         }
