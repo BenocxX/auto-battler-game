@@ -30,17 +30,14 @@ public class GameDisplay extends Display {
     }
 
     public int update() {
-        super.resetStateData(gamePad);
-
+        resetStateData(gamePad);
         keysInputCheck();
         player.update();
         for (TriggerArea triggerArea : triggerAreas) {
             triggerArea.triggerCheck(player);
         }
         gamePad.clearTypedKeys();
-
-        super.updateAlreadyInDisplay();
-
+        updateAlreadyInDisplay();
         return currentId;
     }
 

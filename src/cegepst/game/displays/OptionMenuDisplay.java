@@ -25,17 +25,14 @@ public class OptionMenuDisplay extends Display {
     }
 
     public int update() {
-        super.resetStateData(gamePad);
-
+        resetStateData(gamePad);
         quitKeyCheck();
         enterKeyCheck();
         upDownKeyCheck();
         mouseHoverCheck();
         mouseClickCheck();
         gamePad.clearTypedKeys();
-
-        super.updateAlreadyInDisplay();
-
+        updateAlreadyInDisplay();
         return currentId;
     }
 
