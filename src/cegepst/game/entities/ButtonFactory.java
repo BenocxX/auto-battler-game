@@ -2,7 +2,7 @@ package cegepst.game.entities;
 
 import cegepst.engine.buttons.CustomEvent;
 import cegepst.engine.buttons.RoundButton;
-import cegepst.game.AutoBattlerMenu;
+import cegepst.game.displays.AutoBattlerMenu;
 import cegepst.game.GameSettings;
 
 public class ButtonFactory {

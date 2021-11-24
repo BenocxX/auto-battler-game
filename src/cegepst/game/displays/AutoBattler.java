@@ -1,7 +1,8 @@
-package cegepst.game;
+package cegepst.game.displays;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.Game;
+import cegepst.game.GameSettings;
 import cegepst.game.resources.MusicHandler;
 
 import java.awt.*;

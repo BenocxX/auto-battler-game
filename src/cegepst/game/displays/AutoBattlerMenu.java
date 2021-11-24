@@ -1,8 +1,9 @@
-package cegepst.game;
+package cegepst.game.displays;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.buttons.RoundButton;
 import cegepst.engine.controls.MouseController;
+import cegepst.game.GamePad;
 import cegepst.game.entities.ButtonFactory;
 
 import java.awt.*;

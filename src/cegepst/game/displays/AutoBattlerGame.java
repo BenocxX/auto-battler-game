@@ -1,7 +1,8 @@
-package cegepst.game;
+package cegepst.game.displays;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.RenderingEngine;
+import cegepst.game.*;
 import cegepst.game.entities.BuyStation;
 import cegepst.game.entities.Player;
 import cegepst.game.entities.TriggerArea;
