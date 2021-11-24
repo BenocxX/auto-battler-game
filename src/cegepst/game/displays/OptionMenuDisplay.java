@@ -9,18 +9,15 @@ import cegepst.game.entities.ButtonFactory;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class OptionMenuDisplay {
+public class OptionMenuDisplay extends Display {
 
     private GamePad gamePad;
     private MouseController mouse;
     private ArrayList<RoundButton> buttons;
     private int selectedButtonIndex;
 
-    // TODO: duplicate
-    private boolean alreadyInDisplay = false;
-    private int currentId = DisplayType.OPTION_MENU.getId();
-
-    public OptionMenuDisplay() {
+    public OptionMenuDisplay(DisplayType displayType) {
+        super(displayType);
         gamePad = new GamePad();
         mouse = new MouseController();
         buttons = new ArrayList<>();
@@ -28,10 +25,7 @@ public class OptionMenuDisplay {
     }
 
     public int update() {
-        // TODO: duplicate
-        if (!alreadyInDisplay) {
-            resetStateData();
-        }
+        super.resetStateData(gamePad);
 
         quitKeyCheck();
         enterKeyCheck();
@@ -40,8 +34,7 @@ public class OptionMenuDisplay {
         mouseClickCheck();
         gamePad.clearTypedKeys();
 
-        // TODO: duplicate
-        alreadyInDisplay = (currentId == DisplayType.OPTION_MENU.getId());
+        super.updateAlreadyInDisplay();
 
         return currentId;
     }
@@ -55,12 +48,6 @@ public class OptionMenuDisplay {
 
     public void goToMainMenuDisplay() {
         currentId = DisplayType.MAIN_MENU.getId();
-    }
-
-    // TODO: duplicate
-    private void resetStateData() {
-        currentId = DisplayType.OPTION_MENU.getId();
-        gamePad.clearTypedKeys();
     }
 
     private void quitKeyCheck() {

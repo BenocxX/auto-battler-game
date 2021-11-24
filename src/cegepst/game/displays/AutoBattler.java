@@ -20,7 +20,7 @@ public class AutoBattler extends Game {
         GameSettings.isFullscreenMode = false;
         gameDisplay = new GameDisplay();
         mainMenuDisplay = new MainMenuDisplay(DisplayType.MAIN_MENU);
-        optionMenuDisplay = new OptionMenuDisplay();
+        optionMenuDisplay = new OptionMenuDisplay(DisplayType.OPTION_MENU);
         musicHandler = new MusicHandler();
         musicHandler.play();
     }
