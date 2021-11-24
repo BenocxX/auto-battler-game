@@ -14,6 +14,10 @@ public abstract class Display {
         currentId = displayType.getId();
     }
 
+    public int getId() {
+        return displayType.getId();
+    }
+
     protected void resetStateData(GamePad gamePad) {
         if (!alreadyInDisplay) {
             currentId = displayType.getId();

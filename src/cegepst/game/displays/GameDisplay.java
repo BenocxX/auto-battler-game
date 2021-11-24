@@ -45,6 +45,7 @@ public class GameDisplay extends Display {
     }
 
     public void draw(Buffer buffer) {
+        buffer.setFontSize(Font.PLAIN, 14);
         logicDraw(buffer);
         UIDraw(buffer);
     }
