@@ -82,7 +82,7 @@ public class ButtonSystem {
     private void buttonClickCheck() {
         for (RoundButton button : buttons) {
             if (button.isClicked(mouse.getMousePosition())) {
-                button.customEvent();
+                button.callback();
                 break;
             }
         }
@@ -90,7 +90,7 @@ public class ButtonSystem {
 
     private void enterKeyCheck() {
         if (gamePad.isEnterTyped()) {
-            buttons.get(selectedButtonIndex).customEvent();
+            buttons.get(selectedButtonIndex).callback();
         }
     }
 

@@ -2,8 +2,6 @@ package cegepst.engine.buttons;
 
 import cegepst.engine.Buffer;
 
-import java.awt.*;
-
 public class RoundButton extends Button {
 
     private int arcWidth;
@@ -15,13 +13,13 @@ public class RoundButton extends Button {
      */
     public RoundButton(int x, int y, int width, int height,
                        int arcWidth, int arcHeight,
-                       String text, CustomEvent event) {
+                       String text, Callback event) {
         super(x, y, width, height, text, event);
         this.arcWidth = arcWidth;
         this.arcHeight = arcHeight;
     }
 
-    public RoundButton(int x, int y, int style, String text, CustomEvent event) {
+    public RoundButton(int x, int y, int style, String text, Callback event) {
         super(x, y, style, text, event);
         applyStyle(style);
     }

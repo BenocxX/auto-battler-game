@@ -14,20 +14,20 @@ public class Button extends StaticEntity {
     protected boolean isClicked;
     protected boolean isHovered;
     protected boolean isSelected;
-    protected CustomEvent customEvent;
+    protected Callback customEvent;
 
     /*
      * Lots of overloaded constructors because I want to let
      * the developer customize the button easily.
      */
-    public Button(int x, int y, int width, int height, String text, CustomEvent event) {
+    public Button(int x, int y, int width, int height, String text, Callback event) {
         teleport(x, y);
         setDimension(width, height);
         this.text = text;
         this.customEvent = event;
     }
 
-    public Button(int x, int y, int style, String text, CustomEvent event) {
+    public Button(int x, int y, int style, String text, Callback event) {
         teleport(x, y);
         applyStyle(style);
         this.text = text;
@@ -65,11 +65,11 @@ public class Button extends StaticEntity {
         return isClicked;
     }
 
-    public void customEvent() {
-        customEvent.event();
+    public void callback() {
+        customEvent.callback();
     }
 
-    public void setCustomEvent(CustomEvent customEvent) {
+    public void setCustomEvent(Callback customEvent) {
         this.customEvent = customEvent;
     }
 
