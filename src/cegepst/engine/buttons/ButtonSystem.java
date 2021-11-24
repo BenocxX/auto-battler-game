@@ -4,7 +4,6 @@ import cegepst.engine.Buffer;
 import cegepst.engine.controls.MouseController;
 import cegepst.game.GamePad;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class ButtonSystem {
