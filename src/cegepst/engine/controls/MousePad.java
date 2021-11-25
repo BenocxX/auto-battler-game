@@ -31,7 +31,6 @@ public class MousePad extends MouseAdapter {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        super.mouseReleased(e);
         isClicked = true;
     }
 }
