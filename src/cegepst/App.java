@@ -1,10 +1,11 @@
 package cegepst;
 
-import cegepst.game.AutoBattler;
+import cegepst.game.DisplaySelector;
 
 public class App {
 
     public static void main(String[] args) {
-        (new AutoBattler()).start();
+        DisplaySelector displaySelector = new DisplaySelector();
+        displaySelector.start();
     }
 }

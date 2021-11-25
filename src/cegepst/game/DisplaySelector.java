@@ -7,8 +7,7 @@ import cegepst.game.resources.MusicHandler;
 
 import java.util.ArrayList;
 
-// TODO: Rename to DisplaySelector
-public class AutoBattler extends Game {
+public class DisplaySelector extends Game {
 
     private ArrayList<Display> displays;
     private MusicHandler musicHandler;
