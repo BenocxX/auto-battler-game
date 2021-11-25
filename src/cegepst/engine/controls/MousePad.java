@@ -6,11 +6,11 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class MouseController extends MouseAdapter {
+public class MousePad extends MouseAdapter {
 
     private boolean isClicked;
 
-    public MouseController() {
+    public MousePad() {
         RenderingEngine.getInstance().addMouseListener(this);
     }
 

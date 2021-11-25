@@ -1,7 +1,7 @@
 package cegepst.engine.buttons;
 
 import cegepst.engine.Buffer;
-import cegepst.engine.controls.MouseController;
+import cegepst.engine.controls.MousePad;
 import cegepst.game.GamePad;
 
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class ButtonSystem {
 
     private GamePad gamePad;
-    private MouseController mouse;
+    private MousePad mouse;
     private ArrayList<RoundButton> buttons;
     private int selectedButtonIndex;
 
@@ -37,7 +37,7 @@ public class ButtonSystem {
         this.gamePad = gamePad;
     }
 
-    public void addMouseDevice(MouseController mouse) {
+    public void addMouseDevice(MousePad mouse) {
         this.mouse = mouse;
     }
 

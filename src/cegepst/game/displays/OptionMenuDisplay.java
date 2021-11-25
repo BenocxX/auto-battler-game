@@ -2,7 +2,7 @@ package cegepst.game.displays;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.buttons.ButtonSystem;
-import cegepst.engine.controls.MouseController;
+import cegepst.engine.controls.MousePad;
 import cegepst.game.GamePad;
 import cegepst.game.entities.ButtonFactory;
 
@@ -11,13 +11,13 @@ import java.awt.*;
 public class OptionMenuDisplay extends Display {
 
     private GamePad gamePad;
-    private MouseController mouse;
+    private MousePad mousePad;
     private ButtonSystem buttonSystem;
 
     public OptionMenuDisplay(DisplayType displayType) {
         super(displayType);
         gamePad = new GamePad();
-        mouse = new MouseController();
+        mousePad = new MousePad();
         initializeButtonSystem();
     }
 
@@ -41,7 +41,7 @@ public class OptionMenuDisplay extends Display {
         if (!alreadyInDisplay) {
             currentId = displayType.getId();
             gamePad.clearTypedKeys();
-            mouse.resetIsClicked();
+            mousePad.resetIsClicked();
         }
     }
 
@@ -54,7 +54,7 @@ public class OptionMenuDisplay extends Display {
     private void initializeButtonSystem() {
         buttonSystem = new ButtonSystem();
         buttonSystem.addGamePadDevice(gamePad);
-        buttonSystem.addMouseDevice(mouse);
+        buttonSystem.addMouseDevice(mousePad);
         buttonSystem.addButton(ButtonFactory.soundButton());
         buttonSystem.addButton(ButtonFactory.musicButton());
         buttonSystem.addButton(ButtonFactory.debugButton());
