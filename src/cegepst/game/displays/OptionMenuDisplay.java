@@ -53,8 +53,8 @@ public class OptionMenuDisplay extends Display {
 
     private void initializeButtonSystem() {
         buttonSystem = new ButtonSystem();
-        buttonSystem.addGamePad(gamePad);
-        buttonSystem.addMouse(mouse);
+        buttonSystem.addGamePadDevice(gamePad);
+        buttonSystem.addMouseDevice(mouse);
         buttonSystem.addButton(ButtonFactory.soundButton());
         buttonSystem.addButton(ButtonFactory.musicButton());
         buttonSystem.addButton(ButtonFactory.debugButton());

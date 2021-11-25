@@ -33,11 +33,11 @@ public class ButtonSystem {
         }
     }
 
-    public void addGamePad(GamePad gamePad) {
+    public void addGamePadDevice(GamePad gamePad) {
         this.gamePad = gamePad;
     }
 
-    public void addMouse(MouseController mouse) {
+    public void addMouseDevice(MouseController mouse) {
         this.mouse = mouse;
     }
 
