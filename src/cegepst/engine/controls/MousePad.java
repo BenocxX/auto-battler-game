@@ -30,13 +30,8 @@ public class MousePad extends MouseAdapter {
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
-        super.mousePressed(e);
-    }
-
-    @Override
     public void mouseReleased(MouseEvent e) {
-        isClicked = true;
         super.mouseReleased(e);
+        isClicked = true;
     }
 }
