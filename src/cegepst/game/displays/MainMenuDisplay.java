@@ -53,7 +53,6 @@ public class MainMenuDisplay extends Display {
 
     private void initializeButtonSystem() {
         buttonSystem = new ButtonSystem();
-        // TODO: Rename to addGamePadDevice & addMouseDevice
         buttonSystem.addGamePadDevice(gamePad);
         buttonSystem.addMouseDevice(mouse);
         buttonSystem.addButton(ButtonFactory.playButton(this));
