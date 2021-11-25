@@ -25,15 +25,7 @@ public class DisplaySelector extends Game {
     @Override
     public void update() {
         musicHandler.setVolumeBasedOnGameSettings(GameSettings.MUSIC);
-        for (Display display : displays) {
-            if (currentId == display.getId()) {
-                currentId = display.update();
-                if (currentId == DisplayType.QUIT.getId()) {
-                    stop();
-                }
-                break;
-            }
-        }
+        updateDisplay();
     }
 
     @Override
@@ -48,6 +40,22 @@ public class DisplaySelector extends Game {
     @Override
     public void conclude() {
         musicHandler.stop();
+    }
+
+    private void updateDisplay() {
+        for (Display display : displays) {
+            if (currentId == display.getId()) {
+                currentId = display.update();
+                quitCheck();
+                break;
+            }
+        }
+    }
+
+    private void quitCheck() {
+        if (currentId == DisplayType.QUIT.getId()) {
+            stop();
+        }
     }
 
     private void initializeDisplays() {
