@@ -22,7 +22,6 @@ public class GameDisplay extends Display {
     public GameDisplay(DisplayType displayType) {
         super(displayType);
         gamePad = new GamePad();
-        setGamePad(gamePad);
         player = new Player(gamePad);
         world = new World();
         initializer = new Initializer();
@@ -48,6 +47,13 @@ public class GameDisplay extends Display {
         buffer.setFontSize(Font.PLAIN, 14);
         logicDraw(buffer);
         UIDraw(buffer);
+    }
+
+    private void resetStateData() {
+        if (!alreadyInDisplay) {
+            currentId = displayType.getId();
+            gamePad.clearTypedKeys();
+        }
     }
 
     private void logicDraw(Buffer buffer) {

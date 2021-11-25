@@ -18,8 +18,6 @@ public class OptionMenuDisplay extends Display {
         super(displayType);
         gamePad = new GamePad();
         mouse = new MouseController();
-        setGamePad(gamePad);
-        setMouse(mouse);
         initializeButtonSystem();
     }
 
@@ -37,6 +35,14 @@ public class OptionMenuDisplay extends Display {
     public void draw(Buffer buffer) {
         buffer.setFontSize(Font.PLAIN, 20);
         buttonSystem.draw(buffer);
+    }
+
+    private void resetStateData() {
+        if (!alreadyInDisplay) {
+            currentId = displayType.getId();
+            gamePad.clearTypedKeys();
+            mouse.resetIsClicked();
+        }
     }
 
     private void quitKeyCheck() {

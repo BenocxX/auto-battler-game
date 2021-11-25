@@ -18,8 +18,6 @@ public class MainMenuDisplay extends Display {
         super(displayType);
         gamePad = new GamePad();
         mouse = new MouseController();
-        setGamePad(gamePad);
-        setMouse(mouse);
         initializeButtonSystem();
     }
 
@@ -39,6 +37,14 @@ public class MainMenuDisplay extends Display {
         buttonSystem.draw(buffer);
     }
 
+    private void resetStateData() {
+        if (!alreadyInDisplay) {
+            currentId = displayType.getId();
+            gamePad.clearTypedKeys();
+            mouse.resetIsClicked();
+        }
+    }
+
     private void quitKeyCheck() {
         if (gamePad.isQuitTyped() || gamePad.isEscapeTyped()) {
             quit();
@@ -47,6 +53,7 @@ public class MainMenuDisplay extends Display {
 
     private void initializeButtonSystem() {
         buttonSystem = new ButtonSystem();
+        // TODO: Rename to addGamePadDevice & addMouseDevice
         buttonSystem.addGamePad(gamePad);
         buttonSystem.addMouse(mouse);
         buttonSystem.addButton(ButtonFactory.playButton(this));
