@@ -1,4 +1,4 @@
-package cegepst.game;
+package cegepst.game.entities;
 
 import cegepst.engine.resources.images.SpriteHandler;
 import cegepst.game.resources.Sprite;

@@ -22,6 +22,7 @@ public class GameDisplay extends Display {
     public GameDisplay(DisplayType displayType) {
         super(displayType);
         gamePad = new GamePad();
+        setGamePad(gamePad);
         player = new Player(gamePad);
         world = new World();
         initializer = new Initializer();
@@ -31,7 +32,7 @@ public class GameDisplay extends Display {
 
     @Override
     public int update() {
-        resetStateData(gamePad);
+        resetStateData();
         keysInputCheck();
         player.update();
         for (TriggerArea triggerArea : triggerAreas) {

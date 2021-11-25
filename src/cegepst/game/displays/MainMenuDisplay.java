@@ -2,6 +2,8 @@ package cegepst.game.displays;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.buttons.ButtonSystem;
+import cegepst.engine.buttons.Callback;
+import cegepst.engine.buttons.RoundButton;
 import cegepst.engine.controls.MouseController;
 import cegepst.game.GamePad;
 import cegepst.game.entities.ButtonFactory;
@@ -18,12 +20,14 @@ public class MainMenuDisplay extends Display {
         super(displayType);
         gamePad = new GamePad();
         mouse = new MouseController();
+        setGamePad(gamePad);
+        setMouse(mouse);
         initializeButtonSystem();
     }
 
     @Override
     public int update() {
-        resetStateData(gamePad);
+        resetStateData();
         quitKeyCheck();
         buttonSystem.update();
         gamePad.clearTypedKeys();

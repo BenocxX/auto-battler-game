@@ -18,12 +18,14 @@ public class OptionMenuDisplay extends Display {
         super(displayType);
         gamePad = new GamePad();
         mouse = new MouseController();
+        setGamePad(gamePad);
+        setMouse(mouse);
         initializeButtonSystem();
     }
 
     @Override
     public int update() {
-        resetStateData(gamePad);
+        resetStateData();
         quitKeyCheck();
         buttonSystem.update();
         gamePad.clearTypedKeys();

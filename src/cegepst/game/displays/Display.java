@@ -1,13 +1,16 @@
 package cegepst.game.displays;
 
 import cegepst.engine.Buffer;
+import cegepst.engine.controls.MouseController;
 import cegepst.game.GamePad;
 
 public abstract class Display {
 
-    private boolean alreadyInDisplay;
+    private GamePad gamePad;
+    private MouseController mouse;
     private DisplayType displayType;
     protected int currentId;
+    private boolean alreadyInDisplay;
 
     public Display(DisplayType displayType) {
         this.displayType = displayType;
@@ -38,14 +41,27 @@ public abstract class Display {
         currentId = DisplayType.QUIT.getId();
     }
 
-    protected void resetStateData(GamePad gamePad) {
+    protected void resetStateData() {
         if (!alreadyInDisplay) {
             currentId = displayType.getId();
-            gamePad.clearTypedKeys();
+            if (gamePad != null) {
+                gamePad.clearTypedKeys();
+            }
+            if (mouse != null) {
+                mouse.resetIsClicked();
+            }
         }
     }
 
     protected void updateAlreadyInDisplay() {
         alreadyInDisplay = (currentId == displayType.getId());
+    }
+
+    protected void setGamePad(GamePad gamePad) {
+        this.gamePad = gamePad;
+    }
+
+    protected void setMouse(MouseController mouse) {
+        this.mouse = mouse;
     }
 }
