@@ -14,6 +14,7 @@ public class Item extends StaticEntity {
         isBought = false;
     }
 
+    // Turn to abstract method
     @Override
     public void draw(Buffer buffer) {
 
