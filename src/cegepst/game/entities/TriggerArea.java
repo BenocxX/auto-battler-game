@@ -21,16 +21,10 @@ public class TriggerArea extends StaticEntity {
 
     public void triggerCheck(StaticEntity triggerer) {
         if (intersectWith(triggerer)) {
-            EventSystem.getInstance().onTriggerAreaTriggered(id);
-            if (!isTriggered) {
-                EventSystem.getInstance().onTriggerAreaEnter(id);
-                isTriggered = true;
-            }
+            triggerEnterEventCheck();
+            triggeringEventCheck();
         } else {
-            if (isTriggered) {
-                EventSystem.getInstance().onTriggerAreaLeave(id);
-                isTriggered = false;
-            }
+            triggerLeaveEventCheck();
         }
     }
 
@@ -38,6 +32,26 @@ public class TriggerArea extends StaticEntity {
     public void draw(Buffer buffer) {
         if (GameSettings.DEBUG_MODE) {
             buffer.drawRectangle(x, y, width, height, new Color(255, 0, 0, 100));
+        }
+    }
+
+    private void triggerEnterEventCheck() {
+        if (!isTriggered) {
+            EventSystem.getInstance().onTriggerAreaEnter(id);
+            isTriggered = true;
+        }
+    }
+
+    private void triggeringEventCheck() {
+        if (isTriggered) {
+            EventSystem.getInstance().onTriggerAreaTriggered(id);
+        }
+    }
+
+    private void triggerLeaveEventCheck() {
+        if (isTriggered) {
+            EventSystem.getInstance().onTriggerAreaLeave(id);
+            isTriggered = false;
         }
     }
 }
