@@ -4,7 +4,7 @@ import cegepst.engine.Buffer;
 import cegepst.engine.entities.StaticEntity;
 import cegepst.game.eventsystem.EventSystem;
 
-public class Item extends StaticEntity {
+public abstract class Item extends StaticEntity {
 
     private int id;
     protected boolean isBought;
@@ -15,9 +15,7 @@ public class Item extends StaticEntity {
     }
 
     @Override
-    public void draw(Buffer buffer) {
-
-    }
+    public abstract void draw(Buffer buffer);
 
     public void buy() {
         isBought = true;
