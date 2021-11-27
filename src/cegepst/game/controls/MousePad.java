@@ -7,9 +7,9 @@ import java.awt.event.MouseEvent;
 
 public class MousePad extends MouseController {
 
-    private int leftClick = MouseEvent.BUTTON1;
-    private int middleClick = MouseEvent.BUTTON2;
-    private int rightClick = MouseEvent.BUTTON3;
+    private final int leftClick = MouseEvent.BUTTON1;
+    private final int middleClick = MouseEvent.BUTTON2;
+    private final int rightClick = MouseEvent.BUTTON3;
 
     public MousePad() {
         RenderingEngine.getInstance().addMouseListener(this);
