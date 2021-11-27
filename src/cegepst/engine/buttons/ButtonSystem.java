@@ -9,10 +9,10 @@ import java.util.ArrayList;
 
 public class ButtonSystem {
 
-    private GamePad gamePad;
     private MousePad mousePad;
     private ArrayList<RoundButton> buttons;
     private LoopingIndex loopingIndex;
+    private ButtonKeyboardNavigation keyboardNavigation;
 
     public ButtonSystem() {
         buttons = new ArrayList<>();
@@ -20,8 +20,8 @@ public class ButtonSystem {
     }
 
     public void update() {
-        if (gamePad != null) {
-            gamePadCheck();
+        if (keyboardNavigation != null) {
+            keyboardNavigation.inputCheck();
         }
         if (mousePad != null) {
             mouseCheck();
@@ -35,7 +35,7 @@ public class ButtonSystem {
     }
 
     public void addGamePadDevice(GamePad gamePad) {
-        this.gamePad = gamePad;
+        keyboardNavigation = new ButtonKeyboardNavigation(gamePad);
     }
 
     public void addMouseDevice(MousePad mousePad) {
@@ -44,20 +44,18 @@ public class ButtonSystem {
 
     public void addButton(RoundButton button) {
         buttons.add(button);
+        keyboardNavigation.setButtons(buttons);
         loopingIndex.setMaxIndex(buttons.size() - 1);
     }
 
     public void removeButton(RoundButton button) {
         buttons.remove(button);
+        keyboardNavigation.setButtons(buttons);
+        loopingIndex.setMaxIndex(buttons.size() - 1);
     }
 
     public RoundButton getButton(int index) {
         return buttons.get(index);
-    }
-
-    private void gamePadCheck() {
-        enterKeyCheck();
-        arrowKeyCheck();
     }
 
     private void mouseCheck() {
@@ -85,35 +83,6 @@ public class ButtonSystem {
             if (button.isClicked(mousePad.getPosition())) {
                 button.callback();
                 break;
-            }
-        }
-    }
-
-    private void enterKeyCheck() {
-        if (gamePad.isEnterTyped()) {
-            buttons.get(loopingIndex.getIndex()).callback();
-        }
-    }
-
-    private void arrowKeyCheck() {
-        upArrowCheck();
-        downArrowCheck();
-    }
-
-    private void upArrowCheck() {
-        if (gamePad.isUpTyped()) {
-            loopingIndex.decrement();
-            for (RoundButton button : buttons) {
-                button.isSelected(button == buttons.get(loopingIndex.getIndex()));
-            }
-        }
-    }
-
-    private void downArrowCheck() {
-        if (gamePad.isDownTyped()) {
-            loopingIndex.increment();
-            for (RoundButton button : buttons) {
-                button.isSelected(button == buttons.get(loopingIndex.getIndex()));
             }
         }
     }
