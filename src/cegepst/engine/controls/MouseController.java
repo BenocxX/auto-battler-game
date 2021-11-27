@@ -32,10 +32,10 @@ public abstract class MouseController extends MouseAdapter {
     }
 
     protected Point getMousePositionRelativeToScreen() {
-        Point mousePositionRelativeToScreen = MouseInfo.getPointerInfo().getLocation();
+        Point mousePosition = MouseInfo.getPointerInfo().getLocation();
         Point locationOfJPanelOnScreen = RenderingEngine.getInstance().getLocationOnScreen();
-        return new Point(mousePositionRelativeToScreen.x - locationOfJPanelOnScreen.x,
-                mousePositionRelativeToScreen.y - locationOfJPanelOnScreen.y);
+        return new Point(mousePosition.x - locationOfJPanelOnScreen.x,
+                mousePosition.y - locationOfJPanelOnScreen.y);
     }
 
     @Override
