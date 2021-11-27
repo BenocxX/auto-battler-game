@@ -65,7 +65,7 @@ public class ButtonSystem {
 
     private void mouseHoverCheck() {
         for (RoundButton button : buttons) {
-            button.checkIfHovered(mousePad.getMousePosition());
+            button.checkIfHovered(mousePad.getPosition());
             if (button.isHovered()) {
                 buttons.get(selectedButtonIndex).isSelected(false);
             }
@@ -80,7 +80,7 @@ public class ButtonSystem {
 
     private void buttonClickCheck() {
         for (RoundButton button : buttons) {
-            if (button.isClicked(mousePad.getMousePosition())) {
+            if (button.isClicked(mousePad.getPosition())) {
                 button.callback();
                 break;
             }

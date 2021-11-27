@@ -3,6 +3,7 @@ package cegepst.game.controls;
 import cegepst.engine.RenderingEngine;
 import cegepst.engine.controls.MouseController;
 
+import java.awt.*;
 import java.awt.event.MouseEvent;
 
 public class MousePad extends MouseController {
@@ -18,6 +19,10 @@ public class MousePad extends MouseController {
                 middleClick,
                 rightClick
         });
+    }
+
+    public Point getPosition() {
+        return getMousePositionRelativeToScreen();
     }
 
     public boolean isLeftClicked() {

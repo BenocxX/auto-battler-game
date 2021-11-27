@@ -17,25 +17,6 @@ public abstract class MouseController extends MouseAdapter {
         RenderingEngine.getInstance().addMouseListener(this);
     }
 
-    public Point getMousePosition() {
-        Point mousePositionRelativeToScreen = MouseInfo.getPointerInfo().getLocation();
-        Point locationOfJPanelOnScreen = RenderingEngine.getInstance().getLocationOnScreen();
-        return new Point(mousePositionRelativeToScreen.x - locationOfJPanelOnScreen.x,
-                mousePositionRelativeToScreen.y - locationOfJPanelOnScreen.y);
-    }
-
-    public void resetClickedButtons() {
-        clickedButtons.replaceAll((k, v) -> false);
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        int button = e.getButton();
-        if (clickedButtons.containsKey(button)) {
-            clickedButtons.put(button, true);
-        }
-    }
-
     protected boolean isClicked(int button) {
         return clickedButtons.get(button);
     }
@@ -48,5 +29,24 @@ public abstract class MouseController extends MouseAdapter {
 
     protected void bindButton(int button) {
         clickedButtons.put(button, false);
+    }
+
+    protected Point getMousePositionRelativeToScreen() {
+        Point mousePositionRelativeToScreen = MouseInfo.getPointerInfo().getLocation();
+        Point locationOfJPanelOnScreen = RenderingEngine.getInstance().getLocationOnScreen();
+        return new Point(mousePositionRelativeToScreen.x - locationOfJPanelOnScreen.x,
+                mousePositionRelativeToScreen.y - locationOfJPanelOnScreen.y);
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        int button = e.getButton();
+        if (clickedButtons.containsKey(button)) {
+            clickedButtons.put(button, true);
+        }
+    }
+
+    public void resetClickedButtons() {
+        clickedButtons.replaceAll((k, v) -> false);
     }
 }
