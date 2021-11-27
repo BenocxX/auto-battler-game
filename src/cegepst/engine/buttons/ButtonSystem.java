@@ -1,6 +1,7 @@
 package cegepst.engine.buttons;
 
 import cegepst.engine.Buffer;
+import cegepst.engine.helpers.LoopingIndex;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
 
@@ -11,11 +12,11 @@ public class ButtonSystem {
     private GamePad gamePad;
     private MousePad mousePad;
     private ArrayList<RoundButton> buttons;
-    private int selectedButtonIndex;
+    private LoopingIndex loopingIndex;
 
     public ButtonSystem() {
         buttons = new ArrayList<>();
-        selectedButtonIndex = 0;
+        loopingIndex = new LoopingIndex();
     }
 
     public void update() {
@@ -43,6 +44,7 @@ public class ButtonSystem {
 
     public void addButton(RoundButton button) {
         buttons.add(button);
+        loopingIndex.setMaxIndex(buttons.size() - 1);
     }
 
     public void removeButton(RoundButton button) {
@@ -67,7 +69,7 @@ public class ButtonSystem {
         for (RoundButton button : buttons) {
             button.checkIfHovered(mousePad.getPosition());
             if (button.isHovered()) {
-                buttons.get(selectedButtonIndex).isSelected(false);
+                buttons.get(loopingIndex.getIndex()).isSelected(false);
             }
         }
     }
@@ -89,7 +91,7 @@ public class ButtonSystem {
 
     private void enterKeyCheck() {
         if (gamePad.isEnterTyped()) {
-            buttons.get(selectedButtonIndex).callback();
+            buttons.get(loopingIndex.getIndex()).callback();
         }
     }
 
@@ -100,35 +102,19 @@ public class ButtonSystem {
 
     private void upArrowCheck() {
         if (gamePad.isUpTyped()) {
-            decrementSelectedButtonIndex();
+            loopingIndex.decrement();
             for (RoundButton button : buttons) {
-                button.isSelected(button == buttons.get(selectedButtonIndex));
+                button.isSelected(button == buttons.get(loopingIndex.getIndex()));
             }
         }
     }
 
     private void downArrowCheck() {
         if (gamePad.isDownTyped()) {
-            incrementSelectedButtonIndex();
+            loopingIndex.increment();
             for (RoundButton button : buttons) {
-                button.isSelected(button == buttons.get(selectedButtonIndex));
+                button.isSelected(button == buttons.get(loopingIndex.getIndex()));
             }
-        }
-    }
-
-    private void decrementSelectedButtonIndex() {
-        if (selectedButtonIndex > 0) {
-            selectedButtonIndex--;
-        } else {
-            selectedButtonIndex = buttons.size() - 1;
-        }
-    }
-
-    private void incrementSelectedButtonIndex() {
-        if (selectedButtonIndex < buttons.size() - 1) {
-            selectedButtonIndex++;
-        } else {
-            selectedButtonIndex = 0;
         }
     }
 }
