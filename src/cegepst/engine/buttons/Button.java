@@ -73,19 +73,13 @@ public class Button extends StaticEntity {
         this.customEvent = customEvent;
     }
 
-    public void checkIfHovered(Point mousePosition) {
+    public boolean isHovered(Point mousePosition) {
         isHovered = getBounds().contains(mousePosition);
-        if (isHovered) {
-            isSelected = false;
-        }
+        return isHovered;
     }
 
     public void isSelected(boolean isSelected) {
         this.isSelected = isSelected;
-    }
-
-    public boolean isHovered() {
-        return isHovered;
     }
 
     protected void applyStyle(int style) {

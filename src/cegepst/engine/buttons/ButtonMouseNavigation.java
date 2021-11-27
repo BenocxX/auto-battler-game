@@ -23,11 +23,20 @@ public class ButtonMouseNavigation extends ButtonNavigationController {
 
     private void mouseHoverCheck() {
         for (RoundButton button : buttons) {
-            button.checkIfHovered(mousePad.getPosition());
-            if (button.isHovered()) {
-                buttons.get(loopingIndex.getIndex()).isSelected(false);
+            if (button.isHovered(mousePad.getPosition())) {
+                unselectLastCurrentButton();
+                selectHoveredButton(button);
             }
         }
+    }
+
+    private void unselectLastCurrentButton() {
+        buttons.get(loopingIndex.getIndex()).isSelected(false);
+    }
+
+    private void selectHoveredButton(RoundButton button) {
+        loopingIndex.setCurrentIndex(buttons.indexOf(button));
+        buttons.get(loopingIndex.getIndex()).isSelected(true);
     }
 
     private void mouseClickCheck() {
