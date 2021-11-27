@@ -5,16 +5,15 @@ import cegepst.game.controls.MousePad;
 
 import java.util.ArrayList;
 
-public class ButtonMouseNavigation {
+public class ButtonMouseNavigation extends ButtonNavigationController {
 
     private MousePad mousePad;
-    private ArrayList<RoundButton> buttons;
-    private LoopingIndex loopingIndex;
 
     public ButtonMouseNavigation(MousePad mousePad) {
         this.mousePad = mousePad;
     }
 
+    @Override
     public void inputCheck(ArrayList<RoundButton> buttons, LoopingIndex loopingIndex) {
         this.buttons = buttons;
         this.loopingIndex = loopingIndex;
