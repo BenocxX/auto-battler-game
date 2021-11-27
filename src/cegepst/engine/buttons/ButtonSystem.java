@@ -38,7 +38,7 @@ public class ButtonSystem {
         keyboardNavigation = new ButtonKeyboardNavigation(gamePad);
     }
 
-    public void addMouseDevice(MousePad mousePad) {
+    public void addMousePadDevice(MousePad mousePad) {
         mouseNavigation = new ButtonMouseNavigation(mousePad);
     }
 
