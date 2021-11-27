@@ -3,7 +3,7 @@ package cegepst.game.entities;
 import cegepst.engine.buttons.Callback;
 import cegepst.engine.buttons.RoundButton;
 import cegepst.game.displays.MainMenuDisplay;
-import cegepst.game.GameSettings;
+import cegepst.game.settings.GameSettings;
 import cegepst.game.displays.OptionMenuDisplay;
 
 public class ButtonFactory {

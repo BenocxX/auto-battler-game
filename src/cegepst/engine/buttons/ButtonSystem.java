@@ -2,7 +2,7 @@ package cegepst.engine.buttons;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.controls.MousePad;
-import cegepst.game.GamePad;
+import cegepst.game.controls.GamePad;
 
 import java.util.ArrayList;
 

@@ -2,10 +2,13 @@ package cegepst.game.displays;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.RenderingEngine;
-import cegepst.game.*;
+import cegepst.game.controls.GamePad;
 import cegepst.game.entities.BuyStation;
 import cegepst.game.entities.Player;
 import cegepst.game.entities.TriggerArea;
+import cegepst.game.helpers.Initializer;
+import cegepst.game.map.World;
+import cegepst.game.settings.GameSettings;
 
 import java.awt.*;
 import java.util.ArrayList;

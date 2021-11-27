@@ -3,7 +3,7 @@ package cegepst.game.displays;
 import cegepst.engine.Buffer;
 import cegepst.engine.buttons.ButtonSystem;
 import cegepst.engine.controls.MousePad;
-import cegepst.game.GamePad;
+import cegepst.game.controls.GamePad;
 import cegepst.game.entities.ButtonFactory;
 
 import java.awt.*;

@@ -1,6 +1,6 @@
 package cegepst.engine;
 
-import cegepst.game.GameSettings;
+import cegepst.game.settings.GameSettings;
 
 import javax.swing.*;
 import java.awt.*;

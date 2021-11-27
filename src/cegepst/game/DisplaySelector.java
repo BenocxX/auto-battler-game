@@ -4,6 +4,7 @@ import cegepst.engine.Buffer;
 import cegepst.engine.Game;
 import cegepst.game.displays.*;
 import cegepst.game.resources.MusicHandler;
+import cegepst.game.settings.GameSettings;
 
 import java.util.ArrayList;
 

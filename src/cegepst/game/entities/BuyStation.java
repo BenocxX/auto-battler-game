@@ -6,7 +6,7 @@ import cegepst.engine.RenderingEngine;
 import cegepst.engine.entities.MovableEntity;
 import cegepst.engine.helpers.RandomHandler;
 import cegepst.engine.resources.images.SpriteHandler;
-import cegepst.game.GameSettings;
+import cegepst.game.settings.GameSettings;
 import cegepst.game.resources.Sound;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.ItemBuyListener;

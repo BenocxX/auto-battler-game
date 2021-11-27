@@ -2,7 +2,7 @@ package cegepst.game.resources;
 
 import cegepst.engine.resources.sounds.ClipHandler;
 import cegepst.engine.resources.sounds.SoundPlayer;
-import cegepst.game.GameSettings;
+import cegepst.game.settings.GameSettings;
 
 public class MusicHandler {
 

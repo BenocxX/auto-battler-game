@@ -2,7 +2,7 @@ package cegepst.game.entities;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.entities.StaticEntity;
-import cegepst.game.GameSettings;
+import cegepst.game.settings.GameSettings;
 import cegepst.game.eventsystem.EventSystem;
 
 import java.awt.*;

@@ -2,7 +2,7 @@ package cegepst.engine.entities;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.CollidableRepository;
-import cegepst.game.GameSettings;
+import cegepst.game.settings.GameSettings;
 
 import java.awt.*;
 
