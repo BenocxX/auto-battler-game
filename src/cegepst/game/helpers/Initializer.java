@@ -1,4 +1,4 @@
-package cegepst.game;
+package cegepst.game.helpers;
 
 import cegepst.game.entities.BuyStation;
 import cegepst.game.entities.TriggerArea;

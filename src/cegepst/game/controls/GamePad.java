@@ -1,4 +1,4 @@
-package cegepst.game;
+package cegepst.game.controls;
 
 import cegepst.engine.RenderingEngine;
 import cegepst.engine.controls.MovementController;

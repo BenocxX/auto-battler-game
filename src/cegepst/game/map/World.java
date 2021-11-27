@@ -1,4 +1,4 @@
-package cegepst.game;
+package cegepst.game.map;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.RenderingEngine;
