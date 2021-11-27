@@ -9,10 +9,10 @@ import java.util.ArrayList;
 
 public class ButtonSystem {
 
-    private MousePad mousePad;
     private ArrayList<RoundButton> buttons;
     private LoopingIndex loopingIndex;
     private ButtonKeyboardNavigation keyboardNavigation;
+    private ButtonMouseNavigation mouseNavigation;
 
     public ButtonSystem() {
         buttons = new ArrayList<>();
@@ -21,10 +21,10 @@ public class ButtonSystem {
 
     public void update() {
         if (keyboardNavigation != null) {
-            keyboardNavigation.inputCheck();
+            keyboardNavigation.inputCheck(buttons, loopingIndex);
         }
-        if (mousePad != null) {
-            mouseCheck();
+        if (mouseNavigation != null) {
+            mouseNavigation.inputCheck(buttons, loopingIndex);
         }
     }
 
@@ -39,51 +39,20 @@ public class ButtonSystem {
     }
 
     public void addMouseDevice(MousePad mousePad) {
-        this.mousePad = mousePad;
+        mouseNavigation = new ButtonMouseNavigation(mousePad);
     }
 
     public void addButton(RoundButton button) {
         buttons.add(button);
-        keyboardNavigation.setButtons(buttons);
         loopingIndex.setMaxIndex(buttons.size() - 1);
     }
 
     public void removeButton(RoundButton button) {
         buttons.remove(button);
-        keyboardNavigation.setButtons(buttons);
         loopingIndex.setMaxIndex(buttons.size() - 1);
     }
 
     public RoundButton getButton(int index) {
         return buttons.get(index);
-    }
-
-    private void mouseCheck() {
-        mouseHoverCheck();
-        mouseClickCheck();
-    }
-
-    private void mouseHoverCheck() {
-        for (RoundButton button : buttons) {
-            button.checkIfHovered(mousePad.getPosition());
-            if (button.isHovered()) {
-                buttons.get(loopingIndex.getIndex()).isSelected(false);
-            }
-        }
-    }
-
-    private void mouseClickCheck() {
-        if (mousePad.isLeftClicked()) {
-            buttonClickCheck();
-        }
-    }
-
-    private void buttonClickCheck() {
-        for (RoundButton button : buttons) {
-            if (button.isClicked(mousePad.getPosition())) {
-                button.callback();
-                break;
-            }
-        }
     }
 }

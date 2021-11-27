@@ -8,20 +8,16 @@ import java.util.ArrayList;
 public class ButtonKeyboardNavigation {
 
     private GamePad gamePad;
-    private LoopingIndex loopingIndex;
     private ArrayList<RoundButton> buttons;
+    private LoopingIndex loopingIndex;
 
     public ButtonKeyboardNavigation(GamePad gamePad) {
         this.gamePad = gamePad;
-        loopingIndex = new LoopingIndex();
     }
 
-    public void setButtons(ArrayList<RoundButton> buttons) {
+    public void inputCheck(ArrayList<RoundButton> buttons, LoopingIndex loopingIndex) {
         this.buttons = buttons;
-        loopingIndex.setMaxIndex(buttons.size() - 1);
-    }
-
-    public void inputCheck() {
+        this.loopingIndex = loopingIndex;
         selectKeyCheck();
         navigationKeyCheck();
     }
