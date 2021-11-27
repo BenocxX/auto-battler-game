@@ -1,15 +1,15 @@
 package cegepst.engine.buttons;
 
 import cegepst.engine.Buffer;
-import cegepst.engine.controls.MousePad;
 import cegepst.game.controls.GamePad;
+import cegepst.game.controls.MousePad;
 
 import java.util.ArrayList;
 
 public class ButtonSystem {
 
     private GamePad gamePad;
-    private MousePad mouse;
+    private MousePad mousePad;
     private ArrayList<RoundButton> buttons;
     private int selectedButtonIndex;
 
@@ -22,7 +22,7 @@ public class ButtonSystem {
         if (gamePad != null) {
             gamePadCheck();
         }
-        if (mouse != null) {
+        if (mousePad != null) {
             mouseCheck();
         }
     }
@@ -37,8 +37,8 @@ public class ButtonSystem {
         this.gamePad = gamePad;
     }
 
-    public void addMouseDevice(MousePad mouse) {
-        this.mouse = mouse;
+    public void addMouseDevice(MousePad mousePad) {
+        this.mousePad = mousePad;
     }
 
     public void addButton(RoundButton button) {
@@ -65,7 +65,7 @@ public class ButtonSystem {
 
     private void mouseHoverCheck() {
         for (RoundButton button : buttons) {
-            button.checkIfHovered(mouse.getMousePosition());
+            button.checkIfHovered(mousePad.getMousePosition());
             if (button.isHovered()) {
                 buttons.get(selectedButtonIndex).isSelected(false);
             }
@@ -73,15 +73,14 @@ public class ButtonSystem {
     }
 
     private void mouseClickCheck() {
-        if (mouse.isClicked()) {
+        if (mousePad.isLeftClicked()) {
             buttonClickCheck();
         }
-        mouse.resetIsClicked();
     }
 
     private void buttonClickCheck() {
         for (RoundButton button : buttons) {
-            if (button.isClicked(mouse.getMousePosition())) {
+            if (button.isClicked(mousePad.getMousePosition())) {
                 button.callback();
                 break;
             }

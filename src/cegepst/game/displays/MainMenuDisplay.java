@@ -2,8 +2,9 @@ package cegepst.game.displays;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.buttons.ButtonSystem;
-import cegepst.engine.controls.MousePad;
+import cegepst.engine.controls.MouseController;
 import cegepst.game.controls.GamePad;
+import cegepst.game.controls.MousePad;
 import cegepst.game.entities.ButtonFactory;
 
 import java.awt.*;
@@ -27,6 +28,7 @@ public class MainMenuDisplay extends Display {
         quitKeyCheck();
         buttonSystem.update();
         gamePad.clearTypedKeys();
+        mousePad.resetClickedButtons();
         updateAlreadyInDisplay();
         return currentId;
     }
@@ -41,7 +43,7 @@ public class MainMenuDisplay extends Display {
         if (!alreadyInDisplay) {
             currentId = displayType.getId();
             gamePad.clearTypedKeys();
-            mousePad.resetIsClicked();
+            mousePad.resetClickedButtons();
         }
     }
 
