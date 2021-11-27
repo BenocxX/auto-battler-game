@@ -32,15 +32,11 @@ public class ButtonMouseNavigation extends ButtonNavigationController {
 
     private void mouseClickCheck() {
         if (mousePad.isLeftClicked()) {
-            buttonClickCheck();
-        }
-    }
-
-    private void buttonClickCheck() {
-        for (RoundButton button : buttons) {
-            if (button.isClicked(mousePad.getPosition())) {
-                button.callback();
-                break;
+            for (RoundButton button : buttons) {
+                if (button.isClicked(mousePad.getPosition())) {
+                    button.callback();
+                    return;
+                }
             }
         }
     }
