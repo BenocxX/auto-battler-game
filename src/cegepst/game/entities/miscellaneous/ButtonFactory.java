@@ -1,4 +1,4 @@
-package cegepst.game.entities;
+package cegepst.game.entities.miscellaneous;
 
 import cegepst.engine.menu.buttons.Callback;
 import cegepst.engine.menu.buttons.RoundButton;

@@ -4,7 +4,7 @@ import cegepst.engine.Buffer;
 import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
-import cegepst.game.entities.ButtonFactory;
+import cegepst.game.entities.miscellaneous.ButtonFactory;
 
 import java.awt.*;
 

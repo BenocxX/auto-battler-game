@@ -1,7 +1,7 @@
 package cegepst.game.helpers;
 
-import cegepst.game.entities.BuyStation;
-import cegepst.game.entities.TriggerArea;
+import cegepst.game.entities.shopPhase.BuyStation;
+import cegepst.game.entities.miscellaneous.TriggerArea;
 
 import java.util.ArrayList;
 
