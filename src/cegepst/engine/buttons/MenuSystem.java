@@ -7,14 +7,14 @@ import cegepst.game.controls.MousePad;
 
 import java.util.ArrayList;
 
-public class ButtonSystem {
+public class MenuSystem {
 
     private ArrayList<RoundButton> buttons;
     private LoopingIndex loopingIndex;
     private KeyboardNavigation keyboardNavigation;
     private MouseNavigation mouseNavigation;
 
-    public ButtonSystem() {
+    public MenuSystem() {
         buttons = new ArrayList<>();
         loopingIndex = new LoopingIndex();
     }

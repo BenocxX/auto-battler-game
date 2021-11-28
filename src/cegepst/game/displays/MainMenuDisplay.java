@@ -1,7 +1,7 @@
 package cegepst.game.displays;
 
 import cegepst.engine.Buffer;
-import cegepst.engine.buttons.ButtonSystem;
+import cegepst.engine.buttons.MenuSystem;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
 import cegepst.game.entities.ButtonFactory;
@@ -12,7 +12,7 @@ public class MainMenuDisplay extends Display {
 
     private GamePad gamePad;
     private MousePad mousePad;
-    private ButtonSystem buttonSystem;
+    private MenuSystem buttonSystem;
 
     public MainMenuDisplay(DisplayType displayType) {
         super(displayType);
@@ -53,7 +53,7 @@ public class MainMenuDisplay extends Display {
     }
 
     private void initializeButtonSystem() {
-        buttonSystem = new ButtonSystem();
+        buttonSystem = new MenuSystem();
         buttonSystem.addGamePadDevice(gamePad);
         buttonSystem.addMousePadDevice(mousePad);
         buttonSystem.addButton(ButtonFactory.playButton(this));
