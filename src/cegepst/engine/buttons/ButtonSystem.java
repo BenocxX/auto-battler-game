@@ -11,8 +11,8 @@ public class ButtonSystem {
 
     private ArrayList<RoundButton> buttons;
     private LoopingIndex loopingIndex;
-    private ButtonKeyboardNavigation keyboardNavigation;
-    private ButtonMouseNavigation mouseNavigation;
+    private KeyboardNavigation keyboardNavigation;
+    private MouseNavigation mouseNavigation;
 
     public ButtonSystem() {
         buttons = new ArrayList<>();
@@ -35,11 +35,11 @@ public class ButtonSystem {
     }
 
     public void addGamePadDevice(GamePad gamePad) {
-        keyboardNavigation = new ButtonKeyboardNavigation(gamePad);
+        keyboardNavigation = new KeyboardNavigation(gamePad);
     }
 
     public void addMousePadDevice(MousePad mousePad) {
-        mouseNavigation = new ButtonMouseNavigation(mousePad);
+        mouseNavigation = new MouseNavigation(mousePad);
     }
 
     public void addButton(RoundButton button) {

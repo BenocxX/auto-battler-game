@@ -5,11 +5,11 @@ import cegepst.game.controls.MousePad;
 
 import java.util.ArrayList;
 
-public class ButtonMouseNavigation extends ButtonNavigationController {
+public class MouseNavigation extends NavigationController {
 
     private MousePad mousePad;
 
-    public ButtonMouseNavigation(MousePad mousePad) {
+    public MouseNavigation(MousePad mousePad) {
         this.mousePad = mousePad;
     }
 

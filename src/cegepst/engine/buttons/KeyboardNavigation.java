@@ -5,11 +5,11 @@ import cegepst.game.controls.GamePad;
 
 import java.util.ArrayList;
 
-public class ButtonKeyboardNavigation extends ButtonNavigationController {
+public class KeyboardNavigation extends NavigationController {
 
     private GamePad gamePad;
 
-    public ButtonKeyboardNavigation(GamePad gamePad) {
+    public KeyboardNavigation(GamePad gamePad) {
         this.gamePad = gamePad;
     }
 
