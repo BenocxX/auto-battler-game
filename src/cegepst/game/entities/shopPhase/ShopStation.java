@@ -15,7 +15,7 @@ import cegepst.game.resources.Sprite;
 
 import java.awt.*;
 
-public class BuyStation extends MovableEntity implements TriggerAreaListener, ItemBuyListener {
+public class ShopStation extends MovableEntity implements TriggerAreaListener, ItemBuyListener {
 
     private Sound sound;
     private Image image;
@@ -24,7 +24,7 @@ public class BuyStation extends MovableEntity implements TriggerAreaListener, It
     private boolean hasItem;
     private int id;
 
-    public BuyStation(int x, int y, int id) {
+    public ShopStation(int x, int y, int id) {
         setDimension(70, 44);
         teleport(x, y);
         initializeSound();

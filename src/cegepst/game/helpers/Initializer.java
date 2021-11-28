@@ -1,26 +1,26 @@
 package cegepst.game.helpers;
 
-import cegepst.game.entities.shopPhase.BuyStation;
+import cegepst.game.entities.shopPhase.ShopStation;
 import cegepst.game.entities.miscellaneous.TriggerArea;
 
 import java.util.ArrayList;
 
 public class Initializer {
 
-    public ArrayList<BuyStation> getBuyStations() {
-        ArrayList<BuyStation> buyStations = new ArrayList<>();
-        buyStations.add(new BuyStation(300, 300, 1));
-        buyStations.add(new BuyStation(380, 300, 2));
-        buyStations.add(new BuyStation(460, 300, 3));
-        buyStations.add(new BuyStation(540, 300, 4));
-        return buyStations;
+    public ArrayList<ShopStation> getShopStations() {
+        ArrayList<ShopStation> shopStations = new ArrayList<>();
+        shopStations.add(new ShopStation(300, 300, 1));
+        shopStations.add(new ShopStation(380, 300, 2));
+        shopStations.add(new ShopStation(460, 300, 3));
+        shopStations.add(new ShopStation(540, 300, 4));
+        return shopStations;
     }
 
-    public ArrayList<TriggerArea> getTriggerAreasForBuyStations(ArrayList<BuyStation> buyStations) {
+    public ArrayList<TriggerArea> getTriggerAreasForShopStations(ArrayList<ShopStation> shopStations) {
         ArrayList<TriggerArea> triggerAreas = new ArrayList<>();
-        for (BuyStation buyStation : buyStations) {
-            triggerAreas.add(new TriggerArea(buyStation.getId(), buyStation.getX(),
-                    buyStation.getY() + buyStation.getHeight() + 10, buyStation.getWidth(), 50));
+        for (ShopStation shopStation : shopStations) {
+            triggerAreas.add(new TriggerArea(shopStation.getId(), shopStation.getX(),
+                    shopStation.getY() + shopStation.getHeight() + 10, shopStation.getWidth(), 50));
         }
         return triggerAreas;
     }

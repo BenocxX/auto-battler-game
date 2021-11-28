@@ -3,7 +3,7 @@ package cegepst.game.displays;
 import cegepst.engine.Buffer;
 import cegepst.engine.RenderingEngine;
 import cegepst.game.controls.GamePad;
-import cegepst.game.entities.shopPhase.BuyStation;
+import cegepst.game.entities.shopPhase.ShopStation;
 import cegepst.game.entities.Player;
 import cegepst.game.entities.miscellaneous.TriggerArea;
 import cegepst.game.helpers.Initializer;
@@ -19,7 +19,7 @@ public class GameDisplay extends Display {
     private Player player;
     private World world;
     private Initializer initializer;
-    private ArrayList<BuyStation> buyStations;
+    private ArrayList<ShopStation> shopStations;
     private ArrayList<TriggerArea> triggerAreas;
 
     public GameDisplay(DisplayType displayType) {
@@ -28,8 +28,8 @@ public class GameDisplay extends Display {
         player = new Player(gamePad);
         world = new World();
         initializer = new Initializer();
-        buyStations = initializer.getBuyStations();
-        triggerAreas = initializer.getTriggerAreasForBuyStations(buyStations);
+        shopStations = initializer.getShopStations();
+        triggerAreas = initializer.getTriggerAreasForShopStations(shopStations);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class GameDisplay extends Display {
 
     private void logicDraw(Buffer buffer) {
         world.draw(buffer);
-        for (BuyStation buyStation : buyStations) {
+        for (ShopStation buyStation : shopStations) {
             buyStation.draw(buffer);
         }
         for (TriggerArea triggerArea : triggerAreas) {
@@ -100,7 +100,7 @@ public class GameDisplay extends Display {
 
     private void useKeyCheck() {
         if (gamePad.isUseTyped()) {
-            for (BuyStation buyStation : buyStations) {
+            for (ShopStation buyStation : shopStations) {
                 if (buyStation.isSelected()) {
                     buyStation.buyItem();
                 }
