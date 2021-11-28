@@ -1,7 +1,7 @@
 package cegepst.game.displays;
 
 import cegepst.engine.Buffer;
-import cegepst.engine.buttons.MenuSystem;
+import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
 import cegepst.game.entities.ButtonFactory;
