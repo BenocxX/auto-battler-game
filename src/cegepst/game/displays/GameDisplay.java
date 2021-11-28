@@ -52,13 +52,6 @@ public class GameDisplay extends Display {
         UIDraw(buffer);
     }
 
-    private void resetStateData() {
-        if (!alreadyInDisplay) {
-            currentId = displayType.getId();
-            gamePad.clearTypedKeys();
-        }
-    }
-
     private void logicDraw(Buffer buffer) {
         world.draw(buffer);
         for (ShopStation buyStation : shopStations) {
@@ -76,6 +69,13 @@ public class GameDisplay extends Display {
             buffer.drawText("('D' to deactivate debug mode)", RenderingEngine.WIDTH - 200, 20, new Color(255, 255, 255));
         } else {
             buffer.drawText("('D' to activate debug mode)", RenderingEngine.WIDTH - 184, 20, new Color(255, 255, 255));
+        }
+    }
+
+    private void resetStateData() {
+        if (!alreadyInDisplay) {
+            currentId = displayType.getId();
+            gamePad.clearTypedKeys();
         }
     }
 
