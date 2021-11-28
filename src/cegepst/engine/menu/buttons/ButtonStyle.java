@@ -1,4 +1,4 @@
-package cegepst.engine.buttons;
+package cegepst.engine.menu.buttons;
 
 public class ButtonStyle {
 

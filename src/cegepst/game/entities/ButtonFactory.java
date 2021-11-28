@@ -1,7 +1,7 @@
 package cegepst.game.entities;
 
-import cegepst.engine.buttons.Callback;
-import cegepst.engine.buttons.RoundButton;
+import cegepst.engine.menu.buttons.Callback;
+import cegepst.engine.menu.buttons.RoundButton;
 import cegepst.game.displays.MainMenuDisplay;
 import cegepst.game.settings.GameSettings;
 import cegepst.game.displays.OptionMenuDisplay;

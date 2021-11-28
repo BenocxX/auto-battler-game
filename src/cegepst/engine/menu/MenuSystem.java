@@ -1,6 +1,7 @@
-package cegepst.engine.buttons;
+package cegepst.engine.menu;
 
 import cegepst.engine.Buffer;
+import cegepst.engine.menu.buttons.RoundButton;
 import cegepst.engine.helpers.LoopingIndex;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;

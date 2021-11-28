@@ -1,4 +1,4 @@
-package cegepst.engine.buttons;
+package cegepst.engine.menu.buttons;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.entities.StaticEntity;
