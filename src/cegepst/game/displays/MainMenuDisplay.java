@@ -12,7 +12,7 @@ public class MainMenuDisplay extends Display {
 
     private GamePad gamePad;
     private MousePad mousePad;
-    private MenuSystem buttonSystem;
+    private MenuSystem menuSystem;
 
     public MainMenuDisplay(DisplayType displayType) {
         super(displayType);
@@ -25,7 +25,7 @@ public class MainMenuDisplay extends Display {
     public int update() {
         resetStateData();
         quitKeyCheck();
-        buttonSystem.update();
+        menuSystem.update();
         gamePad.clearTypedKeys();
         mousePad.resetClickedButtons();
         updateAlreadyInDisplay();
@@ -35,7 +35,7 @@ public class MainMenuDisplay extends Display {
     @Override
     public void draw(Buffer buffer) {
         buffer.setFontSize(Font.PLAIN, 20);
-        buttonSystem.draw(buffer);
+        menuSystem.draw(buffer);
     }
 
     private void resetStateData() {
@@ -53,12 +53,12 @@ public class MainMenuDisplay extends Display {
     }
 
     private void initializeButtonSystem() {
-        buttonSystem = new MenuSystem();
-        buttonSystem.addGamePadDevice(gamePad);
-        buttonSystem.addMousePadDevice(mousePad);
-        buttonSystem.addButton(ButtonFactory.playButton(this));
-        buttonSystem.addButton(ButtonFactory.optionButton(this));
-        buttonSystem.addButton(ButtonFactory.quitButton(this));
-        buttonSystem.getButton(0).isSelected(true);
+        menuSystem = new MenuSystem();
+        menuSystem.addGamePadDevice(gamePad);
+        menuSystem.addMousePadDevice(mousePad);
+        menuSystem.addButton(ButtonFactory.playButton(this));
+        menuSystem.addButton(ButtonFactory.optionButton(this));
+        menuSystem.addButton(ButtonFactory.quitButton(this));
+        menuSystem.getButton(0).isSelected(true);
     }
 }
