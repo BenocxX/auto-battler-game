@@ -19,8 +19,11 @@ public class Initializer {
     public ArrayList<TriggerArea> getTriggerAreasForShopStations(ArrayList<ShopStation> shopStations) {
         ArrayList<TriggerArea> triggerAreas = new ArrayList<>();
         for (ShopStation shopStation : shopStations) {
-            triggerAreas.add(new TriggerArea(shopStation.getId(), shopStation.getX(),
-                    shopStation.getY() + shopStation.getHeight() + 10, shopStation.getWidth(), 50));
+            TriggerArea triggerArea = new TriggerArea(shopStation.getId(),
+                    shopStation.getWidth() / 2, 50);
+            triggerArea.teleport(CenteringMachine.centerHorizontally(shopStation.getHitBox(), triggerArea.getWidth()),
+                    shopStation.getY() + shopStation.getHeight() + 10);
+            triggerAreas.add(triggerArea);
         }
         return triggerAreas;
     }

@@ -19,6 +19,12 @@ public class TriggerArea extends StaticEntity {
         setDimension(width, height);
     }
 
+    public TriggerArea(int id, int width, int height) {
+        this.id = id;
+        isTriggered = false;
+        setDimension(width, height);
+    }
+
     public void triggerCheck(StaticEntity triggerer) {
         if (intersectWith(triggerer)) {
             triggerEnterEventCheck();
