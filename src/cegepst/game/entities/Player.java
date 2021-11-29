@@ -2,15 +2,19 @@ package cegepst.game.entities;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.CollidableRepository;
+import cegepst.engine.RenderingEngine;
 import cegepst.engine.controls.MovementController;
 import cegepst.engine.entities.ControllableEntity;
 import cegepst.engine.resources.images.Animator;
 import cegepst.game.settings.GameSettings;
 import cegepst.game.resources.Sprite;
 
+import java.awt.*;
+
 public class Player extends ControllableEntity {
 
     private Animator animator;
+    private int money;
 
     public Player(MovementController controller) {
         super(controller);
@@ -20,6 +24,8 @@ public class Player extends ControllableEntity {
         animator = new Animator(Sprite.PLAYER_SPRITE_SHEET.getBufferedImage(), 8);
         animator.loadAnimations(0, 128, width, height, 3);
         CollidableRepository.getInstance().registerEntity(this);
+
+        money = 10;
     }
 
     @Override
@@ -32,6 +38,7 @@ public class Player extends ControllableEntity {
     @Override
     public void draw(Buffer buffer) {
         buffer.drawImage(animator.getImage(getDirection()), x ,y);
+        buffer.drawText(money + " $", 10, RenderingEngine.HEIGHT - 10, Color.WHITE);
         if (hasMoved() && GameSettings.DEBUG_MODE) {
             drawHitBox(buffer);
         }
