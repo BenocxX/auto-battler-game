@@ -5,8 +5,7 @@ public enum DisplayType {
     QUIT(-1),
     MAIN_MENU(0),
     OPTION_MENU(1),
-    GAME(2),
-    PAUSE_MENU(3);
+    GAME(2);
 
     private int id;
 
