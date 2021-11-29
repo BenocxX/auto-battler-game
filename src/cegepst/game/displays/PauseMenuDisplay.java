@@ -8,13 +8,13 @@ import cegepst.game.entities.miscellaneous.ButtonFactory;
 
 import java.awt.*;
 
-public class OptionMenuDisplay extends Display {
+public class PauseMenuDisplay extends Display {
 
     private GamePad gamePad;
     private MousePad mousePad;
     private MenuSystem menuSystem;
 
-    public OptionMenuDisplay(DisplayType displayType) {
+    public PauseMenuDisplay(DisplayType displayType) {
         super(displayType);
         gamePad = new GamePad();
         mousePad = new MousePad();
@@ -48,7 +48,7 @@ public class OptionMenuDisplay extends Display {
 
     private void quitKeyCheck() {
         if (gamePad.isQuitTyped() || gamePad.isEscapeTyped()) {
-            goToMainMenuDisplay();
+            quit();
         }
     }
 
@@ -56,10 +56,9 @@ public class OptionMenuDisplay extends Display {
         menuSystem = new MenuSystem();
         menuSystem.addGamePadDevice(gamePad);
         menuSystem.addMousePadDevice(mousePad);
-        menuSystem.addButton(ButtonFactory.soundButton(200, 200));
-        menuSystem.addButton(ButtonFactory.musicButton(200, 260));
-        menuSystem.addButton(ButtonFactory.debugButton(200, 320));
-        menuSystem.addButton(ButtonFactory.backToMainMenuButton(this, 200, 380));
+        menuSystem.addButton(ButtonFactory.backToGameButton(this, 200, 200));
+        menuSystem.addButton(ButtonFactory.optionButton(this, 200, 260));
+        menuSystem.addButton(ButtonFactory.mainMenuButton(this, 200, 320));
         menuSystem.getButton(0).isSelected(true);
     }
 }
