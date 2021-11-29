@@ -14,7 +14,7 @@ public class OptionMenuDisplay extends Display {
     private MousePad mousePad;
     private MenuSystem menuSystem;
 
-    public OptionMenuDisplay(DisplayType displayType) {
+    public OptionMenuDisplay(DisplayType displayType, int parentDisplayId) {
         super(displayType);
         gamePad = new GamePad();
         mousePad = new MousePad();

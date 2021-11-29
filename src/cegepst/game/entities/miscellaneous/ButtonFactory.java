@@ -3,10 +3,7 @@ package cegepst.game.entities.miscellaneous;
 import cegepst.engine.menu.buttons.Callback;
 import cegepst.engine.menu.buttons.RoundButton;
 import cegepst.game.displays.Display;
-import cegepst.game.displays.MainMenuDisplay;
-import cegepst.game.displays.PauseMenuDisplay;
 import cegepst.game.settings.GameSettings;
-import cegepst.game.displays.OptionMenuDisplay;
 
 public class ButtonFactory {
 
@@ -91,27 +88,5 @@ public class ButtonFactory {
             }
         });
         return backButton;
-    }
-
-    public static RoundButton backToGameButton(Display menu, int x, int y) {
-        RoundButton backButton = new RoundButton(x, y, "Back");
-        backButton.setCustomEvent(new Callback() {
-            @Override
-            public void callback() {
-                menu.goToGameDisplay();
-            }
-        });
-        return backButton;
-    }
-
-    public static RoundButton mainMenuButton(Display currentDisplay, int x, int y) {
-        RoundButton mainMenuButton = new RoundButton(x, y, "Main menu");
-        mainMenuButton.setCustomEvent(new Callback() {
-            @Override
-            public void callback() {
-                currentDisplay.goToMainMenuDisplay();
-            }
-        });
-        return mainMenuButton;
     }
 }

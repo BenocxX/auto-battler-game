@@ -33,10 +33,6 @@ public abstract class Display {
         currentId = DisplayType.GAME.getId();
     }
 
-    public void goToPauseDisplay() {
-        currentId = DisplayType.PAUSE_MENU.getId();
-    }
-
     public void quit() {
         currentId = DisplayType.QUIT.getId();
     }
