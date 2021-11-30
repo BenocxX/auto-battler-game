@@ -9,15 +9,13 @@ import cegepst.engine.resources.images.Animator;
 import cegepst.game.entities.shopPhase.CreatureType;
 import cegepst.game.entities.shopPhase.Item;
 import cegepst.game.eventsystem.EventSystem;
-import cegepst.game.eventsystem.events.ButtonEventType;
-import cegepst.game.eventsystem.events.ButtonListener;
 import cegepst.game.eventsystem.events.MorphListener;
 import cegepst.game.settings.GameSettings;
 import cegepst.game.resources.Sprite;
 
 import java.awt.*;
 
-public class Player extends ControllableEntity implements ButtonListener, MorphListener {
+public class Player extends ControllableEntity implements MorphListener {
 
     private static final int INITIAL_MONEY = 500;
 
@@ -34,7 +32,6 @@ public class Player extends ControllableEntity implements ButtonListener, MorphL
         animator.loadAnimations(0, 128, width, height, 3);
         CollidableRepository.getInstance().registerEntity(this);
 
-        EventSystem.getInstance().addButtonListener(this);
         EventSystem.getInstance().addMorphListener(this);
         money = INITIAL_MONEY;
     }
@@ -58,13 +55,6 @@ public class Player extends ControllableEntity implements ButtonListener, MorphL
         buffer.drawText(money + " $", 20, RenderingEngine.HEIGHT - 70, Color.WHITE);
         if (hasMoved() && GameSettings.DEBUG_MODE) {
             drawHitBox(buffer);
-        }
-    }
-
-    @Override
-    public void onButtonClick(ButtonEventType eventType) {
-        if (ButtonEventType.MONEY_CHEAT == eventType) {
-            money += 500;
         }
     }
 

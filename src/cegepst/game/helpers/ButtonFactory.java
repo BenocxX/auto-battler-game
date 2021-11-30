@@ -132,7 +132,7 @@ public class ButtonFactory {
         backButton.setCustomEvent(new Callback() {
             @Override
             public void callback() {
-                EventSystem.getInstance().onButtonClicked(ButtonEventType.MORPH);
+                EventSystem.getInstance().onButtonClicked(ButtonEventType.GAME_DISPLAY);
                 EventSystem.getInstance().onMorph(creatureType);
             }
         });
