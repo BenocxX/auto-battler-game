@@ -23,7 +23,7 @@ public class CreatureItem extends Item {
         image = creatureType.getSprite(WIDTH, HEIGHT);
         inventoryImage = creatureType.getSprite(Slot.IMAGE_WIDTH, Slot.IMAGE_HEIGHT);
         name = creatureType.getName();
-        description = "Description goes here";
+        description = creatureType.getDescription();
     }
 
     @Override

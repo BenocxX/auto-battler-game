@@ -67,7 +67,6 @@ public class Player extends ControllableEntity implements ButtonListener, MorphL
 
     @Override
     public void onMorph(CreatureType creatureType) {
-        System.out.println("Morph into: " + creatureType.getName());
         setDimension(50, 50);
         morphSprite = creatureType.getSprite(50, 50);
     }
