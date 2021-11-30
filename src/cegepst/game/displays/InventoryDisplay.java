@@ -7,8 +7,6 @@ import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
 import cegepst.game.helpers.ButtonFactory;
 
-import java.awt.*;
-
 public class InventoryDisplay extends Display {
 
     private GamePad gamePad;
