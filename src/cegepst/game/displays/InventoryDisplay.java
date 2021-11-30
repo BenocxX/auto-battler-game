@@ -35,7 +35,6 @@ public class InventoryDisplay extends Display {
 
     @Override
     public void draw(Buffer buffer) {
-        buffer.setFontSize(Font.PLAIN, 20);
         menuSystem.draw(buffer);
     }
 
@@ -56,7 +55,7 @@ public class InventoryDisplay extends Display {
     private void initializeButtonSystem() {
         menuSystem = new MenuSystem();
         menuSystem.addMousePadDevice(mousePad);
-        menuSystem.addButton(ButtonFactory.playButton(10, RenderingEngine.HEIGHT - 60));
+        menuSystem.addButton(ButtonFactory.backToGameButton(10, RenderingEngine.HEIGHT - 60));
         menuSystem.getButton(0).isSelected(true);
     }
 }

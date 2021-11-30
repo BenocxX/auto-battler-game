@@ -93,6 +93,17 @@ public class ButtonFactory {
         return button;
     }
 
+    public static RoundButton backToGameButton(int x, int y) {
+        RoundButton button = new RoundButton(x, y, "Back");
+        button.setCustomEvent(new Callback() {
+            @Override
+            public void callback() {
+                EventSystem.getInstance().onButtonClicked(ButtonEventType.GAME_DISPLAY);
+            }
+        });
+        return button;
+    }
+
     public static RoundButton moneyCheatButton(int x, int y) {
         RoundButton button = new RoundButton(x, y, ButtonStyle.CHEAT_STYLE , "$");
         button.setCustomEvent(new Callback() {

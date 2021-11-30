@@ -2,6 +2,8 @@ package cegepst.engine.menu.buttons;
 
 import cegepst.engine.Buffer;
 
+import java.awt.*;
+
 public class RoundButton extends Button {
 
     private int arcWidth;
@@ -41,7 +43,9 @@ public class RoundButton extends Button {
         } else {
             buffer.drawRoundRectangle(x, y, width, height, arcWidth, arcHeight, UNSELECTED_COLOR);
         }
+        buffer.setFontSize(Font.PLAIN, 20);
         buffer.drawCenteredText(text, getBounds());
+        buffer.setFontSize(Font.PLAIN, 14);
     }
 
     @Override

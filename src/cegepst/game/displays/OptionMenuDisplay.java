@@ -34,7 +34,6 @@ public class OptionMenuDisplay extends Display {
 
     @Override
     public void draw(Buffer buffer) {
-        buffer.setFontSize(Font.PLAIN, 20);
         menuSystem.draw(buffer);
     }
 
