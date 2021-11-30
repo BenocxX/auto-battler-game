@@ -19,6 +19,8 @@ import java.awt.*;
 
 public class Player extends ControllableEntity implements ButtonListener, MorphListener {
 
+    private static final int INITIAL_MONEY = 500;
+
     private Animator animator;
     private Image morphSprite;
     private int money;
@@ -34,7 +36,7 @@ public class Player extends ControllableEntity implements ButtonListener, MorphL
 
         EventSystem.getInstance().addButtonListener(this);
         EventSystem.getInstance().addMorphListener(this);
-        money = 10;
+        money = INITIAL_MONEY;
     }
 
     @Override
