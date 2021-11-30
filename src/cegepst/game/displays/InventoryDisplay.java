@@ -1,6 +1,7 @@
 package cegepst.game.displays;
 
 import cegepst.engine.Buffer;
+import cegepst.engine.RenderingEngine;
 import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
@@ -55,7 +56,7 @@ public class InventoryDisplay extends Display {
     private void initializeButtonSystem() {
         menuSystem = new MenuSystem();
         menuSystem.addMousePadDevice(mousePad);
-        menuSystem.addButton(ButtonFactory.playButton(200, 200));
+        menuSystem.addButton(ButtonFactory.playButton(10, RenderingEngine.HEIGHT - 60));
         menuSystem.getButton(0).isSelected(true);
     }
 }
