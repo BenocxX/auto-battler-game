@@ -5,7 +5,7 @@ import cegepst.engine.RenderingEngine;
 import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
-import cegepst.game.entities.miscellaneous.ButtonFactory;
+import cegepst.game.helpers.ButtonFactory;
 import cegepst.game.entities.shopPhase.ShopStation;
 import cegepst.game.entities.Player;
 import cegepst.game.entities.miscellaneous.TriggerArea;

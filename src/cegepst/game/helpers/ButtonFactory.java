@@ -1,9 +1,11 @@
-package cegepst.game.entities.miscellaneous;
+package cegepst.game.helpers;
 
 import cegepst.engine.menu.buttons.ButtonStyle;
 import cegepst.engine.menu.buttons.Callback;
 import cegepst.engine.menu.buttons.RoundButton;
 import cegepst.game.displays.Display;
+import cegepst.game.eventsystem.EventSystem;
+import cegepst.game.eventsystem.events.ButtonEventType;
 import cegepst.game.settings.GameSettings;
 
 public class ButtonFactory {
@@ -96,7 +98,7 @@ public class ButtonFactory {
         backButton.setCustomEvent(new Callback() {
             @Override
             public void callback() {
-                System.out.println("Cheat money $$$");
+                EventSystem.getInstance().onButtonClicked(ButtonEventType.MONEY_CHEAT);
             }
         });
         return backButton;

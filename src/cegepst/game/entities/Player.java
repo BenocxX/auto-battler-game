@@ -6,15 +6,19 @@ import cegepst.engine.RenderingEngine;
 import cegepst.engine.controls.MovementController;
 import cegepst.engine.entities.ControllableEntity;
 import cegepst.engine.resources.images.Animator;
+import cegepst.game.eventsystem.EventSystem;
+import cegepst.game.eventsystem.events.ButtonEventType;
+import cegepst.game.eventsystem.events.ButtonListener;
 import cegepst.game.settings.GameSettings;
 import cegepst.game.resources.Sprite;
 
 import java.awt.*;
 
-public class Player extends ControllableEntity {
+public class Player extends ControllableEntity implements ButtonListener {
 
     private Animator animator;
     private int money;
+    private int moneyButtonId;
 
     public Player(MovementController controller) {
         super(controller);
@@ -25,7 +29,9 @@ public class Player extends ControllableEntity {
         animator.loadAnimations(0, 128, width, height, 3);
         CollidableRepository.getInstance().registerEntity(this);
 
+        EventSystem.getInstance().addButtonListener(this);
         money = 10;
+        moneyButtonId = 0;
     }
 
     @Override
@@ -41,6 +47,13 @@ public class Player extends ControllableEntity {
         buffer.drawText(money + " $", 10, RenderingEngine.HEIGHT - 10, Color.WHITE);
         if (hasMoved() && GameSettings.DEBUG_MODE) {
             drawHitBox(buffer);
+        }
+    }
+
+    @Override
+    public void onButtonClick(ButtonEventType eventType) {
+        if (ButtonEventType.MONEY_CHEAT == eventType) {
+            money += 500;
         }
     }
 }

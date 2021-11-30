@@ -1,5 +1,7 @@
 package cegepst.game.eventsystem;
 
+import cegepst.game.eventsystem.events.ButtonEventType;
+import cegepst.game.eventsystem.events.ButtonListener;
 import cegepst.game.eventsystem.events.ItemBuyListener;
 import cegepst.game.eventsystem.events.TriggerAreaListener;
 
@@ -11,6 +13,7 @@ public class EventSystem {
 
     private ArrayList<TriggerAreaListener> triggerAreaListeners;
     private ArrayList<ItemBuyListener> itemBuyListeners;
+    private ArrayList<ButtonListener> buttonClickListeners;
 
     public static EventSystem getInstance() {
         if (instance == null) {
@@ -25,6 +28,10 @@ public class EventSystem {
 
     public void addItemBuyListener(ItemBuyListener listener) {
         itemBuyListeners.add(listener);
+    }
+
+    public void addButtonListener(ButtonListener listener) {
+        buttonClickListeners.add(listener);
     }
 
     public void onTriggerAreaEnter(int triggerId) {
@@ -51,8 +58,15 @@ public class EventSystem {
         }
     }
 
+    public void onButtonClicked(ButtonEventType eventType) {
+        for (ButtonListener listener : buttonClickListeners) {
+            listener.onButtonClick(eventType);
+        }
+    }
+
     private EventSystem() {
         triggerAreaListeners = new ArrayList<>();
         itemBuyListeners = new ArrayList<>();
+        buttonClickListeners = new ArrayList<>();
     }
 }
