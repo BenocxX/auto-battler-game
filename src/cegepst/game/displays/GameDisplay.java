@@ -131,6 +131,6 @@ public class GameDisplay extends Display {
         menuSystem = new MenuSystem();
         menuSystem.addMousePadDevice(mousePad);
         menuSystem.addButton(ButtonFactory.inventoryButton(10, RenderingEngine.HEIGHT - 60));
-        menuSystem.addButton(ButtonFactory.moneyCheatButton(RenderingEngine.WIDTH - 60, 50));
+        menuSystem.addButton(ButtonFactory.moneyCheatButton(220, RenderingEngine.HEIGHT - 60));
     }
 }
