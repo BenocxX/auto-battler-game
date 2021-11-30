@@ -83,6 +83,12 @@ public class RoundButton extends Button {
                 arcWidth = 40;
                 arcHeight = 40;
             }
+            case 13 -> {
+                width = 50;
+                height = 50;
+                arcWidth = 20;
+                arcHeight = 20;
+            }
         }
         if (width != 0) {
             super.applyStyle(style);

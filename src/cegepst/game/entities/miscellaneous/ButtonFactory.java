@@ -1,5 +1,6 @@
 package cegepst.game.entities.miscellaneous;
 
+import cegepst.engine.menu.buttons.ButtonStyle;
 import cegepst.engine.menu.buttons.Callback;
 import cegepst.engine.menu.buttons.RoundButton;
 import cegepst.game.displays.Display;
@@ -85,6 +86,17 @@ public class ButtonFactory {
             @Override
             public void callback() {
                 menu.goToMainMenuDisplay();
+            }
+        });
+        return backButton;
+    }
+
+    public static RoundButton moneyCheatButton(int x, int y) {
+        RoundButton backButton = new RoundButton(x, y, ButtonStyle.CHEAT_STYLE , "$");
+        backButton.setCustomEvent(new Callback() {
+            @Override
+            public void callback() {
+                System.out.println("Cheat money $$$");
             }
         });
         return backButton;

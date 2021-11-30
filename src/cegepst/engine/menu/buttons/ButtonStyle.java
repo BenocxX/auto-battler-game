@@ -17,4 +17,6 @@ public class ButtonStyle {
     public static final int SMALL_VERTICAL_ROUND = 10;
     public static final int MEDIUM_VERTICAL_ROUND = 11;
     public static final int LARGE_VERTICAL_ROUND = 12;
+
+    public static final int CHEAT_STYLE = 13;
 }
