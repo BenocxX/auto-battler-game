@@ -15,7 +15,7 @@ public class ButtonFactory {
         playButton.setCustomEvent(new Callback() {
             @Override
             public void callback() {
-                menu.goToGameDisplay();
+                EventSystem.getInstance().onButtonClicked(ButtonEventType.GAME_DISPLAY);
             }
         });
         return playButton;
@@ -26,7 +26,7 @@ public class ButtonFactory {
         optionButton.setCustomEvent(new Callback() {
             @Override
             public void callback() {
-                menu.goToOptionDisplay();
+                EventSystem.getInstance().onButtonClicked(ButtonEventType.OPTION_MENU_DISPLAY);
             }
         });
         return optionButton;
@@ -37,7 +37,7 @@ public class ButtonFactory {
         quitButton.setCustomEvent(new Callback() {
             @Override
             public void callback() {
-                menu.quit();
+                EventSystem.getInstance().onButtonClicked(ButtonEventType.QUIT);
             }
         });
         return quitButton;
@@ -87,7 +87,7 @@ public class ButtonFactory {
         backButton.setCustomEvent(new Callback() {
             @Override
             public void callback() {
-                menu.goToMainMenuDisplay();
+                EventSystem.getInstance().onButtonClicked(ButtonEventType.MAIN_MENU_DISPLAY);
             }
         });
         return backButton;
