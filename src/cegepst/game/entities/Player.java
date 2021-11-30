@@ -6,19 +6,21 @@ import cegepst.engine.RenderingEngine;
 import cegepst.engine.controls.MovementController;
 import cegepst.engine.entities.ControllableEntity;
 import cegepst.engine.resources.images.Animator;
+import cegepst.game.entities.shopPhase.CreatureType;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.ButtonEventType;
 import cegepst.game.eventsystem.events.ButtonListener;
+import cegepst.game.eventsystem.events.MorphListener;
 import cegepst.game.settings.GameSettings;
 import cegepst.game.resources.Sprite;
 
 import java.awt.*;
 
-public class Player extends ControllableEntity implements ButtonListener {
+public class Player extends ControllableEntity implements ButtonListener, MorphListener {
 
     private Animator animator;
+    private Image morphSprite;
     private int money;
-    private int moneyButtonId;
 
     public Player(MovementController controller) {
         super(controller);
@@ -30,20 +32,26 @@ public class Player extends ControllableEntity implements ButtonListener {
         CollidableRepository.getInstance().registerEntity(this);
 
         EventSystem.getInstance().addButtonListener(this);
+        EventSystem.getInstance().addMorphListener(this);
         money = 10;
-        moneyButtonId = 0;
     }
 
     @Override
     public void update() {
         super.update();
         moveAccordingToController();
-        animator.updateAnimationFrame(hasMoved());
+        if (morphSprite == null) {
+            animator.updateAnimationFrame(hasMoved());
+        }
     }
 
     @Override
     public void draw(Buffer buffer) {
-        buffer.drawImage(animator.getImage(getDirection()), x ,y);
+        if (morphSprite == null) {
+            buffer.drawImage(animator.getImage(getDirection()), x ,y);
+        } else {
+            buffer.drawImage(morphSprite, x ,y);
+        }
         buffer.drawText(money + " $", 20, RenderingEngine.HEIGHT - 70, Color.WHITE);
         if (hasMoved() && GameSettings.DEBUG_MODE) {
             drawHitBox(buffer);
@@ -55,5 +63,12 @@ public class Player extends ControllableEntity implements ButtonListener {
         if (ButtonEventType.MONEY_CHEAT == eventType) {
             money += 500;
         }
+    }
+
+    @Override
+    public void onMorph(CreatureType creatureType) {
+        System.out.println("Morph into: " + creatureType.getName());
+        setDimension(50, 50);
+        morphSprite = creatureType.getSprite(50, 50);
     }
 }

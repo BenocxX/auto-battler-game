@@ -34,6 +34,10 @@ public class CreatureItem extends Item {
         }
     }
 
+    public CreatureType getCreatureType() {
+        return creatureType;
+    }
+
     private CreatureType getRandomCreatureType() {
         return CreatureType.values()[RandomHandler.getInt(CreatureType.values().length)];
     }

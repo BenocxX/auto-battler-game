@@ -1,9 +1,7 @@
 package cegepst.game.eventsystem;
 
-import cegepst.game.eventsystem.events.ButtonEventType;
-import cegepst.game.eventsystem.events.ButtonListener;
-import cegepst.game.eventsystem.events.ItemBuyListener;
-import cegepst.game.eventsystem.events.TriggerAreaListener;
+import cegepst.game.entities.shopPhase.CreatureType;
+import cegepst.game.eventsystem.events.*;
 
 import java.util.ArrayList;
 
@@ -14,6 +12,7 @@ public class EventSystem {
     private ArrayList<TriggerAreaListener> triggerAreaListeners;
     private ArrayList<ItemBuyListener> itemBuyListeners;
     private ArrayList<ButtonListener> buttonClickListeners;
+    private ArrayList<MorphListener> morphListeners;
 
     public static EventSystem getInstance() {
         if (instance == null) {
@@ -32,6 +31,10 @@ public class EventSystem {
 
     public void addButtonListener(ButtonListener listener) {
         buttonClickListeners.add(listener);
+    }
+
+    public void addMorphListener(MorphListener listener) {
+        morphListeners.add(listener);
     }
 
     public void onTriggerAreaEnter(int triggerId) {
@@ -64,9 +67,16 @@ public class EventSystem {
         }
     }
 
+    public void onMorph(CreatureType creatureType) {
+        for (MorphListener listener : morphListeners) {
+            listener.onMorph(creatureType);
+        }
+    }
+
     private EventSystem() {
         triggerAreaListeners = new ArrayList<>();
         itemBuyListeners = new ArrayList<>();
         buttonClickListeners = new ArrayList<>();
+        morphListeners = new ArrayList<>();
     }
 }

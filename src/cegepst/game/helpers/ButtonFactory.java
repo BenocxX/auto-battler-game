@@ -4,6 +4,7 @@ import cegepst.engine.menu.buttons.ButtonStyle;
 import cegepst.engine.menu.buttons.Callback;
 import cegepst.engine.menu.buttons.RoundButton;
 import cegepst.game.displays.Display;
+import cegepst.game.entities.shopPhase.CreatureType;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.ButtonEventType;
 import cegepst.game.settings.GameSettings;
@@ -126,12 +127,13 @@ public class ButtonFactory {
         return backButton;
     }
 
-    public static RoundButton morphButton(int x, int y) {
+    public static RoundButton morphButton(int x, int y, CreatureType creatureType) {
         RoundButton backButton = new RoundButton(x, y, ButtonStyle.SLOT_STYLE, "Morph");
         backButton.setCustomEvent(new Callback() {
             @Override
             public void callback() {
                 EventSystem.getInstance().onButtonClicked(ButtonEventType.MORPH);
+                EventSystem.getInstance().onMorph(creatureType);
             }
         });
         return backButton;
