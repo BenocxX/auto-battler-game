@@ -29,6 +29,8 @@ public abstract class Display implements ButtonListener {
             goToOptionDisplay();
         } else if (ButtonEventType.GAME_DISPLAY == eventType) {
             goToGameDisplay();
+        } else if (ButtonEventType.INVENTORY == eventType) {
+            goToInventoryDisplay();
         } else if (ButtonEventType.QUIT == eventType) {
             quit();
         }
@@ -42,16 +44,20 @@ public abstract class Display implements ButtonListener {
         currentId = DisplayType.MAIN_MENU.getId();
     }
 
-    protected void quit() {
-        currentId = DisplayType.QUIT.getId();
-    }
-
-    private void goToOptionDisplay() {
+    protected void goToOptionDisplay() {
         currentId = DisplayType.OPTION_MENU.getId();
     }
 
-    private void goToGameDisplay() {
+    protected void goToGameDisplay() {
         currentId = DisplayType.GAME.getId();
+    }
+
+    protected void goToInventoryDisplay() {
+        currentId = DisplayType.INVENTORY.getId();
+    }
+
+    protected void quit() {
+        currentId = DisplayType.QUIT.getId();
     }
 
     protected void updateAlreadyInDisplay() {

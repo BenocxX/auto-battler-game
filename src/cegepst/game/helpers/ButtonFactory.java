@@ -11,94 +11,105 @@ import cegepst.game.settings.GameSettings;
 public class ButtonFactory {
 
     public static RoundButton playButton(int x, int y) {
-        RoundButton playButton = new RoundButton(x, y, "Play");
-        playButton.setCustomEvent(new Callback() {
+        RoundButton button = new RoundButton(x, y, "Play");
+        button.setCustomEvent(new Callback() {
             @Override
             public void callback() {
                 EventSystem.getInstance().onButtonClicked(ButtonEventType.GAME_DISPLAY);
             }
         });
-        return playButton;
+        return button;
     }
 
     public static RoundButton optionButton(int x, int y) {
-        RoundButton optionButton = new RoundButton(x, y, "Option");
-        optionButton.setCustomEvent(new Callback() {
+        RoundButton button = new RoundButton(x, y, "Option");
+        button.setCustomEvent(new Callback() {
             @Override
             public void callback() {
                 EventSystem.getInstance().onButtonClicked(ButtonEventType.OPTION_MENU_DISPLAY);
             }
         });
-        return optionButton;
+        return button;
     }
 
     public static RoundButton quitButton(int x, int y) {
-        RoundButton quitButton = new RoundButton(x, y, "Quit");
-        quitButton.setCustomEvent(new Callback() {
+        RoundButton button = new RoundButton(x, y, "Quit");
+        button.setCustomEvent(new Callback() {
             @Override
             public void callback() {
                 EventSystem.getInstance().onButtonClicked(ButtonEventType.QUIT);
             }
         });
-        return quitButton;
+        return button;
     }
 
     public static RoundButton soundButton(int x, int y) {
-        RoundButton soundButton = new RoundButton(x, y,
+        RoundButton button = new RoundButton(x, y,
                 "Sound " + (GameSettings.SOUND ? "On" : "Off"));
-        soundButton.setCustomEvent(new Callback() {
+        button.setCustomEvent(new Callback() {
             @Override
             public void callback() {
                 GameSettings.SOUND = !GameSettings.SOUND;
-                soundButton.setText("Sound " + (GameSettings.SOUND ? "On" : "Off"));
+                button.setText("Sound " + (GameSettings.SOUND ? "On" : "Off"));
             }
         });
-        return soundButton;
+        return button;
     }
 
     public static RoundButton musicButton(int x, int y) {
-        RoundButton musicButton = new RoundButton(x, y,
+        RoundButton button = new RoundButton(x, y,
                 "Music " + (GameSettings.MUSIC ? "On" : "Off"));
-        musicButton.setCustomEvent(new Callback() {
+        button.setCustomEvent(new Callback() {
             @Override
             public void callback() {
                 GameSettings.MUSIC = !GameSettings.MUSIC;
-                musicButton.setText("Music " + (GameSettings.MUSIC ? "On" : "Off"));
+                button.setText("Music " + (GameSettings.MUSIC ? "On" : "Off"));
             }
         });
-        return musicButton;
+        return button;
     }
 
     public static RoundButton debugButton(int x, int y) {
-        RoundButton debugButton = new RoundButton(x, y,
+        RoundButton button = new RoundButton(x, y,
                 "Debug " + (GameSettings.DEBUG_MODE ? "On" : "Off"));
-        debugButton.setCustomEvent(new Callback() {
+        button.setCustomEvent(new Callback() {
             @Override
             public void callback() {
                 GameSettings.DEBUG_MODE = !GameSettings.DEBUG_MODE;
-                debugButton.setText("Debug " + (GameSettings.DEBUG_MODE ? "On" : "Off"));
+                button.setText("Debug " + (GameSettings.DEBUG_MODE ? "On" : "Off"));
             }
         });
-        return debugButton;
+        return button;
     }
 
     public static RoundButton backToMainMenuButton(int x, int y) {
-        RoundButton backButton = new RoundButton(x, y, "Back");
-        backButton.setCustomEvent(new Callback() {
+        RoundButton button = new RoundButton(x, y, "Back");
+        button.setCustomEvent(new Callback() {
             @Override
             public void callback() {
                 EventSystem.getInstance().onButtonClicked(ButtonEventType.MAIN_MENU_DISPLAY);
             }
         });
-        return backButton;
+        return button;
     }
 
     public static RoundButton moneyCheatButton(int x, int y) {
-        RoundButton backButton = new RoundButton(x, y, ButtonStyle.CHEAT_STYLE , "$");
-        backButton.setCustomEvent(new Callback() {
+        RoundButton button = new RoundButton(x, y, ButtonStyle.CHEAT_STYLE , "$");
+        button.setCustomEvent(new Callback() {
             @Override
             public void callback() {
                 EventSystem.getInstance().onButtonClicked(ButtonEventType.MONEY_CHEAT);
+            }
+        });
+        return button;
+    }
+
+    public static RoundButton inventoryButton(int x, int y) {
+        RoundButton backButton = new RoundButton(x, y, "Inventory");
+        backButton.setCustomEvent(new Callback() {
+            @Override
+            public void callback() {
+                EventSystem.getInstance().onButtonClicked(ButtonEventType.INVENTORY);
             }
         });
         return backButton;

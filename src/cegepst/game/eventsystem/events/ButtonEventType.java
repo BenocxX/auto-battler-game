@@ -6,6 +6,7 @@ public enum ButtonEventType {
     MAIN_MENU_DISPLAY,
     OPTION_MENU_DISPLAY,
     GAME_DISPLAY,
-    QUIT,
+    INVENTORY,
+    QUIT
 
 }

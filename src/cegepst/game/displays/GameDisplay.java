@@ -130,6 +130,7 @@ public class GameDisplay extends Display {
     private void initializeButtonSystem() {
         menuSystem = new MenuSystem();
         menuSystem.addMousePadDevice(mousePad);
+        menuSystem.addButton(ButtonFactory.inventoryButton(10, RenderingEngine.HEIGHT - 60));
         menuSystem.addButton(ButtonFactory.moneyCheatButton(RenderingEngine.WIDTH - 60, 50));
     }
 }

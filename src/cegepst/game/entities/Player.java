@@ -44,7 +44,7 @@ public class Player extends ControllableEntity implements ButtonListener {
     @Override
     public void draw(Buffer buffer) {
         buffer.drawImage(animator.getImage(getDirection()), x ,y);
-        buffer.drawText(money + " $", 10, RenderingEngine.HEIGHT - 10, Color.WHITE);
+        buffer.drawText(money + " $", 20, RenderingEngine.HEIGHT - 70, Color.WHITE);
         if (hasMoved() && GameSettings.DEBUG_MODE) {
             drawHitBox(buffer);
         }
