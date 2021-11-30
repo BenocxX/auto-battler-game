@@ -8,6 +8,7 @@ public class RoundButton extends Button {
 
     private int arcWidth;
     private int arcHeight;
+    private int currentStyle;
 
     /*
      * Lots of overloaded constructors because I want to let
@@ -43,13 +44,19 @@ public class RoundButton extends Button {
         } else {
             buffer.drawRoundRectangle(x, y, width, height, arcWidth, arcHeight, UNSELECTED_COLOR);
         }
-        buffer.setFontSize(Font.PLAIN, 20);
-        buffer.drawCenteredText(text, getBounds());
-        buffer.setFontSize(Font.PLAIN, 14);
+        if (currentStyle != 14) {
+            buffer.setFontSize(Font.PLAIN, 20);
+            buffer.drawCenteredText(text, getBounds());
+            buffer.setFontSize(Font.PLAIN, 14);
+        } else {
+            buffer.setFontSize(Font.PLAIN, 14);
+            buffer.drawCenteredText(text, getBounds());
+        }
     }
 
     @Override
     protected void applyStyle(int style) {
+        currentStyle = style;
         switch (style) {
             case 4 -> {
                 width = 100;
@@ -90,6 +97,12 @@ public class RoundButton extends Button {
             case 13 -> {
                 width = 50;
                 height = 50;
+                arcWidth = 20;
+                arcHeight = 20;
+            }
+            case 14 -> {
+                width = 60;
+                height = 30;
                 arcWidth = 20;
                 arcHeight = 20;
             }

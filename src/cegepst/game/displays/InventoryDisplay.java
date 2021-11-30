@@ -6,6 +6,7 @@ import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
 import cegepst.game.helpers.ButtonFactory;
+import cegepst.game.inventory.Inventory;
 
 public class InventoryDisplay extends Display {
 
@@ -33,6 +34,7 @@ public class InventoryDisplay extends Display {
 
     @Override
     public void draw(Buffer buffer) {
+        Inventory.getInstance().draw(buffer);
         menuSystem.draw(buffer);
     }
 

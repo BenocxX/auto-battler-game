@@ -43,7 +43,7 @@ public class ShopStation extends MovableEntity implements TriggerAreaListener, I
     public void draw(Buffer buffer) {
         buffer.drawImage(image, x, y);
         if (isSelected) {
-            buffer.drawHorizontallyCenteredText(item.name(), getBounds(), y - 35);
+            buffer.drawHorizontallyCenteredText(item.getName(), getBounds(), y - 35);
             buffer.drawText("(Use E to Buy)", RenderingEngine.WIDTH - 97, 40, Color.WHITE);
         }
         item.draw(buffer);

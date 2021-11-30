@@ -125,4 +125,15 @@ public class ButtonFactory {
         });
         return backButton;
     }
+
+    public static RoundButton morphButton(int x, int y) {
+        RoundButton backButton = new RoundButton(x, y, ButtonStyle.SLOT_STYLE, "Morph");
+        backButton.setCustomEvent(new Callback() {
+            @Override
+            public void callback() {
+                EventSystem.getInstance().onButtonClicked(ButtonEventType.MORPH);
+            }
+        });
+        return backButton;
+    }
 }

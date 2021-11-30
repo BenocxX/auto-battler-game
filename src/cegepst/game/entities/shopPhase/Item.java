@@ -4,10 +4,15 @@ import cegepst.engine.Buffer;
 import cegepst.engine.entities.StaticEntity;
 import cegepst.game.eventsystem.EventSystem;
 
+import java.awt.*;
+
 public abstract class Item extends StaticEntity {
 
     private int id;
     protected boolean isBought;
+    protected Image image;
+    protected String name;
+    protected String description;
 
     public Item(int id) {
         this.id = id;
@@ -23,7 +28,15 @@ public abstract class Item extends StaticEntity {
         EventSystem.getInstance().onItemBuy(id);
     }
 
-    public String name() {
-        return null;
+    public Image getImage() {
+        return image;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

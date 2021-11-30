@@ -2,6 +2,7 @@ package cegepst.game.entities.shopPhase;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.helpers.RandomHandler;
+import cegepst.game.inventory.Inventory;
 
 import java.awt.*;
 
@@ -19,6 +20,10 @@ public class CreatureItem extends Item {
         teleport(x, y);
         creatureType = getRandomCreatureType();
         sprite = creatureType.getSprite(WIDTH, HEIGHT);
+        image = sprite;
+        name = creatureType.getName();
+        description = "Description goes here";
+        Inventory.getInstance().addItem(this);
     }
 
     @Override
@@ -26,10 +31,6 @@ public class CreatureItem extends Item {
         if (!isBought) {
             buffer.drawImage(sprite, x, y);
         }
-    }
-
-    public String name() {
-        return creatureType.getName();
     }
 
     private CreatureType getRandomCreatureType() {
