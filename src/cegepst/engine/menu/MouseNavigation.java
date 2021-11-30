@@ -23,11 +23,15 @@ public class MouseNavigation extends NavigationController {
     }
 
     private void mouseHoverCheck() {
-        for (RoundButton button : buttons) {
-            if (button.isHovered(mousePad.getPosition())) {
-                unselectLastCurrentButton();
-                selectHoveredButton(button);
+        if (buttons.size() > 1) {
+            for (RoundButton button : buttons) {
+                if (button.isHovered(mousePad.getPosition())) {
+                    unselectLastCurrentButton();
+                    selectHoveredButton(button);
+                }
             }
+        } else {
+            buttons.get(0).isSelected(buttons.get(0).isHovered(mousePad.getPosition()));
         }
     }
 
