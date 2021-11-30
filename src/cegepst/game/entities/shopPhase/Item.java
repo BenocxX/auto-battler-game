@@ -11,6 +11,7 @@ public abstract class Item extends StaticEntity {
     private int id;
     protected boolean isBought;
     protected Image image;
+    protected Image inventoryImage;
     protected String name;
     protected String description;
 
@@ -30,6 +31,10 @@ public abstract class Item extends StaticEntity {
 
     public Image getImage() {
         return image;
+    }
+
+    public Image getInventoryImage() {
+        return inventoryImage;
     }
 
     public String getName() {

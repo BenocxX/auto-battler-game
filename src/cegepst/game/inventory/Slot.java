@@ -39,7 +39,7 @@ public class Slot extends StaticEntity {
     @Override
     public void draw(Buffer buffer) {
         buffer.drawRectangle(x, y, WIDTH, HEIGHT, new Color(49, 49, 49));
-        buffer.drawImage(item.getImage(), x + 10,
+        buffer.drawImage(item.getInventoryImage(), x + 10,
                 CenteringMachine.centerVertically(getBounds(), IMAGE_HEIGHT),
                 IMAGE_WIDTH, IMAGE_HEIGHT);
         buffer.drawText(item.getName(), x + 10 + IMAGE_WIDTH + 10, y + 25, Color.WHITE);

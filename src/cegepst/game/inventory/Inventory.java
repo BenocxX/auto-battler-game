@@ -13,7 +13,7 @@ public class Inventory extends StaticEntity {
 
     private static Inventory instance;
     private static final int WIDTH = 500;
-    private static final int HEIGHT = RenderingEngine.HEIGHT - 50;
+    private static final int HEIGHT = RenderingEngine.HEIGHT - 65;
 
     private ArrayList<Slot> slots;
 
