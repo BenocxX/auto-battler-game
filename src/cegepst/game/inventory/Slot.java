@@ -12,7 +12,7 @@ import java.awt.*;
 
 public class Slot extends StaticEntity {
 
-    public static final int WIDTH = 300;
+    public static final int WIDTH = 400;
     public static final int HEIGHT = 100;
     public static final int IMAGE_WIDTH = 75;
     public static final int IMAGE_HEIGHT = 75;
@@ -38,7 +38,7 @@ public class Slot extends StaticEntity {
 
     @Override
     public void draw(Buffer buffer) {
-        buffer.drawRectangle(x, y, WIDTH, HEIGHT, new Color(49, 49, 49));
+        buffer.drawRoundRectangle(x, y, WIDTH, HEIGHT, 40, 40, new Color(49, 49, 49));
         buffer.drawImage(item.getInventoryImage(), x + 10,
                 CenteringMachine.centerVertically(getBounds(), IMAGE_HEIGHT),
                 IMAGE_WIDTH, IMAGE_HEIGHT);

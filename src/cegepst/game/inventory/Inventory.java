@@ -24,8 +24,15 @@ public class Inventory extends StaticEntity {
         return instance;
     }
 
+    public void update() {
+        for (Slot slot : slots) {
+            slot.update();
+        }
+    }
+
+    @Override
     public void draw(Buffer buffer) {
-        buffer.drawRectangle(x, y, WIDTH, HEIGHT, new Color(255, 0, 0));
+        buffer.drawRoundRectangle(x, y, WIDTH, HEIGHT, 40, 40, new Color(28, 28, 28));
         for (Slot slot : slots) {
             slot.draw(buffer);
         }

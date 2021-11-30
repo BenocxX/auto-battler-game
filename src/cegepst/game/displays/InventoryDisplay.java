@@ -26,6 +26,7 @@ public class InventoryDisplay extends Display {
         resetStateData();
         quitKeyCheck();
         menuSystem.update();
+        Inventory.getInstance().update();
         gamePad.clearTypedKeys();
         mousePad.resetClickedButtons();
         updateAlreadyInDisplay();
