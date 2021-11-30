@@ -10,7 +10,7 @@ import cegepst.game.settings.GameSettings;
 
 public class ButtonFactory {
 
-    public static RoundButton playButton(Display menu, int x, int y) {
+    public static RoundButton playButton(int x, int y) {
         RoundButton playButton = new RoundButton(x, y, "Play");
         playButton.setCustomEvent(new Callback() {
             @Override
@@ -21,7 +21,7 @@ public class ButtonFactory {
         return playButton;
     }
 
-    public static RoundButton optionButton(Display menu, int x, int y) {
+    public static RoundButton optionButton(int x, int y) {
         RoundButton optionButton = new RoundButton(x, y, "Option");
         optionButton.setCustomEvent(new Callback() {
             @Override
@@ -32,7 +32,7 @@ public class ButtonFactory {
         return optionButton;
     }
 
-    public static RoundButton quitButton(Display menu, int x, int y) {
+    public static RoundButton quitButton(int x, int y) {
         RoundButton quitButton = new RoundButton(x, y, "Quit");
         quitButton.setCustomEvent(new Callback() {
             @Override
@@ -82,7 +82,7 @@ public class ButtonFactory {
         return debugButton;
     }
 
-    public static RoundButton backToMainMenuButton(Display menu, int x, int y) {
+    public static RoundButton backToMainMenuButton(int x, int y) {
         RoundButton backButton = new RoundButton(x, y, "Back");
         backButton.setCustomEvent(new Callback() {
             @Override

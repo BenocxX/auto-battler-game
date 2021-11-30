@@ -56,9 +56,9 @@ public class MainMenuDisplay extends Display {
         menuSystem = new MenuSystem();
         menuSystem.addGamePadDevice(gamePad);
         menuSystem.addMousePadDevice(mousePad);
-        menuSystem.addButton(ButtonFactory.playButton(this, 200, 200));
-        menuSystem.addButton(ButtonFactory.optionButton(this, 200, 260));
-        menuSystem.addButton(ButtonFactory.quitButton(this, 200, 320));
+        menuSystem.addButton(ButtonFactory.playButton(200, 200));
+        menuSystem.addButton(ButtonFactory.optionButton(200, 260));
+        menuSystem.addButton(ButtonFactory.quitButton(200, 320));
         menuSystem.getButton(0).isSelected(true);
     }
 }

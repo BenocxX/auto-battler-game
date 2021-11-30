@@ -59,7 +59,7 @@ public class OptionMenuDisplay extends Display {
         menuSystem.addButton(ButtonFactory.soundButton(200, 200));
         menuSystem.addButton(ButtonFactory.musicButton(200, 260));
         menuSystem.addButton(ButtonFactory.debugButton(200, 320));
-        menuSystem.addButton(ButtonFactory.backToMainMenuButton(this, 200, 380));
+        menuSystem.addButton(ButtonFactory.backToMainMenuButton(200, 380));
         menuSystem.getButton(0).isSelected(true);
     }
 }
