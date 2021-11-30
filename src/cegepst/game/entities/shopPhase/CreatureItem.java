@@ -24,7 +24,6 @@ public class CreatureItem extends Item {
         inventoryImage = creatureType.getSprite(Slot.IMAGE_WIDTH, Slot.IMAGE_HEIGHT);
         name = creatureType.getName();
         description = "Description goes here";
-        Inventory.getInstance().addItem(this);
     }
 
     @Override
@@ -32,6 +31,12 @@ public class CreatureItem extends Item {
         if (!isBought) {
             buffer.drawImage(image, x, y);
         }
+    }
+
+    @Override
+    public void buy() {
+        super.buy();
+        Inventory.getInstance().addItem(this);
     }
 
     public CreatureType getCreatureType() {
