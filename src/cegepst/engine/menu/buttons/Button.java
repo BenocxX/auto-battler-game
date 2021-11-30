@@ -2,6 +2,8 @@ package cegepst.engine.menu.buttons;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.entities.StaticEntity;
+import cegepst.game.resources.Sound;
+import cegepst.game.settings.GameSettings;
 
 import java.awt.*;
 
@@ -66,6 +68,7 @@ public class Button extends StaticEntity {
     }
 
     public void callback() {
+        Sound.BUTTON_CLICK.play(GameSettings.SOUND);
         customEvent.callback();
     }
 

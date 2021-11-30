@@ -10,7 +10,8 @@ public enum Sound {
     BUY_1("./sounds/buy1.wav"),
     BUY_2("./sounds/buy2.wav"),
     BUY_3("./sounds/buy3.wav"),
-    BUY_4("./sounds/buy4.wav");
+    BUY_4("./sounds/buy4.wav"),
+    BUTTON_CLICK("./sounds/button_click.wav");
 
     private final String path;
 
