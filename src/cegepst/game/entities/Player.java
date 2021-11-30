@@ -7,6 +7,7 @@ import cegepst.engine.controls.MovementController;
 import cegepst.engine.entities.ControllableEntity;
 import cegepst.engine.resources.images.Animator;
 import cegepst.game.entities.shopPhase.CreatureType;
+import cegepst.game.entities.shopPhase.Item;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.ButtonEventType;
 import cegepst.game.eventsystem.events.ButtonListener;
@@ -69,5 +70,13 @@ public class Player extends ControllableEntity implements ButtonListener, MorphL
     public void onMorph(CreatureType creatureType) {
         setDimension(50, 50);
         morphSprite = creatureType.getSprite(50, 50);
+    }
+
+    public boolean canBuy() {
+        return money >= Item.PRICE;
+    }
+
+    public void buyItem() {
+        money -= Item.PRICE;
     }
 }

@@ -5,7 +5,6 @@ import cegepst.engine.RenderingEngine;
 import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
-import cegepst.game.eventsystem.events.ButtonEventType;
 import cegepst.game.helpers.ButtonFactory;
 import cegepst.game.entities.shopPhase.ShopStation;
 import cegepst.game.entities.Player;
@@ -58,6 +57,7 @@ public class GameDisplay extends Display {
 
     @Override
     public void draw(Buffer buffer) {
+        buffer.setFontSize(Font.PLAIN, 14);
         logicDraw(buffer);
         UIDraw(buffer);
     }
@@ -113,8 +113,9 @@ public class GameDisplay extends Display {
     private void useKeyCheck() {
         if (gamePad.isUseTyped()) {
             for (ShopStation buyStation : shopStations) {
-                if (buyStation.isSelected()) {
+                if (buyStation.isSelected() && player.canBuy()) {
                     buyStation.buyItem();
+                    player.buyItem();
                 }
             }
         }

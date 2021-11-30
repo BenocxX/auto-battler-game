@@ -8,6 +8,8 @@ import java.awt.*;
 
 public abstract class Item extends StaticEntity {
 
+    public static final int PRICE = 100;
+
     private int id;
     protected boolean isBought;
     protected Image image;
