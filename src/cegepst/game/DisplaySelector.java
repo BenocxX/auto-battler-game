@@ -18,7 +18,7 @@ public class DisplaySelector extends Game {
     public void initialize() {
         GameSettings.isFullscreenMode = false;
         initializeDisplays();
-        currentId = DisplayType.MAIN_MENU.getId();
+        currentId = DisplayType.GAME.getId();
         musicHandler = new MusicHandler();
         musicHandler.play();
     }
