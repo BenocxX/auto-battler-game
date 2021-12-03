@@ -48,7 +48,7 @@ public class InventoryDisplay extends Display {
     }
 
     private void quitKeyCheck() {
-        if (gamePad.isQuitTyped() || gamePad.isEscapeTyped()) {
+        if (gamePad.isQuitTyped() || gamePad.isEscapeTyped() || gamePad.isInventoryTyped()) {
             goToGameDisplay();
         }
     }
