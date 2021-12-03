@@ -13,6 +13,7 @@ public class GamePad extends MovementController {
     private int useKey = KeyEvent.VK_E;
     private int screenModeKey = KeyEvent.VK_F;
     private int debugKey = KeyEvent.VK_D;
+    private int inventoryKey = KeyEvent.VK_I;
 
     public GamePad() {
         RenderingEngine.getInstance().addKeyListener(this);
@@ -40,5 +41,9 @@ public class GamePad extends MovementController {
 
     public boolean isDebugTyped() {
         return isKeyTyped(debugKey);
+    }
+
+    public boolean isInventoryTyped() {
+        return isKeyTyped(inventoryKey);
     }
 }
