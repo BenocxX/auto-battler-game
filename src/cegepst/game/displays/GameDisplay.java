@@ -59,6 +59,7 @@ public class GameDisplay extends Display {
             battleMenuSystem.update();
             for (Enemy enemy : enemies) {
                 enemy.update();
+                enemy.checkIfTouchingPlayer(player);
             }
         } else {
             shopMenuSystem.update();
