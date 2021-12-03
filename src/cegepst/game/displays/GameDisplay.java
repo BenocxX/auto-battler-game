@@ -5,12 +5,15 @@ import cegepst.engine.RenderingEngine;
 import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
+import cegepst.game.eventsystem.events.ButtonEventType;
 import cegepst.game.helpers.ButtonFactory;
 import cegepst.game.entities.shopPhase.ShopStation;
 import cegepst.game.entities.Player;
 import cegepst.game.entities.miscellaneous.TriggerArea;
+import cegepst.game.helpers.CenteringMachine;
 import cegepst.game.helpers.Initializer;
 import cegepst.game.map.World;
+import cegepst.game.resources.Sprite;
 import cegepst.game.settings.GameSettings;
 
 import java.awt.*;
@@ -21,20 +24,23 @@ public class GameDisplay extends Display {
     private GamePad gamePad;
     private MousePad mousePad;
     private Player player;
-    private World world;
+    private World shopMap;
+    private World battleMap;
     private Initializer initializer;
-    private MenuSystem menuSystem;
+    private MenuSystem shopMenuSystem;
+    private MenuSystem battleMenuSystem;
     private ArrayList<ShopStation> shopStations;
     private ArrayList<TriggerArea> triggerAreas;
+    private boolean inBattle = false;
 
     public GameDisplay(DisplayType displayType) {
         super(displayType);
         gamePad = new GamePad();
         mousePad = new MousePad();
         player = new Player(gamePad);
-        world = new World();
+        battleMap = new World(Sprite.BATTLE_MAP.getImage());
+        shopMap = new World(Sprite.SHOP_MAP.getImage());
         initializer = new Initializer();
-        menuSystem = new MenuSystem();
         initializeButtonSystem();
         shopStations = initializer.getShopStations();
         triggerAreas = initializer.getTriggerAreasForShopStations(shopStations);
@@ -44,11 +50,15 @@ public class GameDisplay extends Display {
     public int update() {
         resetStateData();
         keysInputCheck();
-        menuSystem.update();
-        player.update();
-        for (TriggerArea triggerArea : triggerAreas) {
-            triggerArea.triggerCheck(player);
+        if (inBattle) {
+            battleMenuSystem.update();
+        } else {
+            shopMenuSystem.update();
+            for (TriggerArea triggerArea : triggerAreas) {
+                triggerArea.triggerCheck(player);
+            }
         }
+        player.update();
         gamePad.clearTypedKeys();
         mousePad.resetClickedButtons();
         updateAlreadyInDisplay();
@@ -62,19 +72,40 @@ public class GameDisplay extends Display {
         UIDraw(buffer);
     }
 
-    private void logicDraw(Buffer buffer) {
-        world.draw(buffer);
-        for (ShopStation buyStation : shopStations) {
-            buyStation.draw(buffer);
+    @Override
+    public void onButtonClick(ButtonEventType eventType) {
+        super.onButtonClick(eventType);
+        if (ButtonEventType.BATTLE == eventType) {
+            inBattle = true;
+            Rectangle screenRectangle = new Rectangle(RenderingEngine.WIDTH, RenderingEngine.HEIGHT);
+            player.teleport(CenteringMachine.centerHorizontally(screenRectangle, player.getHitBox()), 450);
+        } else if (ButtonEventType.LEAVE_BATTLE == eventType) {
+            inBattle = false;
+            player.teleport(100, 400);
         }
-        for (TriggerArea triggerArea : triggerAreas) {
-            triggerArea.draw(buffer);
+    }
+
+    private void logicDraw(Buffer buffer) {
+        if (inBattle) {
+            battleMap.draw(buffer);
+        } else {
+            shopMap.draw(buffer);
+            for (ShopStation buyStation : shopStations) {
+                buyStation.draw(buffer);
+            }
+            for (TriggerArea triggerArea : triggerAreas) {
+                triggerArea.draw(buffer);
+            }
         }
         player.draw(buffer);
     }
 
     private void UIDraw(Buffer buffer) {
-        menuSystem.draw(buffer);
+        if (inBattle) {
+            battleMenuSystem.draw(buffer);
+        } else {
+            shopMenuSystem.draw(buffer);
+        }
         if (GameSettings.DEBUG_MODE) {
             buffer.drawGameDebugStats();
             buffer.drawText("('D' to deactivate debug mode)", RenderingEngine.WIDTH - 200, 20, new Color(255, 255, 255));
@@ -135,9 +166,15 @@ public class GameDisplay extends Display {
     }
 
     private void initializeButtonSystem() {
-        menuSystem = new MenuSystem();
-        menuSystem.addMousePadDevice(mousePad);
-        menuSystem.addButton(ButtonFactory.inventoryButton(10, RenderingEngine.HEIGHT - 60));
-        menuSystem.addButton(ButtonFactory.moneyCheatButton(220, RenderingEngine.HEIGHT - 60));
+        shopMenuSystem = new MenuSystem();
+        shopMenuSystem.addMousePadDevice(mousePad);
+        shopMenuSystem.addButton(ButtonFactory.inventoryButton(10, RenderingEngine.HEIGHT - 60));
+        shopMenuSystem.addButton(ButtonFactory.moneyCheatButton(220, RenderingEngine.HEIGHT - 60));
+        shopMenuSystem.addButton(ButtonFactory.battleButton(10, RenderingEngine.HEIGHT - 120));
+
+        battleMenuSystem = new MenuSystem();
+        battleMenuSystem.addMousePadDevice(mousePad);
+        battleMenuSystem.addButton(ButtonFactory.inventoryButton(10, RenderingEngine.HEIGHT - 60));
+        battleMenuSystem.addButton(ButtonFactory.leaveBattleButton(10, RenderingEngine.HEIGHT - 120));
     }
 }
