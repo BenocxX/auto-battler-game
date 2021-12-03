@@ -63,7 +63,7 @@ public class DisplaySelector extends Game {
         displays = new ArrayList<>();
         displays.add(new MainMenuDisplay(DisplayType.MAIN_MENU));
         displays.add(new OptionMenuDisplay(DisplayType.OPTION_MENU, DisplayType.MAIN_MENU.getId()));
-        displays.add(new ShopGameDisplay(DisplayType.GAME));
+        displays.add(new GameDisplay(DisplayType.GAME));
         displays.add(new InventoryDisplay(DisplayType.INVENTORY));
     }
 }

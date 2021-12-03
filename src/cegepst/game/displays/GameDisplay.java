@@ -16,7 +16,7 @@ import cegepst.game.settings.GameSettings;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class ShopGameDisplay extends Display {
+public class GameDisplay extends Display {
 
     private GamePad gamePad;
     private MousePad mousePad;
@@ -27,7 +27,7 @@ public class ShopGameDisplay extends Display {
     private ArrayList<ShopStation> shopStations;
     private ArrayList<TriggerArea> triggerAreas;
 
-    public ShopGameDisplay(DisplayType displayType) {
+    public GameDisplay(DisplayType displayType) {
         super(displayType);
         gamePad = new GamePad();
         mousePad = new MousePad();
