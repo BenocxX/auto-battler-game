@@ -24,6 +24,8 @@ public class Player extends ControllableEntity implements MorphListener, ButtonL
     private Animator animator;
     private Image morphSprite;
     private int money;
+    private int health;
+    private int damage;
 
     public Player(MovementController controller) {
         super(controller);
@@ -37,6 +39,8 @@ public class Player extends ControllableEntity implements MorphListener, ButtonL
         EventSystem.getInstance().addMorphListener(this);
         EventSystem.getInstance().addButtonListener(this);
         money = INITIAL_MONEY;
+        health = 100;
+        damage = 10;
     }
 
     @Override
@@ -80,5 +84,13 @@ public class Player extends ControllableEntity implements MorphListener, ButtonL
 
     public void buyItem() {
         money -= Item.PRICE;
+    }
+
+    public void takeDamage(int damageTaken) {
+        health -= damageTaken;
+    }
+
+    public int dealDamage() {
+        return damage;
     }
 }
