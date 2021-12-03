@@ -7,6 +7,8 @@ public class Zombie extends Enemy {
     public Zombie() {
         super();
         animator.loadAnimations(96, 128, width, height, 3);
+        health = 100;
+        damage = 10;
     }
 
     @Override
