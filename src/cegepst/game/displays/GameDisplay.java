@@ -5,6 +5,8 @@ import cegepst.engine.RenderingEngine;
 import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
+import cegepst.game.entities.Enemy;
+import cegepst.game.entities.Zombie;
 import cegepst.game.eventsystem.events.ButtonEventType;
 import cegepst.game.helpers.ButtonFactory;
 import cegepst.game.entities.shopPhase.ShopStation;
@@ -31,6 +33,7 @@ public class GameDisplay extends Display {
     private MenuSystem battleMenuSystem;
     private ArrayList<ShopStation> shopStations;
     private ArrayList<TriggerArea> triggerAreas;
+    private ArrayList<Enemy> enemies;
     private boolean inBattle = false;
 
     public GameDisplay(DisplayType displayType) {
@@ -44,6 +47,8 @@ public class GameDisplay extends Display {
         initializeButtonSystem();
         shopStations = initializer.getShopStations();
         triggerAreas = initializer.getTriggerAreasForShopStations(shopStations);
+        enemies = new ArrayList<>();
+        enemies.add(new Zombie());
     }
 
     @Override
@@ -52,6 +57,9 @@ public class GameDisplay extends Display {
         keysInputCheck();
         if (inBattle) {
             battleMenuSystem.update();
+            for (Enemy enemy : enemies) {
+                enemy.update();
+            }
         } else {
             shopMenuSystem.update();
             for (TriggerArea triggerArea : triggerAreas) {
@@ -88,6 +96,9 @@ public class GameDisplay extends Display {
     private void logicDraw(Buffer buffer) {
         if (inBattle) {
             battleMap.draw(buffer);
+            for (Enemy enemy : enemies) {
+                enemy.draw(buffer);
+            }
         } else {
             shopMap.draw(buffer);
             for (ShopStation buyStation : shopStations) {
