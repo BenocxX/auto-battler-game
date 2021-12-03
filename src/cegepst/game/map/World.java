@@ -30,7 +30,7 @@ public class World {
     private void initializeWorldBorders() {
         worldBorders = new ArrayList<>();
         Blockade topBorder = new Blockade();
-        topBorder.teleport(0, 0);
+        topBorder.teleport(0, 350);
         topBorder.setDimension(RenderingEngine.WIDTH, 1);
 
         Blockade bottomBorder = new Blockade();
