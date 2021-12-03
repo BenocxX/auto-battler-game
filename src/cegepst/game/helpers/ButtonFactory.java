@@ -116,6 +116,28 @@ public class ButtonFactory {
         return button;
     }
 
+    public static RoundButton battleButton(int x, int y) {
+        RoundButton button = new RoundButton(x, y, "Battle");
+        button.setCustomEvent(new Callback() {
+            @Override
+            public void callback() {
+                EventSystem.getInstance().onButtonClicked(ButtonEventType.BATTLE);
+            }
+        });
+        return button;
+    }
+
+    public static RoundButton leaveBattleButton(int x, int y) {
+        RoundButton button = new RoundButton(x, y, "Leave");
+        button.setCustomEvent(new Callback() {
+            @Override
+            public void callback() {
+                EventSystem.getInstance().onButtonClicked(ButtonEventType.LEAVE_BATTLE);
+            }
+        });
+        return button;
+    }
+
     public static RoundButton inventoryButton(int x, int y) {
         RoundButton backButton = new RoundButton(x, y, "Inventory");
         backButton.setCustomEvent(new Callback() {
