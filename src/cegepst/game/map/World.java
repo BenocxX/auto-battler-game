@@ -14,9 +14,9 @@ public class World {
     private Image mapSprite;
     private ArrayList<Blockade> worldBorders;
 
-    public World() {
+    public World(Image mapImage) {
         initializeWorldBorders();
-        mapSprite = SpriteHandler.resizeImage(Sprite.MAP.getImage(),
+        mapSprite = SpriteHandler.resizeImage(mapImage,
                 Image.SCALE_SMOOTH, RenderingEngine.WIDTH, RenderingEngine.HEIGHT);
     }
 
