@@ -95,7 +95,14 @@ public class GameDisplay extends Display {
         quitKeyCheck();
         debugKeyCheck();
         useKeyCheck();
+        inventoryKeyCheck();
         screenModeKeyCheck();
+    }
+
+    private void inventoryKeyCheck() {
+        if (gamePad.isInventoryTyped()) {
+            goToInventoryDisplay();
+        }
     }
 
     private void quitKeyCheck() {
