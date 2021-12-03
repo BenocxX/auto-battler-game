@@ -16,7 +16,7 @@ import cegepst.game.settings.GameSettings;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class GameDisplay extends Display {
+public class ShopGameDisplay extends Display {
 
     private GamePad gamePad;
     private MousePad mousePad;
@@ -27,7 +27,7 @@ public class GameDisplay extends Display {
     private ArrayList<ShopStation> shopStations;
     private ArrayList<TriggerArea> triggerAreas;
 
-    public GameDisplay(DisplayType displayType) {
+    public ShopGameDisplay(DisplayType displayType) {
         super(displayType);
         gamePad = new GamePad();
         mousePad = new MousePad();
@@ -103,8 +103,8 @@ public class GameDisplay extends Display {
         if (gamePad.isInventoryTyped()) {
             goToInventoryDisplay();
         }
-    }
-
+    } 
+    
     private void quitKeyCheck() {
         if (gamePad.isQuitTyped() || gamePad.isEscapeTyped()) {
             goToMainMenuDisplay();
