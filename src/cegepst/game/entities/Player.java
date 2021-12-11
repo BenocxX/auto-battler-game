@@ -6,8 +6,7 @@ import cegepst.engine.RenderingEngine;
 import cegepst.engine.controls.MovementController;
 import cegepst.engine.entities.ControllableEntity;
 import cegepst.engine.resources.images.Animator;
-import cegepst.game.entities.enemies.Damagable;
-import cegepst.game.entities.enemies.DamageDealable;
+import cegepst.game.entities.enemies.Killable;
 import cegepst.game.entities.shopPhase.CreatureType;
 import cegepst.game.entities.shopPhase.Item;
 import cegepst.game.eventsystem.EventSystem;
@@ -20,7 +19,7 @@ import cegepst.game.resources.Sprite;
 import java.awt.*;
 
 public class Player extends ControllableEntity
-        implements MorphListener, ButtonListener, Damagable, DamageDealable {
+        implements MorphListener, ButtonListener, Killable {
 
     private static final int INITIAL_MONEY = 500;
 

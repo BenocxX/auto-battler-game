@@ -5,7 +5,7 @@ import cegepst.engine.resources.images.Animator;
 import cegepst.game.entities.Player;
 import cegepst.game.resources.Sprite;
 
-public abstract class Enemy extends MovableEntity implements Damagable, DamageDealable {
+public abstract class Enemy extends MovableEntity implements Killable {
 
     protected Animator animator;
     protected int health;

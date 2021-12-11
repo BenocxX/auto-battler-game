@@ -1,6 +1,7 @@
 package cegepst.game.entities.enemies;
 
-public interface Damagable {
+public interface Killable {
 
+    int dealDamage();
     void takeDamage(int damage);
 }
