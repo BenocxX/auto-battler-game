@@ -11,11 +11,12 @@ public abstract class Enemy extends MovableEntity implements Killable {
     protected Animator animator;
     protected int health;
     protected int damage;
+    protected int speed;
 
     public Enemy() {
+        Spawns spawn = Spawns.randomSpawn();
+        teleport(spawn.getX(), spawn.getY());
         setDimension(32, 32);
-        teleport(700, 450);
-        setSpeed(1);
         animator = new Animator(Sprite.PLAYER_SPRITE_SHEET.getBufferedImage(), 8);
     }
 

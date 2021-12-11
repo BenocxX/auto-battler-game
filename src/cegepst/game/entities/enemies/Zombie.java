@@ -7,8 +7,10 @@ public class Zombie extends Enemy {
     public Zombie() {
         super();
         animator.loadAnimations(96, 128, width, height, 3);
-        health = 100;
-        damage = 10;
+        health = Enemies.ZOMBIE.getHealth();
+        damage = Enemies.ZOMBIE.getDamage();
+        speed = Enemies.ZOMBIE.getSpeed();
+        setSpeed(speed);
     }
 
     @Override
@@ -21,5 +23,6 @@ public class Zombie extends Enemy {
     @Override
     public void draw(Buffer buffer) {
         buffer.drawImage(animator.getImage(getDirection()), x, y);
+        buffer.drawHorizontallyCenteredText("HP: " + health, getBounds(), y - 10);
     }
 }
