@@ -1,7 +1,9 @@
 package cegepst.game.displays;
 
 import cegepst.engine.Buffer;
+import cegepst.engine.CollidableRepository;
 import cegepst.engine.RenderingEngine;
+import cegepst.engine.entities.StaticEntity;
 import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
@@ -56,12 +58,18 @@ public class GameDisplay extends Display {
         resetStateData();
         keysInputCheck();
         if (inBattle) {
+            applyColliderOnEnemies();
             battleMenuSystem.update();
             for (Enemy enemy : enemies) {
+                CollidableRepository.getInstance().registerEntity(enemy);
                 enemy.update();
                 enemy.checkIfTouchingPlayer(player);
             }
+            removeColliderOnEnemies();
         } else {
+            for (Enemy enemy : enemies) {
+                CollidableRepository.getInstance().unregisterEntity(enemy);
+            }
             shopMenuSystem.update();
             for (TriggerArea triggerArea : triggerAreas) {
                 triggerArea.triggerCheck(player);
@@ -91,6 +99,19 @@ public class GameDisplay extends Display {
         } else if (ButtonEventType.LEAVE_BATTLE == eventType) {
             inBattle = false;
             player.teleport(100, 400);
+            removeColliderOnEnemies();
+        }
+    }
+
+    private void applyColliderOnEnemies() {
+        for (StaticEntity enemy : enemies) {
+            CollidableRepository.getInstance().registerEntity(enemy);
+        }
+    }
+
+    private void removeColliderOnEnemies() {
+        for (StaticEntity enemy : enemies) {
+            CollidableRepository.getInstance().unregisterEntity(enemy);
         }
     }
 

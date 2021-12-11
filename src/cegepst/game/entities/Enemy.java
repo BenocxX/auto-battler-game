@@ -17,7 +17,6 @@ public abstract class Enemy extends MovableEntity {
         teleport(700, 450);
         setSpeed(1);
         animator = new Animator(Sprite.PLAYER_SPRITE_SHEET.getBufferedImage(), 8);
-        CollidableRepository.getInstance().registerEntity(this);
     }
 
     public void checkIfTouchingPlayer(Player player) {
