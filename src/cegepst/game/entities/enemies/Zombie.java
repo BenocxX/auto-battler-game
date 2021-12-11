@@ -1,6 +1,7 @@
-package cegepst.game.entities;
+package cegepst.game.entities.enemies;
 
 import cegepst.engine.Buffer;
+import cegepst.game.entities.enemies.Enemy;
 
 public class Zombie extends Enemy {
 

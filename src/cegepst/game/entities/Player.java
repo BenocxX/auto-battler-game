@@ -6,6 +6,8 @@ import cegepst.engine.RenderingEngine;
 import cegepst.engine.controls.MovementController;
 import cegepst.engine.entities.ControllableEntity;
 import cegepst.engine.resources.images.Animator;
+import cegepst.game.entities.enemies.Damagable;
+import cegepst.game.entities.enemies.DamageDealable;
 import cegepst.game.entities.shopPhase.CreatureType;
 import cegepst.game.entities.shopPhase.Item;
 import cegepst.game.eventsystem.EventSystem;
@@ -17,7 +19,8 @@ import cegepst.game.resources.Sprite;
 
 import java.awt.*;
 
-public class Player extends ControllableEntity implements MorphListener, ButtonListener {
+public class Player extends ControllableEntity
+        implements MorphListener, ButtonListener, Damagable, DamageDealable {
 
     private static final int INITIAL_MONEY = 500;
 
@@ -78,19 +81,21 @@ public class Player extends ControllableEntity implements MorphListener, ButtonL
         morphSprite = creatureType.getSprite(50, 50);
     }
 
+    @Override
+    public void takeDamage(int damage) {
+        health -= damage;
+    }
+
+    @Override
+    public int dealDamage() {
+        return damage;
+    }
+
     public boolean canBuy() {
         return money >= Item.PRICE;
     }
 
     public void buyItem() {
         money -= Item.PRICE;
-    }
-
-    public void takeDamage(int damageTaken) {
-        health -= damageTaken;
-    }
-
-    public int dealDamage() {
-        return damage;
     }
 }

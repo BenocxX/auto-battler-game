@@ -1,12 +1,11 @@
-package cegepst.game.entities;
+package cegepst.game.entities.enemies;
 
-import cegepst.engine.CollidableRepository;
 import cegepst.engine.entities.MovableEntity;
-import cegepst.engine.entities.StaticEntity;
 import cegepst.engine.resources.images.Animator;
+import cegepst.game.entities.Player;
 import cegepst.game.resources.Sprite;
 
-public abstract class Enemy extends MovableEntity {
+public abstract class Enemy extends MovableEntity implements Damagable, DamageDealable {
 
     protected Animator animator;
     protected int health;
@@ -19,20 +18,20 @@ public abstract class Enemy extends MovableEntity {
         animator = new Animator(Sprite.PLAYER_SPRITE_SHEET.getBufferedImage(), 8);
     }
 
+    @Override
+    public void takeDamage(int damage) {
+        health -= damage;
+    }
+
+    @Override
+    public int dealDamage() {
+        return damage;
+    }
+
     public void checkIfTouchingPlayer(Player player) {
         if (hitBoxIntersectWith(player)) {
             takeDamage(player.dealDamage());
             player.takeDamage(dealDamage());
-            System.out.println();
-            System.out.println();
         }
-    }
-
-    protected void takeDamage(int damageTaken) {
-        health -= damageTaken;
-    }
-
-    protected int dealDamage() {
-        return damage;
     }
 }
