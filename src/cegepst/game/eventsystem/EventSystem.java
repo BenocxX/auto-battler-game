@@ -13,6 +13,7 @@ public class EventSystem {
     private ArrayList<ItemBuyListener> itemBuyListeners;
     private ArrayList<ButtonListener> buttonClickListeners;
     private ArrayList<MorphListener> morphListeners;
+    private ArrayList<PlayerAttackListener> playerAttackListeners;
 
     public static EventSystem getInstance() {
         if (instance == null) {
@@ -35,6 +36,10 @@ public class EventSystem {
 
     public void addMorphListener(MorphListener listener) {
         morphListeners.add(listener);
+    }
+
+    public void addPlayerAttackListener(PlayerAttackListener listener) {
+        playerAttackListeners.add(listener);
     }
 
     public void onTriggerAreaEnter(int triggerId) {
@@ -73,10 +78,23 @@ public class EventSystem {
         }
     }
 
+    public void onTargetAttack(int id, int damage) {
+        for (PlayerAttackListener listener : playerAttackListeners) {
+            listener.onTargetAttack(id, damage);
+        }
+    }
+
+    public void onAreaAttack(int[] id, int damage) {
+        for (PlayerAttackListener listener : playerAttackListeners) {
+            listener.onAreaAttack(id, damage);
+        }
+    }
+
     private EventSystem() {
         triggerAreaListeners = new ArrayList<>();
         itemBuyListeners = new ArrayList<>();
         buttonClickListeners = new ArrayList<>();
         morphListeners = new ArrayList<>();
+        playerAttackListeners = new ArrayList<>();
     }
 }

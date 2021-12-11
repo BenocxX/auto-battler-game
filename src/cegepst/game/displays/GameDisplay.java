@@ -10,6 +10,7 @@ import cegepst.game.controls.MousePad;
 import cegepst.game.entities.enemies.Enemy;
 import cegepst.game.entities.enemies.RunnerZombie;
 import cegepst.game.entities.enemies.Zombie;
+import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.ButtonEventType;
 import cegepst.game.helpers.ButtonFactory;
 import cegepst.game.entities.shopPhase.ShopStation;
@@ -23,6 +24,7 @@ import cegepst.game.settings.GameSettings;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GameDisplay extends Display {
 
@@ -160,6 +162,7 @@ public class GameDisplay extends Display {
     private void keysInputCheck() {
         quitKeyCheck();
         debugKeyCheck();
+        attackKeyCheck();
         useKeyCheck();
         inventoryKeyCheck();
         screenModeKeyCheck();
@@ -181,6 +184,16 @@ public class GameDisplay extends Display {
         if (gamePad.isDebugTyped()) {
             GameSettings.DEBUG_MODE = !GameSettings.DEBUG_MODE;
         }
+    }
+
+    private void attackKeyCheck() {
+        if (gamePad.isAttackTyped()) {
+            EventSystem.getInstance().onTargetAttack(getRandomEnemyIndex(), player.dealDamage());
+        }
+    }
+
+    private int getRandomEnemyIndex() {
+        return enemies.get((new Random()).nextInt(enemies.size())).getId();
     }
 
     private void useKeyCheck() {

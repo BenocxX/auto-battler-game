@@ -84,6 +84,7 @@ public class Player extends ControllableEntity
     @Override
     public void takeDamage(int damage) {
         health -= damage;
+        System.out.println("Attack!");
     }
 
     @Override
