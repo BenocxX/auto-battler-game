@@ -1,4 +1,4 @@
-package cegepst.game.entities.enemies;
+package cegepst.game.entities;
 
 public interface Killable {
 

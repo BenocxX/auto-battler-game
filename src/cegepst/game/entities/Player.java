@@ -6,7 +6,6 @@ import cegepst.engine.RenderingEngine;
 import cegepst.engine.controls.MovementController;
 import cegepst.engine.entities.ControllableEntity;
 import cegepst.engine.resources.images.Animator;
-import cegepst.game.entities.enemies.Killable;
 import cegepst.game.entities.shopPhase.CreatureType;
 import cegepst.game.entities.shopPhase.Item;
 import cegepst.game.eventsystem.EventSystem;

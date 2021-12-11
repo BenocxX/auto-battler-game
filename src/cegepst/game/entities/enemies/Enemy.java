@@ -2,6 +2,7 @@ package cegepst.game.entities.enemies;
 
 import cegepst.engine.entities.MovableEntity;
 import cegepst.engine.resources.images.Animator;
+import cegepst.game.entities.Killable;
 import cegepst.game.entities.Player;
 import cegepst.game.resources.Sprite;
 
