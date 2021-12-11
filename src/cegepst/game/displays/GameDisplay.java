@@ -8,6 +8,7 @@ import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
 import cegepst.game.entities.enemies.Enemy;
+import cegepst.game.entities.enemies.RunnerZombie;
 import cegepst.game.entities.enemies.Zombie;
 import cegepst.game.eventsystem.events.ButtonEventType;
 import cegepst.game.helpers.ButtonFactory;
@@ -51,6 +52,7 @@ public class GameDisplay extends Display {
         triggerAreas = initializer.getTriggerAreasForShopStations(shopStations);
         enemies = new ArrayList<>();
         enemies.add(new Zombie());
+        enemies.add(new RunnerZombie());
     }
 
     @Override
