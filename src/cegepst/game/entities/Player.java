@@ -12,6 +12,7 @@ import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.ButtonEventType;
 import cegepst.game.eventsystem.events.ButtonListener;
 import cegepst.game.eventsystem.events.MorphListener;
+import cegepst.game.helpers.CenteringMachine;
 import cegepst.game.settings.GameSettings;
 import cegepst.game.resources.Sprite;
 
@@ -60,6 +61,7 @@ public class Player extends ControllableEntity
         } else {
             buffer.drawImage(morphSprite, x ,y);
         }
+        buffer.drawHorizontallyCenteredText("HP: " + health, getBounds(), y - 10);
         buffer.drawText(money + " $", 20, RenderingEngine.HEIGHT - 70, Color.WHITE);
         if (hasMoved() && GameSettings.DEBUG_MODE) {
             drawHitBox(buffer);
