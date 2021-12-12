@@ -1,5 +1,6 @@
 package cegepst.game.eventsystem;
 
+import cegepst.game.entities.enemies.Enemy;
 import cegepst.game.entities.shopPhase.CreatureType;
 import cegepst.game.eventsystem.events.*;
 
@@ -81,6 +82,12 @@ public class EventSystem {
     public void onTargetAttack(int id, int damage) {
         for (PlayerAttackListener listener : playerAttackListeners) {
             listener.onTargetAttack(id, damage);
+        }
+    }
+
+    public void onRowAttack(ArrayList<Enemy> enemies, int damage) {
+        for (PlayerAttackListener listener : playerAttackListeners) {
+            listener.onRowAttack(enemies, damage);
         }
     }
 

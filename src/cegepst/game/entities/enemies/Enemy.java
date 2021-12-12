@@ -8,6 +8,7 @@ import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.PlayerAttackListener;
 import cegepst.game.resources.Sprite;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -42,6 +43,13 @@ public abstract class Enemy extends MovableEntity implements Killable, PlayerAtt
     public void onTargetAttack(int id, int damage) {
         if (id == this.id) {
             takeDamage(damage);
+        }
+    }
+
+    @Override
+    public void onRowAttack(ArrayList<Enemy> enemies, int damage) {
+        for (Enemy enemy : enemies) {
+            enemy.takeDamage(damage);
         }
     }
 

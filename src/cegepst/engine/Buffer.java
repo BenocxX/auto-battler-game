@@ -19,6 +19,11 @@ public class Buffer {
         graphics.fillRect(x, y, width, height);
     }
 
+    public void drawOutlineRectangle(int x, int y, int width, int height, Paint paint) {
+        graphics.setPaint(paint);
+        graphics.drawRect(x, y, width, height);
+    }
+
     public void drawRoundRectangle(int x, int y, int width, int height, int arcWidth, int arcHeight, Paint paint) {
         graphics.setPaint(paint);
         graphics.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
