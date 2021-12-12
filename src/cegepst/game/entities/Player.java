@@ -12,7 +12,6 @@ import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.ButtonEventType;
 import cegepst.game.eventsystem.events.ButtonListener;
 import cegepst.game.eventsystem.events.MorphListener;
-import cegepst.game.helpers.CenteringMachine;
 import cegepst.game.settings.GameSettings;
 import cegepst.game.resources.Sprite;
 
