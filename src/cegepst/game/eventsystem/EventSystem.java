@@ -79,9 +79,9 @@ public class EventSystem {
         }
     }
 
-    public void onTargetAttack(int id, int damage) {
+    public void onTargetAttack(Enemy enemy, int damage) {
         for (PlayerAttackListener listener : playerAttackListeners) {
-            listener.onTargetAttack(id, damage);
+            listener.onTargetAttack(enemy, damage);
         }
     }
 
@@ -91,9 +91,9 @@ public class EventSystem {
         }
     }
 
-    public void onAreaAttack(int[] id, int damage) {
+    public void onAreaAttack(ArrayList<Enemy> enemies, int damage) {
         for (PlayerAttackListener listener : playerAttackListeners) {
-            listener.onAreaAttack(id, damage);
+            listener.onAreaAttack(enemies, damage);
         }
     }
 

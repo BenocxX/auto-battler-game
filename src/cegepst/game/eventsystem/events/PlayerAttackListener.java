@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public interface PlayerAttackListener {
 
-    void onTargetAttack(int id, int damage);
+    void onTargetAttack(Enemy enemy, int damage);
     void onRowAttack(ArrayList<Enemy> enemies, int damage);
-    void onAreaAttack(int[] ids, int damage);
+    void onAreaAttack(ArrayList<Enemy> enemies, int damage);
 }
