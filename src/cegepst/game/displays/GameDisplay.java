@@ -18,6 +18,9 @@ import cegepst.game.entities.Player;
 import cegepst.game.entities.miscellaneous.TriggerArea;
 import cegepst.game.helpers.CenteringMachine;
 import cegepst.game.helpers.Initializer;
+import cegepst.game.map.DefendingRow;
+import cegepst.game.map.AttackingRow;
+import cegepst.game.map.Row;
 import cegepst.game.map.World;
 import cegepst.game.resources.Sprite;
 import cegepst.game.settings.GameSettings;
@@ -39,6 +42,10 @@ public class GameDisplay extends Display {
     private ArrayList<ShopStation> shopStations;
     private ArrayList<TriggerArea> triggerAreas;
     private ArrayList<Enemy> enemies;
+    private ArrayList<Row> rows;
+    private ArrayList<AttackingRow> attackingRows;
+    private ArrayList<DefendingRow> defendingRows;
+    private int currentRowIndex;
     private boolean inBattle = false;
 
     public GameDisplay(DisplayType displayType) {
@@ -49,12 +56,13 @@ public class GameDisplay extends Display {
         battleMap = new World(Sprite.BATTLE_MAP.getImage());
         shopMap = new World(Sprite.SHOP_MAP.getImage());
         initializer = new Initializer();
-        initializeButtonSystem();
         shopStations = initializer.getShopStations();
         triggerAreas = initializer.getTriggerAreasForShopStations(shopStations);
-        enemies = new ArrayList<>();
-        enemies.add(new Zombie());
-        enemies.add(new RunnerZombie());
+        initializeButtonSystem();
+        initializeEnemies();
+        initializeAttackRows();
+        initializeDefendingRows();
+        initializeRows();
     }
 
     @Override
@@ -62,6 +70,7 @@ public class GameDisplay extends Display {
         resetStateData();
         keysInputCheck();
         if (inBattle) {
+            player.setInBattle(true);
             applyColliderOnEnemies();
             battleMenuSystem.update();
             for (Enemy enemy : enemies) {
@@ -71,9 +80,7 @@ public class GameDisplay extends Display {
             }
             removeColliderOnEnemies();
         } else {
-            for (Enemy enemy : enemies) {
-                CollidableRepository.getInstance().unregisterEntity(enemy);
-            }
+            player.setInBattle(false);
             shopMenuSystem.update();
             for (TriggerArea triggerArea : triggerAreas) {
                 triggerArea.triggerCheck(player);
@@ -122,6 +129,9 @@ public class GameDisplay extends Display {
     private void logicDraw(Buffer buffer) {
         if (inBattle) {
             battleMap.draw(buffer);
+            for (Row row : rows) {
+                row.draw(buffer);
+            }
             for (Enemy enemy : enemies) {
                 enemy.draw(buffer);
             }
@@ -163,6 +173,7 @@ public class GameDisplay extends Display {
         quitKeyCheck();
         debugKeyCheck();
         attackKeyCheck();
+        moveRowKeyCheck();
         useKeyCheck();
         inventoryKeyCheck();
         screenModeKeyCheck();
@@ -188,7 +199,27 @@ public class GameDisplay extends Display {
 
     private void attackKeyCheck() {
         if (gamePad.isAttackTyped()) {
-            EventSystem.getInstance().onTargetAttack(getRandomEnemyIndex(), player.dealDamage());
+            EventSystem.getInstance().onRowAttack(
+                    attackingRows.get(0).getEnemies(enemies), player.dealDamage());
+        }
+    }
+
+    private void moveRowKeyCheck() {
+        if (inBattle) {
+            if (gamePad.isMoveRowUpTyped()) {
+                currentRowIndex--;
+                if (currentRowIndex < 0) {
+                    currentRowIndex = defendingRows.size() - 1;
+                }
+                defendingRows.get(currentRowIndex).movePlayer(player);
+            }
+            if (gamePad.isMoveRowDownTyped()) {
+                currentRowIndex++;
+                if (currentRowIndex > defendingRows.size() - 1) {
+                    currentRowIndex = 0;
+                }
+                defendingRows.get(currentRowIndex).movePlayer(player);
+            }
         }
     }
 
@@ -224,5 +255,32 @@ public class GameDisplay extends Display {
         battleMenuSystem.addMousePadDevice(mousePad);
         battleMenuSystem.addButton(ButtonFactory.inventoryButton(10, RenderingEngine.HEIGHT - 60));
         battleMenuSystem.addButton(ButtonFactory.leaveBattleButton(10, RenderingEngine.HEIGHT - 120));
+    }
+
+    private void initializeEnemies() {
+        enemies = new ArrayList<>();
+        enemies.add(new Zombie());
+        enemies.add(new RunnerZombie());
+    }
+
+    private void initializeAttackRows() {
+        attackingRows = new ArrayList<>();
+        attackingRows.add(new AttackingRow(400));
+        attackingRows.add(new AttackingRow(450));
+        attackingRows.add(new AttackingRow(500));
+    }
+
+    private void initializeDefendingRows() {
+        defendingRows = new ArrayList<>();
+        defendingRows.add(new DefendingRow(attackingRows.get(0)));
+        defendingRows.add(new DefendingRow(attackingRows.get(1)));
+        defendingRows.add(new DefendingRow(attackingRows.get(2)));
+        currentRowIndex = 1;
+    }
+
+    private void initializeRows() {
+        rows = new ArrayList<>();
+        rows.addAll(attackingRows);
+        rows.addAll(defendingRows);
     }
 }

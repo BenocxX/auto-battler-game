@@ -28,6 +28,7 @@ public class Player extends ControllableEntity
     private int money;
     private int health;
     private int damage;
+    private boolean inBattle = false;
 
     public Player(MovementController controller) {
         super(controller);
@@ -48,7 +49,9 @@ public class Player extends ControllableEntity
     @Override
     public void update() {
         super.update();
-        moveAccordingToController();
+        if (!inBattle) {
+            moveAccordingToController();
+        }
         if (morphSprite == null) {
             animator.updateAnimationFrame(hasMoved());
         }
@@ -84,7 +87,6 @@ public class Player extends ControllableEntity
     @Override
     public void takeDamage(int damage) {
         health -= damage;
-        System.out.println("Attack!");
     }
 
     @Override
@@ -98,5 +100,9 @@ public class Player extends ControllableEntity
 
     public void buyItem() {
         money -= Item.PRICE;
+    }
+
+    public void setInBattle(boolean inBattle) {
+        this.inBattle = inBattle;
     }
 }
