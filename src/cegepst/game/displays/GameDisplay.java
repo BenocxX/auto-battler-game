@@ -207,20 +207,28 @@ public class GameDisplay extends Display {
     private void moveRowKeyCheck() {
         if (inBattle) {
             if (gamePad.isMoveRowUpTyped()) {
-                currentRowIndex--;
-                if (currentRowIndex < 0) {
-                    currentRowIndex = defendingRows.size() - 1;
-                }
-                defendingRows.get(currentRowIndex).movePlayer(player);
+                moveRowUp();
             }
             if (gamePad.isMoveRowDownTyped()) {
-                currentRowIndex++;
-                if (currentRowIndex > defendingRows.size() - 1) {
-                    currentRowIndex = 0;
-                }
-                defendingRows.get(currentRowIndex).movePlayer(player);
+                 moveRowDown();
             }
         }
+    }
+
+    private void moveRowUp() {
+        currentRowIndex--;
+        if (currentRowIndex < 0) {
+            currentRowIndex = defendingRows.size() - 1;
+        }
+        defendingRows.get(currentRowIndex).movePlayer(player);
+    }
+
+    private void moveRowDown() {
+        currentRowIndex++;
+        if (currentRowIndex > defendingRows.size() - 1) {
+            currentRowIndex = 0;
+        }
+        defendingRows.get(currentRowIndex).movePlayer(player);
     }
 
     private int getRandomEnemyIndex() {

@@ -40,8 +40,8 @@ public abstract class Enemy extends MovableEntity implements Killable, PlayerAtt
     }
 
     @Override
-    public void onTargetAttack(int id, int damage) {
-        if (id == this.id) {
+    public void onTargetAttack(Enemy enemy, int damage) {
+        if (this == enemy) {
             takeDamage(damage);
         }
     }
@@ -54,9 +54,9 @@ public abstract class Enemy extends MovableEntity implements Killable, PlayerAtt
     }
 
     @Override
-    public void onAreaAttack(int[] ids, int damage) {
-        if (Arrays.stream(ids).anyMatch(i -> i == id)) {
-            takeDamage(damage);
+    public void onAreaAttack(ArrayList<Enemy> enemies, int damage) {
+        for (Enemy enemy : enemies) {
+            enemy.takeDamage(damage);
         }
     }
 
