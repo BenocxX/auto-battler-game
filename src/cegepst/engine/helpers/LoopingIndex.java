@@ -12,6 +12,24 @@ public class LoopingIndex {
         maxIndex = 0;
     }
 
+    public LoopingIndex(int initialIndex) {
+        currentIndex = initialIndex;
+        minIndex = 0;
+        maxIndex = 0;
+    }
+
+    public LoopingIndex(int min, int max) {
+        currentIndex = 0;
+        minIndex = min;
+        maxIndex = max;
+    }
+
+    public LoopingIndex(int initialIndex, int min, int max) {
+        currentIndex = initialIndex;
+        minIndex = min;
+        maxIndex = max;
+    }
+
     public void decrement() {
         if (currentIndex > minIndex) {
             currentIndex--;

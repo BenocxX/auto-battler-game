@@ -4,6 +4,7 @@ import cegepst.engine.Buffer;
 import cegepst.engine.CollidableRepository;
 import cegepst.engine.RenderingEngine;
 import cegepst.engine.entities.StaticEntity;
+import cegepst.engine.helpers.LoopingIndex;
 import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
@@ -45,7 +46,7 @@ public class GameDisplay extends Display {
     private ArrayList<Row> rows;
     private ArrayList<AttackingRow> attackingRows;
     private ArrayList<DefendingRow> defendingRows;
-    private int currentRowIndex;
+    private LoopingIndex currentRowLoopingIndex;
     private boolean inBattle = false;
 
     public GameDisplay(DisplayType displayType) {
@@ -105,8 +106,7 @@ public class GameDisplay extends Display {
         super.onButtonClick(eventType);
         if (ButtonEventType.BATTLE == eventType) {
             inBattle = true;
-            Rectangle screenRectangle = new Rectangle(RenderingEngine.WIDTH, RenderingEngine.HEIGHT);
-            player.teleport(CenteringMachine.centerHorizontally(screenRectangle, player.getHitBox()), 450);
+            defendingRows.get(currentRowLoopingIndex.getIndex()).movePlayer(player);
         } else if (ButtonEventType.LEAVE_BATTLE == eventType) {
             inBattle = false;
             player.teleport(100, 400);
@@ -207,28 +207,14 @@ public class GameDisplay extends Display {
     private void moveRowKeyCheck() {
         if (inBattle) {
             if (gamePad.isMoveRowUpTyped()) {
-                moveRowUp();
+                currentRowLoopingIndex.decrement();
+                defendingRows.get(currentRowLoopingIndex.getIndex()).movePlayer(player);
             }
             if (gamePad.isMoveRowDownTyped()) {
-                 moveRowDown();
+                currentRowLoopingIndex.increment();
+                defendingRows.get(currentRowLoopingIndex.getIndex()).movePlayer(player);
             }
         }
-    }
-
-    private void moveRowUp() {
-        currentRowIndex--;
-        if (currentRowIndex < 0) {
-            currentRowIndex = defendingRows.size() - 1;
-        }
-        defendingRows.get(currentRowIndex).movePlayer(player);
-    }
-
-    private void moveRowDown() {
-        currentRowIndex++;
-        if (currentRowIndex > defendingRows.size() - 1) {
-            currentRowIndex = 0;
-        }
-        defendingRows.get(currentRowIndex).movePlayer(player);
     }
 
     private int getRandomEnemyIndex() {
@@ -283,7 +269,7 @@ public class GameDisplay extends Display {
         defendingRows.add(new DefendingRow(attackingRows.get(0)));
         defendingRows.add(new DefendingRow(attackingRows.get(1)));
         defendingRows.add(new DefendingRow(attackingRows.get(2)));
-        currentRowIndex = 1;
+        currentRowLoopingIndex = new LoopingIndex(1, 0, defendingRows.size() -1);
     }
 
     private void initializeRows() {
