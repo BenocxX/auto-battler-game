@@ -1,7 +1,14 @@
 package cegepst.game.helpers;
 
+import cegepst.engine.helpers.LoopingIndex;
+import cegepst.game.entities.enemies.Enemy;
+import cegepst.game.entities.enemies.RunnerZombie;
+import cegepst.game.entities.enemies.Zombie;
 import cegepst.game.entities.shopPhase.ShopStation;
 import cegepst.game.entities.miscellaneous.TriggerArea;
+import cegepst.game.map.AttackingRow;
+import cegepst.game.map.DefendingRow;
+import cegepst.game.map.Row;
 
 import java.util.ArrayList;
 
@@ -26,5 +33,35 @@ public class Initializer {
             triggerAreas.add(triggerArea);
         }
         return triggerAreas;
+    }
+
+    public ArrayList<Enemy> getEnemies() {
+        ArrayList<Enemy> enemies = new ArrayList<>();
+        enemies.add(new Zombie());
+        enemies.add(new RunnerZombie());
+        return enemies;
+    }
+
+    public ArrayList<AttackingRow> getAttackingRows() {
+        ArrayList<AttackingRow> rows = new ArrayList<>();
+        rows.add(new AttackingRow(400));
+        rows.add(new AttackingRow(450));
+        rows.add(new AttackingRow(500));
+        return rows;
+    }
+
+    public ArrayList<DefendingRow> getDefendingRows(ArrayList<AttackingRow> attackingRows) {
+        ArrayList<DefendingRow> rows = new ArrayList<>();
+        for (AttackingRow attackingRow : attackingRows) {
+            rows.add(new DefendingRow(attackingRow));
+        }
+        return rows;
+    }
+
+    public ArrayList<Row> initializeRows(ArrayList<AttackingRow> attackingRows, ArrayList<DefendingRow> defendingRows) {
+        ArrayList<Row> rows = new ArrayList<>();
+        rows.addAll(attackingRows);
+        rows.addAll(defendingRows);
+        return rows;
     }
 }

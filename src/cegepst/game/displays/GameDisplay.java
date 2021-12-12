@@ -60,10 +60,11 @@ public class GameDisplay extends Display {
         shopStations = initializer.getShopStations();
         triggerAreas = initializer.getTriggerAreasForShopStations(shopStations);
         initializeButtonSystem();
-        initializeEnemies();
-        initializeAttackRows();
-        initializeDefendingRows();
-        initializeRows();
+        enemies = initializer.getEnemies();
+        attackingRows = initializer.getAttackingRows();
+        defendingRows = initializer.getDefendingRows(attackingRows);
+        rows = initializer.initializeRows(attackingRows, defendingRows);
+        currentRowLoopingIndex = new LoopingIndex(1, 0, defendingRows.size() -1);
     }
 
     @Override
@@ -249,32 +250,5 @@ public class GameDisplay extends Display {
         battleMenuSystem.addMousePadDevice(mousePad);
         battleMenuSystem.addButton(ButtonFactory.inventoryButton(10, RenderingEngine.HEIGHT - 60));
         battleMenuSystem.addButton(ButtonFactory.leaveBattleButton(10, RenderingEngine.HEIGHT - 120));
-    }
-
-    private void initializeEnemies() {
-        enemies = new ArrayList<>();
-        enemies.add(new Zombie());
-        enemies.add(new RunnerZombie());
-    }
-
-    private void initializeAttackRows() {
-        attackingRows = new ArrayList<>();
-        attackingRows.add(new AttackingRow(400));
-        attackingRows.add(new AttackingRow(450));
-        attackingRows.add(new AttackingRow(500));
-    }
-
-    private void initializeDefendingRows() {
-        defendingRows = new ArrayList<>();
-        defendingRows.add(new DefendingRow(attackingRows.get(0)));
-        defendingRows.add(new DefendingRow(attackingRows.get(1)));
-        defendingRows.add(new DefendingRow(attackingRows.get(2)));
-        currentRowLoopingIndex = new LoopingIndex(1, 0, defendingRows.size() -1);
-    }
-
-    private void initializeRows() {
-        rows = new ArrayList<>();
-        rows.addAll(attackingRows);
-        rows.addAll(defendingRows);
     }
 }
