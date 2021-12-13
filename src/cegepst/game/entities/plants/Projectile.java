@@ -14,8 +14,8 @@ public class Projectile extends MovableEntity {
     public Projectile(Plant plant) {
         direction = Direction.RIGHT;
         setSpeed(5);
-        teleport(plant.getX() + plant.getWidth() + 1,
-                plant.getY() + 15 - 2);
+        teleport(plant.getX() + plant.getWidth() - 15,
+                plant.getY() + 5 - 2);
         setDimension(8, 4);
     }
 
@@ -26,6 +26,6 @@ public class Projectile extends MovableEntity {
 
     @Override
     public void draw(Buffer buffer) {
-        buffer.drawRectangle(x, y, width, height, Color.YELLOW);
+        buffer.drawCircle(x, y, 10, new Color(113, 180, 55));
     }
 }
