@@ -174,73 +174,52 @@ public class GameDisplay extends Display {
     }
 
     private void addKeyInputAction() {
-        gamePad.addKeyListener(new KeyListener() {
-            @Override
-            public void onKeyAction() {
-                if (gamePad.isQuitTyped() || gamePad.isEscapeTyped()) {
-                    goToMainMenuDisplay();
+        gamePad.addKeyListener(() -> {
+            if (gamePad.isQuitTyped() || gamePad.isEscapeTyped()) {
+                goToMainMenuDisplay();
+            }
+        });
+        gamePad.addKeyListener(() -> {
+            if (gamePad.isDebugTyped()) {
+                GameSettings.DEBUG_MODE = !GameSettings.DEBUG_MODE;
+            }
+        });
+        gamePad.addKeyListener(() -> {
+            if (gamePad.isAttackTyped()) {
+                EventSystem.getInstance().onRowAttack(
+                        attackingRows.get(0).getEnemies(enemies), player.dealDamage());
+            }
+        });
+        gamePad.addKeyListener(() -> {
+            if (inBattle) {
+                if (gamePad.isMoveRowUpTyped()) {
+                    currentRowLoopingIndex.decrement();
+                    defendingRows.get(currentRowLoopingIndex.getIndex()).movePlayer(player);
+                }
+                if (gamePad.isMoveRowDownTyped()) {
+                    currentRowLoopingIndex.increment();
+                    defendingRows.get(currentRowLoopingIndex.getIndex()).movePlayer(player);
                 }
             }
         });
-        gamePad.addKeyListener(new KeyListener() {
-            @Override
-            public void onKeyAction() {
-                if (gamePad.isDebugTyped()) {
-                    GameSettings.DEBUG_MODE = !GameSettings.DEBUG_MODE;
-                }
-            }
-        });
-        gamePad.addKeyListener(new KeyListener() {
-            @Override
-            public void onKeyAction() {
-                if (gamePad.isAttackTyped()) {
-                    EventSystem.getInstance().onRowAttack(
-                            attackingRows.get(0).getEnemies(enemies), player.dealDamage());
-                }
-            }
-        });
-        gamePad.addKeyListener(new KeyListener() {
-            @Override
-            public void onKeyAction() {
-                if (inBattle) {
-                    if (gamePad.isMoveRowUpTyped()) {
-                        currentRowLoopingIndex.decrement();
-                        defendingRows.get(currentRowLoopingIndex.getIndex()).movePlayer(player);
-                    }
-                    if (gamePad.isMoveRowDownTyped()) {
-                        currentRowLoopingIndex.increment();
-                        defendingRows.get(currentRowLoopingIndex.getIndex()).movePlayer(player);
+        gamePad.addKeyListener(() -> {
+            if (gamePad.isUseTyped()) {
+                for (ShopStation buyStation : shopStations) {
+                    if (buyStation.isSelected() && player.canBuy()) {
+                        buyStation.buyItem();
+                        player.buyItem();
                     }
                 }
             }
         });
-        gamePad.addKeyListener(new KeyListener() {
-            @Override
-            public void onKeyAction() {
-                if (gamePad.isUseTyped()) {
-                    for (ShopStation buyStation : shopStations) {
-                        if (buyStation.isSelected() && player.canBuy()) {
-                            buyStation.buyItem();
-                            player.buyItem();
-                        }
-                    }
-                }
+        gamePad.addKeyListener(() -> {
+            if (gamePad.isInventoryTyped()) {
+                goToInventoryDisplay();
             }
         });
-        gamePad.addKeyListener(new KeyListener() {
-            @Override
-            public void onKeyAction() {
-                if (gamePad.isInventoryTyped()) {
-                    goToInventoryDisplay();
-                }
-            }
-        });
-        gamePad.addKeyListener(new KeyListener() {
-            @Override
-            public void onKeyAction() {
-                if (gamePad.isScreenModeTyped()) {
-                    RenderingEngine.getInstance().getScreen().toggleFullscreen();
-                }
+        gamePad.addKeyListener(() -> {
+            if (gamePad.isScreenModeTyped()) {
+                RenderingEngine.getInstance().getScreen().toggleFullscreen();
             }
         });
     }
