@@ -47,11 +47,6 @@ public class PlantSelector extends StaticEntity {
     }
 
     public Plant getPlant() {
-        if (plant instanceof Peashooter) {
-            return new Peashooter(200, 200);
-        } else if (plant instanceof Sunflower) {
-            return new Sunflower(200, 200);
-        }
-        return null;
+        return plant.getPlantOfSameType();
     }
 }

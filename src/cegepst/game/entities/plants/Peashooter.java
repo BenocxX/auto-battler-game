@@ -39,4 +39,9 @@ public class Peashooter extends Plant {
     public void draw(Buffer buffer) {
         buffer.drawImage(image, x, y);
     }
+
+    @Override
+    public Plant getPlantOfSameType() {
+        return new Peashooter(0, 0);
+    }
 }

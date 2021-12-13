@@ -28,7 +28,6 @@ public class ShopStation extends MovableEntity implements TriggerAreaListener, I
         setDimension(70, 44);
         teleport(x, y);
         initializeSound();
-        CollidableRepository.getInstance().registerEntity(this);
         EventSystem.getInstance().addTriggerAreaListener(this);
         EventSystem.getInstance().addItemBuyListener(this);
 

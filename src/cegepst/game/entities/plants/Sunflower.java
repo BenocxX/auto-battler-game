@@ -41,4 +41,9 @@ public class Sunflower extends Plant {
     public boolean isCooldownOver() {
         return cooldown == 0;
     }
+
+    @Override
+    public Plant getPlantOfSameType() {
+        return new Sunflower(0, 0);
+    }
 }

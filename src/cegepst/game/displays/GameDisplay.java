@@ -124,10 +124,12 @@ public class GameDisplay extends Display implements CellListener {
 
     private void shopUpdate() {
         player.setInBattle(false);
+        applyColliderOnShop();
         shopMenuSystem.update();
         for (TriggerArea triggerArea : triggerAreas) {
             triggerArea.triggerCheck(player);
         }
+        removeColliderOnShop();
     }
 
     private void updateEnemies() {
@@ -167,6 +169,18 @@ public class GameDisplay extends Display implements CellListener {
     private void lineClickCheck() {
         for (Line line : lines) {
             line.checkIfCellClicked(mousePad.getPosition());
+        }
+    }
+
+    private void applyColliderOnShop() {
+        for (ShopStation shopStation : shopStations) {
+            CollidableRepository.getInstance().registerEntity(shopStation);
+        }
+    }
+
+    private void removeColliderOnShop() {
+        for (ShopStation shopStation : shopStations) {
+            CollidableRepository.getInstance().unregisterEntity(shopStation);
         }
     }
 
