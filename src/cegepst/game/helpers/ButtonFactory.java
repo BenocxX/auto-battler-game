@@ -1,10 +1,7 @@
 package cegepst.game.helpers;
 
 import cegepst.engine.menu.buttons.ButtonStyle;
-import cegepst.engine.menu.buttons.Callback;
 import cegepst.engine.menu.buttons.RoundButton;
-import cegepst.game.displays.Display;
-import cegepst.game.entities.shopPhase.CreatureType;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.ButtonEventType;
 import cegepst.game.settings.GameSettings;
@@ -101,15 +98,6 @@ public class ButtonFactory {
         RoundButton backButton = new RoundButton(x, y, "Inventory");
         backButton.setCustomEvent(() ->
             EventSystem.getInstance().onButtonClicked(ButtonEventType.INVENTORY));
-        return backButton;
-    }
-
-    public static RoundButton morphButton(int x, int y, CreatureType creatureType) {
-        RoundButton backButton = new RoundButton(x, y, ButtonStyle.SLOT_STYLE, "Morph");
-        backButton.setCustomEvent(() -> {
-            EventSystem.getInstance().onButtonClicked(ButtonEventType.GAME_DISPLAY);
-            EventSystem.getInstance().onMorph(creatureType);
-        });
         return backButton;
     }
 }

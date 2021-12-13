@@ -6,19 +6,17 @@ import cegepst.engine.RenderingEngine;
 import cegepst.engine.controls.MovementController;
 import cegepst.engine.entities.ControllableEntity;
 import cegepst.engine.resources.images.Animator;
-import cegepst.game.entities.shopPhase.CreatureType;
-import cegepst.game.entities.shopPhase.Item;
+import cegepst.game.entities.shopPhase.ShopStation;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.ButtonEventType;
 import cegepst.game.eventsystem.events.ButtonListener;
-import cegepst.game.eventsystem.events.MorphListener;
 import cegepst.game.settings.GameSettings;
 import cegepst.game.resources.Sprite;
 
 import java.awt.*;
 
 public class Player extends ControllableEntity
-        implements MorphListener, ButtonListener, Killable {
+        implements ButtonListener, Killable {
 
     private static final int INITIAL_MONEY = 500;
 
@@ -38,7 +36,6 @@ public class Player extends ControllableEntity
         animator.loadAnimations(0, 128, width, height, 3);
         CollidableRepository.getInstance().registerEntity(this);
 
-        EventSystem.getInstance().addMorphListener(this);
         EventSystem.getInstance().addButtonListener(this);
         money = INITIAL_MONEY;
         health = 100;
@@ -78,12 +75,6 @@ public class Player extends ControllableEntity
     }
 
     @Override
-    public void onMorph(CreatureType creatureType) {
-        setDimension(50, 50);
-        morphSprite = creatureType.getSprite(50, 50);
-    }
-
-    @Override
     public void takeDamage(int damage) {
         health -= damage;
     }
@@ -94,11 +85,11 @@ public class Player extends ControllableEntity
     }
 
     public boolean canBuy() {
-        return money >= Item.PRICE;
+        return money >= ShopStation.PRICE;
     }
 
     public void buyItem() {
-        money -= Item.PRICE;
+        money -= ShopStation.PRICE;
     }
 
     public void setInBattle(boolean inBattle) {
