@@ -15,7 +15,6 @@ import cegepst.game.entities.shopPhase.ShopStation;
 import cegepst.game.entities.Player;
 import cegepst.game.entities.miscellaneous.TriggerArea;
 import cegepst.game.helpers.Initializer;
-import cegepst.game.controls.KeyListener;
 import cegepst.game.map.DefendingRow;
 import cegepst.game.map.AttackingRow;
 import cegepst.game.map.Row;
