@@ -1,10 +1,14 @@
 package cegepst.game.displays;
 
 import cegepst.engine.Buffer;
+import cegepst.engine.RenderingEngine;
 import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
+import cegepst.game.entities.shopPhase.ShopStation;
+import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.helpers.ButtonFactory;
+import cegepst.game.settings.GameSettings;
 
 import java.awt.*;
 
@@ -19,13 +23,14 @@ public class MainMenuDisplay extends Display {
         gamePad = new GamePad();
         mousePad = new MousePad();
         initializeButtonSystem();
+        addKeyInputAction();
     }
 
     @Override
     public int update() {
         resetStateData();
-        quitKeyCheck();
         menuSystem.update();
+        gamePad.update();
         gamePad.clearTypedKeys();
         mousePad.resetClickedButtons();
         updateAlreadyInDisplay();
@@ -45,12 +50,6 @@ public class MainMenuDisplay extends Display {
         }
     }
 
-    private void quitKeyCheck() {
-        if (gamePad.isQuitTyped() || gamePad.isEscapeTyped()) {
-            quit();
-        }
-    }
-
     private void initializeButtonSystem() {
         menuSystem = new MenuSystem();
         menuSystem.addGamePadDevice(gamePad);
@@ -59,5 +58,13 @@ public class MainMenuDisplay extends Display {
         menuSystem.addButton(ButtonFactory.optionButton(200, 260));
         menuSystem.addButton(ButtonFactory.quitButton(200, 320));
         menuSystem.getButton(0).isSelected(true);
+    }
+
+    private void addKeyInputAction() {
+        gamePad.addKeyListener(() -> {
+            if (gamePad.isQuitTyped() || gamePad.isEscapeTyped()) {
+                quit();
+            }
+        });
     }
 }
