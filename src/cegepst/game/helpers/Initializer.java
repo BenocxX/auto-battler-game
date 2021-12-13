@@ -1,6 +1,9 @@
 package cegepst.game.helpers;
 
+import cegepst.engine.RenderingEngine;
 import cegepst.engine.helpers.LoopingIndex;
+import cegepst.engine.menu.MenuSystem;
+import cegepst.game.controls.MousePad;
 import cegepst.game.entities.enemies.Enemy;
 import cegepst.game.entities.enemies.RunnerZombie;
 import cegepst.game.entities.enemies.Zombie;
@@ -33,6 +36,23 @@ public class Initializer {
             triggerAreas.add(triggerArea);
         }
         return triggerAreas;
+    }
+
+    public MenuSystem getShopMenuSystem(MousePad mousePad) {
+        MenuSystem menuSystem = new MenuSystem();
+        menuSystem.addMousePadDevice(mousePad);
+        menuSystem.addButton(ButtonFactory.inventoryButton(10, RenderingEngine.HEIGHT - 60));
+        menuSystem.addButton(ButtonFactory.moneyCheatButton(220, RenderingEngine.HEIGHT - 60));
+        menuSystem.addButton(ButtonFactory.battleButton(10, RenderingEngine.HEIGHT - 120));
+        return menuSystem;
+    }
+
+    public MenuSystem getBattleMenuSystem(MousePad mousePad) {
+        MenuSystem menuSystem = new MenuSystem();
+        menuSystem.addMousePadDevice(mousePad);
+        menuSystem.addButton(ButtonFactory.inventoryButton(10, RenderingEngine.HEIGHT - 60));
+        menuSystem.addButton(ButtonFactory.leaveBattleButton(10, RenderingEngine.HEIGHT - 120));
+        return menuSystem;
     }
 
     public ArrayList<Enemy> getEnemies() {

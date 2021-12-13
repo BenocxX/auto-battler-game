@@ -59,7 +59,8 @@ public class GameDisplay extends Display {
         initializer = new Initializer();
         shopStations = initializer.getShopStations();
         triggerAreas = initializer.getTriggerAreasForShopStations(shopStations);
-        initializeButtonSystem();
+        shopMenuSystem = initializer.getShopMenuSystem(mousePad);
+        battleMenuSystem = initializer.getBattleMenuSystem(mousePad);
         enemies = initializer.getEnemies();
         attackingRows = initializer.getAttackingRows();
         defendingRows = initializer.getDefendingRows(attackingRows);
@@ -218,10 +219,6 @@ public class GameDisplay extends Display {
         }
     }
 
-    private int getRandomEnemyIndex() {
-        return enemies.get((new Random()).nextInt(enemies.size())).getId();
-    }
-
     private void useKeyCheck() {
         if (gamePad.isUseTyped()) {
             for (ShopStation buyStation : shopStations) {
@@ -239,16 +236,7 @@ public class GameDisplay extends Display {
         }
     }
 
-    private void initializeButtonSystem() {
-        shopMenuSystem = new MenuSystem();
-        shopMenuSystem.addMousePadDevice(mousePad);
-        shopMenuSystem.addButton(ButtonFactory.inventoryButton(10, RenderingEngine.HEIGHT - 60));
-        shopMenuSystem.addButton(ButtonFactory.moneyCheatButton(220, RenderingEngine.HEIGHT - 60));
-        shopMenuSystem.addButton(ButtonFactory.battleButton(10, RenderingEngine.HEIGHT - 120));
-
-        battleMenuSystem = new MenuSystem();
-        battleMenuSystem.addMousePadDevice(mousePad);
-        battleMenuSystem.addButton(ButtonFactory.inventoryButton(10, RenderingEngine.HEIGHT - 60));
-        battleMenuSystem.addButton(ButtonFactory.leaveBattleButton(10, RenderingEngine.HEIGHT - 120));
+    private int getRandomEnemyIndex() {
+        return enemies.get((new Random()).nextInt(enemies.size())).getId();
     }
 }
