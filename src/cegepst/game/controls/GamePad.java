@@ -4,9 +4,11 @@ import cegepst.engine.RenderingEngine;
 import cegepst.engine.controls.MovementController;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class GamePad extends MovementController {
 
+    private ArrayList<KeyListener> listeners;
     private int quitKey = KeyEvent.VK_Q;
     private int escapeKey = KeyEvent.VK_ESCAPE;
     private int enterKey = KeyEvent.VK_ENTER;
@@ -20,6 +22,17 @@ public class GamePad extends MovementController {
 
     public GamePad() {
         RenderingEngine.getInstance().addKeyListener(this);
+        listeners = new ArrayList<>();
+    }
+
+    public void update() {
+        for (KeyListener listener : listeners) {
+            listener.onKeyAction();
+        }
+    }
+
+    public void addKeyListener(KeyListener listener) {
+        listeners.add(listener);
     }
 
     public boolean isQuitTyped() {

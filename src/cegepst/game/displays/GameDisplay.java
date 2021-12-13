@@ -9,16 +9,13 @@ import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
 import cegepst.game.entities.enemies.Enemy;
-import cegepst.game.entities.enemies.RunnerZombie;
-import cegepst.game.entities.enemies.Zombie;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.ButtonEventType;
-import cegepst.game.helpers.ButtonFactory;
 import cegepst.game.entities.shopPhase.ShopStation;
 import cegepst.game.entities.Player;
 import cegepst.game.entities.miscellaneous.TriggerArea;
-import cegepst.game.helpers.CenteringMachine;
 import cegepst.game.helpers.Initializer;
+import cegepst.game.controls.KeyListener;
 import cegepst.game.map.DefendingRow;
 import cegepst.game.map.AttackingRow;
 import cegepst.game.map.Row;
@@ -57,6 +54,7 @@ public class GameDisplay extends Display {
         battleMap = new World(Sprite.BATTLE_MAP.getImage());
         shopMap = new World(Sprite.SHOP_MAP.getImage());
         initializer = new Initializer();
+        addKeyInputAction();
         shopStations = initializer.getShopStations();
         triggerAreas = initializer.getTriggerAreasForShopStations(shopStations);
         shopMenuSystem = initializer.getShopMenuSystem(mousePad);
@@ -71,7 +69,6 @@ public class GameDisplay extends Display {
     @Override
     public int update() {
         resetStateData();
-        keysInputCheck();
         if (inBattle) {
             player.setInBattle(true);
             applyColliderOnEnemies();
@@ -90,6 +87,7 @@ public class GameDisplay extends Display {
             }
         }
         player.update();
+        gamePad.update();
         gamePad.clearTypedKeys();
         mousePad.resetClickedButtons();
         updateAlreadyInDisplay();
@@ -171,72 +169,79 @@ public class GameDisplay extends Display {
         }
     }
 
-    private void keysInputCheck() {
-        quitKeyCheck();
-        debugKeyCheck();
-        attackKeyCheck();
-        moveRowKeyCheck();
-        useKeyCheck();
-        inventoryKeyCheck();
-        screenModeKeyCheck();
-    }
-
-    private void inventoryKeyCheck() {
-        if (gamePad.isInventoryTyped()) {
-            goToInventoryDisplay();
-        }
-    } 
-    
-    private void quitKeyCheck() {
-        if (gamePad.isQuitTyped() || gamePad.isEscapeTyped()) {
-            goToMainMenuDisplay();
-        }
-    }
-
-    private void debugKeyCheck() {
-        if (gamePad.isDebugTyped()) {
-            GameSettings.DEBUG_MODE = !GameSettings.DEBUG_MODE;
-        }
-    }
-
-    private void attackKeyCheck() {
-        if (gamePad.isAttackTyped()) {
-            EventSystem.getInstance().onRowAttack(
-                    attackingRows.get(0).getEnemies(enemies), player.dealDamage());
-        }
-    }
-
-    private void moveRowKeyCheck() {
-        if (inBattle) {
-            if (gamePad.isMoveRowUpTyped()) {
-                currentRowLoopingIndex.decrement();
-                defendingRows.get(currentRowLoopingIndex.getIndex()).movePlayer(player);
-            }
-            if (gamePad.isMoveRowDownTyped()) {
-                currentRowLoopingIndex.increment();
-                defendingRows.get(currentRowLoopingIndex.getIndex()).movePlayer(player);
-            }
-        }
-    }
-
-    private void useKeyCheck() {
-        if (gamePad.isUseTyped()) {
-            for (ShopStation buyStation : shopStations) {
-                if (buyStation.isSelected() && player.canBuy()) {
-                    buyStation.buyItem();
-                    player.buyItem();
-                }
-            }
-        }
-    }
-
-    private void screenModeKeyCheck() {
-        if (gamePad.isScreenModeTyped()) {
-            RenderingEngine.getInstance().getScreen().toggleFullscreen();
-        }
-    }
-
     private int getRandomEnemyIndex() {
         return enemies.get((new Random()).nextInt(enemies.size())).getId();
+    }
+
+    private void addKeyInputAction() {
+        gamePad.addKeyListener(new KeyListener() {
+            @Override
+            public void onKeyAction() {
+                if (gamePad.isQuitTyped() || gamePad.isEscapeTyped()) {
+                    goToMainMenuDisplay();
+                }
+            }
+        });
+        gamePad.addKeyListener(new KeyListener() {
+            @Override
+            public void onKeyAction() {
+                if (gamePad.isDebugTyped()) {
+                    GameSettings.DEBUG_MODE = !GameSettings.DEBUG_MODE;
+                }
+            }
+        });
+        gamePad.addKeyListener(new KeyListener() {
+            @Override
+            public void onKeyAction() {
+                if (gamePad.isAttackTyped()) {
+                    EventSystem.getInstance().onRowAttack(
+                            attackingRows.get(0).getEnemies(enemies), player.dealDamage());
+                }
+            }
+        });
+        gamePad.addKeyListener(new KeyListener() {
+            @Override
+            public void onKeyAction() {
+                if (inBattle) {
+                    if (gamePad.isMoveRowUpTyped()) {
+                        currentRowLoopingIndex.decrement();
+                        defendingRows.get(currentRowLoopingIndex.getIndex()).movePlayer(player);
+                    }
+                    if (gamePad.isMoveRowDownTyped()) {
+                        currentRowLoopingIndex.increment();
+                        defendingRows.get(currentRowLoopingIndex.getIndex()).movePlayer(player);
+                    }
+                }
+            }
+        });
+        gamePad.addKeyListener(new KeyListener() {
+            @Override
+            public void onKeyAction() {
+                if (gamePad.isUseTyped()) {
+                    for (ShopStation buyStation : shopStations) {
+                        if (buyStation.isSelected() && player.canBuy()) {
+                            buyStation.buyItem();
+                            player.buyItem();
+                        }
+                    }
+                }
+            }
+        });
+        gamePad.addKeyListener(new KeyListener() {
+            @Override
+            public void onKeyAction() {
+                if (gamePad.isInventoryTyped()) {
+                    goToInventoryDisplay();
+                }
+            }
+        });
+        gamePad.addKeyListener(new KeyListener() {
+            @Override
+            public void onKeyAction() {
+                if (gamePad.isScreenModeTyped()) {
+                    RenderingEngine.getInstance().getScreen().toggleFullscreen();
+                }
+            }
+        });
     }
 }
