@@ -15,7 +15,11 @@ public enum Sprite {
     SAP_BAT_SPRITE("./images/sap/bat.png"),
     SAP_DOG_SPRITE("./images/sap/dog.png"),
     SAP_FISH_SPRITE("./images/sap/fish.png"),
-    SAP_DRAGON_SPRITE("./images/sap/dragon.png");
+    SAP_DRAGON_SPRITE("./images/sap/dragon.png"),
+
+    PVZ_MAP("./images/PVZ/map.jpg"),
+    PEASHOOTER("./images/PVZ/peashooter.png"),
+    SUNFLOWER("./images/PVZ/Sunflower.png");
 
     private final String path;
     private Image image;

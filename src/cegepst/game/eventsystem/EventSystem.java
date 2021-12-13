@@ -3,6 +3,7 @@ package cegepst.game.eventsystem;
 import cegepst.game.entities.enemies.Enemy;
 import cegepst.game.entities.shopPhase.CreatureType;
 import cegepst.game.eventsystem.events.*;
+import cegepst.game.map.Cell;
 
 import java.util.ArrayList;
 
@@ -14,7 +15,7 @@ public class EventSystem {
     private ArrayList<ItemBuyListener> itemBuyListeners;
     private ArrayList<ButtonListener> buttonClickListeners;
     private ArrayList<MorphListener> morphListeners;
-    private ArrayList<PlayerAttackListener> playerAttackListeners;
+    private ArrayList<CellListener> cellListeners;
 
     public static EventSystem getInstance() {
         if (instance == null) {
@@ -39,8 +40,8 @@ public class EventSystem {
         morphListeners.add(listener);
     }
 
-    public void addPlayerAttackListener(PlayerAttackListener listener) {
-        playerAttackListeners.add(listener);
+    public void addCellListener(CellListener listener) {
+        cellListeners.add(listener);
     }
 
     public void onTriggerAreaEnter(int triggerId) {
@@ -79,21 +80,9 @@ public class EventSystem {
         }
     }
 
-    public void onTargetAttack(Enemy enemy, int damage) {
-        for (PlayerAttackListener listener : playerAttackListeners) {
-            listener.onTargetAttack(enemy, damage);
-        }
-    }
-
-    public void onRowAttack(ArrayList<Enemy> enemies, int damage) {
-        for (PlayerAttackListener listener : playerAttackListeners) {
-            listener.onRowAttack(enemies, damage);
-        }
-    }
-
-    public void onAreaAttack(ArrayList<Enemy> enemies, int damage) {
-        for (PlayerAttackListener listener : playerAttackListeners) {
-            listener.onAreaAttack(enemies, damage);
+    public void onCellClick(Cell cell) {
+        for (CellListener listener : cellListeners) {
+            listener.onCellClick(cell);
         }
     }
 
@@ -102,6 +91,6 @@ public class EventSystem {
         itemBuyListeners = new ArrayList<>();
         buttonClickListeners = new ArrayList<>();
         morphListeners = new ArrayList<>();
-        playerAttackListeners = new ArrayList<>();
+        cellListeners = new ArrayList<>();
     }
 }

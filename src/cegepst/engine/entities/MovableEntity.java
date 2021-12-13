@@ -67,13 +67,12 @@ public abstract class MovableEntity extends UpdatableEntity {
     }
 
     public Rectangle getHitBox() {
-        switch (direction) {
-            case UP: return getUpperHitBox();
-            case DOWN: return getLowerHitBox();
-            case LEFT: return getLeftHitBox();
-            case RIGHT: return getRightHitBox();
-            default: return getBounds();
-        }
+        return switch (direction) {
+            case UP -> getUpperHitBox();
+            case DOWN -> getLowerHitBox();
+            case LEFT -> getLeftHitBox();
+            case RIGHT -> getRightHitBox();
+        };
     }
 
     public boolean hasMoved() {
