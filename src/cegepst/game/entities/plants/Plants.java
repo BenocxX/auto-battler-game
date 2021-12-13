@@ -7,7 +7,8 @@ import java.awt.*;
 
 public enum Plants {
 
-    PEASHOOTER(Sprite.PEASHOOTER.getImage());
+    PEASHOOTER(Sprite.PEASHOOTER.getImage()),
+    SUNFLOWER(Sprite.SUNFLOWER.getImage());
 
     private Image image;
 

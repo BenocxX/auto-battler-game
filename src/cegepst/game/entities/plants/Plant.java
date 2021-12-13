@@ -13,8 +13,8 @@ public abstract class Plant extends StaticEntity {
     @Override
     public abstract void draw(Buffer buffer);
     public abstract void update();
-    public abstract boolean canAttack();
-    public abstract Projectile fireProjectile();
+    public abstract boolean isCooldownOver();
+    public abstract Projectile ability();
 
     public Image getImage() {
         return image;

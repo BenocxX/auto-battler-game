@@ -8,10 +8,7 @@ import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
 import cegepst.game.entities.enemies.Enemy;
-import cegepst.game.entities.plants.Peashooter;
-import cegepst.game.entities.plants.Plant;
-import cegepst.game.entities.plants.PlantSelector;
-import cegepst.game.entities.plants.Projectile;
+import cegepst.game.entities.plants.*;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.ButtonEventType;
 import cegepst.game.entities.shopPhase.ShopStation;
@@ -25,7 +22,6 @@ import cegepst.game.settings.GameSettings;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class GameDisplay extends Display implements CellListener {
 
@@ -45,7 +41,7 @@ public class GameDisplay extends Display implements CellListener {
     private ArrayList<Line> lines;
     private ArrayList<Plant> plants;
     private ArrayList<Projectile> projectiles;
-    private PlantSelector plantSelector1;
+    private PlantSelector[] plantSelectors;
 
     public GameDisplay(DisplayType displayType) {
         super(displayType);
@@ -62,16 +58,10 @@ public class GameDisplay extends Display implements CellListener {
         battleMenuSystem = initializer.getBattleMenuSystem(mousePad);
         enemies = initializer.getEnemies();
 
-        lines = new ArrayList<>();
-        lines.add(new Line(90));
-        lines.add(new Line(190));
-        lines.add(new Line(295));
-        lines.add(new Line(400));
-        lines.add(new Line(500));
+        initializeLines();
         plants = new ArrayList<>();
         projectiles = new ArrayList<>();
-        plantSelector1 = new PlantSelector(20, 100, new Peashooter(20, 100));
-
+        initializePlantSelectors();
         EventSystem.getInstance().addCellListener(this);
     }
 
@@ -112,10 +102,12 @@ public class GameDisplay extends Display implements CellListener {
 
     @Override
     public void onCellClick(Cell cell) {
-        if (plantSelector1.isSelected()) {
-            Plant plant = plantSelector1.getPlant();
-            cell.placeEntity(plant);
-            plants.add(plant);
+        for (PlantSelector plantSelector : plantSelectors) {
+            if (plantSelector.isSelected()) {
+                Plant plant = plantSelector.getPlant();
+                cell.placeEntity(plant);
+                plants.add(plant);
+            }
         }
     }
 
@@ -123,22 +115,10 @@ public class GameDisplay extends Display implements CellListener {
         player.setInBattle(true);
         applyColliderOnEnemies();
         battleMenuSystem.update();
-        for (Enemy enemy : enemies) {
-            enemy.update();
-        }
-        for (Plant plant : plants) {
-            plant.update();
-            if (plant.canAttack()) {
-                projectiles.add(plant.fireProjectile());
-            }
-        }
+        updateEnemies();
+        updatePlants();
         handleProjectile();
-        if (mousePad.isLeftClicked()) {
-            plantSelector1.isClicked(mousePad.getPosition());
-            for (Line line : lines) {
-                line.checkIfCellClicked(mousePad.getPosition());
-            }
-        }
+        leftClickCheck();
         removeColliderOnEnemies();
     }
 
@@ -147,6 +127,46 @@ public class GameDisplay extends Display implements CellListener {
         shopMenuSystem.update();
         for (TriggerArea triggerArea : triggerAreas) {
             triggerArea.triggerCheck(player);
+        }
+    }
+
+    private void updateEnemies() {
+        for (Enemy enemy : enemies) {
+            enemy.update();
+        }
+    }
+
+    private void updatePlants() {
+        for (Plant plant : plants) {
+            plant.update();
+            if (plant.isCooldownOver()) {
+                projectiles.add(plant.ability());
+            }
+        }
+    }
+
+    private void leftClickCheck() {
+        if (mousePad.isLeftClicked()) {
+            plantSelectorClickCheck();
+            lineClickCheck();
+        }
+    }
+
+    private void plantSelectorClickCheck() {
+        for (PlantSelector plantSelector : plantSelectors) {
+            if (plantSelector.isClicked(mousePad.getPosition())) {
+                for (PlantSelector plantSelector2 : plantSelectors) {
+                    if (plantSelector != plantSelector2) {
+                        plantSelector2.setSelected(false);
+                    }
+                }
+            }
+        }
+    }
+
+    private void lineClickCheck() {
+        for (Line line : lines) {
+            line.checkIfCellClicked(mousePad.getPosition());
         }
     }
 
@@ -179,7 +199,9 @@ public class GameDisplay extends Display implements CellListener {
             for (Projectile projectile : projectiles) {
                 projectile.draw(buffer);
             }
-            plantSelector1.draw(buffer);
+            for (PlantSelector plantSelector : plantSelectors) {
+                plantSelector.draw(buffer);
+            }
         } else {
             shopMap.draw(buffer);
             for (ShopStation buyStation : shopStations) {
@@ -212,10 +234,6 @@ public class GameDisplay extends Display implements CellListener {
             gamePad.clearTypedKeys();
             mousePad.resetClickedButtons();
         }
-    }
-
-    private int getRandomEnemyIndex() {
-        return enemies.get((new Random()).nextInt(enemies.size())).getId();
     }
 
     private void handleProjectile() {
@@ -276,5 +294,24 @@ public class GameDisplay extends Display implements CellListener {
                 RenderingEngine.getInstance().getScreen().toggleFullscreen();
             }
         });
+    }
+
+    private void initializeLines() {
+        lines = new ArrayList<>();
+        lines.add(new Line(90));
+        lines.add(new Line(190));
+        lines.add(new Line(295));
+        lines.add(new Line(400));
+        lines.add(new Line(500));
+    }
+
+    private void initializePlantSelectors() {
+        plantSelectors = new PlantSelector[] {
+                new PlantSelector(20, 100, new Peashooter(20, 100)),
+                new PlantSelector(20, 170, new Sunflower(20, 170)),
+                new PlantSelector(20, 240, new Peashooter(20, 240)),
+                new PlantSelector(20, 310, new Peashooter(20, 310)),
+                new PlantSelector(20, 380, new Peashooter(20, 380)),
+        };
     }
 }
