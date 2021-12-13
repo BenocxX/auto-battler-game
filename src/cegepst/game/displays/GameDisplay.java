@@ -79,32 +79,9 @@ public class GameDisplay extends Display implements CellListener {
     public int update() {
         resetStateData();
         if (inBattle) {
-            player.setInBattle(true);
-            applyColliderOnEnemies();
-            battleMenuSystem.update();
-            for (Enemy enemy : enemies) {
-                enemy.update();
-            }
-            for (Plant plant : plants) {
-                plant.update();
-                if (plant.canAttack()) {
-                    projectiles.add(plant.fireProjectile());
-                }
-            }
-            handleProjectile();
-            if (mousePad.isLeftClicked()) {
-                plantSelector1.isClicked(mousePad.getPosition());
-                for (Line line : lines) {
-                    line.checkIfCellClicked(mousePad.getPosition());
-                }
-            }
-            removeColliderOnEnemies();
+            battleUpdate();
         } else {
-            player.setInBattle(false);
-            shopMenuSystem.update();
-            for (TriggerArea triggerArea : triggerAreas) {
-                triggerArea.triggerCheck(player);
-            }
+            shopUpdate();
         }
         player.update();
         gamePad.update();
@@ -139,6 +116,37 @@ public class GameDisplay extends Display implements CellListener {
             Plant plant = plantSelector1.getPlant();
             cell.placeEntity(plant);
             plants.add(plant);
+        }
+    }
+
+    private void battleUpdate() {
+        player.setInBattle(true);
+        applyColliderOnEnemies();
+        battleMenuSystem.update();
+        for (Enemy enemy : enemies) {
+            enemy.update();
+        }
+        for (Plant plant : plants) {
+            plant.update();
+            if (plant.canAttack()) {
+                projectiles.add(plant.fireProjectile());
+            }
+        }
+        handleProjectile();
+        if (mousePad.isLeftClicked()) {
+            plantSelector1.isClicked(mousePad.getPosition());
+            for (Line line : lines) {
+                line.checkIfCellClicked(mousePad.getPosition());
+            }
+        }
+        removeColliderOnEnemies();
+    }
+
+    private void shopUpdate() {
+        player.setInBattle(false);
+        shopMenuSystem.update();
+        for (TriggerArea triggerArea : triggerAreas) {
+            triggerArea.triggerCheck(player);
         }
     }
 
