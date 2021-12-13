@@ -25,6 +25,11 @@ public class TriggerArea extends StaticEntity {
         setDimension(width, height);
     }
 
+    public TriggerArea(int x, int y, int width, int height) {
+        teleport(x, y);
+        setDimension(width, height);
+    }
+
     public TriggerArea(int width, int height) {
         isTriggered = false;
         setDimension(width, height);

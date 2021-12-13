@@ -3,6 +3,7 @@ package cegepst.game.eventsystem;
 import cegepst.game.entities.enemies.Enemy;
 import cegepst.game.entities.shopPhase.CreatureType;
 import cegepst.game.eventsystem.events.*;
+import cegepst.game.map.Cell;
 
 import java.util.ArrayList;
 
@@ -15,6 +16,7 @@ public class EventSystem {
     private ArrayList<ButtonListener> buttonClickListeners;
     private ArrayList<MorphListener> morphListeners;
     private ArrayList<PlayerAttackListener> playerAttackListeners;
+    private ArrayList<CellListener> cellListeners;
 
     public static EventSystem getInstance() {
         if (instance == null) {
@@ -41,6 +43,10 @@ public class EventSystem {
 
     public void addPlayerAttackListener(PlayerAttackListener listener) {
         playerAttackListeners.add(listener);
+    }
+
+    public void addCellListener(CellListener listener) {
+        cellListeners.add(listener);
     }
 
     public void onTriggerAreaEnter(int triggerId) {
@@ -97,11 +103,18 @@ public class EventSystem {
         }
     }
 
+    public void onCellClick(Cell cell) {
+        for (CellListener listener : cellListeners) {
+            listener.onCellClick(cell);
+        }
+    }
+
     private EventSystem() {
         triggerAreaListeners = new ArrayList<>();
         itemBuyListeners = new ArrayList<>();
         buttonClickListeners = new ArrayList<>();
         morphListeners = new ArrayList<>();
         playerAttackListeners = new ArrayList<>();
+        cellListeners = new ArrayList<>();
     }
 }

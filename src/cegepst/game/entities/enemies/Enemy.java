@@ -1,6 +1,7 @@
 package cegepst.game.entities.enemies;
 
 import cegepst.engine.entities.MovableEntity;
+import cegepst.engine.entities.StaticEntity;
 import cegepst.engine.resources.images.Animator;
 import cegepst.game.entities.Killable;
 import cegepst.game.entities.Player;
@@ -9,7 +10,6 @@ import cegepst.game.eventsystem.events.PlayerAttackListener;
 import cegepst.game.resources.Sprite;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public abstract class Enemy extends MovableEntity implements Killable, PlayerAttackListener {
@@ -60,11 +60,25 @@ public abstract class Enemy extends MovableEntity implements Killable, PlayerAtt
         }
     }
 
+    public boolean isDead() {
+        return health <= 0;
+    }
+
+    // TODO: Remove
+    /**
+     * Not used anymore
+     *
+     * @deprecated use isColliding(StaticEntity entity) instead
+     */
     public void checkIfTouchingPlayer(Player player) {
-        if (hitBoxIntersectWith(player)) {
+        /*if (hitBoxIntersectWith(player)) {
             takeDamage(player.dealDamage());
             player.takeDamage(dealDamage());
-        }
+        }*/
+    }
+
+    public boolean isColliding(StaticEntity entity) {
+        return hitBoxIntersectWith(entity) && !isDead();
     }
 
     public int getId() {
