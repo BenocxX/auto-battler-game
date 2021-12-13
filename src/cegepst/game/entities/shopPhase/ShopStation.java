@@ -1,11 +1,14 @@
 package cegepst.game.entities.shopPhase;
 
 import cegepst.engine.Buffer;
-import cegepst.engine.CollidableRepository;
 import cegepst.engine.RenderingEngine;
 import cegepst.engine.entities.MovableEntity;
 import cegepst.engine.helpers.RandomHandler;
 import cegepst.engine.resources.images.SpriteHandler;
+import cegepst.game.entities.plants.Peashooter;
+import cegepst.game.entities.plants.Plant;
+import cegepst.game.entities.plants.Plants;
+import cegepst.game.inventory.Inventory;
 import cegepst.game.settings.GameSettings;
 import cegepst.game.resources.Sound;
 import cegepst.game.eventsystem.EventSystem;
@@ -17,11 +20,12 @@ import java.awt.*;
 
 public class ShopStation extends MovableEntity implements TriggerAreaListener, ItemBuyListener {
 
+    public final static int PRICE = 60;
+
     private Sound sound;
-    private Image image;
-    private Item item;
+    private Plant plant;
     private boolean isSelected;
-    private boolean hasItem;
+    private boolean hasPlant;
     private int id;
 
     public ShopStation(int x, int y, int id) {
@@ -33,31 +37,31 @@ public class ShopStation extends MovableEntity implements TriggerAreaListener, I
 
 
         this.id = id;
-        hasItem = true;
-        item = new CreatureItem(id, x + ((width - CreatureItem.WIDTH) / 2), y - (CreatureItem.HEIGHT / 2));
-        image = SpriteHandler.resizeImage(Sprite.SAP_TILE_SPRITE.getImage(), Image.SCALE_SMOOTH, width, height);
+        hasPlant = true;
+        plant = new Peashooter(x + ((width - Peashooter.WIDTH) / 2), y - (Peashooter.HEIGHT / 2));
     }
 
     @Override
     public void draw(Buffer buffer) {
-        buffer.drawImage(image, x, y);
         if (isSelected) {
-            buffer.drawHorizontallyCenteredText(item.getName(), getBounds(), y - 35);
+            buffer.drawHorizontallyCenteredText(plant.getName(), getBounds(), y - 35);
             buffer.drawText("(Use E to Buy)", RenderingEngine.WIDTH - 97, 40, Color.WHITE);
         }
-        item.draw(buffer);
+        if (hasPlant) {
+            plant.draw(buffer);
+        }
     }
 
     @Override
     public void onTriggerEnter(int triggerId) {
-        if (id == triggerId && hasItem) {
+        if (id == triggerId && hasPlant) {
             isSelected = true;
         }
     }
 
     @Override
     public void onTrigger(int triggerId) {
-        if (id == triggerId && !hasItem) {
+        if (id == triggerId && !hasPlant) {
             isSelected = false;
         }
     }
@@ -72,7 +76,7 @@ public class ShopStation extends MovableEntity implements TriggerAreaListener, I
     @Override
     public void onItemBuy(int itemId) {
         if (id == itemId) {
-            hasItem = false;
+            hasPlant = false;
             sound.play(GameSettings.SOUND);
         }
     }
@@ -86,8 +90,9 @@ public class ShopStation extends MovableEntity implements TriggerAreaListener, I
     }
 
     public void buyItem() {
-        if (hasItem) {
-            item.buy();
+        if (hasPlant) {
+            EventSystem.getInstance().onItemBuy(id);
+            Inventory.getInstance().addItem(plant);
         }
     }
 

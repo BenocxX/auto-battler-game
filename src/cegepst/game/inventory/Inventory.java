@@ -3,8 +3,7 @@ package cegepst.game.inventory;
 import cegepst.engine.Buffer;
 import cegepst.engine.RenderingEngine;
 import cegepst.engine.entities.StaticEntity;
-import cegepst.game.entities.shopPhase.CreatureItem;
-import cegepst.game.entities.shopPhase.Item;
+import cegepst.game.entities.plants.Plant;
 import cegepst.game.helpers.CenteringMachine;
 
 import java.awt.*;
@@ -39,12 +38,12 @@ public class Inventory extends StaticEntity {
         }
     }
 
-    public void addItem(CreatureItem creatureItem) {
+    public void addItem(Plant plant) {
         int y = this.y + 10;
         if (!slots.isEmpty()) {
             y = slots.get(slots.size() - 1).getY() + Slot.HEIGHT + 10;
         }
-        slots.add(new Slot(creatureItem,
+        slots.add(new Slot(plant,
                 CenteringMachine.centerHorizontally(getBounds(), Slot.WIDTH), y));
     }
 
