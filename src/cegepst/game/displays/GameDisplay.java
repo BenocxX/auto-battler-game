@@ -4,6 +4,7 @@ import cegepst.engine.Buffer;
 import cegepst.engine.CollidableRepository;
 import cegepst.engine.RenderingEngine;
 import cegepst.engine.entities.StaticEntity;
+import cegepst.engine.helpers.RandomHandler;
 import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
@@ -69,7 +70,7 @@ public class GameDisplay extends Display
         plants = new ArrayList<>();
         zombies = new ArrayList<>();
         projectiles = new ArrayList<>();
-        currentRound = RoundFactory.getRound(getSpawningCells(), Rounds.ROUND_1.getNbZombies());
+        currentRound = RoundFactory.getRound(Rounds.ROUND_1.getNbZombies());
         sunCount = 0;
         EventSystem.getInstance().addCellListener(this);
         EventSystem.getInstance().addSlotListener(this);
@@ -149,6 +150,8 @@ public class GameDisplay extends Display
 
     @Override
     public void onZombieSpawn(Zombie zombie) {
+        ArrayList<Cell> spawningCells = getSpawningCells();
+        spawningCells.get(RandomHandler.getInt(spawningCells.size())).placeEntity(zombie);
         zombies.add(zombie);
     }
 

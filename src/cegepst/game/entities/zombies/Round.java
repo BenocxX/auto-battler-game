@@ -2,7 +2,6 @@ package cegepst.game.entities.zombies;
 
 import cegepst.engine.helpers.RandomHandler;
 import cegepst.game.eventsystem.EventSystem;
-import cegepst.game.map.Cell;
 
 import java.util.ArrayList;
 
@@ -14,13 +13,10 @@ public class Round {
     private final static int MAX_COOLDOWN = 60;
 
     private ArrayList<Zombie> zombies;
-    private ArrayList<Cell> spawningCells;
     private int cooldown;
 
-    public Round(ArrayList<Cell> spawningCells, ArrayList<Zombie> zombies) {
-        this.spawningCells = spawningCells;
+    public Round(ArrayList<Zombie> zombies) {
         this.zombies = zombies;
-        teleportZombiesOnRandomSpawningCell();
 //        cooldown = 360;
         cooldown = 0;
     }
@@ -31,16 +27,6 @@ public class Round {
             EventSystem.getInstance().onZombieSpawn(getRandomZombie());
             cooldown = RandomHandler.getInt(MIN_COOLDOWN, MAX_COOLDOWN);
         }
-    }
-
-    private void teleportZombiesOnRandomSpawningCell() {
-        zombies.forEach(zombie -> {
-            getRandomSpawningCell().placeEntity(zombie);
-        });
-    }
-
-    private Cell getRandomSpawningCell() {
-        return spawningCells.get(RandomHandler.getInt(spawningCells.size()));
     }
 
     private Zombie getRandomZombie() {
