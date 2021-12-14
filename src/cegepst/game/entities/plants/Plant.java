@@ -11,6 +11,8 @@ public abstract class Plant extends StaticEntity {
     protected Image image;
     protected String name;
 
+    // Refactor: Use Plants type to make new Plant()
+
     public abstract void update();
     @Override
     public abstract void draw(Buffer buffer);
