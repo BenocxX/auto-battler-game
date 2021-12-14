@@ -15,6 +15,7 @@ public class GamePad extends MovementController {
     private int attackKey = KeyEvent.VK_SPACE;
     private int moveRowUp = KeyEvent.VK_W;
     private int moveRowDown = KeyEvent.VK_S;
+    private int rollKey = KeyEvent.VK_R;
     private int useKey = KeyEvent.VK_E;
     private int screenModeKey = KeyEvent.VK_F;
     private int debugKey = KeyEvent.VK_D;
@@ -61,6 +62,10 @@ public class GamePad extends MovementController {
 
     public boolean isInventoryTyped() {
         return isKeyTyped(inventoryKey);
+    }
+
+    public boolean isRollTyped() {
+        return isKeyTyped(rollKey);
     }
 
     public boolean isAttackTyped() {

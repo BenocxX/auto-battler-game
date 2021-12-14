@@ -8,7 +8,7 @@ import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
 import cegepst.game.entities.enemies.Enemy;
-import cegepst.game.entities.miscellaneous.Projectile;
+import cegepst.game.entities.projectiles.Projectile;
 import cegepst.game.entities.plants.*;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.ButtonEventType;
@@ -17,6 +17,7 @@ import cegepst.game.entities.Player;
 import cegepst.game.entities.miscellaneous.TriggerArea;
 import cegepst.game.eventsystem.events.CellListener;
 import cegepst.game.eventsystem.events.SlotListener;
+import cegepst.game.eventsystem.events.SunListener;
 import cegepst.game.helpers.Initializer;
 import cegepst.game.map.*;
 import cegepst.game.resources.Sprite;
@@ -25,7 +26,8 @@ import cegepst.game.settings.GameSettings;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class GameDisplay extends Display implements CellListener, SlotListener {
+public class GameDisplay extends Display
+        implements CellListener, SlotListener, SunListener {
 
     private GamePad gamePad;
     private MousePad mousePad;
@@ -45,6 +47,8 @@ public class GameDisplay extends Display implements CellListener, SlotListener {
     private ArrayList<Projectile> projectiles;
     private ArrayList<PlantSelector> plantSelectors;
     private PlantSelector selectedPlant;
+    ArrayList<StaticEntity> killedEntities;
+    private int sunCount;
 
     public GameDisplay(DisplayType displayType) {
         super(displayType);
@@ -65,8 +69,10 @@ public class GameDisplay extends Display implements CellListener, SlotListener {
         plants = new ArrayList<>();
         projectiles = new ArrayList<>();
         initializePlantSelectors();
+        sunCount = 0;
         EventSystem.getInstance().addCellListener(this);
         EventSystem.getInstance().addSlotListener(this);
+        EventSystem.getInstance().addSunListener(this);
     }
 
     @Override
@@ -122,6 +128,20 @@ public class GameDisplay extends Display implements CellListener, SlotListener {
     @Override
     public void onSlotDeselection(Plant plant) {
         selectedPlant = null;
+    }
+
+    @Override
+    public void onSunCreation(Projectile projectile) {
+        sunCount++;
+        killedEntities.add(projectile);
+    }
+
+    @Override
+    public void onSunUtilisation() {
+        sunCount--;
+        if (sunCount < 0) {
+            sunCount = 0;
+        }
     }
 
     private void battleUpdate() {
@@ -244,6 +264,7 @@ public class GameDisplay extends Display implements CellListener, SlotListener {
     private void UIDraw(Buffer buffer) {
         if (inBattle) {
             battleMenuSystem.draw(buffer);
+            buffer.drawText("Sun: " + sunCount, 10, RenderingEngine.HEIGHT - 140, new Color(255, 255, 255));
         } else {
             shopMenuSystem.draw(buffer);
         }
@@ -264,13 +285,12 @@ public class GameDisplay extends Display implements CellListener, SlotListener {
     }
 
     private void handleProjectile() {
-        ArrayList<StaticEntity> killedEntities = new ArrayList<>();
+        killedEntities = new ArrayList<>();
         for (Projectile projectile : projectiles) {
             projectile.update();
             for (Enemy enemy : enemies) {
                 if (enemy.isColliding(projectile)) {
-                    // TODO: projectile.dealDamage()
-                    enemy.takeDamage(50);
+                    enemy.takeDamage(projectile.dealDamage());
                     if (enemy.isDead()) {
                         killedEntities.add(enemy);
                     }
@@ -288,6 +308,7 @@ public class GameDisplay extends Display implements CellListener, SlotListener {
             }
             CollidableRepository.getInstance().unregisterEntity(entity);
         }
+        killedEntities.clear();
     }
 
     private void addKeyInputAction() {
@@ -321,6 +342,13 @@ public class GameDisplay extends Display implements CellListener, SlotListener {
                 RenderingEngine.getInstance().getScreen().toggleFullscreen();
             }
         });
+        gamePad.addKeyListener(() -> {
+            if (gamePad.isRollTyped()) {
+                for (ShopStation shopStation : shopStations) {
+                    shopStation.roll();
+                }
+            }
+        });
     }
 
     private void initializeLines() {
@@ -334,10 +362,5 @@ public class GameDisplay extends Display implements CellListener, SlotListener {
 
     private void initializePlantSelectors() {
         plantSelectors = new ArrayList<>();
-//        plantSelectors.add(new PlantSelector(20, 100, new Peashooter(20, 100)));
-//        plantSelectors.add(new PlantSelector(20, 170, new Sunflower(20, 170)));
-//        plantSelectors.add(new PlantSelector(20, 250, new Peashooter(20, 250)));
-//        plantSelectors.add(new PlantSelector(20, 330, new Peashooter(20, 330)));
-//        plantSelectors.add(new PlantSelector(20, 410, new Peashooter(20, 410)));
     }
 }

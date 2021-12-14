@@ -83,6 +83,12 @@ public class ShopStation extends MovableEntity implements TriggerAreaListener, I
         }
     }
 
+    public void roll() {
+        hasPlant = true;
+        plant = getRandomPlant();
+        plant.teleport(x + ((width - plant.getWidth()) / 2), y - (plant.getHeight() / 2));
+    }
+
     public int getId() {
         return id;
     }

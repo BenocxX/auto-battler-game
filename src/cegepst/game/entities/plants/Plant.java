@@ -2,7 +2,7 @@ package cegepst.game.entities.plants;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.entities.StaticEntity;
-import cegepst.game.entities.miscellaneous.Projectile;
+import cegepst.game.entities.projectiles.Projectile;
 
 import java.awt.*;
 
