@@ -17,7 +17,6 @@ import cegepst.game.entities.miscellaneous.TriggerArea;
 import cegepst.game.eventsystem.events.CellListener;
 import cegepst.game.eventsystem.events.SlotListener;
 import cegepst.game.helpers.Initializer;
-import cegepst.game.inventory.Inventory;
 import cegepst.game.map.*;
 import cegepst.game.resources.Sprite;
 import cegepst.game.settings.GameSettings;
