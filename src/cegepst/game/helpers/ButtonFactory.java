@@ -2,6 +2,7 @@ package cegepst.game.helpers;
 
 import cegepst.engine.menu.buttons.ButtonStyle;
 import cegepst.engine.menu.buttons.RoundButton;
+import cegepst.game.entities.plants.Plant;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.ButtonEventType;
 import cegepst.game.settings.GameSettings;
@@ -101,15 +102,16 @@ public class ButtonFactory {
         return backButton;
     }
 
-    public static RoundButton selectPlantButton(int x, int y) {
+    public static RoundButton selectPlantButton(int x, int y, Plant plant) {
         RoundButton button = new RoundButton(x, y, 14,"Select");
         button.setCustomEvent(() -> {
             if (button.getText().equalsIgnoreCase("Select")) {
                 button.setText("Selected");
+                EventSystem.getInstance().onSlotSelection(plant);
             } else {
                 button.setText("Select");
+                EventSystem.getInstance().onSlotDeselection(plant);
             }
-            EventSystem.getInstance().onButtonClicked(ButtonEventType.SELECT_PLANT);
         });
         return button;
     }

@@ -1,5 +1,6 @@
 package cegepst.game.eventsystem;
 
+import cegepst.game.entities.plants.Plant;
 import cegepst.game.eventsystem.events.*;
 import cegepst.game.map.Cell;
 
@@ -13,6 +14,7 @@ public class EventSystem {
     private ArrayList<ItemBuyListener> itemBuyListeners;
     private ArrayList<ButtonListener> buttonClickListeners;
     private ArrayList<CellListener> cellListeners;
+    private ArrayList<SlotListener> slotListeners;
 
     public static EventSystem getInstance() {
         if (instance == null) {
@@ -35,6 +37,10 @@ public class EventSystem {
 
     public void addCellListener(CellListener listener) {
         cellListeners.add(listener);
+    }
+
+    public void addSlotListener(SlotListener listener) {
+        slotListeners.add(listener);
     }
 
     public void onTriggerAreaEnter(int triggerId) {
@@ -73,10 +79,23 @@ public class EventSystem {
         }
     }
 
+    public void onSlotSelection(Plant plant) {
+        for (SlotListener listener : slotListeners) {
+            listener.onSlotSelection(plant);
+        }
+    }
+
+    public void onSlotDeselection(Plant plant) {
+        for (SlotListener listener : slotListeners) {
+            listener.onSlotDeselection(plant);
+        }
+    }
+
     private EventSystem() {
         triggerAreaListeners = new ArrayList<>();
         itemBuyListeners = new ArrayList<>();
         buttonClickListeners = new ArrayList<>();
         cellListeners = new ArrayList<>();
+        slotListeners = new ArrayList<>();
     }
 }

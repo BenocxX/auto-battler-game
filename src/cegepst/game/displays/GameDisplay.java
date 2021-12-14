@@ -15,6 +15,7 @@ import cegepst.game.entities.shopPhase.ShopStation;
 import cegepst.game.entities.Player;
 import cegepst.game.entities.miscellaneous.TriggerArea;
 import cegepst.game.eventsystem.events.CellListener;
+import cegepst.game.eventsystem.events.SlotListener;
 import cegepst.game.helpers.Initializer;
 import cegepst.game.map.*;
 import cegepst.game.resources.Sprite;
@@ -23,7 +24,7 @@ import cegepst.game.settings.GameSettings;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class GameDisplay extends Display implements CellListener {
+public class GameDisplay extends Display implements CellListener, SlotListener {
 
     private GamePad gamePad;
     private MousePad mousePad;
@@ -41,7 +42,7 @@ public class GameDisplay extends Display implements CellListener {
     private ArrayList<Line> lines;
     private ArrayList<Plant> plants;
     private ArrayList<Projectile> projectiles;
-    private PlantSelector[] plantSelectors;
+    private ArrayList<PlantSelector> plantSelectors;
 
     public GameDisplay(DisplayType displayType) {
         super(displayType);
@@ -63,6 +64,7 @@ public class GameDisplay extends Display implements CellListener {
         projectiles = new ArrayList<>();
         initializePlantSelectors();
         EventSystem.getInstance().addCellListener(this);
+        EventSystem.getInstance().addSlotListener(this);
     }
 
     @Override
@@ -109,6 +111,44 @@ public class GameDisplay extends Display implements CellListener {
                 plants.add(plant);
             }
         }
+    }
+
+    @Override
+    public void onSlotSelection(Plant plant) {
+        if (plantSelectors.size() < 5) {
+            int x = PlantSelector.X;
+            int y = getPlantSelectorY();
+            plant.teleport(x, y);
+            plantSelectors.add(new PlantSelector(x, y, plant));
+        }
+    }
+
+    @Override
+    public void onSlotDeselection(Plant plant) {
+        // TODO: Fix
+        System.out.println("Deselection");
+        int index = 0;
+        for (PlantSelector plantSelector : plantSelectors) {
+            if (plantSelector.getPlant().equals(plant)) {
+                System.out.println("Is Equal!");
+            }
+            index++;
+        }
+    }
+
+    private int getPlantSelectorY() {
+        if (plantSelectors.size() == 0) {
+            return PlantSelector.Y_ROW1;
+        } else if (plantSelectors.size() == 1) {
+            return PlantSelector.Y_ROW2;
+        } else if (plantSelectors.size() == 2) {
+            return PlantSelector.Y_ROW3;
+        } else if (plantSelectors.size() == 3) {
+            return PlantSelector.Y_ROW4;
+        } else if (plantSelectors.size() == 4) {
+            return PlantSelector.Y_ROW5;
+        }
+        return 0;
     }
 
     private void battleUpdate() {
@@ -320,12 +360,11 @@ public class GameDisplay extends Display implements CellListener {
     }
 
     private void initializePlantSelectors() {
-        plantSelectors = new PlantSelector[] {
-                new PlantSelector(20, 100, new Peashooter(20, 100)),
-                new PlantSelector(20, 170, new Sunflower(20, 170)),
-                new PlantSelector(20, 240, new Peashooter(20, 240)),
-                new PlantSelector(20, 310, new Peashooter(20, 310)),
-                new PlantSelector(20, 380, new Peashooter(20, 380)),
-        };
+        plantSelectors = new ArrayList<>();
+//        plantSelectors.add(new PlantSelector(20, 100, new Peashooter(20, 100)));
+//        plantSelectors.add(new PlantSelector(20, 170, new Sunflower(20, 170)));
+//        plantSelectors.add(new PlantSelector(20, 250, new Peashooter(20, 250)));
+//        plantSelectors.add(new PlantSelector(20, 330, new Peashooter(20, 330)));
+//        plantSelectors.add(new PlantSelector(20, 410, new Peashooter(20, 410)));
     }
 }

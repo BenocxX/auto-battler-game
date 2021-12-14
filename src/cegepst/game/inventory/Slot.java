@@ -27,7 +27,7 @@ public class Slot extends StaticEntity {
         mousePad = new MousePad();
         menuSystem = new MenuSystem();
         menuSystem.addMousePadDevice(mousePad);
-        menuSystem.addButton(ButtonFactory.selectPlantButton(x + 10 + IMAGE_WIDTH + 10, y + 60));
+        menuSystem.addButton(ButtonFactory.selectPlantButton(x + 10 + IMAGE_WIDTH + 10, y + 60, plant));
         this.plant = plant;
     }
 
