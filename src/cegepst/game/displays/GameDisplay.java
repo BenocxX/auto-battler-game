@@ -276,15 +276,15 @@ public class GameDisplay extends Display
         killedEntities = new ArrayList<>();
         for (Projectile projectile : projectiles) {
             projectile.update();
-            for (Enemy enemy : enemies) {
-                if (enemy.isColliding(projectile)) {
-                    enemy.takeDamage(projectile.dealDamage());
-                    if (enemy.isDead()) {
-                        killedEntities.add(enemy);
+            zombies.forEach(zombie -> {
+                if (zombie.isColliding(projectile)) {
+                    zombie.takeDamage(projectile.dealDamage());
+                    if (zombie.isDead()) {
+                        killedEntities.add(zombie);
                     }
                     killedEntities.add(projectile);
                 }
-            }
+            });
             for (StaticEntity entity : CollidableRepository.getInstance()) {
                 if (projectile.hitBoxIntersectWith(entity)) {
                     killedEntities.add(projectile);
@@ -293,8 +293,8 @@ public class GameDisplay extends Display
         }
 
         for (StaticEntity entity: killedEntities) {
-            if (entity instanceof Enemy) {
-                enemies.remove(entity);
+            if (entity instanceof Zombie) {
+                zombies.remove(entity);
             }
             if (entity instanceof Projectile) {
                 projectiles.remove(entity);
