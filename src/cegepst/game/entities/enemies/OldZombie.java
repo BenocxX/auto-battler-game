@@ -2,9 +2,9 @@ package cegepst.game.entities.enemies;
 
 import cegepst.engine.Buffer;
 
-public class Zombie extends Enemy {
+public class OldZombie extends Enemy {
 
-    public Zombie() {
+    public OldZombie() {
         super();
         animator.loadAnimations(96, 128, width, height, 3);
         health = Enemies.ZOMBIE.getHealth();

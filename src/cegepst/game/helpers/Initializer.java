@@ -5,7 +5,7 @@ import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.MousePad;
 import cegepst.game.entities.enemies.Enemy;
 import cegepst.game.entities.enemies.RunnerZombie;
-import cegepst.game.entities.enemies.Zombie;
+import cegepst.game.entities.enemies.OldZombie;
 import cegepst.game.entities.shopPhase.ShopStation;
 import cegepst.game.entities.miscellaneous.TriggerArea;
 
@@ -53,7 +53,7 @@ public class Initializer {
 
     public ArrayList<Enemy> getEnemies() {
         ArrayList<Enemy> enemies = new ArrayList<>();
-        enemies.add(new Zombie());
+        enemies.add(new OldZombie());
         enemies.add(new RunnerZombie());
         return enemies;
     }

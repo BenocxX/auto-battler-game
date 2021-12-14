@@ -1,6 +1,6 @@
 package cegepst.game.entities.enemies;
 
-public class RunnerZombie extends Zombie {
+public class RunnerZombie extends OldZombie {
 
     public RunnerZombie() {
         super();

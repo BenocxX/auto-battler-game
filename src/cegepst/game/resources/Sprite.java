@@ -20,7 +20,8 @@ public enum Sprite {
     PVZ_MAP("./images/PVZ/map.jpg"),
     PEASHOOTER("./images/PVZ/plants/peashooter.png"),
     SUNFLOWER("./images/PVZ/plants/Sunflower.png"),
-    GATLING_PEA("./images/PVZ/plants/gatlingpea.png");
+    GATLING_PEA("./images/PVZ/plants/gatlingpea.png"),
+    FLAG_ZOMBIE("./iamges/PVZ/zombies/FlagZombie.png");
 
     private final String path;
     private Image image;
