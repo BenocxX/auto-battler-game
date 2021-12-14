@@ -39,7 +39,6 @@ public class GameDisplay extends Display
     private MenuSystem battleMenuSystem;
     private ArrayList<ShopStation> shopStations;
     private ArrayList<TriggerArea> triggerAreas;
-    private ArrayList<Enemy> enemies;
     private boolean inBattle = false;
 
     private ArrayList<Line> lines;
@@ -64,7 +63,6 @@ public class GameDisplay extends Display
         triggerAreas = initializer.getTriggerAreasForShopStations(shopStations);
         shopMenuSystem = initializer.getShopMenuSystem(mousePad);
         battleMenuSystem = initializer.getBattleMenuSystem(mousePad);
-        enemies = initializer.getEnemies();
 
         initializeLines();
         plants = new ArrayList<>();
@@ -109,7 +107,6 @@ public class GameDisplay extends Display
         } else if (ButtonEventType.LEAVE_BATTLE == eventType) {
             inBattle = false;
             player.teleport(100, 400);
-            removeColliderOnEnemies();
         }
     }
 
@@ -156,15 +153,12 @@ public class GameDisplay extends Display
 
     private void battleUpdate() {
         player.setInBattle(true);
-        applyColliderOnEnemies();
         battleMenuSystem.update();
         currentRound.update();
         zombies.forEach(Zombie::update);
-        updateEnemies();
         updatePlants();
         handleProjectile();
         leftClickCheck();
-        removeColliderOnEnemies();
     }
 
     private void shopUpdate() {
@@ -175,12 +169,6 @@ public class GameDisplay extends Display
             triggerArea.triggerCheck(player);
         }
         removeColliderOnShop();
-    }
-
-    private void updateEnemies() {
-        for (Enemy enemy : enemies) {
-            enemy.update();
-        }
     }
 
     private void updatePlants() {
@@ -216,25 +204,10 @@ public class GameDisplay extends Display
         }
     }
 
-    private void applyColliderOnEnemies() {
-        for (Enemy enemy : enemies) {
-            if (!enemy.isDead()) {
-                CollidableRepository.getInstance().registerEntity(enemy);
-            }
-        }
-    }
-
-    private void removeColliderOnEnemies() {
-        for (Enemy enemy : enemies) {
-            CollidableRepository.getInstance().unregisterEntity(enemy);
-        }
-    }
-
     private void logicDraw(Buffer buffer) {
         if (inBattle) {
             battleMap.draw(buffer);
             lines.forEach(line -> line.draw(buffer));
-            enemies.forEach(enemy -> enemy.draw(buffer));
             zombies.forEach(zombie -> zombie.draw(buffer));
             plants.forEach(plant -> plant.draw(buffer));
             projectiles.forEach(projectile -> projectile.draw(buffer));
