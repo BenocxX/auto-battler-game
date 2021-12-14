@@ -12,7 +12,6 @@ import cegepst.game.entities.projectiles.Projectile;
 import cegepst.game.entities.plants.*;
 import cegepst.game.entities.zombies.Round;
 import cegepst.game.entities.zombies.Zombie;
-import cegepst.game.entities.zombies.Zombies;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.*;
 import cegepst.game.entities.shopPhase.ShopStation;
