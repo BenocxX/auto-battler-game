@@ -15,11 +15,13 @@ public class Cell extends StaticEntity {
 
     private TriggerArea area;
     private boolean isClicked;
+    private boolean isEmpty;
 
     public Cell(int x, int y) {
         setDimension(WIDTH, HEIGHT);
         teleport(x, y);
         area = new TriggerArea(x, y, width, height);
+        isEmpty = true;
     }
 
     @Override
@@ -37,8 +39,13 @@ public class Cell extends StaticEntity {
     }
 
     public void placeEntity(StaticEntity entity) {
+        isEmpty = false;
         Rectangle areaRectangle = new Rectangle(getX(), getY(), area.getWidth(), area.getHeight());
         entity.teleport(CenteringMachine.centerHorizontally(areaRectangle, entity.getWidth()),
                 CenteringMachine.centerVertically(areaRectangle, entity.getHeight()));
+    }
+
+    public boolean isEmpty() {
+        return isEmpty;
     }
 }

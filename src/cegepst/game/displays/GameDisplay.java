@@ -113,9 +113,11 @@ public class GameDisplay extends Display
     @Override
     public void onCellClick(Cell cell) {
         if (selectedPlant != null) {
-            Plant plant = selectedPlant.getPlant();
-            cell.placeEntity(plant);
-            plants.add(plant);
+            if (cell.isEmpty()) {
+                Plant plant = selectedPlant.getPlant();
+                cell.placeEntity(plant);
+                plants.add(plant);
+            }
         }
     }
 
