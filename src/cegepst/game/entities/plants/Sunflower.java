@@ -1,6 +1,10 @@
 package cegepst.game.entities.plants;
 
 import cegepst.engine.Buffer;
+import cegepst.engine.resources.images.SpriteHandler;
+import cegepst.game.resources.Sprite;
+
+import java.awt.*;
 
 public class Sunflower extends Plant {
 
@@ -15,7 +19,8 @@ public class Sunflower extends Plant {
         teleport(x, y);
         cooldown = 0;
         name = "Sunflower";
-        image = Plants.SUNFLOWER.getImage(WIDTH, HEIGHT);
+        image = SpriteHandler.resizeImage(Sprite.SUNFLOWER.getImage(),
+                Image.SCALE_SMOOTH, width, height);
     }
 
     @Override

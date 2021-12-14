@@ -12,10 +12,6 @@ public class PlantSelector extends StaticEntity {
 
     public final static int X = 20;
     public final static int Y_ROW1 = 100;
-    public final static int Y_ROW2 = 170;
-    public final static int Y_ROW3 = 250;
-    public final static int Y_ROW4 = 330;
-    public final static int Y_ROW5 = 410;
 
     private Plant plant;
     private boolean isSelected = false;

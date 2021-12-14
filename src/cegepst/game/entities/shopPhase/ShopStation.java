@@ -5,8 +5,8 @@ import cegepst.engine.RenderingEngine;
 import cegepst.engine.entities.MovableEntity;
 import cegepst.engine.helpers.RandomHandler;
 import cegepst.engine.resources.images.SpriteHandler;
-import cegepst.game.entities.plants.Peashooter;
 import cegepst.game.entities.plants.Plant;
+import cegepst.game.entities.plants.Plants;
 import cegepst.game.inventory.Inventory;
 import cegepst.game.resources.Sprite;
 import cegepst.game.settings.GameSettings;
@@ -37,7 +37,8 @@ public class ShopStation extends MovableEntity implements TriggerAreaListener, I
 
         this.id = id;
         hasPlant = true;
-        plant = new Peashooter(x + ((width - Peashooter.WIDTH) / 2), y - (Peashooter.HEIGHT / 2));
+        plant = getRandomPlant();
+        plant.teleport(x + ((width - plant.getWidth()) / 2), y - (plant.getHeight() / 2));
         stoneImage = SpriteHandler.resizeImage(Sprite.SAP_TILE_SPRITE.getImage(), Image.SCALE_SMOOTH, width, height);
     }
 
@@ -99,5 +100,9 @@ public class ShopStation extends MovableEntity implements TriggerAreaListener, I
 
     private void initializeSound() {
         sound = Sound.values()[RandomHandler.getInt(2, 5)];
+    }
+
+    private Plant getRandomPlant() {
+        return Plants.values()[RandomHandler.getInt(Plants.values().length)].getPlant();
     }
 }

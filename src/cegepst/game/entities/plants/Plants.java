@@ -1,22 +1,17 @@
 package cegepst.game.entities.plants;
 
-import cegepst.engine.resources.images.SpriteHandler;
-import cegepst.game.resources.Sprite;
-
-import java.awt.*;
-
 public enum Plants {
 
-    PEASHOOTER(Sprite.PEASHOOTER.getImage()),
-    SUNFLOWER(Sprite.SUNFLOWER.getImage());
+    PEASHOOTER(new Peashooter(0, 0)),
+    SUNFLOWER(new Sunflower(0, 0));
 
-    private Image image;
+    private Plant plant;
 
-    Plants(Image image) {
-        this.image = image;
+    Plants(Plant plant) {
+        this.plant = plant;
     }
 
-    public Image getImage(int width, int height) {
-        return SpriteHandler.resizeImage(image, Image.SCALE_SMOOTH, width, height);
+    public Plant getPlant() {
+        return plant.getPlantOfSameType();
     }
 }

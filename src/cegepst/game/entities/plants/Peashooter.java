@@ -1,6 +1,10 @@
 package cegepst.game.entities.plants;
 
 import cegepst.engine.Buffer;
+import cegepst.engine.resources.images.SpriteHandler;
+import cegepst.game.resources.Sprite;
+
+import java.awt.*;
 
 public class Peashooter extends Plant {
 
@@ -15,7 +19,8 @@ public class Peashooter extends Plant {
         teleport(x, y);
         cooldown = 0;
         name = "Peashooter";
-        image = Plants.PEASHOOTER.getImage(WIDTH, HEIGHT);
+        image = SpriteHandler.resizeImage(Sprite.PEASHOOTER.getImage(),
+                Image.SCALE_SMOOTH, width, height);
     }
 
     @Override
