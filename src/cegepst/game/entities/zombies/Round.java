@@ -17,18 +17,9 @@ public class Round {
     private ArrayList<Cell> spawningCells;
     private int cooldown;
 
-    public Round(ArrayList<Cell> spawningCells) {
+    public Round(ArrayList<Cell> spawningCells, ArrayList<Zombie> zombies) {
         this.spawningCells = spawningCells;
-        zombies = new ArrayList<>();
-        zombies.add(new Zombie(Zombies.FLAG_ZOMBIE));
-        zombies.add(new Zombie(Zombies.FLAG_ZOMBIE));
-        zombies.add(new Zombie(Zombies.FLAG_ZOMBIE));
-        zombies.add(new Zombie(Zombies.FLAG_ZOMBIE));
-        zombies.add(new Zombie(Zombies.CONE_HEAD_ZOMBIE));
-        zombies.add(new Zombie(Zombies.CONE_HEAD_ZOMBIE));
-        zombies.add(new Zombie(Zombies.CONE_HEAD_ZOMBIE));
-        zombies.add(new Zombie(Zombies.BUCKET_HEAD_ZOMBIE));
-        zombies.add(new Zombie(Zombies.BUCKET_HEAD_ZOMBIE));
+        this.zombies = zombies;
         teleportZombiesOnRandomSpawningCell();
 //        cooldown = 360;
         cooldown = 0;

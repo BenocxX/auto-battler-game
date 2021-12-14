@@ -11,6 +11,7 @@ import cegepst.game.entities.enemies.Enemy;
 import cegepst.game.entities.projectiles.Projectile;
 import cegepst.game.entities.plants.*;
 import cegepst.game.entities.zombies.Round;
+import cegepst.game.entities.zombies.Rounds;
 import cegepst.game.entities.zombies.Zombie;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.*;
@@ -18,6 +19,7 @@ import cegepst.game.entities.shopPhase.ShopStation;
 import cegepst.game.entities.Player;
 import cegepst.game.entities.miscellaneous.TriggerArea;
 import cegepst.game.helpers.Initializer;
+import cegepst.game.helpers.RoundFactory;
 import cegepst.game.map.*;
 import cegepst.game.resources.Sprite;
 import cegepst.game.settings.GameSettings;
@@ -39,8 +41,6 @@ public class GameDisplay extends Display
     private MenuSystem battleMenuSystem;
     private ArrayList<ShopStation> shopStations;
     private ArrayList<TriggerArea> triggerAreas;
-    private boolean inBattle = false;
-
     private ArrayList<Line> lines;
     private ArrayList<Plant> plants;
     private ArrayList<Zombie> zombies;
@@ -48,6 +48,7 @@ public class GameDisplay extends Display
     private ArrayList<StaticEntity> killedEntities;
     private PlantSelector selectedPlant;
     private Round currentRound;
+    private boolean inBattle = false;
     private int sunCount;
 
     public GameDisplay(DisplayType displayType) {
@@ -68,7 +69,7 @@ public class GameDisplay extends Display
         plants = new ArrayList<>();
         zombies = new ArrayList<>();
         projectiles = new ArrayList<>();
-        currentRound = new Round(getSpawningCells());
+        currentRound = RoundFactory.getRound(getSpawningCells(), Rounds.ROUND_1.getNbZombies());
         sunCount = 0;
         EventSystem.getInstance().addCellListener(this);
         EventSystem.getInstance().addSlotListener(this);
