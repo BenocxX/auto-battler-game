@@ -4,11 +4,8 @@ import cegepst.engine.entities.MovableEntity;
 import cegepst.engine.entities.StaticEntity;
 import cegepst.engine.resources.images.Animator;
 import cegepst.game.entities.Killable;
-import cegepst.game.entities.Player;
-import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.resources.Sprite;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class Enemy extends MovableEntity implements Killable {
