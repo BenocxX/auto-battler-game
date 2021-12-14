@@ -4,17 +4,14 @@ import cegepst.engine.Buffer;
 import cegepst.engine.RenderingEngine;
 import cegepst.engine.entities.MovableEntity;
 import cegepst.engine.helpers.RandomHandler;
-import cegepst.engine.resources.images.SpriteHandler;
 import cegepst.game.entities.plants.Peashooter;
 import cegepst.game.entities.plants.Plant;
-import cegepst.game.entities.plants.Plants;
 import cegepst.game.inventory.Inventory;
 import cegepst.game.settings.GameSettings;
 import cegepst.game.resources.Sound;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.ItemBuyListener;
 import cegepst.game.eventsystem.events.TriggerAreaListener;
-import cegepst.game.resources.Sprite;
 
 import java.awt.*;
 
