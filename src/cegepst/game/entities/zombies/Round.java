@@ -49,7 +49,7 @@ public class Round {
     }
 
     private Cell getRandomSpawningCell() {
-        return spawningCells.get(RandomHandler.getInt(spawningCells.size() -1));
+        return spawningCells.get(RandomHandler.getInt(spawningCells.size()));
     }
 
     private Zombie getRandomZombie() {
