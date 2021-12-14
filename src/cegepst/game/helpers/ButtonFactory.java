@@ -100,4 +100,17 @@ public class ButtonFactory {
             EventSystem.getInstance().onButtonClicked(ButtonEventType.INVENTORY));
         return backButton;
     }
+
+    public static RoundButton selectPlantButton(int x, int y) {
+        RoundButton button = new RoundButton(x, y, 14,"Select");
+        button.setCustomEvent(() -> {
+            if (button.getText().equalsIgnoreCase("Select")) {
+                button.setText("Selected");
+            } else {
+                button.setText("Select");
+            }
+            EventSystem.getInstance().onButtonClicked(ButtonEventType.SELECT_PLANT);
+        });
+        return button;
+    }
 }

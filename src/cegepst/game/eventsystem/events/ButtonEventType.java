@@ -10,6 +10,7 @@ public enum ButtonEventType {
     OPTION_MENU_DISPLAY,
     GAME_DISPLAY,
     INVENTORY,
+    SELECT_PLANT,
     QUIT
 
 }

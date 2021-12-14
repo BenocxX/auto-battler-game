@@ -62,6 +62,10 @@ public class Button extends StaticEntity {
         this.text = text;
     }
 
+    public String getText() {
+        return text;
+    }
+
     public boolean isClicked(Point mousePosition) {
         isClicked = getBounds().contains(mousePosition);
         return isClicked;

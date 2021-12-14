@@ -32,7 +32,6 @@ public class ShopStation extends MovableEntity implements TriggerAreaListener, I
         EventSystem.getInstance().addTriggerAreaListener(this);
         EventSystem.getInstance().addItemBuyListener(this);
 
-
         this.id = id;
         hasPlant = true;
         plant = new Peashooter(x + ((width - Peashooter.WIDTH) / 2), y - (Peashooter.HEIGHT / 2));
