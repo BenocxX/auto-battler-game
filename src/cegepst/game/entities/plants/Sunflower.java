@@ -2,6 +2,7 @@ package cegepst.game.entities.plants;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.resources.images.SpriteHandler;
+import cegepst.game.entities.miscellaneous.Projectile;
 import cegepst.game.resources.Sprite;
 
 import java.awt.*;
