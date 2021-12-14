@@ -4,9 +4,11 @@ import cegepst.engine.Buffer;
 import cegepst.engine.RenderingEngine;
 import cegepst.engine.entities.MovableEntity;
 import cegepst.engine.helpers.RandomHandler;
+import cegepst.engine.resources.images.SpriteHandler;
 import cegepst.game.entities.plants.Peashooter;
 import cegepst.game.entities.plants.Plant;
 import cegepst.game.inventory.Inventory;
+import cegepst.game.resources.Sprite;
 import cegepst.game.settings.GameSettings;
 import cegepst.game.resources.Sound;
 import cegepst.game.eventsystem.EventSystem;
@@ -20,6 +22,7 @@ public class ShopStation extends MovableEntity implements TriggerAreaListener, I
     public final static int PRICE = 60;
 
     private Sound sound;
+    private Image stoneImage;
     private Plant plant;
     private boolean isSelected;
     private boolean hasPlant;
@@ -35,10 +38,12 @@ public class ShopStation extends MovableEntity implements TriggerAreaListener, I
         this.id = id;
         hasPlant = true;
         plant = new Peashooter(x + ((width - Peashooter.WIDTH) / 2), y - (Peashooter.HEIGHT / 2));
+        stoneImage = SpriteHandler.resizeImage(Sprite.SAP_TILE_SPRITE.getImage(), Image.SCALE_SMOOTH, width, height);
     }
 
     @Override
     public void draw(Buffer buffer) {
+        buffer.drawImage(stoneImage, x, y);
         if (isSelected) {
             buffer.drawHorizontallyCenteredText(plant.getName(), getBounds(), y - 35);
             buffer.drawText("(Use E to Buy)", RenderingEngine.WIDTH - 97, 40, Color.WHITE);
