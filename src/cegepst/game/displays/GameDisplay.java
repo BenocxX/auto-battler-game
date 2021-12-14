@@ -3,6 +3,7 @@ package cegepst.game.displays;
 import cegepst.engine.Buffer;
 import cegepst.engine.CollidableRepository;
 import cegepst.engine.RenderingEngine;
+import cegepst.engine.entities.Blockade;
 import cegepst.engine.entities.StaticEntity;
 import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.GamePad;
@@ -296,6 +297,11 @@ public class GameDisplay extends Display
                     if (enemy.isDead()) {
                         killedEntities.add(enemy);
                     }
+                    killedEntities.add(projectile);
+                }
+            }
+            for (StaticEntity entity : CollidableRepository.getInstance()) {
+                if (projectile.hitBoxIntersectWith(entity)) {
                     killedEntities.add(projectile);
                 }
             }
