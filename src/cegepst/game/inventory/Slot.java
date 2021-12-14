@@ -45,4 +45,12 @@ public class Slot extends StaticEntity {
         buffer.drawText(plant.getName(), x + 10 + IMAGE_WIDTH + 10, y + 25, Color.WHITE);
         menuSystem.draw(buffer);
     }
+
+    public boolean isSelected() {
+        return menuSystem.getButton(0).getText().equalsIgnoreCase("Selected");
+    }
+
+    public void unselectSlot() {
+        menuSystem.getButton(0).setText("Select");
+    }
 }

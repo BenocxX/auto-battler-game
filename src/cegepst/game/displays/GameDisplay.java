@@ -17,6 +17,7 @@ import cegepst.game.entities.miscellaneous.TriggerArea;
 import cegepst.game.eventsystem.events.CellListener;
 import cegepst.game.eventsystem.events.SlotListener;
 import cegepst.game.helpers.Initializer;
+import cegepst.game.inventory.Inventory;
 import cegepst.game.map.*;
 import cegepst.game.resources.Sprite;
 import cegepst.game.settings.GameSettings;
@@ -43,6 +44,7 @@ public class GameDisplay extends Display implements CellListener, SlotListener {
     private ArrayList<Plant> plants;
     private ArrayList<Projectile> projectiles;
     private ArrayList<PlantSelector> plantSelectors;
+    private PlantSelector selectedPlant;
 
     public GameDisplay(DisplayType displayType) {
         super(displayType);
@@ -104,51 +106,22 @@ public class GameDisplay extends Display implements CellListener, SlotListener {
 
     @Override
     public void onCellClick(Cell cell) {
-        for (PlantSelector plantSelector : plantSelectors) {
-            if (plantSelector.isSelected()) {
-                Plant plant = plantSelector.getPlant();
-                cell.placeEntity(plant);
-                plants.add(plant);
-            }
+        if (selectedPlant != null) {
+            Plant plant = selectedPlant.getPlant();
+            cell.placeEntity(plant);
+            plants.add(plant);
         }
     }
 
     @Override
     public void onSlotSelection(Plant plant) {
-        if (plantSelectors.size() < 5) {
-            int x = PlantSelector.X;
-            int y = getPlantSelectorY();
-            plant.teleport(x, y);
-            plantSelectors.add(new PlantSelector(x, y, plant));
-        }
+        plant.teleport(PlantSelector.X, PlantSelector.Y_ROW1);
+        selectedPlant = new PlantSelector(PlantSelector.X, PlantSelector.Y_ROW1, plant);
     }
 
     @Override
     public void onSlotDeselection(Plant plant) {
-        // TODO: Fix
-        System.out.println("Deselection");
-        int index = 0;
-        for (PlantSelector plantSelector : plantSelectors) {
-            if (plantSelector.getPlant().equals(plant)) {
-                System.out.println("Is Equal!");
-            }
-            index++;
-        }
-    }
-
-    private int getPlantSelectorY() {
-        if (plantSelectors.size() == 0) {
-            return PlantSelector.Y_ROW1;
-        } else if (plantSelectors.size() == 1) {
-            return PlantSelector.Y_ROW2;
-        } else if (plantSelectors.size() == 2) {
-            return PlantSelector.Y_ROW3;
-        } else if (plantSelectors.size() == 3) {
-            return PlantSelector.Y_ROW4;
-        } else if (plantSelectors.size() == 4) {
-            return PlantSelector.Y_ROW5;
-        }
-        return 0;
+        selectedPlant = null;
     }
 
     private void battleUpdate() {
@@ -253,8 +226,8 @@ public class GameDisplay extends Display implements CellListener, SlotListener {
             for (Projectile projectile : projectiles) {
                 projectile.draw(buffer);
             }
-            for (PlantSelector plantSelector : plantSelectors) {
-                plantSelector.draw(buffer);
+            if (selectedPlant != null) {
+                selectedPlant.draw(buffer);
             }
         } else {
             shopMap.draw(buffer);

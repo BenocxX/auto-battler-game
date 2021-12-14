@@ -38,6 +38,20 @@ public class Inventory extends StaticEntity {
         }
     }
 
+    public void unselectEverySlot() {
+        for (Slot slot : slots) {
+            slot.unselectSlot();
+        }
+    }
+
+    public void unselectedSelectedSlot() {
+        for (Slot slot : slots) {
+            if (slot.isSelected()) {
+                slot.unselectSlot();
+            }
+        }
+    }
+
     public void addItem(Plant plant) {
         int y = this.y + 10;
         if (!slots.isEmpty()) {

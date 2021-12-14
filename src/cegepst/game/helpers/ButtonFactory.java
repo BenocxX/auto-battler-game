@@ -5,6 +5,7 @@ import cegepst.engine.menu.buttons.RoundButton;
 import cegepst.game.entities.plants.Plant;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.ButtonEventType;
+import cegepst.game.inventory.Inventory;
 import cegepst.game.settings.GameSettings;
 
 public class ButtonFactory {
@@ -106,9 +107,11 @@ public class ButtonFactory {
         RoundButton button = new RoundButton(x, y, 14,"Select");
         button.setCustomEvent(() -> {
             if (button.getText().equalsIgnoreCase("Select")) {
+                Inventory.getInstance().unselectedSelectedSlot();
                 button.setText("Selected");
                 EventSystem.getInstance().onSlotSelection(plant);
             } else {
+                Inventory.getInstance().unselectEverySlot();
                 button.setText("Select");
                 EventSystem.getInstance().onSlotDeselection(plant);
             }
