@@ -3,7 +3,6 @@ package cegepst.game.displays;
 import cegepst.engine.Buffer;
 import cegepst.engine.CollidableRepository;
 import cegepst.engine.RenderingEngine;
-import cegepst.engine.entities.Blockade;
 import cegepst.engine.entities.StaticEntity;
 import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.GamePad;
@@ -11,6 +10,7 @@ import cegepst.game.controls.MousePad;
 import cegepst.game.entities.enemies.Enemy;
 import cegepst.game.entities.projectiles.Projectile;
 import cegepst.game.entities.plants.*;
+import cegepst.game.entities.zombies.Zombie;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.ButtonEventType;
 import cegepst.game.entities.shopPhase.ShopStation;
@@ -45,10 +45,10 @@ public class GameDisplay extends Display
 
     private ArrayList<Line> lines;
     private ArrayList<Plant> plants;
+    private ArrayList<Zombie> zombies;
     private ArrayList<Projectile> projectiles;
-    private ArrayList<PlantSelector> plantSelectors;
     private PlantSelector selectedPlant;
-    ArrayList<StaticEntity> killedEntities;
+    private ArrayList<StaticEntity> killedEntities;
     private int sunCount;
 
     public GameDisplay(DisplayType displayType) {
@@ -68,6 +68,7 @@ public class GameDisplay extends Display
 
         initializeLines();
         plants = new ArrayList<>();
+        zombies = new ArrayList<>();
         projectiles = new ArrayList<>();
         initializePlantSelectors();
         sunCount = 0;
@@ -185,20 +186,7 @@ public class GameDisplay extends Display
 
     private void leftClickCheck() {
         if (mousePad.isLeftClicked()) {
-            plantSelectorClickCheck();
             lineClickCheck();
-        }
-    }
-
-    private void plantSelectorClickCheck() {
-        for (PlantSelector plantSelector : plantSelectors) {
-            if (plantSelector.isClicked(mousePad.getPosition())) {
-                for (PlantSelector plantSelector2 : plantSelectors) {
-                    if (plantSelector != plantSelector2) {
-                        plantSelector2.setSelected(false);
-                    }
-                }
-            }
         }
     }
 
@@ -366,9 +354,5 @@ public class GameDisplay extends Display
         lines.add(new Line(295));
         lines.add(new Line(400));
         lines.add(new Line(500));
-    }
-
-    private void initializePlantSelectors() {
-        plantSelectors = new ArrayList<>();
     }
 }
