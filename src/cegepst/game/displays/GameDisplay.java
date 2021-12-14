@@ -8,6 +8,7 @@ import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
 import cegepst.game.entities.enemies.Enemy;
+import cegepst.game.entities.miscellaneous.Projectile;
 import cegepst.game.entities.plants.*;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.ButtonEventType;

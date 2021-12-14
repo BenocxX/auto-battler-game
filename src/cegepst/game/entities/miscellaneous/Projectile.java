@@ -1,9 +1,10 @@
-package cegepst.game.entities.plants;
+package cegepst.game.entities.miscellaneous;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.CollidableRepository;
 import cegepst.engine.controls.Direction;
 import cegepst.engine.entities.MovableEntity;
+import cegepst.game.entities.plants.Plant;
 
 import java.awt.*;
 
