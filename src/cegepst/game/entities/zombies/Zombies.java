@@ -7,9 +7,9 @@ import java.awt.*;
 
 public enum Zombies {
 
-    FLAG_ZOMBIE(100, 30, 2, 180, 265, Sprite.FLAG_ZOMBIE.getImage()),
-    CONE_HEAD_ZOMBIE(150, 25, 3, 180, 347, Sprite.FLAG_ZOMBIE.getImage()),
-    BUCKET_HEAD_ZOMBIE(200, 20, 3, 180, 312, Sprite.FLAG_ZOMBIE.getImage());
+    FLAG_ZOMBIE(100, 30, 1, 60, 88, Sprite.FLAG_ZOMBIE.getImage()),
+    CONE_HEAD_ZOMBIE(150, 25, 1, 60, 115, Sprite.CONE_HEAD_ZOMBIE.getImage()),
+    BUCKET_HEAD_ZOMBIE(200, 20, 1, 60, 104, Sprite.BUCKET_HEAD_ZOMBIE.getImage());
 
     private int health;
     private int damage;
@@ -48,6 +48,7 @@ public enum Zombies {
     }
 
     public Image getResizedImage(int width, int height) {
+
         return SpriteHandler.resizeImage(image,
                 Image.SCALE_SMOOTH, width, height);
     }

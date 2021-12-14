@@ -2,6 +2,7 @@ package cegepst.game.eventsystem;
 
 import cegepst.game.entities.plants.Plant;
 import cegepst.game.entities.projectiles.Projectile;
+import cegepst.game.entities.zombies.Zombie;
 import cegepst.game.eventsystem.events.*;
 import cegepst.game.map.Cell;
 
@@ -17,6 +18,7 @@ public class EventSystem {
     private ArrayList<CellListener> cellListeners;
     private ArrayList<SlotListener> slotListeners;
     private ArrayList<SunListener> sunListeners;
+    private ArrayList<RoundListener> roundListeners;
 
     public static EventSystem getInstance() {
         if (instance == null) {
@@ -47,6 +49,10 @@ public class EventSystem {
 
     public void addSunListener(SunListener listener) {
         sunListeners.add(listener);
+    }
+
+    public void addRoundListener(RoundListener listener) {
+        roundListeners.add(listener);
     }
 
     public void onTriggerAreaEnter(int triggerId) {
@@ -109,6 +115,10 @@ public class EventSystem {
         }
     }
 
+    public void onZombieSpawn(Zombie zombie) {
+        roundListeners.forEach(roundListener -> roundListener.onZombieSpawn(zombie));
+    }
+
     private EventSystem() {
         triggerAreaListeners = new ArrayList<>();
         itemBuyListeners = new ArrayList<>();
@@ -116,5 +126,6 @@ public class EventSystem {
         cellListeners = new ArrayList<>();
         slotListeners = new ArrayList<>();
         sunListeners = new ArrayList<>();
+        roundListeners = new ArrayList<>();
     }
 }

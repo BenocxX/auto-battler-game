@@ -31,6 +31,10 @@ public class Line {
         spawningCell.draw(buffer);
     }
 
+    public Cell getSpawningCell() {
+        return spawningCell;
+    }
+
     private void initializeCells(int y) {
         cells.add(new Cell(180, y));
         cells.add(new Cell(237, y));

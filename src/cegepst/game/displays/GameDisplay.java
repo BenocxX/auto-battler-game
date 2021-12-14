@@ -10,15 +10,14 @@ import cegepst.game.controls.MousePad;
 import cegepst.game.entities.enemies.Enemy;
 import cegepst.game.entities.projectiles.Projectile;
 import cegepst.game.entities.plants.*;
+import cegepst.game.entities.zombies.Round;
 import cegepst.game.entities.zombies.Zombie;
+import cegepst.game.entities.zombies.Zombies;
 import cegepst.game.eventsystem.EventSystem;
-import cegepst.game.eventsystem.events.ButtonEventType;
+import cegepst.game.eventsystem.events.*;
 import cegepst.game.entities.shopPhase.ShopStation;
 import cegepst.game.entities.Player;
 import cegepst.game.entities.miscellaneous.TriggerArea;
-import cegepst.game.eventsystem.events.CellListener;
-import cegepst.game.eventsystem.events.SlotListener;
-import cegepst.game.eventsystem.events.SunListener;
 import cegepst.game.helpers.Initializer;
 import cegepst.game.map.*;
 import cegepst.game.resources.Sprite;
@@ -28,7 +27,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class GameDisplay extends Display
-        implements CellListener, SlotListener, SunListener {
+        implements CellListener, SlotListener,
+        SunListener, RoundListener {
 
     private GamePad gamePad;
     private MousePad mousePad;
@@ -47,8 +47,9 @@ public class GameDisplay extends Display
     private ArrayList<Plant> plants;
     private ArrayList<Zombie> zombies;
     private ArrayList<Projectile> projectiles;
-    private PlantSelector selectedPlant;
     private ArrayList<StaticEntity> killedEntities;
+    private PlantSelector selectedPlant;
+    private Round currentRound;
     private int sunCount;
 
     public GameDisplay(DisplayType displayType) {
@@ -70,10 +71,12 @@ public class GameDisplay extends Display
         plants = new ArrayList<>();
         zombies = new ArrayList<>();
         projectiles = new ArrayList<>();
+        currentRound = new Round(getSpawningCells());
         sunCount = 0;
         EventSystem.getInstance().addCellListener(this);
         EventSystem.getInstance().addSlotListener(this);
         EventSystem.getInstance().addSunListener(this);
+        EventSystem.getInstance().addRoundListener(this);
     }
 
     @Override
@@ -147,10 +150,17 @@ public class GameDisplay extends Display
         }
     }
 
+    @Override
+    public void onZombieSpawn(Zombie zombie) {
+        zombies.add(zombie);
+    }
+
     private void battleUpdate() {
         player.setInBattle(true);
         applyColliderOnEnemies();
         battleMenuSystem.update();
+        currentRound.update();
+        zombies.forEach(Zombie::update);
         updateEnemies();
         updatePlants();
         handleProjectile();
@@ -224,29 +234,18 @@ public class GameDisplay extends Display
     private void logicDraw(Buffer buffer) {
         if (inBattle) {
             battleMap.draw(buffer);
-            for (Line line : lines) {
-                line.draw(buffer);
-            }
-            for (Enemy enemy : enemies) {
-                enemy.draw(buffer);
-            }
-            for (Plant plant : plants) {
-                plant.draw(buffer);
-            }
-            for (Projectile projectile : projectiles) {
-                projectile.draw(buffer);
-            }
+            lines.forEach(line -> line.draw(buffer));
+            enemies.forEach(enemy -> enemy.draw(buffer));
+            zombies.forEach(zombie -> zombie.draw(buffer));
+            plants.forEach(plant -> plant.draw(buffer));
+            projectiles.forEach(projectile -> projectile.draw(buffer));
             if (selectedPlant != null) {
                 selectedPlant.draw(buffer);
             }
         } else {
             shopMap.draw(buffer);
-            for (ShopStation buyStation : shopStations) {
-                buyStation.draw(buffer);
-            }
-            for (TriggerArea triggerArea : triggerAreas) {
-                triggerArea.draw(buffer);
-            }
+            shopStations.forEach(shopStation -> shopStation.draw(buffer));
+            triggerAreas.forEach(triggerArea -> triggerArea.draw(buffer));
         }
         player.draw(buffer);
     }
@@ -353,5 +352,11 @@ public class GameDisplay extends Display
         lines.add(new Line(295));
         lines.add(new Line(400));
         lines.add(new Line(500));
+    }
+
+    public ArrayList<Cell> getSpawningCells() {
+        ArrayList<Cell> spawningCells = new ArrayList<>();
+        lines.forEach(line -> spawningCells.add(line.getSpawningCell()));
+        return spawningCells;
     }
 }

@@ -21,7 +21,9 @@ public enum Sprite {
     PEASHOOTER("./images/PVZ/plants/peashooter.png"),
     SUNFLOWER("./images/PVZ/plants/Sunflower.png"),
     GATLING_PEA("./images/PVZ/plants/gatlingpea.png"),
-    FLAG_ZOMBIE("./iamges/PVZ/zombies/FlagZombie.png");
+    FLAG_ZOMBIE("./images/PVZ/zombies/FlagZombie.png"),
+    CONE_HEAD_ZOMBIE("./images/PVZ/zombies/ConeheadZombie.png"),
+    BUCKET_HEAD_ZOMBIE("./images/PVZ/zombies/BucketheadZombie.png");
 
     private final String path;
     private Image image;

@@ -9,11 +9,14 @@ import java.awt.*;
 
 public class Zombie extends MovableEntity {
 
+    private final static int COOLDOWN_RESET = 2;
+
     private Zombies type;
     private int health;
     private int damage;
     private int speed;
     private Image image;
+    private int cooldown;
 
     public Zombie(Zombies type) {
         this.type = type;
@@ -23,10 +26,15 @@ public class Zombie extends MovableEntity {
         damage = type.getDamage();
         speed = type.getSpeed();
         setSpeed(speed);
+        cooldown = 30;
     }
 
     public void update() {
-        move(Direction.LEFT);
+        cooldown--;
+        if (cooldown <= 0) {
+            move(Direction.LEFT);
+            cooldown = COOLDOWN_RESET;
+        }
     }
 
     @Override
