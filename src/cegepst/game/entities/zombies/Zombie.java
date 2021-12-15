@@ -1,14 +1,10 @@
 package cegepst.game.entities.zombies;
 
 import cegepst.engine.Buffer;
-import cegepst.engine.CollidableRepository;
 import cegepst.engine.controls.Direction;
 import cegepst.engine.entities.MovableEntity;
 import cegepst.engine.entities.StaticEntity;
-import cegepst.game.entities.miscellaneous.TriggerArea;
 import cegepst.game.entities.plants.Plant;
-import cegepst.game.eventsystem.EventSystem;
-import cegepst.game.helpers.CenteringMachine;
 
 import java.awt.*;
 
