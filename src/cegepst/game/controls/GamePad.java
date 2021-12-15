@@ -20,6 +20,8 @@ public class GamePad extends MovementController {
     private int screenModeKey = KeyEvent.VK_F;
     private int debugKey = KeyEvent.VK_D;
     private int inventoryKey = KeyEvent.VK_I;
+    private int leftKey = KeyEvent.VK_LEFT;
+    private int rightKey = KeyEvent.VK_RIGHT;
 
     public GamePad() {
         RenderingEngine.getInstance().addKeyListener(this);
@@ -78,5 +80,13 @@ public class GamePad extends MovementController {
 
     public boolean isMoveRowDownTyped() {
         return isKeyTyped(moveRowDown);
+    }
+
+    public boolean isLeftTyped() {
+        return isKeyTyped(leftKey);
+    }
+
+    public boolean isRightTyped() {
+        return isKeyTyped(rightKey);
     }
 }

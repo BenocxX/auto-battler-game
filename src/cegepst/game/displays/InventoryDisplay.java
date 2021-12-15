@@ -74,5 +74,12 @@ public class InventoryDisplay extends Display {
                 goToGameDisplay();
             }
         });
+        gamePad.addKeyListener(() -> {
+            if (gamePad.isLeftTyped()) {
+                Inventory.getInstance().previousPage();
+            } else if (gamePad.isRightTyped()) {
+                Inventory.getInstance().nextPage();
+            }
+        });
     }
 }
