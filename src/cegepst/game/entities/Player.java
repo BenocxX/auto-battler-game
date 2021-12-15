@@ -20,7 +20,7 @@ import java.awt.*;
 public class Player extends ControllableEntity
         implements ButtonListener {
 
-    private static final int INITIAL_MONEY = 500;
+    private static final int INITIAL_MONEY = 2000;
 
     private Animator animator;
     private int money;

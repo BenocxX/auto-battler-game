@@ -124,4 +124,14 @@ public class ButtonFactory {
         });
         return button;
     }
+
+    public static RoundButton previousPageButton(int x, int y) {
+        return new RoundButton(x, y, 50, 50, 20,
+                20, "<", () -> Inventory.getInstance().previousPage());
+    }
+
+    public static RoundButton nextPageButton(int x, int y) {
+        return new RoundButton(x, y, 50, 50, 20,
+                20, ">", () -> Inventory.getInstance().nextPage());
+    }
 }

@@ -63,6 +63,8 @@ public class InventoryDisplay extends Display {
         menuSystem = new MenuSystem();
         menuSystem.addMousePadDevice(mousePad);
         menuSystem.addButton(ButtonFactory.backToGameButton(10, RenderingEngine.HEIGHT - 60));
+        menuSystem.addButton(ButtonFactory.previousPageButton(260, RenderingEngine.HEIGHT - 100));
+        menuSystem.addButton(ButtonFactory.nextPageButton(RenderingEngine.WIDTH - 260 - 50, RenderingEngine.HEIGHT - 100));
         menuSystem.getButton(0).isSelected(true);
     }
 
