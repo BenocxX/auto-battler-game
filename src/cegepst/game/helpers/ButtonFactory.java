@@ -1,6 +1,5 @@
 package cegepst.game.helpers;
 
-import cegepst.engine.menu.buttons.ButtonStyle;
 import cegepst.engine.menu.buttons.RoundButton;
 import cegepst.game.entities.plants.Plant;
 import cegepst.game.eventsystem.EventSystem;
@@ -86,13 +85,6 @@ public class ButtonFactory {
         RoundButton button = new RoundButton(x, y, "Back");
         button.setCustomEvent(() ->
             EventSystem.getInstance().onButtonClicked(ButtonEventType.GAME_DISPLAY));
-        return button;
-    }
-
-    public static RoundButton moneyCheatButton(int x, int y) {
-        RoundButton button = new RoundButton(x, y, ButtonStyle.CHEAT_STYLE , "$");
-        button.setCustomEvent(() ->
-            EventSystem.getInstance().onButtonClicked(ButtonEventType.MONEY_CHEAT));
         return button;
     }
 

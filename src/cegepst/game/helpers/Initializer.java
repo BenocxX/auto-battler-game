@@ -38,7 +38,6 @@ public class Initializer {
         MenuSystem menuSystem = new MenuSystem();
         menuSystem.addMousePadDevice(mousePad);
         menuSystem.addButton(ButtonFactory.inventoryButton(10, RenderingEngine.HEIGHT - 60));
-        menuSystem.addButton(ButtonFactory.moneyCheatButton(220, RenderingEngine.HEIGHT - 60));
         menuSystem.addButton(ButtonFactory.battleButton(10, RenderingEngine.HEIGHT - 120));
         return menuSystem;
     }
