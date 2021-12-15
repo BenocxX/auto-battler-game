@@ -21,7 +21,6 @@ public class Player extends ControllableEntity
     private static final int INITIAL_MONEY = 500;
 
     private Animator animator;
-    private Image morphSprite;
     private int money;
     private int health;
     private int damage;
@@ -44,26 +43,21 @@ public class Player extends ControllableEntity
 
     @Override
     public void update() {
-        super.update();
         if (!inBattle) {
+            super.update();
             moveAccordingToController();
-        }
-        if (morphSprite == null) {
-            animator.updateAnimationFrame(hasMoved());
         }
     }
 
     @Override
     public void draw(Buffer buffer) {
-        if (morphSprite == null) {
+        if (!inBattle) {
             buffer.drawImage(animator.getImage(getDirection()), x ,y);
-        } else {
-            buffer.drawImage(morphSprite, x ,y);
-        }
-        buffer.drawHorizontallyCenteredText("HP: " + health, getBounds(), y - 10);
-        buffer.drawText(money + " $", 20, RenderingEngine.HEIGHT - 70, Color.WHITE);
-        if (hasMoved() && GameSettings.DEBUG_MODE) {
-            drawHitBox(buffer);
+            buffer.drawHorizontallyCenteredText("HP: " + health, getBounds(), y - 10);
+            buffer.drawText(money + " $", 20, RenderingEngine.HEIGHT - 70, Color.WHITE);
+            if (hasMoved() && GameSettings.DEBUG_MODE) {
+                drawHitBox(buffer);
+            }
         }
     }
 
@@ -93,6 +87,11 @@ public class Player extends ControllableEntity
     }
 
     public void setInBattle(boolean inBattle) {
+        if (inBattle) {
+            CollidableRepository.getInstance().unregisterEntity(this);
+        } else {
+            CollidableRepository.getInstance().registerEntity(this);
+        }
         this.inBattle = inBattle;
     }
 }
