@@ -3,9 +3,6 @@ package cegepst.game.helpers;
 import cegepst.engine.RenderingEngine;
 import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.MousePad;
-import cegepst.game.entities.enemies.Enemy;
-import cegepst.game.entities.enemies.RunnerZombie;
-import cegepst.game.entities.enemies.OldZombie;
 import cegepst.game.entities.shopPhase.ShopStation;
 import cegepst.game.entities.miscellaneous.TriggerArea;
 
@@ -48,12 +45,5 @@ public class Initializer {
         menuSystem.addButton(ButtonFactory.inventoryButton(10, RenderingEngine.HEIGHT - 60));
         menuSystem.addButton(ButtonFactory.leaveBattleButton(10, RenderingEngine.HEIGHT - 120));
         return menuSystem;
-    }
-
-    public ArrayList<Enemy> getEnemies() {
-        ArrayList<Enemy> enemies = new ArrayList<>();
-        enemies.add(new OldZombie());
-        enemies.add(new RunnerZombie());
-        return enemies;
     }
 }

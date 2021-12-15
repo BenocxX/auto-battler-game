@@ -18,14 +18,12 @@ import cegepst.game.resources.Sprite;
 import java.awt.*;
 
 public class Player extends ControllableEntity
-        implements ButtonListener, Killable {
+        implements ButtonListener {
 
     private static final int INITIAL_MONEY = 500;
 
     private Animator animator;
     private int money;
-    private int health;
-    private int damage;
     private boolean inBattle = false;
 
     public Player(MovementController controller) {
@@ -39,8 +37,6 @@ public class Player extends ControllableEntity
 
         EventSystem.getInstance().addButtonListener(this);
         money = INITIAL_MONEY;
-        health = 100;
-        damage = 10;
     }
 
     @Override
@@ -67,17 +63,6 @@ public class Player extends ControllableEntity
         if (eventType == ButtonEventType.MONEY_CHEAT) {
             money += 500;
         }
-    }
-
-    // TODO: Remove
-    @Override
-    public void takeDamage(int damage) {
-        health -= damage;
-    }
-
-    @Override
-    public int dealDamage() {
-        return damage;
     }
 
     public boolean canBuy(int price) {
