@@ -119,6 +119,10 @@ public class EventSystem {
         roundListeners.forEach(roundListener -> roundListener.onZombieSpawn(zombie));
     }
 
+    public void onRoundFinished() {
+        roundListeners.forEach(RoundListener::onRoundFinished);
+    }
+
     private EventSystem() {
         triggerAreaListeners = new ArrayList<>();
         itemBuyListeners = new ArrayList<>();

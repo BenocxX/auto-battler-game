@@ -48,6 +48,8 @@ public class GameDisplay extends Display
     private ArrayList<Projectile> projectiles;
     private ArrayList<StaticEntity> killedEntities;
     private PlantSelector selectedPlant;
+    private Rounds[] rounds;
+    private int roundCount;
     private Round currentRound;
     private boolean inBattle = false;
     private int sunCount;
@@ -70,7 +72,9 @@ public class GameDisplay extends Display
         plants = new ArrayList<>();
         zombies = new ArrayList<>();
         projectiles = new ArrayList<>();
-        currentRound = RoundFactory.getRound(Rounds.ROUND_1.getNbZombies());
+        rounds = Rounds.values();
+        roundCount = 0;
+        currentRound = RoundFactory.getRound(rounds[roundCount].getNbZombies());
         sunCount = 0;
         EventSystem.getInstance().addCellListener(this);
         EventSystem.getInstance().addSlotListener(this);
@@ -153,6 +157,14 @@ public class GameDisplay extends Display
         ArrayList<Cell> spawningCells = getSpawningCells();
         spawningCells.get(RandomHandler.getInt(spawningCells.size())).placeEntity(zombie);
         zombies.add(zombie);
+    }
+
+    @Override
+    public void onRoundFinished() {
+        if (roundCount < rounds.length - 1) {
+            roundCount++;
+            currentRound = RoundFactory.getRound(rounds[roundCount].getNbZombies());
+        }
     }
 
     private void battleUpdate() {

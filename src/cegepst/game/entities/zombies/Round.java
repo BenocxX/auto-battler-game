@@ -7,25 +7,33 @@ import java.util.ArrayList;
 
 public class Round {
 
+    private final static int START_COOLDOWN = 900;
 //    private final static int MIN_COOLDOWN = 60;
 //    private final static int MAX_COOLDOWN = 180;
     private final static int MIN_COOLDOWN = 20;
     private final static int MAX_COOLDOWN = 60;
 
     private ArrayList<Zombie> zombies;
-    private int cooldown;
+    private int spawnCoolDown;
+    private int roundCooldown;
 
     public Round(ArrayList<Zombie> zombies) {
         this.zombies = zombies;
-//        cooldown = 360;
-        cooldown = 0;
+        roundCooldown = START_COOLDOWN;
+        spawnCoolDown = 0;
     }
 
     public void update() {
-        cooldown--;
-        if (cooldown <= 0 && zombies.size() > 0) {
-            EventSystem.getInstance().onZombieSpawn(getRandomZombie());
-            cooldown = RandomHandler.getInt(MIN_COOLDOWN, MAX_COOLDOWN);
+        roundCooldown--;
+        if (roundCooldown <= 0) {
+            roundCooldown = 0;
+            spawnCoolDown--;
+            if (spawnCoolDown <= 0 && zombies.size() > 0) {
+                EventSystem.getInstance().onZombieSpawn(getRandomZombie());
+                spawnCoolDown = RandomHandler.getInt(MIN_COOLDOWN, MAX_COOLDOWN);
+            } else if (zombies.size() < 1) {
+                EventSystem.getInstance().onRoundFinished();
+            }
         }
     }
 
