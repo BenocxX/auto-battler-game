@@ -4,7 +4,6 @@ import cegepst.engine.Buffer;
 import cegepst.engine.controls.Direction;
 import cegepst.engine.entities.MovableEntity;
 import cegepst.game.entities.plants.Plant;
-import cegepst.game.entities.plants.PlantOld;
 
 public abstract class Projectile extends MovableEntity {
 

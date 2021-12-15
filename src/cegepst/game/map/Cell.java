@@ -4,7 +4,6 @@ import cegepst.engine.Buffer;
 import cegepst.engine.entities.StaticEntity;
 import cegepst.game.entities.miscellaneous.TriggerArea;
 import cegepst.game.entities.plants.Plant;
-import cegepst.game.entities.plants.PlantOld;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.PlantListener;
 import cegepst.game.helpers.CenteringMachine;

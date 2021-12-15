@@ -2,7 +2,6 @@ package cegepst.game.entities.projectiles;
 
 import cegepst.engine.Buffer;
 import cegepst.game.entities.plants.Plant;
-import cegepst.game.entities.plants.PlantOld;
 import cegepst.game.eventsystem.EventSystem;
 
 public class Sun extends Projectile {

@@ -2,7 +2,6 @@ package cegepst.game.helpers;
 
 import cegepst.engine.menu.buttons.RoundButton;
 import cegepst.game.entities.plants.Plant;
-import cegepst.game.entities.plants.PlantOld;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.ButtonEventType;
 import cegepst.game.inventory.Inventory;

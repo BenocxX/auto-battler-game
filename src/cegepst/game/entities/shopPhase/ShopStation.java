@@ -6,7 +6,6 @@ import cegepst.engine.entities.MovableEntity;
 import cegepst.engine.helpers.RandomHandler;
 import cegepst.engine.resources.images.SpriteHandler;
 import cegepst.game.entities.plants.Plant;
-import cegepst.game.entities.plants.PlantOld;
 import cegepst.game.entities.plants.Plants;
 import cegepst.game.inventory.Inventory;
 import cegepst.game.resources.Sprite;
