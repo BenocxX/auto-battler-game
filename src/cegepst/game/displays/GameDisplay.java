@@ -137,6 +137,7 @@ public class GameDisplay extends Display
                 if (sunCount >= plant.getSunPrice()) {
                     sunCount -= plant.getSunPrice();
                     cell.placeEntity(plant);
+                    cell.addPlant(plant);
                     plants.add(plant);
                 }
             }
