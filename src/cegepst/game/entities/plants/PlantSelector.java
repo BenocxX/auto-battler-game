@@ -12,7 +12,7 @@ public class PlantSelector extends StaticEntity {
 
     public PlantSelector(Plant plant) {
         setDimension(plant.getWidth(), plant.getHeight());
-        teleport(CenteringMachine.centerHorizontally(new Rectangle(125, 200), getBounds()), 80);
+        teleport(CenteringMachine.centerHorizontally(new Rectangle(125, 200), getBounds()), 100);
         plant.teleport(x, y);
         this.plant = plant;
     }

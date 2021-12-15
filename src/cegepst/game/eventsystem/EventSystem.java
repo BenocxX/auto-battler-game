@@ -19,6 +19,7 @@ public class EventSystem {
     private ArrayList<SlotListener> slotListeners;
     private ArrayList<SunListener> sunListeners;
     private ArrayList<RoundListener> roundListeners;
+    private ArrayList<PlantListener> plantListeners;
 
     public static EventSystem getInstance() {
         if (instance == null) {
@@ -53,6 +54,10 @@ public class EventSystem {
 
     public void addRoundListener(RoundListener listener) {
         roundListeners.add(listener);
+    }
+
+    public void addPlantListener(PlantListener listener) {
+        plantListeners.add(listener);
     }
 
     public void onTriggerAreaEnter(int triggerId) {
@@ -123,6 +128,11 @@ public class EventSystem {
         roundListeners.forEach(RoundListener::onRoundFinished);
     }
 
+    public void onPlantDeath(Plant plant) {
+        System.out.println("Calling onPlantDeath event");
+        plantListeners.forEach(plantListener -> plantListener.onPlantDeath(plant));
+    }
+
     private EventSystem() {
         triggerAreaListeners = new ArrayList<>();
         itemBuyListeners = new ArrayList<>();
@@ -131,5 +141,6 @@ public class EventSystem {
         slotListeners = new ArrayList<>();
         sunListeners = new ArrayList<>();
         roundListeners = new ArrayList<>();
+        plantListeners = new ArrayList<>();
     }
 }

@@ -1,22 +1,31 @@
 package cegepst.game.entities.zombies;
 
 import cegepst.engine.Buffer;
+import cegepst.engine.CollidableRepository;
 import cegepst.engine.controls.Direction;
 import cegepst.engine.entities.MovableEntity;
 import cegepst.engine.entities.StaticEntity;
+import cegepst.game.entities.miscellaneous.TriggerArea;
+import cegepst.game.entities.plants.Plant;
+import cegepst.game.eventsystem.EventSystem;
+import cegepst.game.helpers.CenteringMachine;
 
 import java.awt.*;
 
 public class Zombie extends MovableEntity {
 
-    private final static int COOLDOWN_RESET = 2;
+    private final static int MOVING_COOLDOWN_RESET = 2;
+    private final static int EATING_COOLDOWN_RESET = 60;
 
     private Zombies type;
     private int health;
     private int damage;
     private int speed;
     private Image image;
-    private int cooldown;
+    private int movingCooldown;
+    private int eatingCooldown;
+    private boolean isEating;
+    private Plant eatingPlant;
 
     public Zombie(Zombies type) {
         this.type = type;
@@ -26,14 +35,23 @@ public class Zombie extends MovableEntity {
         damage = type.getDamage();
         speed = type.getSpeed();
         setSpeed(speed);
-        cooldown = 30;
+        movingCooldown = 30;
+        eatingCooldown = EATING_COOLDOWN_RESET;
     }
 
     public void update() {
-        cooldown--;
-        if (cooldown <= 0) {
-            move(Direction.LEFT);
-            cooldown = COOLDOWN_RESET;
+        if (isEating && !eatingPlant.isDead()) {
+            eatingCooldown--;
+            if (eatingCooldown <= 0) {
+                eatingPlant.takeDamage(damage);
+                eatingCooldown = EATING_COOLDOWN_RESET;
+            }
+        } else {
+            movingCooldown--;
+            if (movingCooldown <= 0) {
+                move(Direction.LEFT);
+                movingCooldown = MOVING_COOLDOWN_RESET;
+            }
         }
     }
 
@@ -46,15 +64,16 @@ public class Zombie extends MovableEntity {
         health -= damage;
     }
 
-    public int dealDamage() {
-        return damage;
-    }
-
     public boolean isDead() {
         return health <= 0;
     }
 
     public boolean isColliding(StaticEntity entity) {
         return hitBoxIntersectWith(entity) && !isDead();
+    }
+
+    public void setEating(boolean isEating, Plant eatingPlant) {
+        this.isEating = isEating;
+        this.eatingPlant = eatingPlant;
     }
 }

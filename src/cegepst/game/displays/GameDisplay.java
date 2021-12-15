@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 public class GameDisplay extends Display
         implements CellListener, SlotListener,
-        SunListener, RoundListener {
+        SunListener, RoundListener, PlantListener {
 
     private final static Color white = new Color(255, 255, 255);
 
@@ -49,6 +49,7 @@ public class GameDisplay extends Display
     private ArrayList<Zombie> zombies;
     private ArrayList<Projectile> projectiles;
     private ArrayList<StaticEntity> killedEntities;
+    private ArrayList<Plant> killedPlants;
     private PlantSelector selectedPlant;
     private Rounds[] rounds;
     private int roundCount;
@@ -74,6 +75,7 @@ public class GameDisplay extends Display
         plants = new ArrayList<>();
         zombies = new ArrayList<>();
         projectiles = new ArrayList<>();
+        killedPlants = new ArrayList<>();
         rounds = Rounds.values();
         roundCount = 0;
         currentRound = RoundFactory.getRound(rounds[roundCount].getNbZombies());
@@ -82,6 +84,7 @@ public class GameDisplay extends Display
         EventSystem.getInstance().addSlotListener(this);
         EventSystem.getInstance().addSunListener(this);
         EventSystem.getInstance().addRoundListener(this);
+        EventSystem.getInstance().addPlantListener(this);
     }
 
     @Override
@@ -168,11 +171,27 @@ public class GameDisplay extends Display
         }
     }
 
+    @Override
+    public void onPlantDeath(Plant plant) {
+        plants.forEach(plant1 -> {
+            if (plant1 == plant) {
+                killedPlants.add(plant);
+            }
+        });
+    }
+
     private void battleUpdate() {
         player.setInBattle(true);
         battleMenuSystem.update();
         currentRound.update();
         zombies.forEach(Zombie::update);
+        zombies.forEach(zombie -> {
+            plants.forEach(plant -> {
+                if (zombie.isColliding(plant)) {
+                    zombie.setEating(true, plant);
+                }
+            });
+        });
         updatePlants();
         handleProjectile();
         leftClickCheck();
@@ -258,7 +277,7 @@ public class GameDisplay extends Display
                 uiInfoBox.width, uiInfoBox.height, 20,
                 20, new Color(0, 0, 0, 150));
         if (selectedPlant != null) {
-            buffer.drawText("Selected plant:", uiInfoBox.x + padding, selectedPlant.getY() - 10, white);
+            buffer.drawText("Selected plant:", uiInfoBox.x + padding, selectedPlant.getY() - 30, white);
             selectedPlant.draw(buffer);
         }
         buffer.drawText("Round #" + (roundCount + 1), uiInfoBox.x + padding, uiInfoBox.y + uiInfoBox.height - 30, white);
@@ -293,12 +312,18 @@ public class GameDisplay extends Display
             }
         }
 
+        killedEntities.addAll(killedPlants);
+        killedPlants.clear();
+
         for (StaticEntity entity: killedEntities) {
             if (entity instanceof Zombie) {
                 zombies.remove(entity);
             }
             if (entity instanceof Projectile) {
                 projectiles.remove(entity);
+            }
+            if (entity instanceof Plant) {
+                plants.remove(entity);
             }
             CollidableRepository.getInstance().unregisterEntity(entity);
         }

@@ -23,6 +23,7 @@ public class Sunflower extends Plant {
         name = "Sunflower";
         image = SpriteHandler.resizeImage(Sprite.SUNFLOWER.getImage(),
                 Image.SCALE_SMOOTH, width, height);
+        health = 75;
     }
 
     @Override
@@ -36,6 +37,7 @@ public class Sunflower extends Plant {
     @Override
     public void draw(Buffer buffer) {
         buffer.drawImage(image, x, y);
+        buffer.drawHorizontallyCenteredText("HP: " + health, getBounds(), y - 10);
     }
 
     @Override

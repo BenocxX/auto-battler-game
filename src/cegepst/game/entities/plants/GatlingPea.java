@@ -23,6 +23,7 @@ public class GatlingPea extends Plant {
         name = "Gatling Pea";
         image = SpriteHandler.resizeImage(Sprite.GATLING_PEA.getImage(),
                 Image.SCALE_SMOOTH, width, height);
+        health = 115;
     }
 
     @Override
@@ -36,6 +37,7 @@ public class GatlingPea extends Plant {
     @Override
     public void draw(Buffer buffer) {
         buffer.drawImage(image, x, y);
+        buffer.drawHorizontallyCenteredText("HP: " + health, getBounds(), y - 10);
     }
 
     @Override

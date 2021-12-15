@@ -23,6 +23,7 @@ public class Peashooter extends Plant {
         name = "Peashooter";
         image = SpriteHandler.resizeImage(Sprite.PEASHOOTER.getImage(),
                 Image.SCALE_SMOOTH, width, height);
+        health = 100;
     }
 
     @Override
@@ -36,6 +37,7 @@ public class Peashooter extends Plant {
     @Override
     public void draw(Buffer buffer) {
         buffer.drawImage(image, x, y);
+        buffer.drawHorizontallyCenteredText("HP: " + health, getBounds(), y - 10);
     }
 
     public Projectile ability() {
