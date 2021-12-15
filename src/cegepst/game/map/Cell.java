@@ -27,7 +27,7 @@ public class Cell extends StaticEntity {
     @Override
     public void draw(Buffer buffer) {
         area.draw(buffer);
-        buffer.drawOutlineRectangle(getX(), getY(), WIDTH, HEIGHT, Color.WHITE);
+        //buffer.drawOutlineRectangle(getX(), getY(), WIDTH, HEIGHT, Color.WHITE);
     }
 
     public boolean isClicked(Point mousePosition) {

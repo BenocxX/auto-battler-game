@@ -129,8 +129,7 @@ public class GameDisplay extends Display
 
     @Override
     public void onSlotSelection(Plant plant) {
-        plant.teleport(PlantSelector.X, PlantSelector.Y_ROW1);
-        selectedPlant = new PlantSelector(PlantSelector.X, PlantSelector.Y_ROW1, plant);
+        selectedPlant = new PlantSelector(plant);
     }
 
     @Override
@@ -227,9 +226,6 @@ public class GameDisplay extends Display
             zombies.forEach(zombie -> zombie.draw(buffer));
             plants.forEach(plant -> plant.draw(buffer));
             projectiles.forEach(projectile -> projectile.draw(buffer));
-            if (selectedPlant != null) {
-                selectedPlant.draw(buffer);
-            }
         } else {
             shopMap.draw(buffer);
             shopStations.forEach(shopStation -> shopStation.draw(buffer));
@@ -241,7 +237,7 @@ public class GameDisplay extends Display
     private void UIDraw(Buffer buffer) {
         if (inBattle) {
             battleMenuSystem.draw(buffer);
-            buffer.drawText("Sun: " + sunCount, 10, RenderingEngine.HEIGHT - 140, new Color(255, 255, 255));
+            drawGameInfoUI(buffer);
         } else {
             shopMenuSystem.draw(buffer);
         }
@@ -251,6 +247,20 @@ public class GameDisplay extends Display
         } else {
             buffer.drawText("('D' to activate debug mode)", RenderingEngine.WIDTH - 184, 20, new Color(255, 255, 255));
         }
+    }
+
+    private void drawGameInfoUI(Buffer buffer) {
+        int padding = 10;
+        Rectangle uiInfoBox = new Rectangle(10, 50, 125, 200);
+        buffer.drawRoundRectangle(uiInfoBox.x, uiInfoBox.y,
+                uiInfoBox.width, uiInfoBox.height, 20,
+                20, new Color(0, 0, 0, 150));
+        if (selectedPlant != null) {
+            buffer.drawText("Selected plant:", uiInfoBox.x + padding, selectedPlant.getY() - 10, new Color(255, 255, 255));
+            selectedPlant.draw(buffer);
+        }
+        buffer.drawText("Round #" + (roundCount + 1), uiInfoBox.x + padding, uiInfoBox.y + uiInfoBox.height - 30, new Color(255, 255, 255));
+        buffer.drawText("Sun: " + sunCount, uiInfoBox.x + padding, uiInfoBox.y + uiInfoBox.height - padding, new Color(255, 255, 255));
     }
 
     private void resetStateData() {
