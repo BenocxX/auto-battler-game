@@ -12,13 +12,14 @@ import java.lang.reflect.InvocationTargetException;
 
 public enum PlantType {
 
-    PEASHOOTER("Peashooter", 100, 60, 60, 60,
+    PEASHOOTER(1, "Peashooter", 100, 60, 60, 60,
             125, Sprite.PEASHOOTER.getImage(), Pea.class),
-    GATLINGPEA("Gatlingpea", 115, 30, 60, 60,
+    GATLINGPEA(2, "Gatlingpea", 115, 30, 60, 60,
             150, Sprite.GATLING_PEA.getImage(), Pea.class),
-    SUNFLOWER("Sunflower", 75, 240, 60, 80,
+    SUNFLOWER(3, "Sunflower", 75, 240, 60, 80,
             100, Sprite.SUNFLOWER.getImage(), Sun.class);
 
+    private int id;
     private String name;
     private int health;
     private int abilityCooldown;
@@ -28,10 +29,11 @@ public enum PlantType {
     private Image image;
     private Constructor<? extends Projectile> projectileConstructor;
 
-    PlantType(String name, int health,
+    PlantType(int id, String name, int health,
               int abilityCooldown, int width,
               int height, int sunPrice,
               Image image, Class<? extends Projectile> projectileClass) {
+        this.id = id;
         this.name = name;
         this.health = health;
         this.abilityCooldown = abilityCooldown;
@@ -81,5 +83,9 @@ public enum PlantType {
 
     public Image getResizedImage() {
         return SpriteHandler.resizeImage(image, Image.SCALE_SMOOTH, width, height);
+    }
+
+    public int getId() {
+        return id;
     }
 }

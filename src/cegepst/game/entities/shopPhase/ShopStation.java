@@ -16,6 +16,7 @@ import cegepst.game.eventsystem.events.ItemBuyListener;
 import cegepst.game.eventsystem.events.TriggerAreaListener;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class ShopStation extends MovableEntity implements TriggerAreaListener, ItemBuyListener {
 
@@ -39,19 +40,21 @@ public class ShopStation extends MovableEntity implements TriggerAreaListener, I
         this.id = id;
         hasPlant = true;
         plant = getRandomPlant();
-        plant.teleport(x + ((width - plant.getWidth()) / 2), y - (plant.getHeight() / 2));
+        if (plant != null) {
+            plant.teleport(x + ((width - plant.getWidth()) / 2), y - (plant.getHeight() / 2));
+        }
         stoneImage = SpriteHandler.resizeImage(Sprite.SAP_TILE_SPRITE.getImage(), Image.SCALE_SMOOTH, width, height);
     }
 
     @Override
     public void draw(Buffer buffer) {
         buffer.drawImage(stoneImage, x, y);
-        if (isSelected) {
-            buffer.drawHorizontallyCenteredText(plant.getName(), getBounds(), y - 35);
-            buffer.drawText("(Use E to Buy)", RenderingEngine.WIDTH - 97, 40, Color.WHITE);
-        }
         if (hasPlant) {
             plant.draw(buffer);
+            if (isSelected) {
+                buffer.drawHorizontallyCenteredText(plant.getName(), getBounds(), y - 35);
+                buffer.drawText("(Use E to Buy)", RenderingEngine.WIDTH - 97, 40, Color.WHITE);
+            }
         }
     }
 
@@ -87,7 +90,11 @@ public class ShopStation extends MovableEntity implements TriggerAreaListener, I
     public void roll() {
         hasPlant = true;
         plant = getRandomPlant();
-        plant.teleport(x + ((width - plant.getWidth()) / 2), y - (plant.getHeight() / 2));
+        if (plant == null)  {
+            hasPlant = false;
+        } else {
+            plant.teleport(x + ((width - plant.getWidth()) / 2), y - (plant.getHeight() / 2));
+        }
     }
 
     public int getId() {
@@ -105,11 +112,32 @@ public class ShopStation extends MovableEntity implements TriggerAreaListener, I
         }
     }
 
+    public Plant getPlant() {
+        return plant;
+    }
+
     private void initializeSound() {
         sound = Sound.values()[RandomHandler.getInt(2, 5)];
     }
 
     private Plant getRandomPlant() {
-        return Plants.values()[RandomHandler.getInt(Plants.values().length)].getPlant();
+        Plants[] plantTypes = Plants.values();
+        ArrayList<Plant> plants = new ArrayList<>();
+        for (Plants plantType: plantTypes) {
+            plants.add(plantType.getPlant());
+        }
+
+        ArrayList<Plant> notAlreadyPossessedPlants = new ArrayList<>();
+        for (Plant plant : plants) {
+            if (!Inventory.getInstance().containsPlant(plant)) {
+                notAlreadyPossessedPlants.add(plant);
+            }
+        }
+
+        if (notAlreadyPossessedPlants.isEmpty()) {
+            return null;
+        } else {
+            return notAlreadyPossessedPlants.get(RandomHandler.getInt(notAlreadyPossessedPlants.size()));
+        }
     }
 }

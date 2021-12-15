@@ -366,10 +366,15 @@ public class GameDisplay extends Display
         });
         gamePad.addKeyListener(() -> {
             if (gamePad.isUseTyped()) {
-                for (ShopStation buyStation : shopStations) {
-                    if (buyStation.isSelected() && player.canBuy(ShopStation.ITEM_PRICE)) {
-                        buyStation.buyItem();
-                        player.buyItem(ShopStation.ITEM_PRICE);
+                for (ShopStation shopStation : shopStations) {
+                    if (shopStation.isSelected() &&
+                            player.canBuy(ShopStation.ITEM_PRICE)) {
+                        if (!Inventory.getInstance().containsPlant(shopStation.getPlant())) {
+                            shopStation.buyItem();
+                            player.buyItem(ShopStation.ITEM_PRICE);
+                        } else {
+                            shopStation.roll();
+                        }
                     }
                 }
             }

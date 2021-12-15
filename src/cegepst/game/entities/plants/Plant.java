@@ -10,6 +10,7 @@ import java.awt.*;
 public class Plant extends StaticEntity {
 
     private PlantType plantType;
+    private int id;
     private Image image;
     private String name;
     private int health;
@@ -20,6 +21,7 @@ public class Plant extends StaticEntity {
         this.plantType = plantType;
         setDimension(plantType.getWidth(), plantType.getHeight());
         image = plantType.getResizedImage();
+        id = plantType.getId();
         name = plantType.getName();
         health = plantType.getHealth();
         sunPrice = plantType.getSunPrice();
@@ -56,7 +58,6 @@ public class Plant extends StaticEntity {
         health -= damage;
         if (health <= 0) {
             health = 0;
-            // TODO: Change parameter
             EventSystem.getInstance().onPlantDeath(this);
         }
     }
@@ -75,5 +76,9 @@ public class Plant extends StaticEntity {
 
     public int getSunPrice() {
         return sunPrice;
+    }
+
+    public int getId() {
+        return id;
     }
 }

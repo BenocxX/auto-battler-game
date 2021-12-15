@@ -60,6 +60,15 @@ public class Inventory extends StaticEntity {
         }
     }
 
+    public boolean containsPlant(Plant plant) {
+        for (Slot slot : slots) {
+            if (slot.containsPlant(plant)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void addItem(Plant plant) {
         slots.add(new Slot(plant,
                 CenteringMachine.centerHorizontally(getBounds(), Slot.WIDTH), nextY));

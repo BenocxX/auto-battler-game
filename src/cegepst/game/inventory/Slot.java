@@ -53,4 +53,8 @@ public class Slot extends StaticEntity {
     public void unselectSlot() {
         menuSystem.getButton(0).setText("Select");
     }
+
+    public boolean containsPlant(Plant newPlant) {
+        return plant.getId() == newPlant.getId();
+    }
 }
