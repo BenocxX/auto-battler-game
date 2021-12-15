@@ -114,12 +114,6 @@ public class EventSystem {
         }
     }
 
-    public void onSunUtilisation() {
-        for (SunListener listener : sunListeners) {
-            listener.onSunUtilisation();
-        }
-    }
-
     public void onZombieSpawn(Zombie zombie) {
         roundListeners.forEach(roundListener -> roundListener.onZombieSpawn(zombie));
     }

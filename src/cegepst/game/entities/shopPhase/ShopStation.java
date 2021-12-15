@@ -19,7 +19,8 @@ import java.awt.*;
 
 public class ShopStation extends MovableEntity implements TriggerAreaListener, ItemBuyListener {
 
-    public final static int PRICE = 60;
+    public final static int ITEM_PRICE = 100;
+    public final static int ROLL_PRICE = 50;
 
     private Sound sound;
     private Image stoneImage;

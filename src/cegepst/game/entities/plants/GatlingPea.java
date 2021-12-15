@@ -24,7 +24,7 @@ public class GatlingPea extends Plant {
         image = SpriteHandler.resizeImage(Sprite.GATLING_PEA.getImage(),
                 Image.SCALE_SMOOTH, width, height);
         health = 115;
-        sunPrice = 10;
+        sunPrice = 150;
     }
 
     @Override

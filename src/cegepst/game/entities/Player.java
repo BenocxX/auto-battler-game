@@ -7,9 +7,11 @@ import cegepst.engine.controls.MovementController;
 import cegepst.engine.entities.ControllableEntity;
 import cegepst.engine.resources.images.Animator;
 import cegepst.game.entities.shopPhase.ShopStation;
+import cegepst.game.entities.zombies.Zombie;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.ButtonEventType;
 import cegepst.game.eventsystem.events.ButtonListener;
+import cegepst.game.eventsystem.events.RoundListener;
 import cegepst.game.settings.GameSettings;
 import cegepst.game.resources.Sprite;
 
@@ -53,8 +55,7 @@ public class Player extends ControllableEntity
     public void draw(Buffer buffer) {
         if (!inBattle) {
             buffer.drawImage(animator.getImage(getDirection()), x ,y);
-            buffer.drawHorizontallyCenteredText("HP: " + health, getBounds(), y - 10);
-            buffer.drawText(money + " $", 20, RenderingEngine.HEIGHT - 70, Color.WHITE);
+            buffer.drawHorizontallyCenteredText(money + " $", getBounds(), y - 10);
             if (hasMoved() && GameSettings.DEBUG_MODE) {
                 drawHitBox(buffer);
             }
@@ -68,6 +69,7 @@ public class Player extends ControllableEntity
         }
     }
 
+    // TODO: Remove
     @Override
     public void takeDamage(int damage) {
         health -= damage;
@@ -78,12 +80,16 @@ public class Player extends ControllableEntity
         return damage;
     }
 
-    public boolean canBuy() {
-        return money >= ShopStation.PRICE;
+    public boolean canBuy(int price) {
+        return money >= price;
     }
 
-    public void buyItem() {
-        money -= ShopStation.PRICE;
+    public void buyItem(int price) {
+        money -= price;
+    }
+
+    public void addMoney(int money) {
+        this.money += money;
     }
 
     public void setInBattle(boolean inBattle) {

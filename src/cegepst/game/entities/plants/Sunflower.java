@@ -24,7 +24,7 @@ public class Sunflower extends Plant {
         image = SpriteHandler.resizeImage(Sprite.SUNFLOWER.getImage(),
                 Image.SCALE_SMOOTH, width, height);
         health = 75;
-        sunPrice = 2;
+        sunPrice = 100;
     }
 
     @Override

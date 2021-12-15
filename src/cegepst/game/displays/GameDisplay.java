@@ -83,7 +83,7 @@ public class GameDisplay extends Display
         rounds = Rounds.values();
         roundCount = 0;
         currentRound = RoundFactory.getRound(rounds[roundCount].getNbZombies());
-        sunCount = 5;
+        sunCount = 200;
         EventSystem.getInstance().addCellListener(this);
         EventSystem.getInstance().addSlotListener(this);
         EventSystem.getInstance().addSunListener(this);
@@ -155,16 +155,8 @@ public class GameDisplay extends Display
 
     @Override
     public void onSunCreation(Projectile projectile) {
-        sunCount++;
+        sunCount += 100;
         killedEntities.add(projectile);
-    }
-
-    @Override
-    public void onSunUtilisation() {
-        sunCount--;
-        if (sunCount < 0) {
-            sunCount = 0;
-        }
     }
 
     @Override
@@ -180,6 +172,7 @@ public class GameDisplay extends Display
             roundCount++;
             currentRound = RoundFactory.getRound(rounds[roundCount].getNbZombies());
         }
+        player.addMoney(100 * roundCount);
     }
 
     @Override
@@ -222,7 +215,7 @@ public class GameDisplay extends Display
         roundCount = 0;
         Inventory.getInstance().clear();
         RoundFactory.getRound(rounds[roundCount].getNbZombies());
-        sunCount = 5;
+        sunCount = 200;
     }
 
     private void shopUpdate() {
@@ -373,9 +366,9 @@ public class GameDisplay extends Display
         gamePad.addKeyListener(() -> {
             if (gamePad.isUseTyped()) {
                 for (ShopStation buyStation : shopStations) {
-                    if (buyStation.isSelected() && player.canBuy()) {
+                    if (buyStation.isSelected() && player.canBuy(ShopStation.ITEM_PRICE)) {
                         buyStation.buyItem();
-                        player.buyItem();
+                        player.buyItem(ShopStation.ITEM_PRICE);
                     }
                 }
             }
@@ -392,8 +385,9 @@ public class GameDisplay extends Display
         });
         gamePad.addKeyListener(() -> {
             if (gamePad.isRollTyped()) {
-                for (ShopStation shopStation : shopStations) {
-                    shopStation.roll();
+                if (player.canBuy(ShopStation.ROLL_PRICE)) {
+                    shopStations.forEach(ShopStation::roll);
+                    player.buyItem(ShopStation.ROLL_PRICE);
                 }
             }
         });
