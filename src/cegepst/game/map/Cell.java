@@ -48,4 +48,8 @@ public class Cell extends StaticEntity {
     public boolean isEmpty() {
         return isEmpty;
     }
+
+    public void empty() {
+        isEmpty = true;
+    }
 }

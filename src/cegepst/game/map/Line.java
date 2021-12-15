@@ -31,6 +31,10 @@ public class Line {
         spawningCell.draw(buffer);
     }
 
+    public void emptyCells() {
+        cells.forEach(Cell::empty);
+    }
+
     public Cell getSpawningCell() {
         return spawningCell;
     }

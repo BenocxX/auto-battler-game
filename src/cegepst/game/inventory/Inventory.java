@@ -69,6 +69,10 @@ public class Inventory extends StaticEntity {
         return slots;
     }
 
+    public void clear() {
+        slots.clear();
+    }
+
     private Inventory() {
         slots = new ArrayList<>();
         Rectangle screenRectangle = new Rectangle(0, 0, RenderingEngine.WIDTH, RenderingEngine.HEIGHT);

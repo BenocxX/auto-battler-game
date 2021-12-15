@@ -21,6 +21,7 @@ import cegepst.game.entities.Player;
 import cegepst.game.entities.miscellaneous.TriggerArea;
 import cegepst.game.helpers.Initializer;
 import cegepst.game.helpers.RoundFactory;
+import cegepst.game.inventory.Inventory;
 import cegepst.game.map.*;
 import cegepst.game.resources.Sprite;
 import cegepst.game.settings.GameSettings;
@@ -51,10 +52,12 @@ public class GameDisplay extends Display
     private ArrayList<StaticEntity> killedEntities;
     private ArrayList<Plant> killedPlants;
     private PlantSelector selectedPlant;
+    private TriggerArea houseTriggerArea;
     private Rounds[] rounds;
-    private int roundCount;
     private Round currentRound;
+    private int roundCount;
     private boolean inBattle = false;
+    private boolean isGameOver = false;
     private int sunCount;
 
     public GameDisplay(DisplayType displayType) {
@@ -76,6 +79,7 @@ public class GameDisplay extends Display
         zombies = new ArrayList<>();
         projectiles = new ArrayList<>();
         killedPlants = new ArrayList<>();
+        houseTriggerArea = new TriggerArea(0, 0, 175, RenderingEngine.HEIGHT);
         rounds = Rounds.values();
         roundCount = 0;
         currentRound = RoundFactory.getRound(rounds[roundCount].getNbZombies());
@@ -89,6 +93,10 @@ public class GameDisplay extends Display
 
     @Override
     public int update() {
+        if (isGameOver) {
+            resetGame();
+            isGameOver = false;
+        }
         resetStateData();
         if (inBattle) {
             battleUpdate();
@@ -186,6 +194,9 @@ public class GameDisplay extends Display
         currentRound.update();
         zombies.forEach(Zombie::update);
         zombies.forEach(zombie -> {
+            if (houseTriggerArea.intersectWith(zombie)) {
+                isGameOver = true;
+            }
             plants.forEach(plant -> {
                 if (zombie.isColliding(plant)) {
                     zombie.setEating(true, plant);
@@ -195,6 +206,20 @@ public class GameDisplay extends Display
         updatePlants();
         handleProjectile();
         leftClickCheck();
+    }
+
+    private void resetGame() {
+        inBattle = false;
+        lines.forEach(Line::emptyCells);
+        shopStations = initializer.getShopStations();
+        plants.clear();
+        selectedPlant = null;
+        projectiles.clear();
+        zombies.clear();
+        roundCount = 0;
+        Inventory.getInstance().clear();
+        RoundFactory.getRound(rounds[roundCount].getNbZombies());
+        sunCount = 0;
     }
 
     private void shopUpdate() {
@@ -243,6 +268,7 @@ public class GameDisplay extends Display
     private void logicDraw(Buffer buffer) {
         if (inBattle) {
             battleMap.draw(buffer);
+            houseTriggerArea.draw(buffer);
             lines.forEach(line -> line.draw(buffer));
             zombies.forEach(zombie -> zombie.draw(buffer));
             plants.forEach(plant -> plant.draw(buffer));
