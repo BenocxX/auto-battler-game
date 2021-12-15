@@ -3,19 +3,24 @@ package cegepst.game.displays;
 import cegepst.engine.Buffer;
 import cegepst.engine.RenderingEngine;
 import cegepst.engine.menu.MenuSystem;
+import cegepst.engine.resources.images.SpriteHandler;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
 import cegepst.game.entities.shopPhase.ShopStation;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.helpers.ButtonFactory;
 import cegepst.game.inventory.Inventory;
+import cegepst.game.resources.Sprite;
 import cegepst.game.settings.GameSettings;
+
+import java.awt.*;
 
 public class InventoryDisplay extends Display {
 
     private GamePad gamePad;
     private MousePad mousePad;
     private MenuSystem menuSystem;
+    private Image image;
 
     public InventoryDisplay(DisplayType displayType) {
         super(displayType);
@@ -23,6 +28,8 @@ public class InventoryDisplay extends Display {
         mousePad = new MousePad();
         initializeButtonSystem();
         addKeyInputAction();
+        image = SpriteHandler.resizeImage(Sprite.MENU.getImage(),
+                Image.SCALE_SMOOTH, RenderingEngine.WIDTH, RenderingEngine.HEIGHT);
     }
 
     @Override
@@ -39,6 +46,7 @@ public class InventoryDisplay extends Display {
 
     @Override
     public void draw(Buffer buffer) {
+        buffer.drawImage(image, 0, 0);
         Inventory.getInstance().draw(buffer);
         menuSystem.draw(buffer);
     }

@@ -8,14 +8,8 @@ import java.awt.image.BufferedImage;
 public enum Sprite {
 
     SHOP_MAP("./images/sap/map.png"),
-    BATTLE_MAP("./images/sap/battle_map.png"),
     PLAYER_SPRITE_SHEET("./images/player.png"),
     SAP_TILE_SPRITE("./images/sap/tile.png"),
-    SAP_ANT_SPRITE("./images/sap/ant.png"),
-    SAP_BAT_SPRITE("./images/sap/bat.png"),
-    SAP_DOG_SPRITE("./images/sap/dog.png"),
-    SAP_FISH_SPRITE("./images/sap/fish.png"),
-    SAP_DRAGON_SPRITE("./images/sap/dragon.png"),
 
     PVZ_MAP("./images/PVZ/map.jpg"),
     PEASHOOTER("./images/PVZ/plants/peashooter.png"),
@@ -23,7 +17,8 @@ public enum Sprite {
     GATLING_PEA("./images/PVZ/plants/gatlingpea.png"),
     FLAG_ZOMBIE("./images/PVZ/zombies/FlagZombie.png"),
     CONE_HEAD_ZOMBIE("./images/PVZ/zombies/ConeheadZombie.png"),
-    BUCKET_HEAD_ZOMBIE("./images/PVZ/zombies/BucketheadZombie.png");
+    BUCKET_HEAD_ZOMBIE("./images/PVZ/zombies/BucketheadZombie.png"),
+    MENU("./images/PVZ/menu.jpg");
 
     private final String path;
     private Image image;
