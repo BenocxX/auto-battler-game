@@ -1,6 +1,7 @@
 package cegepst.game.eventsystem;
 
 import cegepst.game.entities.plants.Plant;
+import cegepst.game.entities.plants.PlantOld;
 import cegepst.game.entities.projectiles.Projectile;
 import cegepst.game.entities.zombies.Zombie;
 import cegepst.game.eventsystem.events.*;
@@ -123,7 +124,6 @@ public class EventSystem {
     }
 
     public void onPlantDeath(Plant plant) {
-        System.out.println("Calling onPlantDeath event");
         plantListeners.forEach(plantListener -> plantListener.onPlantDeath(plant));
     }
 

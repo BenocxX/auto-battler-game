@@ -5,6 +5,7 @@ import cegepst.engine.entities.StaticEntity;
 import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.MousePad;
 import cegepst.game.entities.plants.Plant;
+import cegepst.game.entities.plants.PlantOld;
 import cegepst.game.helpers.ButtonFactory;
 import cegepst.game.helpers.CenteringMachine;
 

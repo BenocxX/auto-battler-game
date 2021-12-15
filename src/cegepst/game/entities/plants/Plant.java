@@ -7,26 +7,56 @@ import cegepst.game.eventsystem.EventSystem;
 
 import java.awt.*;
 
-public abstract class Plant extends StaticEntity {
+public class Plant extends StaticEntity {
 
-    protected Image image;
-    protected String name;
-    protected int health;
-    protected int sunPrice;
+    private PlantType plantType;
+    private Image image;
+    private String name;
+    private int health;
+    private int sunPrice;
+    private int cooldown;
 
-    // Refactor: Use Plants type to make new Plant()
+    public Plant(PlantType plantType) {
+        this.plantType = plantType;
+        setDimension(plantType.getWidth(), plantType.getHeight());
+        image = plantType.getResizedImage();
+        name = plantType.getName();
+        health = plantType.getHealth();
+        sunPrice = plantType.getSunPrice();
+        cooldown = 0;
+    }
 
-    public abstract void update();
+    public void update() {
+        cooldown--;
+        if (cooldown <= 0) {
+            cooldown = 0;
+        }
+    }
+
     @Override
-    public abstract void draw(Buffer buffer);
-    public abstract Projectile ability();
-    public abstract boolean isCooldownOver();
-    public abstract Plant getPlantOfSameType();
+    public void draw(Buffer buffer) {
+        buffer.drawImage(image, x, y);
+        buffer.drawHorizontallyCenteredText("HP: " + health, getBounds(), y - 10);
+    }
+
+    public Projectile ability() {
+        cooldown = plantType.getAbilityCooldown();
+        return plantType.generateNewProjectile(this, x + width - 15, y + 5 - 2);
+    }
+
+    public boolean isCooldownOver() {
+        return cooldown == 0;
+    }
+
+    public Plant getPlantOfSameType() {
+        return new Plant(plantType);
+    }
 
     public void takeDamage(int damage) {
         health -= damage;
         if (health <= 0) {
             health = 0;
+            // TODO: Change parameter
             EventSystem.getInstance().onPlantDeath(this);
         }
     }

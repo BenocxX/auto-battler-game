@@ -8,7 +8,7 @@ import cegepst.game.resources.Sprite;
 
 import java.awt.*;
 
-public class GatlingPea extends Plant {
+public class GatlingPea extends PlantOld {
 
     public final static int WIDTH = 60;
     public final static int HEIGHT = 60;
@@ -44,7 +44,7 @@ public class GatlingPea extends Plant {
     @Override
     public Projectile ability() {
         cooldown = COOLDOWN_RESET;
-        return new Pea(this, x + width - 15, y + 8);
+        return null;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class GatlingPea extends Plant {
     }
 
     @Override
-    public Plant getPlantOfSameType() {
+    public PlantOld getPlantOfSameType() {
         return new GatlingPea(0, 0);
     }
 }

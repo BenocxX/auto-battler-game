@@ -2,9 +2,9 @@ package cegepst.game.entities.plants;
 
 public enum Plants {
 
-    PEASHOOTER(new Peashooter(0, 0)),
-    SUNFLOWER(new Sunflower(0, 0)),
-    GATLING_PEA(new GatlingPea(0, 0));
+    PEASHOOTER(new Plant(PlantType.PEASHOOTER)),
+    SUNFLOWER(new Plant(PlantType.SUNFLOWER)),
+    GATLING_PEA(new Plant(PlantType.GATLINGPEA));
 
     private Plant plant;
 

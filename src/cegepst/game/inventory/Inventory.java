@@ -4,6 +4,7 @@ import cegepst.engine.Buffer;
 import cegepst.engine.RenderingEngine;
 import cegepst.engine.entities.StaticEntity;
 import cegepst.game.entities.plants.Plant;
+import cegepst.game.entities.plants.PlantOld;
 import cegepst.game.helpers.CenteringMachine;
 
 import java.awt.*;
