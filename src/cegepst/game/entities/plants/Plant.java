@@ -12,6 +12,7 @@ public abstract class Plant extends StaticEntity {
     protected Image image;
     protected String name;
     protected int health;
+    protected int sunPrice;
 
     // Refactor: Use Plants type to make new Plant()
 
@@ -40,5 +41,9 @@ public abstract class Plant extends StaticEntity {
 
     public boolean isDead() {
         return health <= 0;
+    }
+
+    public int getSunPrice() {
+        return sunPrice;
     }
 }

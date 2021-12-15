@@ -83,7 +83,7 @@ public class GameDisplay extends Display
         rounds = Rounds.values();
         roundCount = 0;
         currentRound = RoundFactory.getRound(rounds[roundCount].getNbZombies());
-        sunCount = 0;
+        sunCount = 5;
         EventSystem.getInstance().addCellListener(this);
         EventSystem.getInstance().addSlotListener(this);
         EventSystem.getInstance().addSunListener(this);
@@ -134,8 +134,11 @@ public class GameDisplay extends Display
         if (selectedPlant != null) {
             if (cell.isEmpty()) {
                 Plant plant = selectedPlant.getPlant();
-                cell.placeEntity(plant);
-                plants.add(plant);
+                if (sunCount >= plant.getSunPrice()) {
+                    sunCount -= plant.getSunPrice();
+                    cell.placeEntity(plant);
+                    plants.add(plant);
+                }
             }
         }
     }
@@ -219,7 +222,7 @@ public class GameDisplay extends Display
         roundCount = 0;
         Inventory.getInstance().clear();
         RoundFactory.getRound(rounds[roundCount].getNbZombies());
-        sunCount = 0;
+        sunCount = 5;
     }
 
     private void shopUpdate() {

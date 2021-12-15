@@ -24,6 +24,7 @@ public class Peashooter extends Plant {
         image = SpriteHandler.resizeImage(Sprite.PEASHOOTER.getImage(),
                 Image.SCALE_SMOOTH, width, height);
         health = 100;
+        sunPrice = 5;
     }
 
     @Override
