@@ -56,6 +56,10 @@ public abstract class Display implements ButtonListener {
         currentId = DisplayType.INVENTORY.getId();
     }
 
+    protected void goToGameOverDisplay() {
+        currentId = DisplayType.GAME_OVER.getId();
+    }
+
     protected void quit() {
         currentId = DisplayType.QUIT.getId();
     }

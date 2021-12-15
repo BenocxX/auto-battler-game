@@ -8,7 +8,6 @@ import cegepst.engine.helpers.RandomHandler;
 import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
-import cegepst.game.entities.enemies.Enemy;
 import cegepst.game.entities.projectiles.Projectile;
 import cegepst.game.entities.plants.*;
 import cegepst.game.entities.zombies.Round;
@@ -95,7 +94,6 @@ public class GameDisplay extends Display
     public int update() {
         if (isGameOver) {
             resetGame();
-            isGameOver = false;
         }
         resetStateData();
         if (inBattle) {
@@ -217,6 +215,8 @@ public class GameDisplay extends Display
         Inventory.getInstance().clear();
         RoundFactory.getRound(rounds[roundCount].getNbZombies());
         sunCount = 200;
+        isGameOver = false;
+        goToGameOverDisplay();
     }
 
     private void shopUpdate() {

@@ -17,6 +17,20 @@ public class ButtonFactory {
         return button;
     }
 
+    public static RoundButton backToGame(int x, int y) {
+        RoundButton button = new RoundButton(x, y, "Back to game");
+        button.setCustomEvent(() ->
+                EventSystem.getInstance().onButtonClicked(ButtonEventType.GAME_DISPLAY));
+        return button;
+    }
+
+    public static RoundButton backToMainMenu(int x, int y) {
+        RoundButton button = new RoundButton(x, y, "Back to main menu");
+        button.setCustomEvent(() ->
+                EventSystem.getInstance().onButtonClicked(ButtonEventType.MAIN_MENU_DISPLAY));
+        return button;
+    }
+
     public static RoundButton optionButton(int x, int y) {
         RoundButton button = new RoundButton(x, y, "Option");
         button.setCustomEvent(() ->

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Round {
 
-    private final static int START_COOLDOWN = 900; // 900
+    private final static int START_COOLDOWN = 0; // 900
 //    private final static int MIN_COOLDOWN = 60;
 //    private final static int MAX_COOLDOWN = 180;
     private final static int MIN_COOLDOWN = 20;
