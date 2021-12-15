@@ -32,6 +32,8 @@ public class GameDisplay extends Display
         implements CellListener, SlotListener,
         SunListener, RoundListener {
 
+    private final static Color white = new Color(255, 255, 255);
+
     private GamePad gamePad;
     private MousePad mousePad;
     private Player player;
@@ -243,9 +245,9 @@ public class GameDisplay extends Display
         }
         if (GameSettings.DEBUG_MODE) {
             buffer.drawGameDebugStats();
-            buffer.drawText("('D' to deactivate debug mode)", RenderingEngine.WIDTH - 200, 20, new Color(255, 255, 255));
+            buffer.drawText("('D' to deactivate debug mode)", RenderingEngine.WIDTH - 200, 20, white);
         } else {
-            buffer.drawText("('D' to activate debug mode)", RenderingEngine.WIDTH - 184, 20, new Color(255, 255, 255));
+            buffer.drawText("('D' to activate debug mode)", RenderingEngine.WIDTH - 184, 20, white);
         }
     }
 
@@ -256,11 +258,11 @@ public class GameDisplay extends Display
                 uiInfoBox.width, uiInfoBox.height, 20,
                 20, new Color(0, 0, 0, 150));
         if (selectedPlant != null) {
-            buffer.drawText("Selected plant:", uiInfoBox.x + padding, selectedPlant.getY() - 10, new Color(255, 255, 255));
+            buffer.drawText("Selected plant:", uiInfoBox.x + padding, selectedPlant.getY() - 10, white);
             selectedPlant.draw(buffer);
         }
-        buffer.drawText("Round #" + (roundCount + 1), uiInfoBox.x + padding, uiInfoBox.y + uiInfoBox.height - 30, new Color(255, 255, 255));
-        buffer.drawText("Sun: " + sunCount, uiInfoBox.x + padding, uiInfoBox.y + uiInfoBox.height - padding, new Color(255, 255, 255));
+        buffer.drawText("Round #" + (roundCount + 1), uiInfoBox.x + padding, uiInfoBox.y + uiInfoBox.height - 30, white);
+        buffer.drawText("Sun: " + sunCount, uiInfoBox.x + padding, uiInfoBox.y + uiInfoBox.height - padding, white);
     }
 
     private void resetStateData() {
