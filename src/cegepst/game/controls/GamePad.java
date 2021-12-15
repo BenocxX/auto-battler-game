@@ -12,9 +12,6 @@ public class GamePad extends MovementController {
     private int quitKey = KeyEvent.VK_Q;
     private int escapeKey = KeyEvent.VK_ESCAPE;
     private int enterKey = KeyEvent.VK_ENTER;
-    private int attackKey = KeyEvent.VK_SPACE;
-    private int moveRowUp = KeyEvent.VK_W;
-    private int moveRowDown = KeyEvent.VK_S;
     private int rollKey = KeyEvent.VK_R;
     private int useKey = KeyEvent.VK_E;
     private int screenModeKey = KeyEvent.VK_F;
@@ -68,18 +65,6 @@ public class GamePad extends MovementController {
 
     public boolean isRollTyped() {
         return isKeyTyped(rollKey);
-    }
-
-    public boolean isAttackTyped() {
-        return isKeyTyped(attackKey);
-    }
-
-    public boolean isMoveRowUpTyped() {
-        return isKeyTyped(moveRowUp);
-    }
-
-    public boolean isMoveRowDownTyped() {
-        return isKeyTyped(moveRowDown);
     }
 
     public boolean isLeftTyped() {
