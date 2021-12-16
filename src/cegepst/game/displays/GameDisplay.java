@@ -43,7 +43,6 @@ public class GameDisplay extends Display
     private Initializer initializer;
     private MenuSystem shopMenuSystem;
     private MenuSystem battleMenuSystem;
-    // test
     private ArrayList<ShopStation> shopStations;
     private ArrayList<TriggerArea> triggerAreas;
     private ArrayList<Line> lines;
