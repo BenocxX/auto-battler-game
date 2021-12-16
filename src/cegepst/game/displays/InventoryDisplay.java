@@ -6,12 +6,9 @@ import cegepst.engine.menu.MenuSystem;
 import cegepst.engine.resources.images.SpriteHandler;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
-import cegepst.game.entities.shopPhase.ShopStation;
-import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.helpers.ButtonFactory;
 import cegepst.game.inventory.Inventory;
 import cegepst.game.resources.Sprite;
-import cegepst.game.settings.GameSettings;
 
 import java.awt.*;
 

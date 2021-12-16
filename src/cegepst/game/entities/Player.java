@@ -2,20 +2,14 @@ package cegepst.game.entities;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.CollidableRepository;
-import cegepst.engine.RenderingEngine;
 import cegepst.engine.controls.MovementController;
 import cegepst.engine.entities.ControllableEntity;
 import cegepst.engine.resources.images.Animator;
-import cegepst.game.entities.shopPhase.ShopStation;
-import cegepst.game.entities.zombies.Zombie;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.ButtonEventType;
 import cegepst.game.eventsystem.events.ButtonListener;
-import cegepst.game.eventsystem.events.RoundListener;
 import cegepst.game.settings.GameSettings;
 import cegepst.game.resources.Sprite;
-
-import java.awt.*;
 
 public class Player extends ControllableEntity
         implements ButtonListener {

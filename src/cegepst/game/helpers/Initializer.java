@@ -3,7 +3,7 @@ package cegepst.game.helpers;
 import cegepst.engine.RenderingEngine;
 import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.MousePad;
-import cegepst.game.entities.shopPhase.ShopStation;
+import cegepst.game.entities.shops.ShopStation;
 import cegepst.game.entities.miscellaneous.TriggerArea;
 
 import java.util.ArrayList;

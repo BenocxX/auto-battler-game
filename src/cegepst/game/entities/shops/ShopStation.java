@@ -1,4 +1,4 @@
-package cegepst.game.entities.shopPhase;
+package cegepst.game.entities.shops;
 
 import cegepst.engine.Buffer;
 import cegepst.engine.RenderingEngine;
@@ -52,7 +52,7 @@ public class ShopStation extends MovableEntity implements TriggerAreaListener, I
         if (hasPlant) {
             plant.draw(buffer);
             if (isSelected) {
-                buffer.drawHorizontallyCenteredText(plant.getName(), getBounds(), y - 35);
+                buffer.drawHorizontallyCenteredText(plant.getName(), getBounds(), y - 70);
                 buffer.drawText("(Use E to Buy)", RenderingEngine.WIDTH - 97, 40, Color.WHITE);
             }
         }

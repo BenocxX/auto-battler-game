@@ -15,7 +15,7 @@ import cegepst.game.entities.zombies.Rounds;
 import cegepst.game.entities.zombies.Zombie;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.*;
-import cegepst.game.entities.shopPhase.ShopStation;
+import cegepst.game.entities.shops.ShopStation;
 import cegepst.game.entities.Player;
 import cegepst.game.entities.miscellaneous.TriggerArea;
 import cegepst.game.helpers.Initializer;
