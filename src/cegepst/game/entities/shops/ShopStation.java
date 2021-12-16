@@ -93,7 +93,6 @@ public class ShopStation extends MovableEntity implements TriggerAreaListener, I
     public void roll() {
         hasPlant = true;
         plant = getRandomPlant();
-        SoundPlayer.play("./sounds/roll.wav");
         if (plant == null)  {
             hasPlant = false;
         } else {

@@ -143,6 +143,7 @@ public class ShopDisplay extends Display implements RoundListener, GameListener 
                             shopStation.buyItem();
                             player.buyItem(ShopStation.ITEM_PRICE);
                         } else {
+                            SoundPlayer.play("./sounds/roll.wav");
                             shopStation.roll();
                         }
                     } else if (shopStation.isSelected()) {
@@ -165,6 +166,7 @@ public class ShopDisplay extends Display implements RoundListener, GameListener 
         gamePad.addKeyListener(() -> {
             if (gamePad.isRollTyped()) {
                 if (player.canBuy(ShopStation.ROLL_PRICE)) {
+                    SoundPlayer.play("./sounds/roll.wav");
                     shopStations.forEach(ShopStation::roll);
                     player.buyItem(ShopStation.ROLL_PRICE);
                 }
