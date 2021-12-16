@@ -73,6 +73,22 @@ public enum PlantType {
     }
 
     public Projectile generateNewProjectile(Plant plant, int x, int y) {
+        /* Note
+         *
+         * I needed a way to instantiate lots of new projectile children.
+         * But I couldn't know which children unless I used 'new Pea()' in
+         * the enum parameter list. Using new Projectile() as a parameter
+         * would have caused a bunch of problems, the first one being that
+         * it would only create one object of type projectile and update that
+         * one only. The second one being that I can't pass parameter like
+         * the plant shooting the projectile in enum parameter list.
+         *
+         * I found a way to get the constructor of the children classes of
+         * Projectile. Using this, I can instantiate projectiles by only passing
+         * the class through enum parameter list. I saw on internet that this
+         * is called Reflection. I don't totally understand what reflection is
+         * but I get why it works and how to use it for what I need. :)
+         */
         try {
             return projectileConstructor.newInstance(plant, x, y);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
