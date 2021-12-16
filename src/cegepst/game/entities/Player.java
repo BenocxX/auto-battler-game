@@ -14,7 +14,7 @@ import cegepst.game.resources.Sprite;
 public class Player extends ControllableEntity
         implements ButtonListener {
 
-    private static final int INITIAL_MONEY = 450;
+    private static final int INITIAL_MONEY = 350;
 
     private Animator animator;
     private int money;
