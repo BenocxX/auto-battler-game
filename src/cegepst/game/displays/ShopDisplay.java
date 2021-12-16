@@ -1,13 +1,11 @@
 package cegepst.game.displays;
 
 import cegepst.engine.Buffer;
-import cegepst.engine.CollidableRepository;
 import cegepst.engine.RenderingEngine;
 import cegepst.engine.menu.MenuSystem;
 import cegepst.engine.resources.sounds.SoundPlayer;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
-import cegepst.game.entities.zombies.Zombie;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.*;
 import cegepst.game.entities.shops.ShopStation;
