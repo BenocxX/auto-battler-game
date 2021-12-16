@@ -66,5 +66,6 @@ public class DisplaySelector extends Game {
         displays.add(new GameDisplay(DisplayType.GAME));
         displays.add(new InventoryDisplay(DisplayType.INVENTORY));
         displays.add(new GameOverDisplay(DisplayType.GAME_OVER));
+        displays.add(new BattleDisplay(DisplayType.BATTLE));
     }
 }

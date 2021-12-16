@@ -1,6 +1,8 @@
 package cegepst.game.helpers;
 
+import cegepst.engine.menu.buttons.Callback;
 import cegepst.engine.menu.buttons.RoundButton;
+import cegepst.game.displays.Display;
 import cegepst.game.entities.plants.Plant;
 import cegepst.game.eventsystem.EventSystem;
 import cegepst.game.eventsystem.events.ButtonEventType;
@@ -81,10 +83,9 @@ public class ButtonFactory {
         return button;
     }
 
-    public static RoundButton backToGameButton(int x, int y) {
+    public static RoundButton backToGameButton(int x, int y, Callback callback) {
         RoundButton button = new RoundButton(x, y, "Back");
-        button.setCustomEvent(() ->
-            EventSystem.getInstance().onButtonClicked(ButtonEventType.GAME_DISPLAY));
+        button.setCustomEvent(callback);
         return button;
     }
 
@@ -100,10 +101,12 @@ public class ButtonFactory {
                 () -> EventSystem.getInstance().onButtonClicked(ButtonEventType.LEAVE_BATTLE));
     }
 
-    public static RoundButton inventoryButton(int x, int y) {
+    public static RoundButton inventoryButton(int x, int y, Display parent) {
         return new RoundButton(x, y,
-                125, 50, 20, 20, "Inventory",
-                () -> EventSystem.getInstance().onButtonClicked(ButtonEventType.INVENTORY));
+                125, 50, 20, 20, "Inventory", () -> {
+                    EventSystem.getInstance().onButtonClicked(ButtonEventType.INVENTORY);
+                    EventSystem.getInstance().onInventoryOpening(parent);
+                });
     }
 
     public static RoundButton selectPlantButton(int x, int y, Plant plant) {

@@ -7,7 +7,8 @@ public enum DisplayType {
     OPTION_MENU(1),
     GAME(2),
     INVENTORY(3),
-    GAME_OVER(4);
+    GAME_OVER(4),
+    BATTLE(5);
 
     private int id;
 

@@ -3,6 +3,7 @@ package cegepst.game.helpers;
 import cegepst.engine.RenderingEngine;
 import cegepst.engine.menu.MenuSystem;
 import cegepst.game.controls.MousePad;
+import cegepst.game.displays.Display;
 import cegepst.game.entities.shops.ShopStation;
 import cegepst.game.entities.miscellaneous.TriggerArea;
 
@@ -31,18 +32,18 @@ public class Initializer {
         return triggerAreas;
     }
 
-    public MenuSystem getShopMenuSystem(MousePad mousePad) {
+    public MenuSystem getShopMenuSystem(MousePad mousePad, Display parent) {
         MenuSystem menuSystem = new MenuSystem();
         menuSystem.addMousePadDevice(mousePad);
-        menuSystem.addButton(ButtonFactory.inventoryButton(10, RenderingEngine.HEIGHT - 60));
+        menuSystem.addButton(ButtonFactory.inventoryButton(10, RenderingEngine.HEIGHT - 60, parent));
         menuSystem.addButton(ButtonFactory.battleButton(10, RenderingEngine.HEIGHT - 120));
         return menuSystem;
     }
 
-    public MenuSystem getBattleMenuSystem(MousePad mousePad) {
+    public MenuSystem getBattleMenuSystem(MousePad mousePad, Display parent) {
         MenuSystem menuSystem = new MenuSystem();
         menuSystem.addMousePadDevice(mousePad);
-        menuSystem.addButton(ButtonFactory.inventoryButton(10, RenderingEngine.HEIGHT - 60));
+        menuSystem.addButton(ButtonFactory.inventoryButton(10, RenderingEngine.HEIGHT - 60, parent));
         menuSystem.addButton(ButtonFactory.leaveBattleButton(10, RenderingEngine.HEIGHT - 120));
         return menuSystem;
     }
