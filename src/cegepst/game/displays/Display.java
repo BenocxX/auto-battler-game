@@ -27,8 +27,8 @@ public abstract class Display implements ButtonListener {
             goToMainMenuDisplay();
         } else if (ButtonEventType.OPTION_MENU_DISPLAY == eventType) {
             goToOptionDisplay();
-        } else if (ButtonEventType.GAME_DISPLAY == eventType) {
-            goToGameDisplay();
+        } else if (ButtonEventType.SHOP_DISPLAY == eventType) {
+            goToShopDisplay();
         } else if (ButtonEventType.INVENTORY == eventType) {
             goToInventoryDisplay();
         } else if (ButtonEventType.QUIT == eventType) {
@@ -48,8 +48,8 @@ public abstract class Display implements ButtonListener {
         currentId = DisplayType.OPTION_MENU.getId();
     }
 
-    protected void goToGameDisplay() {
-        currentId = DisplayType.GAME.getId();
+    protected void goToShopDisplay() {
+        currentId = DisplayType.SHOP.getId();
     }
 
     protected void goToInventoryDisplay() {

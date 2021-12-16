@@ -5,7 +5,7 @@ public enum DisplayType {
     QUIT(-1),
     MAIN_MENU(0),
     OPTION_MENU(1),
-    GAME(2),
+    SHOP(2),
     INVENTORY(3),
     GAME_OVER(4),
     BATTLE(5);

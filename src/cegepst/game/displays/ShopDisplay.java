@@ -22,7 +22,7 @@ import cegepst.game.settings.GameSettings;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class GameDisplay extends Display implements RoundListener, GameListener {
+public class ShopDisplay extends Display implements RoundListener, GameListener {
 
     private final static Color white = new Color(255, 255, 255);
 
@@ -35,7 +35,7 @@ public class GameDisplay extends Display implements RoundListener, GameListener 
     private ArrayList<ShopStation> shopStations;
     private ArrayList<TriggerArea> triggerAreas;
 
-    public GameDisplay(DisplayType displayType) {
+    public ShopDisplay(DisplayType displayType) {
         super(displayType);
         gamePad = new GamePad();
         mousePad = new MousePad();

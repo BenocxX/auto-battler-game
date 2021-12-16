@@ -114,7 +114,7 @@ public class BattleDisplay extends Display
     public void onButtonClick(ButtonEventType eventType) {
         super.onButtonClick(eventType);
         if (ButtonEventType.LEAVE_BATTLE == eventType) {
-            goToGameDisplay();
+            goToShopDisplay();
         }
     }
 

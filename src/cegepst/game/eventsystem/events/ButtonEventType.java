@@ -8,7 +8,7 @@ public enum ButtonEventType {
     LEAVE_BATTLE,
     MAIN_MENU_DISPLAY,
     OPTION_MENU_DISPLAY,
-    GAME_DISPLAY,
+    SHOP_DISPLAY,
     INVENTORY,
     SELECT_PLANT,
     QUIT

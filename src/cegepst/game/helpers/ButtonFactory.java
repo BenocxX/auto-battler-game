@@ -14,14 +14,14 @@ public class ButtonFactory {
     public static RoundButton playButton(int x, int y) {
         RoundButton button = new RoundButton(x, y, "Play");
         button.setCustomEvent(() ->
-                EventSystem.getInstance().onButtonClicked(ButtonEventType.GAME_DISPLAY));
+                EventSystem.getInstance().onButtonClicked(ButtonEventType.SHOP_DISPLAY));
         return button;
     }
 
     public static RoundButton backToGame(int x, int y) {
         RoundButton button = new RoundButton(x, y, "Back to game");
         button.setCustomEvent(() ->
-                EventSystem.getInstance().onButtonClicked(ButtonEventType.GAME_DISPLAY));
+                EventSystem.getInstance().onButtonClicked(ButtonEventType.SHOP_DISPLAY));
         return button;
     }
 
