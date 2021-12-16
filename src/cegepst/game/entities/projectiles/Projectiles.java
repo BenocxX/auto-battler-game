@@ -5,7 +5,8 @@ import java.awt.*;
 public enum Projectiles {
 
     PEA(8, 4, 5, 10, new Color(113, 180, 55)),
-    SUN(10, 5, 0, 0, new Color(227, 168, 52));
+    SUN(10, 5, 0, 0, new Color(227, 168, 52)),
+    EMPTY_PROJECTILE(0, 0, 0, 0, new Color(0, 0, 0, 0));
 
     private int width;
     private int height;

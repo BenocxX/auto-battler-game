@@ -1,6 +1,7 @@
 package cegepst.game.entities.plants;
 
 import cegepst.engine.resources.images.SpriteHandler;
+import cegepst.game.entities.projectiles.EmptyProjectile;
 import cegepst.game.entities.projectiles.Pea;
 import cegepst.game.entities.projectiles.Projectile;
 import cegepst.game.entities.projectiles.Sun;
@@ -17,7 +18,9 @@ public enum PlantType {
     GATLINGPEA(2, "Gatlingpea", 115, 30, 60, 60,
             150, Sprite.GATLING_PEA.getImage(), Pea.class),
     SUNFLOWER(3, "Sunflower", 75, 240, 60, 80,
-            100, Sprite.SUNFLOWER.getImage(), Sun.class);
+            100, Sprite.SUNFLOWER.getImage(), Sun.class),
+    WALL_NUT(4, "Wall Nut", 300, 1000, 60, 70,
+            150, Sprite.WALL_NUT.getImage(), EmptyProjectile.class);
 
     private int id;
     private String name;
