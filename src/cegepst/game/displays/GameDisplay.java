@@ -6,6 +6,7 @@ import cegepst.engine.RenderingEngine;
 import cegepst.engine.entities.StaticEntity;
 import cegepst.engine.helpers.RandomHandler;
 import cegepst.engine.menu.MenuSystem;
+import cegepst.engine.resources.sounds.SoundPlayer;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
 import cegepst.game.entities.projectiles.Projectile;
@@ -375,6 +376,8 @@ public class GameDisplay extends Display
                         } else {
                             shopStation.roll();
                         }
+                    } else if (shopStation.isSelected()) {
+                        SoundPlayer.play("./sounds/lock.wav");
                     }
                 }
             }

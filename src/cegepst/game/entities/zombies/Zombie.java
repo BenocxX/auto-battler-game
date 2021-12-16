@@ -4,6 +4,8 @@ import cegepst.engine.Buffer;
 import cegepst.engine.controls.Direction;
 import cegepst.engine.entities.MovableEntity;
 import cegepst.engine.entities.StaticEntity;
+import cegepst.engine.helpers.RandomHandler;
+import cegepst.engine.resources.sounds.SoundPlayer;
 import cegepst.game.entities.plants.Plant;
 
 import java.awt.*;
@@ -36,6 +38,9 @@ public class Zombie extends MovableEntity {
     }
 
     public void update() {
+        if (RandomHandler.getInt(5000) == 0) {
+            SoundPlayer.play("./sounds/best1.wav");
+        }
         if (isEating && !eatingPlant.isDead()) {
             eatingCooldown--;
             if (eatingCooldown <= 0) {
@@ -57,6 +62,9 @@ public class Zombie extends MovableEntity {
     }
 
     public void takeDamage(int damage) {
+        if (RandomHandler.getInt(100) == 0) {
+            SoundPlayer.play("./sounds/best1.wav");
+        }
         health -= damage;
     }
 

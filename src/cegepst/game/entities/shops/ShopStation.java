@@ -5,6 +5,7 @@ import cegepst.engine.RenderingEngine;
 import cegepst.engine.entities.MovableEntity;
 import cegepst.engine.helpers.RandomHandler;
 import cegepst.engine.resources.images.SpriteHandler;
+import cegepst.engine.resources.sounds.SoundPlayer;
 import cegepst.game.entities.plants.Plant;
 import cegepst.game.entities.plants.Plants;
 import cegepst.game.inventory.Inventory;
@@ -90,6 +91,7 @@ public class ShopStation extends MovableEntity implements TriggerAreaListener, I
     public void roll() {
         hasPlant = true;
         plant = getRandomPlant();
+        SoundPlayer.play("./sounds/roll.wav");
         if (plant == null)  {
             hasPlant = false;
         } else {
