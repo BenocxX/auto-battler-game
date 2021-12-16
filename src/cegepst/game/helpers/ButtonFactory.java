@@ -89,24 +89,21 @@ public class ButtonFactory {
     }
 
     public static RoundButton battleButton(int x, int y) {
-        RoundButton button = new RoundButton(x, y, "Battle");
-        button.setCustomEvent(() ->
-                EventSystem.getInstance().onButtonClicked(ButtonEventType.BATTLE));
-        return button;
+        return new RoundButton(x, y,
+                125, 50, 20, 20, "Battle",
+                () -> EventSystem.getInstance().onButtonClicked(ButtonEventType.BATTLE));
     }
 
     public static RoundButton leaveBattleButton(int x, int y) {
-        RoundButton button = new RoundButton(x, y, "Leave");
-        button.setCustomEvent(() ->
-            EventSystem.getInstance().onButtonClicked(ButtonEventType.LEAVE_BATTLE));
-        return button;
+        return new RoundButton(x, y,
+                125, 50, 20, 20, "Leave Battle",
+                () -> EventSystem.getInstance().onButtonClicked(ButtonEventType.LEAVE_BATTLE));
     }
 
     public static RoundButton inventoryButton(int x, int y) {
-        RoundButton backButton = new RoundButton(x, y, "Inventory");
-        backButton.setCustomEvent(() ->
-            EventSystem.getInstance().onButtonClicked(ButtonEventType.INVENTORY));
-        return backButton;
+        return new RoundButton(x, y,
+                125, 50, 20, 20, "Inventory",
+                () -> EventSystem.getInstance().onButtonClicked(ButtonEventType.INVENTORY));
     }
 
     public static RoundButton selectPlantButton(int x, int y, Plant plant) {
