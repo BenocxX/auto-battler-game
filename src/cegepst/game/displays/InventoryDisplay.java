@@ -6,14 +6,17 @@ import cegepst.engine.menu.MenuSystem;
 import cegepst.engine.resources.images.SpriteHandler;
 import cegepst.game.controls.GamePad;
 import cegepst.game.controls.MousePad;
+import cegepst.game.eventsystem.EventSystem;
+import cegepst.game.eventsystem.events.InventoryListener;
 import cegepst.game.helpers.ButtonFactory;
 import cegepst.game.inventory.Inventory;
 import cegepst.game.resources.Sprite;
 
 import java.awt.*;
 
-public class InventoryDisplay extends Display {
+public class InventoryDisplay extends Display implements InventoryListener {
 
+    private Display parent;
     private GamePad gamePad;
     private MousePad mousePad;
     private MenuSystem menuSystem;
@@ -27,6 +30,7 @@ public class InventoryDisplay extends Display {
         addKeyInputAction();
         image = SpriteHandler.resizeImage(Sprite.MENU.getImage(),
                 Image.SCALE_SMOOTH, RenderingEngine.WIDTH, RenderingEngine.HEIGHT);
+        EventSystem.getInstance().addInventoryListener(this);
     }
 
     @Override
@@ -48,6 +52,11 @@ public class InventoryDisplay extends Display {
         menuSystem.draw(buffer);
     }
 
+    @Override
+    public void onInventoryOpening(Display parent) {
+        this.parent = parent;
+    }
+
     private void resetStateData() {
         if (!alreadyInDisplay) {
             currentId = displayType.getId();
@@ -59,7 +68,7 @@ public class InventoryDisplay extends Display {
     private void initializeButtonSystem() {
         menuSystem = new MenuSystem();
         menuSystem.addMousePadDevice(mousePad);
-        menuSystem.addButton(ButtonFactory.backToGameButton(10, RenderingEngine.HEIGHT - 60));
+        menuSystem.addButton(ButtonFactory.backToGameButton(10, RenderingEngine.HEIGHT - 60, () -> currentId = parent.getId()));
         menuSystem.addButton(ButtonFactory.previousPageButton(260, RenderingEngine.HEIGHT - 100));
         menuSystem.addButton(ButtonFactory.nextPageButton(RenderingEngine.WIDTH - 260 - 50, RenderingEngine.HEIGHT - 100));
         menuSystem.getButton(0).isSelected(true);
@@ -68,7 +77,7 @@ public class InventoryDisplay extends Display {
     private void addKeyInputAction() {
         gamePad.addKeyListener(() -> {
             if (gamePad.isQuitTyped() || gamePad.isEscapeTyped() || gamePad.isInventoryTyped()) {
-                goToGameDisplay();
+                currentId = parent.getId();
             }
         });
         gamePad.addKeyListener(() -> {

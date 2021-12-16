@@ -1,5 +1,6 @@
 package cegepst.game.eventsystem;
 
+import cegepst.game.displays.Display;
 import cegepst.game.entities.plants.Plant;
 import cegepst.game.entities.projectiles.Projectile;
 import cegepst.game.entities.zombies.Zombie;
@@ -18,8 +19,11 @@ public class EventSystem {
     private ArrayList<CellListener> cellListeners;
     private ArrayList<SlotListener> slotListeners;
     private ArrayList<SunListener> sunListeners;
+    private ArrayList<ZombieListener> zombieListeners;
     private ArrayList<RoundListener> roundListeners;
     private ArrayList<PlantListener> plantListeners;
+    private ArrayList<InventoryListener> inventoryListeners;
+    private ArrayList<GameListener> gameListeners;
 
     public static EventSystem getInstance() {
         if (instance == null) {
@@ -52,12 +56,24 @@ public class EventSystem {
         sunListeners.add(listener);
     }
 
+    public void addZombieListener(ZombieListener listener) {
+        zombieListeners.add(listener);
+    }
+
     public void addRoundListener(RoundListener listener) {
         roundListeners.add(listener);
     }
 
     public void addPlantListener(PlantListener listener) {
         plantListeners.add(listener);
+    }
+
+    public void addInventoryListener(InventoryListener listener) {
+        inventoryListeners.add(listener);
+    }
+
+    public void addGameListener(GameListener listener) {
+        gameListeners.add(listener);
     }
 
     public void onTriggerAreaEnter(int triggerId) {
@@ -115,7 +131,7 @@ public class EventSystem {
     }
 
     public void onZombieSpawn(Zombie zombie) {
-        roundListeners.forEach(roundListener -> roundListener.onZombieSpawn(zombie));
+        zombieListeners.forEach(zombieListener -> zombieListener.onZombieSpawn(zombie));
     }
 
     public void onRoundFinished() {
@@ -126,6 +142,14 @@ public class EventSystem {
         plantListeners.forEach(plantListener -> plantListener.onPlantDeath(plant));
     }
 
+    public void onInventoryOpening(Display parent) {
+        inventoryListeners.forEach(inventoryListener -> inventoryListener.onInventoryOpening(parent));
+    }
+
+    public void onGameOver() {
+        gameListeners.forEach(GameListener::onGameOver);
+    }
+
     private EventSystem() {
         triggerAreaListeners = new ArrayList<>();
         itemBuyListeners = new ArrayList<>();
@@ -133,7 +157,10 @@ public class EventSystem {
         cellListeners = new ArrayList<>();
         slotListeners = new ArrayList<>();
         sunListeners = new ArrayList<>();
+        zombieListeners = new ArrayList<>();
         roundListeners = new ArrayList<>();
         plantListeners = new ArrayList<>();
+        inventoryListeners = new ArrayList<>();
+        gameListeners = new ArrayList<>();
     }
 }

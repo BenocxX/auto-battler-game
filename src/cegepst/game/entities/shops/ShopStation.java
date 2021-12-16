@@ -1,6 +1,7 @@
 package cegepst.game.entities.shops;
 
 import cegepst.engine.Buffer;
+import cegepst.engine.CollidableRepository;
 import cegepst.engine.RenderingEngine;
 import cegepst.engine.entities.MovableEntity;
 import cegepst.engine.helpers.RandomHandler;
@@ -35,8 +36,6 @@ public class ShopStation extends MovableEntity implements TriggerAreaListener, I
         setDimension(70, 44);
         teleport(x, y);
         initializeSound();
-        EventSystem.getInstance().addTriggerAreaListener(this);
-        EventSystem.getInstance().addItemBuyListener(this);
 
         this.id = id;
         hasPlant = true;
@@ -45,6 +44,9 @@ public class ShopStation extends MovableEntity implements TriggerAreaListener, I
             plant.teleport(x + ((width - plant.getWidth()) / 2), y - (plant.getHeight() / 2));
         }
         stoneImage = SpriteHandler.resizeImage(Sprite.SAP_TILE_SPRITE.getImage(), Image.SCALE_SMOOTH, width, height);
+
+        EventSystem.getInstance().addTriggerAreaListener(this);
+        EventSystem.getInstance().addItemBuyListener(this);
     }
 
     @Override
