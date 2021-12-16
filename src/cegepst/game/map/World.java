@@ -4,7 +4,6 @@ import cegepst.engine.Buffer;
 import cegepst.engine.RenderingEngine;
 import cegepst.engine.entities.Blockade;
 import cegepst.engine.resources.images.SpriteHandler;
-import cegepst.game.resources.Sprite;
 
 import java.awt.*;
 import java.util.ArrayList;

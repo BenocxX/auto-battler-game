@@ -1,12 +1,10 @@
 package cegepst.game.entities.shops;
 
 import cegepst.engine.Buffer;
-import cegepst.engine.CollidableRepository;
 import cegepst.engine.RenderingEngine;
 import cegepst.engine.entities.MovableEntity;
 import cegepst.engine.helpers.RandomHandler;
 import cegepst.engine.resources.images.SpriteHandler;
-import cegepst.engine.resources.sounds.SoundPlayer;
 import cegepst.game.entities.plants.Plant;
 import cegepst.game.entities.plants.Plants;
 import cegepst.game.inventory.Inventory;
