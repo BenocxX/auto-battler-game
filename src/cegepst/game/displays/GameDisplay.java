@@ -37,7 +37,6 @@ public class GameDisplay extends Display
 
     private GamePad gamePad;
     private MousePad mousePad;
-    //test
     private Player player;
     private World shopMap;
     private World battleMap;
