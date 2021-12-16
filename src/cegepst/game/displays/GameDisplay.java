@@ -138,6 +138,11 @@ public class GameDisplay extends Display
                     cell.placeEntity(plant);
                     cell.addPlant(plant);
                     plants.add(plant);
+                    switch (RandomHandler.getInt(3)) {
+                        case 0 -> SoundPlayer.play("./sounds/dirt1.wav");
+                        case 1 -> SoundPlayer.play("./sounds/dirt2.wav");
+                        case 2 -> SoundPlayer.play("./sounds/dirt3.wav");
+                    }
                 }
             }
         }
