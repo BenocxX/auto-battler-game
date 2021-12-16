@@ -16,11 +16,13 @@ public enum PlantType {
     PEASHOOTER(1, "Peashooter", 100, 60, 60, 60,
             125, Sprite.PEASHOOTER.getImage(), Pea.class),
     GATLINGPEA(2, "Gatlingpea", 115, 30, 60, 60,
-            150, Sprite.GATLING_PEA.getImage(), Pea.class),
+            200, Sprite.GATLING_PEA.getImage(), Pea.class),
     SUNFLOWER(3, "Sunflower", 75, 240, 60, 80,
             100, Sprite.SUNFLOWER.getImage(), Sun.class),
     WALL_NUT(4, "Wall Nut", 300, 1000, 60, 70,
-            150, Sprite.WALL_NUT.getImage(), EmptyProjectile.class);
+            150, Sprite.WALL_NUT.getImage(), EmptyProjectile.class),
+    DOUBLE_PEASHOOTER(5, "Double Peashooter", 125, 60, 60, 60,
+            150, Sprite.DOUBLE_PEASHOOTER.getImage(), Pea.class);
 
     private int id;
     private String name;

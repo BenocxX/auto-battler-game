@@ -16,6 +16,7 @@ public enum Sprite {
     SUNFLOWER("./images/PVZ/plants/Sunflower.png"),
     GATLING_PEA("./images/PVZ/plants/gatlingpea.png"),
     WALL_NUT("./images/PVZ/plants/WallNut.png"),
+    DOUBLE_PEASHOOTER("./images/PVZ/plants/double_peashooter.png"),
     FLAG_ZOMBIE("./images/PVZ/zombies/FlagZombie.png"),
     CONE_HEAD_ZOMBIE("./images/PVZ/zombies/ConeheadZombie.png"),
     BUCKET_HEAD_ZOMBIE("./images/PVZ/zombies/BucketheadZombie.png"),

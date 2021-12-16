@@ -9,13 +9,13 @@ import java.awt.*;
 
 public class Plant extends StaticEntity {
 
-    private PlantType plantType;
+    protected PlantType plantType;
     private int id;
     private Image image;
     private String name;
     private int health;
     private int sunPrice;
-    private int cooldown;
+    protected int cooldown;
 
     public Plant(PlantType plantType) {
         this.plantType = plantType;
